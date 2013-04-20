@@ -11,7 +11,6 @@
 #import "Medicine.h"
 #import "MTMedicineInfoViewController.h"
 #import "MTMedicineCell.h"
-#import "Schedule.h"
 
 @interface MTProfileInfoViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NSFetchedResultsControllerDelegate>
 {
@@ -65,6 +64,7 @@
 {
     [_name release];
     [_originalImage release];
+    [_fetchedResultsController release];
     [super dealloc];
 }
 
@@ -253,7 +253,7 @@
 }
 
 
-#pragma UITableViewDataSource
+#pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -288,24 +288,16 @@
     tbCell.quantity.text = [medicine.quantity stringValue];
     tbCell.unit.text = medicine.unit;
     tbCell.medicineImage.image = medicine.image;
-        
-        NSArray *schedulSet = [medicine.schedules allObjects];
-        if(schedulSet.count) {
-            for(Schedule *sched in schedulSet) {
-                Schedule *schedule = sched;
-            tbCell.frequency.text = sched.frequency;
+    tbCell.frequency.text = medicine.frequency;;
             
-            NSArray *timeSet = [schedule.time valueForKey:@"time"];
-            if(timeSet.count) {
-                NSMutableString *string = [NSMutableString string];
-                for(NSString *date in timeSet) {
-                    //NSLog(@"str %@",dates);
-                    [string appendFormat:@"%@ ",date];
-                }
-                tbCell.scheduleTime.text = string;
-            }
+    NSArray *timeSet = [medicine.times valueForKey:@"time"];
+    if(timeSet.count) {
+        NSMutableString *string = [NSMutableString string];
+        for(NSString *date in timeSet) {
+            [string appendFormat:@"%@ ",date];
         }
-        }
+        tbCell.scheduleTime.text = string;
+    }
     
     return tbCell;
 }
@@ -315,7 +307,7 @@
  }*/
 
 
-#pragma UITableViewDelegate
+#pragma mark UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -325,11 +317,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"BASIL");
-    if([_name isEqualToString:@"Profile"]) {
-        MTProfileInfoViewController *profileInfoController = [[[MTProfileInfoViewController alloc] initWithNibName:@"MTProfileInfoViewController" bundle:nil] autorelease];
-        [self.navigationController pushViewController:profileInfoController animated:YES];
-    }
+    Medicine *medicine = [_fetchedResultsController objectAtIndexPath:indexPath];
+    
+    NSString *nibName = [[XCDeviceManager manager] xibNameForDevice:@"MTMedicineInfoViewController"];
+        MTMedicineInfoViewController *medicineInfoController = [[[MTMedicineInfoViewController alloc] initWithNibName:nibName bundle:nil] autorelease];
+    
+    medicineInfoController.medicine = medicine;
+    [self.navigationController pushViewController:medicineInfoController animated:YES];
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -343,8 +337,17 @@
     
 }
 
-- (void) fetchResultCatcher:(NSIndexPath *)a withAotherParam:(NSUInteger)b {
-    
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Medicine *medicine = [_fetchedResultsController objectAtIndexPath:indexPath];
+    NSManagedObject *manageObject = medicine;
+    [[ManageObjectModel objectManager] deleteObject:manageObject];
+    [[ManageObjectModel objectManager] saveContext];
 }
 
 - (void) onButtonDoneClicked
@@ -363,12 +366,12 @@
         profile.name = self.profileName.text;
         profile.profileImage = [self.profileImage.imageView.image data];
         
-        if([MTProfileManager profileManager].medicineList.count) {
+      /*  if([MTProfileManager profileManager].medicineList.count) {
             for(Medicine *med in [MTProfileManager profileManager].medicineList) {
                 [profile addMedicinesObject:med];
             }
         }
-        
+*/
         [[ManageObjectModel objectManager] saveContext];
         
         [self.navigationController popViewControllerAnimated:YES];
@@ -403,7 +406,7 @@
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:[[ManageObjectModel objectManager] managedObjectContext] sectionNameKeyPath:nil
                                                    cacheName:nil];
-    self.fetchedResultsController = theFetchedResultsController;
+    _fetchedResultsController = theFetchedResultsController;
     _fetchedResultsController.delegate = self;
     
     return _fetchedResultsController;
@@ -414,8 +417,11 @@
 {
     NSString *nibName = [[XCDeviceManager manager] xibNameForDevice:@"MTMedicineInfoViewController"];
     MTMedicineInfoViewController *medicineInfoController = [[MTMedicineInfoViewController alloc] initWithNibName:nibName bundle:nil];
-    
+    Medicine *medicine = [Medicine medicine];
+    medicine.medicineTaker = [MTProfileManager profileManager].currentProfile;
+    medicineInfoController.medicine = medicine;
     [self.navigationController pushViewController:medicineInfoController animated:YES];
+    [medicineInfoController release];
 }
 
 - (void)viewDidLoad
@@ -429,6 +435,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    [_tableView reloadData];
 }
 - (void)didReceiveMemoryWarning
 {

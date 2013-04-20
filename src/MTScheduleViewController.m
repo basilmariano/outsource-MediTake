@@ -8,10 +8,10 @@
 
 #import "MTScheduleViewController.h"
 #import "Time.h"
-#import "Schedule.h"
 #import "MTFrequencyDatesViewController.h"
 #import "Date.h"
 #import "MTMedicineInfoViewController.h"
+#import "MTTimeCell.h"
 
 typedef enum
 {
@@ -28,7 +28,8 @@ PickerType;
 @property(nonatomic, retain) UIPickerView *pickerView;
 @property(nonatomic) PickerType pickerType;
 @property(nonatomic, retain) NSMutableArray *timeList;
-@property(nonatomic, assign) Schedule *schedule;
+
+@property (nonatomic, retain) NSMutableArray *times;
 
 -(IBAction)frequencyButtonClicked:(id)sender;
 -(IBAction)frequencyDayButtonClicked:(id)sender;
@@ -53,8 +54,6 @@ static MTScheduleViewController *_instance;
     if (self) {
         // Custom initialization
         _instance = self;
-        Schedule *sched = [Schedule schedule];
-        self.schedule = sched;
         
         self.navigationItem.title = @"Schedule";
         _timeList = [[NSMutableArray alloc] init];
@@ -76,6 +75,8 @@ static MTScheduleViewController *_instance;
         [buttonDone addTarget:self action:@selector(onButtonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonCancel = [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
         self.navigationItem.rightBarButtonItem = barButtonCancel;
+        
+        _times = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -92,6 +93,8 @@ static MTScheduleViewController *_instance;
     [_actionSheet release];
     [_datePicker release];
     [_timeList release];
+    [_times release];
+    [_medicine release];
     [super dealloc];
 }
 
@@ -108,11 +111,12 @@ static MTScheduleViewController *_instance;
 
 -(IBAction)frequencyDayButtonClicked:(id)sender
 {
-    if([self.labelFrequencyDayTitle.text isEqual:@"Date"]) {
+    if([_medicine.frequency isEqualToString:@"Specific Date"] || [_medicine.frequency isEqualToString:@""]) {
         self.pickerType = DatePicker;
         [self showPickerActionSheet:@"Date"];
     } else {
         MTFrequencyDatesViewController *fequencyDatesViewController = [[MTFrequencyDatesViewController alloc] initWithFrequencyDayName:self.labelFrequencyValue.text];
+        fequencyDatesViewController.medicine = self.medicine;
         [self presentModalViewController:fequencyDatesViewController animated:YES];
     }
 }
@@ -128,34 +132,37 @@ static MTScheduleViewController *_instance;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  1;//<- temp
+    return _times.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    /*NSInteger count = [[_fetchedResultsController sections] count];
-     NSLog(@"Sections %d",count);
-     return count;*/
-    return 1; //<- just for the mean time
+    return 1; 
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*int selecteRow = (int) indexPath.row;
-     
-     if([_name isEqualToString:@"Reminders"])
-     return  [self reminder:tableView andRow:selecteRow];
-     else
-     return  [self profile:tableView andRow:indexPath];
-     */
-    return  [[UITableViewCell alloc] init];
+    NSString *CellIdentifier = @"MTTimeCell";
+    
+    MTTimeCell *tbCell = (MTTimeCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (tbCell == nil) {
+        
+        tbCell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil]objectAtIndex:0];
+    }
+    
+    Time *time = (Time *) [self.times objectAtIndex:indexPath.row];
+    
+    tbCell.textLabel.text = time.time;
+    
+    return tbCell;
 }
 
 #pragma UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 81.0f;
+    return 44.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -174,6 +181,20 @@ static MTScheduleViewController *_instance;
     
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Time *time = [self.times objectAtIndex:indexPath.row];
+    NSManagedObject *manageObject = time;
+    [[ManageObjectModel objectManager] deleteObject:manageObject];
+    [self.times removeObjectAtIndex:indexPath.row];
+    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
+}
+
 #pragma mark - UIPickerViewDataSource and UIPickerViewDelegate
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
@@ -183,7 +204,7 @@ static MTScheduleViewController *_instance;
 
 -(NSInteger)pickerView:(UIPickerView *)picker numberOfRowsInComponent:(NSInteger)component
 {
-    return 3;//_pickerList.count;
+    return 3;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
@@ -271,53 +292,49 @@ static MTScheduleViewController *_instance;
                 break;
             }
         }
-
-        [MTMedicineInfoViewController stringInfo:self.labelFrequencyValue.text];
+        _medicine.frequency = self.labelFrequencyValue.text;
+       
         
     } else if(self.pickerType == DatePicker) {
         
         NSDate *date = _datePicker.date;
         
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
         
-        if([self.labelFrequencyDayTitle.text isEqual:@"Date"]) {
+        dateFormat.timeZone = _datePicker.timeZone;
+        [dateFormat setDateFormat:@"MMM:dd:yyyy"];
+        NSString *strDate = [dateFormat stringFromDate:date]; //<- format the time
             
-            dateFormat.timeZone = _datePicker.timeZone;
-            [dateFormat setDateFormat:@"MMM:dd:yyyy"];
-            NSString *strDate = [dateFormat stringFromDate:date]; //<- format the time
+        NSLog(@"str %@",strDate);
+        Date *d = [Date date];
+        [d setDate:strDate];
+        [_medicine addDaysObject:d];
+    
             
-            if(![MTProfileManager profileManager].dateList)
-                [MTProfileManager profileManager].dateList = [[[NSMutableArray alloc] init] autorelease];
-           
-                NSLog(@"str %@",strDate);
-                Date *date = [Date date];
-                [date setDate:strDate];
-             
-                [[MTProfileManager profileManager].dateList addObject:date];
-                
-                NSLog(@"Date is %@ and DateCounts are %d",date.date,[MTProfileManager profileManager].dateList.count);
-            
-        } else if(self.pickerType == TimePicker){
-            
-            dateFormat.timeZone = _datePicker.timeZone;
-            [dateFormat setDateFormat:@"HH:mm: aa"];
-            NSString *strTime = [dateFormat stringFromDate:date]; //<- format the time
-            
-            Time *time = [Time time];
-            time.time = strTime;
-            
-            if(![[MTProfileManager profileManager] timeList])
-                [MTProfileManager profileManager].timeList = [[[NSMutableArray alloc] init] autorelease];
-            [[MTProfileManager profileManager].timeList addObject:time]; //<- add in the model array
-            
-            NSLog(@"Time is %@ and %d count", time,[MTProfileManager profileManager].timeList.count);
-
-        }
+    } else if(self.pickerType == TimePicker){
+        
+        NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+        NSDate *date = _datePicker.date;
+        dateFormat.timeZone = _datePicker.timeZone;
+        [dateFormat setDateFormat:@"hh:mm: aa"];
+        NSString *strTime = [dateFormat stringFromDate:date]; //<- format the time
+        
+        Time *time = [Time time];
+        time.time = strTime;
+        
+        [_medicine addTimesObject:time];
+        
+        [self.times addObject:time];
+        NSLog(@"Time is %@ and %d count", time,[MTProfileManager profileManager].timeList.count);
+        
+        [_tableView reloadData];
     }
+
     
     [_actionSheet dismissWithClickedButtonIndex:0 animated:YES];
     self.actionSheet = nil;
     self.datePicker = nil;
+    
 }
 
 - (UIDatePicker *)datePickerForActionSheet
@@ -360,42 +377,37 @@ static MTScheduleViewController *_instance;
 
 - (void)onButtonDoneClicked
 {
-    Schedule *schedule = [Schedule schedule];
-    schedule.frequency = self.labelFrequencyValue.text;
-    
     if([MTProfileManager profileManager].timeList) {
-        for(Time *time in [MTProfileManager profileManager].timeList)
-        {
-            time.schedule = schedule;
-            [schedule addTimeObject:time];
-        }
+        self.medicine.times = [NSSet setWithArray:[MTProfileManager profileManager].timeList];
     }
     if([MTProfileManager profileManager].dateList) {
-        for(Date *date in [MTProfileManager profileManager].dateList){
-            date.schedule = schedule;
-            [schedule addDaysObject:date];
-        }
+        self.medicine.days = [NSSet setWithArray:[MTProfileManager profileManager].dateList];
     }
-    
-    if(![MTProfileManager profileManager].schedList)
-        [MTProfileManager profileManager].schedList = [[[NSMutableArray alloc] init]autorelease];
-        
-    [[MTProfileManager profileManager].schedList addObject:schedule]; //<- added schedules to be saved soon as part of medicine
-    NSLog(@"schedule %@, sched Count %d",schedule, [MTProfileManager profileManager].schedList.count);
-    
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
-{
-    NSLog(@"Days k%@",self.dayList);
-    NSLog(@"Time k%@",self.timeList);
+{   
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.labelFrequencyValue.text = @"Weekly";
+    [_times addObjectsFromArray:[_medicine.times allObjects]];
+    [_tableView reloadData];
+    self.labelFrequencyValue.text = _medicine.frequency;
+    
+    if([_medicine.frequency isEqualToString:@"Weekly"]){
+        self.labelFrequencyDayTitle.text = @"Day of Week";
+    }
+     else if([_medicine.frequency isEqualToString:@"Monthly"]) {
+        self.labelFrequencyDayTitle.text = @"Day of Month";
+    }
+    else {
+        self.labelFrequencyValue.text = @"Specific Date";
+    }
+
     // Do any additional setup after loading the view from its nib.
 }
 

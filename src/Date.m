@@ -2,18 +2,17 @@
 //  Date.m
 //  MTMedicineTaker
 //
-//  Created by Panfilo Mariano Jr. on 4/18/13.
+//  Created by Panfilo Mariano Jr. on 4/20/13.
 //  Copyright (c) 2013 Pace Creative Studio. All rights reserved.
 //
 
 #import "Date.h"
-#import "Schedule.h"
 
 
 @implementation Date
 
 @dynamic date;
-@dynamic schedule;
+@dynamic medicine;
 
 +(Date *)date
 {

@@ -10,6 +10,8 @@
 
 @interface MTScheduleViewController : UIViewController <UITabBarDelegate,UITableViewDataSource>
 
+@property (nonatomic, retain) Medicine *medicine;
+
 @property (nonatomic, retain) IBOutlet UIButton *buttonFrequency;
 @property (nonatomic, retain) IBOutlet UIButton *buttonFrequencyDay;
 @property (nonatomic, retain) IBOutlet UIButton *buttonAddTime;
@@ -20,4 +22,5 @@
 @property (nonatomic,retain) NSMutableArray *dayList;
 
 +(MTScheduleViewController *) scheduleController;
+
 @end

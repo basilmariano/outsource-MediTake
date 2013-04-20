@@ -59,7 +59,6 @@
 		ACDA30C9171FEB16004FDEC6 /* MTTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30C8171FEB16004FDEC6 /* MTTextFieldCell.m */; };
 		ACDA30CC17203144004FDEC6 /* Date.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30CB17203144004FDEC6 /* Date.m */; };
 		ACDA30CF17203144004FDEC6 /* Time.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30CE17203144004FDEC6 /* Time.m */; };
-		ACDA30D2172031CB004FDEC6 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30D1172031CB004FDEC6 /* Schedule.m */; };
 		ACDA30DB17203674004FDEC6 /* MTScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30D917203674004FDEC6 /* MTScheduleViewController.m */; };
 		ACDA30DC17203674004FDEC6 /* MTScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30DA17203674004FDEC6 /* MTScheduleViewController.xib */; };
 		ACDA30E017203B97004FDEC6 /* MTScheduleViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30DF17203B97004FDEC6 /* MTScheduleViewController-h568.xib */; };
@@ -171,8 +170,6 @@
 		ACDA30CB17203144004FDEC6 /* Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Date.m; sourceTree = "<group>"; };
 		ACDA30CD17203144004FDEC6 /* Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Time.h; sourceTree = "<group>"; };
 		ACDA30CE17203144004FDEC6 /* Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Time.m; sourceTree = "<group>"; };
-		ACDA30D0172031CB004FDEC6 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
-		ACDA30D1172031CB004FDEC6 /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		ACDA30D817203674004FDEC6 /* MTScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTScheduleViewController.h; sourceTree = "<group>"; };
 		ACDA30D917203674004FDEC6 /* MTScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTScheduleViewController.m; sourceTree = "<group>"; };
 		ACDA30DA17203674004FDEC6 /* MTScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTScheduleViewController.xib; sourceTree = "<group>"; };
@@ -262,7 +259,6 @@
 				AC9230231714FBC5002FEFF4 /* ManageObjectModel.h */,
 				AC9230241714FBC5002FEFF4 /* ManageObjectModel.m */,
 				AC9230261715148F002FEFF4 /* UIImage+NSData.h */,
-				AC959CE41712EB1A0006D685 /* MedicineTakerModel.xcdatamodeld */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -303,8 +299,6 @@
 		AC959CE71712EB6B0006D685 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				ACDA30D0172031CB004FDEC6 /* Schedule.h */,
-				ACDA30D1172031CB004FDEC6 /* Schedule.m */,
 				ACDA30CD17203144004FDEC6 /* Time.h */,
 				ACDA30CE17203144004FDEC6 /* Time.m */,
 				ACDA30CA17203144004FDEC6 /* Date.h */,
@@ -337,6 +331,7 @@
 				ACDA30BF171FC823004FDEC6 /* XCDeviceManager */,
 				AC959CE71712EB6B0006D685 /* Core Data */,
 				ACF206DD170E73EA00827BD4 /* Default.png */,
+				AC959CE41712EB1A0006D685 /* MedicineTakerModel.xcdatamodeld */,
 				ACD34B9A170DAA2700768F45 /* Default@2x.png */,
 				AC95CFEA171FA5900019211E /* Default-568h@2x.png */,
 				ACBD65BF170BC483007EABE6 /* MTMedicineTaker */,
@@ -665,7 +660,6 @@
 				ACDA30C9171FEB16004FDEC6 /* MTTextFieldCell.m in Sources */,
 				ACDA30CC17203144004FDEC6 /* Date.m in Sources */,
 				ACDA30CF17203144004FDEC6 /* Time.m in Sources */,
-				ACDA30D2172031CB004FDEC6 /* Schedule.m in Sources */,
 				ACDA30DB17203674004FDEC6 /* MTScheduleViewController.m in Sources */,
 				ACDA30E7172060C2004FDEC6 /* MTFrequencyDatesViewController.m in Sources */,
 				ACDA30F017206BAD004FDEC6 /* MTFrequencyCell.m in Sources */,

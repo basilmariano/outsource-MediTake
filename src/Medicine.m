@@ -2,17 +2,19 @@
 //  Medicine.m
 //  MTMedicineTaker
 //
-//  Created by Panfilo Mariano Jr. on 4/16/13.
+//  Created by Panfilo Mariano Jr. on 4/20/13.
 //  Copyright (c) 2013 Pace Creative Studio. All rights reserved.
 //
 
 #import "Medicine.h"
+#import "Date.h"
 #import "Profile.h"
-#import "Schedule.h"
+#import "Time.h"
 
 
 @implementation Medicine
 
+@dynamic frequency;
 @dynamic meal;
 @dynamic medicineImage;
 @dynamic medicineName;
@@ -21,7 +23,8 @@
 @dynamic unit;
 @dynamic willRemind;
 @dynamic medicineTaker;
-@dynamic schedules;
+@dynamic days;
+@dynamic times;
 
 @synthesize image = _image;
 

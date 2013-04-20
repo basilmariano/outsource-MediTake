@@ -10,11 +10,12 @@
 
 @interface MTMedicineInfoViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
+@property (nonatomic, retain) Medicine *medicine;
+
 @property (nonatomic,retain) IBOutlet UITableView *tableView;
 @property (nonatomic,retain) IBOutlet UIButton *medicineImage;
 @property (nonatomic,retain) IBOutlet UITextField *medicineName;
 @property (nonatomic,retain) IBOutlet UISwitch *switcher;
 
-+(NSString *) stringInfo:(NSString *)stringValue;
 
 @end

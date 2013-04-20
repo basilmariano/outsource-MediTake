@@ -19,11 +19,6 @@
 }
 
 @property(nonatomic, retain) UIImage *originalImage;
-@property(nonatomic, retain) NSString *strQuantity;
-@property(nonatomic, retain) NSString *strUnit;
-@property(nonatomic, retain) NSString *strMeal;
-@property(nonatomic, retain) NSString *strTime;
-@property(nonatomic, retain) NSString *strSchedule;
 @property(nonatomic, retain) UIActionSheet *actionSheet;
 @property(nonatomic, retain) UIPickerView *pickerView;
 @property(nonatomic, retain) NSArray *pickerList;
@@ -39,8 +34,6 @@
 
 @end
 
-static MTMedicineInfoViewController *_instance;
-
 @implementation MTMedicineInfoViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,11 +43,6 @@ static MTMedicineInfoViewController *_instance;
         // Custom initialization
         self.navigationItem.title = @"New Medicine";
         _originalImage = [[UIImage alloc] init];
-        _strQuantity = @"1";
-        _strUnit = @"Tablet";
-        _strMeal = @"Before Meal";
-        _strTime = @"Daily";
-        _strSchedule = @"Weekly";
         
         self.quantityList = [[[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil] autorelease];
         self.mealList = [[[NSArray alloc] initWithObjects:@"Before Meal",@"After Meal",@"None", nil] autorelease];
@@ -67,7 +55,16 @@ static MTMedicineInfoViewController *_instance;
         [buttonCancel addTarget:self action:@selector(onButtonCancelClicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonAllprofile = [[[UIBarButtonItem alloc] initWithCustomView:buttonCancel]autorelease];
         self.navigationItem.leftBarButtonItem = barButtonAllprofile;
-        _instance = self;
+        
+        UIImage *doneImage = [UIImage imageNamed:@"ButtonDone.png"];
+        UIButton *buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
+        buttonDone.frame = CGRectMake(0, 0, 50, 26);
+        [buttonDone setImage:doneImage forState:UIControlStateNormal];
+        [buttonDone addTarget:self action:@selector(onButtonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIBarButtonItem *barButtonDone = [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
+        self.navigationItem.rightBarButtonItem = barButtonDone;
+
     }
     
     return self;
@@ -79,22 +76,12 @@ static MTMedicineInfoViewController *_instance;
     [_medicineImage release];
     [_medicineName release];
     [_originalImage release];
-    [_strQuantity release];
-    [_strUnit release];
-    [_strMeal release];
-    [_strTime release];
-    [_strSchedule release];
     [_actionSheet release];
     [_pickerView release];
     [_pickerList release];
     [_quantityList release];
+    [_medicine release];
     [super dealloc];
-}
-
-+(NSString *) stringInfo:(NSString *)stringValue
-{
-    _instance.strTime = stringValue;
-    return stringValue;
 }
 
 #pragma UITableViewDataSource
@@ -119,67 +106,60 @@ static MTMedicineInfoViewController *_instance;
 
 - (UITableViewCell *)cellWithTableView: (UITableView *)tableView andIndexPath:(NSIndexPath *)indexPath
 {
-        NSString *CellIdentifier = @"MTMedicineInfoCell";
+    NSLog(@"Medicine %@ %@",_medicine,self.medicine);
+    NSString *CellIdentifier = @"MTMedicineInfoCell";
+    
+    MTMedicineInfoCell *tbCell = (MTMedicineInfoCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (tbCell == nil) {
         
-        MTMedicineInfoCell *tbCell = (MTMedicineInfoCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        tbCell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil]objectAtIndex:0];
         
-        if (tbCell == nil) {
-            
-            tbCell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil]objectAtIndex:0];
-            
-        }
-        
-        NSString *cellName = [[NSString alloc] init];
-        NSString *cellValue = [[NSString alloc] init];
-        if(indexPath.section == 1) {
-            cellName = @"Time";
-            cellValue = _strTime;
-        } else {
-            switch (indexPath.row) {
-                case 0: {
-                    NSLog(@"_strQuantity %@",_strQuantity);
-                    cellName = @"Quantity";
-                    cellValue = _strQuantity;
-                    break;
-                }
-                case 1: {
+    }
+    
+    NSString *cellName = @"";
+    NSString *cellValue = @"";
+    if(indexPath.section == 1) {
+        cellName = @"Time";
+        cellValue = self.medicine.frequency;
+    } else {
+        switch (indexPath.row) {
+            case 0: {
+                NSLog(@"strQuantity %@",[self.medicine.quantity stringValue]);
+                cellName = @"Quantity";
+                cellValue = [self.medicine.quantity stringValue];
+                break;
+            }
+            case 1: {
+                
+                NSString *CellIdentifier = @"MTTextFieldCell";
+                
+                MTTextFieldCell *tbCell = (MTTextFieldCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (tbCell == nil) {
                     
-                    NSString *CellIdentifier = @"MTTextFieldCell";
+                    tbCell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil]objectAtIndex:0];
                     
-                    MTTextFieldCell *tbCell = (MTTextFieldCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                    
-                    if (tbCell == nil) {
-                        
-                        tbCell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil]objectAtIndex:0];
-                        
-                    }
-                    tbCell.delegate = self;
-                    tbCell.textFieldRange = 100;
-                    tbCell.textField.text = _strUnit;
-                    tbCell.viewParam = self.view;
-                    return tbCell;
-                    break;
                 }
-                case 2: {
-                    cellName = @"Meal";
-                    cellValue = _strMeal;
-                    break;
-                }
-                case 3: {
-                    cellName = @"Time";
-                    cellValue = self.strSchedule;
-                    break;
-                }
+                tbCell.delegate = self;
+                tbCell.textFieldRange = 100;
+                tbCell.textField.text = self.medicine.unit;
+                tbCell.viewParam = self.view;
+                return tbCell;
+                break;
+            }
+            case 2: {
+                cellName = @"Meal";
+                cellValue = self.medicine.meal;
+                break;
             }
         }
-        
-        tbCell.cellName.text = cellName;
-        tbCell.cellValue.text = cellValue;
-        
-        [cellName release];
-        [cellValue release];
-        
-        return tbCell;
+    }
+    
+    tbCell.cellName.text = cellName;
+    tbCell.cellValue.text = cellValue;
+    
+    return tbCell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -204,9 +184,12 @@ static MTMedicineInfoViewController *_instance;
         
         NSString *nibName = [[XCDeviceManager manager] xibNameForDevice:@"MTScheduleViewController"];
         MTScheduleViewController *scheduleViewController = [[MTScheduleViewController alloc] initWithNibName:nibName bundle:nil];
+        scheduleViewController.medicine = _medicine;
         [self.navigationController pushViewController:scheduleViewController animated:YES];
+        [scheduleViewController release];
         selectedIndex = indexPath.row;
         return;
+        
     } else {
         switch (indexPath.row) {
             case 0: {
@@ -312,13 +295,7 @@ static MTMedicineInfoViewController *_instance;
     
     if(![_medicineName.text isEqualToString:@""])
     {
-        UIImage *doneImage = [UIImage imageNamed:@"ButtonDone.png"];
-        UIButton *buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonDone.frame = CGRectMake(0, 0, 50, 26);
-        [buttonDone setImage:doneImage forState:UIControlStateNormal];
-        [buttonDone addTarget:self action:@selector(onButtonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *barButtonCancel = [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
-        self.navigationItem.rightBarButtonItem = barButtonCancel;
+        //self.navigationItem.rightBarButtonItem.enabled = YES;
     }
     return YES;
 }
@@ -357,15 +334,12 @@ static MTMedicineInfoViewController *_instance;
 
 -(void) textFieldFinishedTyping:(UITextField *)textField
 {
-    self.strMeal = textField.text;
+    self.medicine.unit = textField.text;
 }
 
 - (void) onButtonCancelClicked
 {
-    [MTProfileManager profileManager].schedList = nil;
-    [MTProfileManager profileManager].medicineList = nil;
-    [MTProfileManager profileManager].dateList = nil;
-    [MTProfileManager profileManager].timeList = nil;
+    [[ManageObjectModel objectManager] rollback];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -373,27 +347,14 @@ static MTMedicineInfoViewController *_instance;
 {
     if(![self.medicineName.text isEqual:@""])
     {
-        Medicine *medicine = [Medicine medicine];
-        medicine.medicineName = self.medicineName.text;
-        medicine.medicineImage = [self.medicineImage.imageView.image data];
-        medicine.willRemind = [NSNumber numberWithBool: self.switcher.on];
-        medicine.quantity = [NSNumber numberWithInt:[self.strQuantity integerValue]];
-        medicine.unit = self.strUnit;
-        medicine.status = @""; //<-later
-        medicine.meal = self.strMeal;
-        medicine.medicineTaker = [[MTProfileManager profileManager] profile];
-    
-        if([MTProfileManager profileManager].schedList.count) {
-            for(Schedule *sched in [[MTProfileManager profileManager] schedList]) {
-                [medicine addSchedulesObject:sched];
-            }
-        }
+       // if([MTProfileManager profileManager].medicineList)
+           // [MTProfileManager profileManager].medicineList = [[[NSMutableArray alloc] init]autorelease];
+        //[[MTProfileManager profileManager].medicineList addObject:self.medicine];
+        NSLog(@"Profile is %@",self.medicine.medicineTaker.name);
         
-        ///<- dont have to save yet
-        if(![MTProfileManager profileManager].medicineList)
-            [MTProfileManager profileManager].medicineList = [[[NSMutableArray alloc] init]autorelease];
-        
-        [[MTProfileManager profileManager].medicineList addObject:medicine]; //<- add the created medicine in array from model
+        self.medicine.medicineName = _medicineName.text;
+        self.medicine.medicineImage = [self.medicineImage.imageView.image data];
+        self.medicine.willRemind = [NSNumber numberWithBool:self.switcher.on];
         [[ManageObjectModel objectManager] saveContext];
         
         [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
@@ -428,7 +389,6 @@ static MTMedicineInfoViewController *_instance;
     self.pickerView = [self pickerViewInit];
     [actionSheet addSubview:self.pickerView];
     
-    NSLog(@"picker %@",self.pickerView);
     UIButton *okButton = [UIButton buttonWithType:UIButtonTypeCustom];
     okButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
     [okButton setTitle:@"OK" forState:UIControlStateNormal];
@@ -446,15 +406,15 @@ static MTMedicineInfoViewController *_instance;
     NSLog(@"%d",[_pickerView selectedRowInComponent:0] );
     
     if( selectedIndex == 0) {
-        self.strQuantity = [_pickerList objectAtIndex:[_pickerView selectedRowInComponent:0]];
+        _medicine.quantity = [NSNumber numberWithInt:[[_pickerList objectAtIndex:[_pickerView selectedRowInComponent:0]] integerValue]];
         MTMedicineInfoCell *cell = (MTMedicineInfoCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selectedIndex inSection:0]];
-        cell.cellValue.text = _strQuantity;
+        cell.cellValue.text = [_medicine.quantity stringValue];
         [cell layoutSubviews];
     }
     else {
-        self.strMeal = [_pickerList objectAtIndex:[_pickerView selectedRowInComponent:0]];
+        _medicine.meal = [_pickerList objectAtIndex:[_pickerView selectedRowInComponent:0]];
         MTMedicineInfoCell *cell = (MTMedicineInfoCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selectedIndex inSection:0]];
-        cell.cellValue.text = _strMeal;
+        cell.cellValue.text = self.medicine.meal;
         [cell layoutSubviews];
     }
     [_actionSheet dismissWithClickedButtonIndex:0 animated:YES];
@@ -490,13 +450,19 @@ static MTMedicineInfoViewController *_instance;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    if(![self.medicineName.text isEqual:@""])
+        
     [_tableView reloadData];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    if(_medicine.image)
+        self.medicineImage.imageView.image = _medicine.image;
+    if(_medicine.medicineName)
+        self.medicineName.text = _medicine.medicineName;
+    
     self.originalImage = self.medicineImage.imageView.image;
 }
 

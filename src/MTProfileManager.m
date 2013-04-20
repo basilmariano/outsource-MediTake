@@ -26,7 +26,6 @@ static MTProfileManager *_instance;
 -(void) dealloc
 {
     [_medicineList release];
-    [_schedList release];
     [_dateList release];
     [_timeList release];
     [_profile dealloc];
@@ -61,6 +60,18 @@ static MTProfileManager *_instance;
 {
     NSLog(@"adding Medicine to taker name: %@",_profile.name);
     [_profile addMedicinesObject:medicine];
+    [[ManageObjectModel objectManager] saveContext];
+}
+
+- (Profile *)currentProfile
+{
+    return _profile;
+}
+
++ (void)deleteProfile:(Profile *)profile
+{
+    NSManagedObject *profileObject = profile;
+    [[ManageObjectModel objectManager] deleteObject:profileObject];
     [[ManageObjectModel objectManager] saveContext];
 }
 

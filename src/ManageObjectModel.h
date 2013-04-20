@@ -16,6 +16,7 @@
 
 - (NSURL *)applicationDocumentsDirectory;
 - (void)saveContext;
+- (void)deleteObject:(NSManagedObject *)object;
+- (void)rollback;
 + (ManageObjectModel *) objectManager;
-
 @end

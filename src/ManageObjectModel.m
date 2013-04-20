@@ -42,6 +42,16 @@ static ManageObjectModel *_object;
     }
 }
 
+- (void)deleteObject:(NSManagedObject *)object
+{
+    [self.managedObjectContext deleteObject:object];
+}
+
+- (void)rollback
+{
+    [self.managedObjectContext rollback];
+}
+
 /**
  Returns the URL to the application's Documents directory.
  */
