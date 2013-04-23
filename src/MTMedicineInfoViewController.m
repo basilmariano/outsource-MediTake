@@ -460,9 +460,10 @@
     [super viewDidLoad];
     if(_medicine.image)
         self.medicineImage.imageView.image = _medicine.image;
-    if(_medicine.medicineName)
+    if(_medicine.medicineName) {
         self.medicineName.text = _medicine.medicineName;
-    
+        self.navigationItem.title = _medicine.medicineName;
+    }
     self.originalImage = self.medicineImage.imageView.image;
 }
 

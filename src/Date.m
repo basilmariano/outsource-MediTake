@@ -12,6 +12,7 @@
 @implementation Date
 
 @dynamic date;
+@dynamic type;
 @dynamic medicine;
 
 +(Date *)date

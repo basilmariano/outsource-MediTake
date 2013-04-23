@@ -34,6 +34,14 @@
         UIBarButtonItem *barButtonCancel = [[[UIBarButtonItem alloc] initWithCustomView:buttonCancel]autorelease];
         self.navigationItem.leftBarButtonItem = barButtonCancel;
         
+       
+        UIImage *doneImage = [UIImage imageNamed:@"ButtonDone.png"];
+        UIButton *buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
+        buttonDone.frame = CGRectMake(0, 0, 50, 26);
+        [buttonDone setImage:doneImage forState:UIControlStateNormal];
+        [buttonDone addTarget:self action:@selector(onButtonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *barButtonDone = [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
+        self.navigationItem.rightBarButtonItem = barButtonDone;
     }
     return self;
 }
@@ -55,17 +63,6 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [_profileName resignFirstResponder];
-    
-    if(![_profileName.text isEqualToString:@""])
-    {
-        UIImage *doneImage = [UIImage imageNamed:@"ButtonDone.png"];
-        UIButton *buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonDone.frame = CGRectMake(0, 0, 50, 26);
-        [buttonDone setImage:doneImage forState:UIControlStateNormal];
-        [buttonDone addTarget:self action:@selector(onButtonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *barButtonCancel = [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
-        self.navigationItem.rightBarButtonItem = barButtonCancel;
-    }
     return YES;
 }
 
@@ -155,28 +152,37 @@
 - (void) onButtonDoneClicked
 {
      NSLog(@"Done Clicked");
-    
-    if([self isProfileExist]){
+    if(![self.profileName.text isEqualToString:@""]) {
+        if([self isProfileExist]){
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Profile Exist!"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Profile Exist!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+            [self dismissModalViewControllerAnimated:YES];
+        
+        }else{
+            Profile *profile = [Profile profile];
+            profile.name = self.profileName.text;
+            profile.profileImage = [self.profileImage.imageView.image data];
+    
+            [[ManageObjectModel objectManager] saveContext];
+    
+            [self.navigationController popViewControllerAnimated:YES];
+        /*if ([Profile profileCount] > 0) {
+            self.navigationItem.leftBarButtonItem.customView.hidden = NO;
+        }*/
+        }
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:@"Please fill out the Profile Name!"
                                                        delegate:nil
                                               cancelButtonTitle:@"Ok"
                                               otherButtonTitles:nil];
         [alert show];
         [alert release];
         [self dismissModalViewControllerAnimated:YES];
-        
-    }else{
-        Profile *profile = [Profile profile];
-        profile.name = self.profileName.text;
-        profile.profileImage = [self.profileImage.imageView.image data];
-    
-        [[ManageObjectModel objectManager] saveContext];
-    
-         [self.navigationController popViewControllerAnimated:YES];
-        /*if ([Profile profileCount] > 0) {
-            self.navigationItem.leftBarButtonItem.customView.hidden = NO;
-        }*/
     }
 }
 

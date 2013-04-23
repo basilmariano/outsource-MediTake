@@ -11,6 +11,5 @@
 @interface MTTimeCell : UITableViewCell
 
 @property (nonatomic,retain) IBOutlet UILabel *time;
-@property (nonatomic,retain) IBOutlet UIButton *button;
 
 @end

@@ -160,7 +160,7 @@
     [_list addObjectsFromArray:[Profile profileList]];
 }
 
-#pragma UITableViewDataSource
+#pragma mark  UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -192,7 +192,7 @@
 }*/
 
 
-#pragma UITableViewDelegate
+#pragma mark UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -231,7 +231,7 @@
     [MTProfileManager deleteProfile:profile];
 }
 
-#pragma NSFetchedResultsControllerDelegate
+#pragma mark NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     // The fetch controller is about to start sending change notifications, so prepare the table view for updates.

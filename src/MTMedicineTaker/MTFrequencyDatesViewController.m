@@ -16,7 +16,6 @@
 @property(nonatomic,retain) NSString *frequencyName;
 @property(nonatomic,retain) NSMutableArray *dayList;
 @property(nonatomic,retain) NSMutableArray *selectedFrequencyDay;
-@property(nonatomic,retain) NSArray *previousData;
 @property(nonatomic,retain) NSMutableArray *activeDayList;
 @end
 
@@ -34,8 +33,8 @@
         _dayList = [[NSMutableArray alloc] init];
         self.frequencyName = frequencyName;
         NSString *value = [[[NSString alloc] init] autorelease];
-        if([frequencyName isEqualToString:@"Weekly"]) {
-            for (int i = 1; i<8; i++)  {
+        if([frequencyName isEqualToString:@"Weekly"] || [frequencyName isEqualToString:@"Daily"]) {
+            for (int i = 1; i < 8; i++)  {
                 int keyInt = i - 1;
                 NSNumber *numberKey = [NSNumber numberWithInt:keyInt];
                 switch (i) {
@@ -110,9 +109,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    /*NSInteger count = [[_fetchedResultsController sections] count];
-     NSLog(@"Sections %d",count);
-     return count;*/
     return 1; //<- just for the mean time
 }
 
@@ -120,7 +116,7 @@
 {     
     MTFrequencyCell *tbCell = (MTFrequencyCell *) [tableView dequeueReusableCellWithIdentifier:@"MTFrequencyCell"];
    
-    if (tbCell == nil) {
+    if (tbCell == nil) {	
         
         tbCell = [[[NSBundle mainBundle] loadNibNamed:@"MTFrequencyCell" owner:self options:nil]objectAtIndex:0];
         
@@ -130,10 +126,6 @@
     tbCell.textLabel.text = [[_dayList objectAtIndex:indexPath.row] valueForKey:[[NSNumber numberWithInt: indexPath.row] stringValue]];
     
     BOOL exist = NO;
-   /* for (NSString *str in self.selectedFrequencyDay) {
-        if([str isEqualToString:tbCell.textLabel.text])
-            exist = YES;
-    }*/
     
     for(Date *date in self.selectedFrequencyDay) {
         if([date.date isEqualToString:tbCell.textLabel.text]) {
@@ -150,7 +142,6 @@
    
 }
 
-
 #pragma mark UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -163,41 +154,37 @@
     if(self.switcher.on)
         return;
     
-    BOOL exist = NO;
     NSString *value = [[_dayList objectAtIndex:indexPath.row] valueForKey:[[NSNumber numberWithInt: indexPath.row] stringValue]];
+    
+    BOOL exist = NO;
     if(self.selectedFrequencyDay) {
-
-       /* for (NSString *str in self.selectedFrequencyDay) {
+        for(Date *d in self.selectedFrequencyDay) {
             
-            if([str isEqualToString:value]){
-                [self.selectedFrequencyDay removeObject:str];
-                exist = YES;
-                break;
-            }
-        }*/
-        for(Date *date in self.selectedFrequencyDay) {
-            if([date.date isEqualToString:value]) {
-                NSManagedObject *object = date;
-                [[ManageObjectModel objectManager] deleteObject:object];
-                [self.selectedFrequencyDay removeObject:date];
-                NSLog(@"DATE REMOVED : %@",date.date);
+            if([d.date isEqualToString:value]) {
+                [_medicine removeDaysObject:d];
+                [self.selectedFrequencyDay removeObject:d];
+                [[ManageObjectModel objectManager] deleteObject:d];
+                NSLog(@"DATE REMOVED : %@",d.date);
                 exist = YES;
                 break;
             }
         }
     }
-    MTFrequencyCell *cell = (MTFrequencyCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
     if(!exist) {
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
         Date *date = [Date date];
+        if ([_frequencyName isEqualToString:@"Weekly"] || [self.frequencyName isEqualToString:@"Daily"]) {
+            date.type = [NSNumber numberWithInt:0];
+        } else { // Monthly
+            date.type = [NSNumber numberWithInt:1];
+        }
         date.date = value;
+        
         [_medicine addDaysObject:date];
         [self.selectedFrequencyDay addObject:date];
         NSLog(@"DATE ADDED : %@",date.date);
-    } else {
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
-        [cell layoutSubviews];
     }
+    
+    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -211,25 +198,15 @@
 }
 
 - (IBAction)weekFrequencySwitcher:(id)sender
-{
-    if(!self.previousData)
-        _previousData = [[NSArray alloc] init];
-    
+{ 
     if(self.switcher.on) {
-        self.previousData  = self.selectedFrequencyDay;
-        
-        [self.selectedFrequencyDay removeAllObjects];
-        for(int i = 0; i < _dayList.count ; i++)
-        {
+        for(int i = 0; i < _dayList.count ; i++) {
             BOOL exist = NO;
             NSString *strValue = [[_dayList objectAtIndex:i] valueForKey:[[NSNumber numberWithInt:i] stringValue]];
             if(self.selectedFrequencyDay) {
                 
                 for(Date *date in self.selectedFrequencyDay) {
                     if([date.date isEqualToString:strValue]) {
-                        NSManagedObject *object = date;
-                        [[ManageObjectModel objectManager] deleteObject:object];
-                        [self.selectedFrequencyDay removeObject:date];
                         exist = YES;
                         break;
                     }
@@ -239,6 +216,7 @@
             if(!exist) {
                 Date *date = [Date date];
                 date.date = strValue;
+                date.type = [NSNumber numberWithInt:0];
                 [_medicine addDaysObject:date];
                 [self.selectedFrequencyDay addObject:date];
             }
@@ -250,40 +228,18 @@
 
 - (IBAction)onButtonDoneClicked:(id)sender
 {
-    /* BOOL exist = NO;
-    for(NSString *str in _selectedFrequencyDay) {
-        exist = NO;
-        for(Date *d in self.activeDayList) {
-            if([d.date isEqualToString:str]) {
-                exist = YES;
-              
-            }
+    if([self.frequencyName isEqualToString:@"Weekly"] || [self.frequencyName isEqualToString:@"Daily"]) {
+
+        if(self.switcher.on || self.selectedFrequencyDay.count == 7) {
+            _medicine.frequency = @"Daily";
         }
-        
-        if(!exist) {
-            Date *date = [Date date];
-            date.date = str;
-            [_medicine addDaysObject: date];
-        }
-    }*/
+    }
     
-    /*if(self.selectedFrequencyDay) {
-        for(Date *date in self.selectedFrequencyDay) {
-            [_medicine addDaysObject:date];
-        }
-    }*/
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    /*self.activeDayList = [NSMutableArray array];
-    [_activeDayList addObjectsFromArray:[_medicine.days allObjects]];
-    for(NSObject *obj in _activeDayList) {
-        Date *date = (Date *) obj;
-        [self.selectedFrequencyDay addObject:date.date];
-    }*/
-    
     [self.selectedFrequencyDay addObjectsFromArray:[_medicine.days allObjects]];
     [_tableView reloadData];
 }
@@ -293,7 +249,7 @@
     [super viewDidLoad];
     
     self.switcher.on = NO;
-    if([self.frequencyName isEqualToString:@"Weekly"]) {
+    if([self.frequencyName isEqualToString:@"Weekly"] || [self.frequencyName isEqualToString:@"Daily"]) {
       [self.frequencyWeekView setHidden:NO];
     }
     else {

@@ -13,6 +13,7 @@
 @interface Date : NSManagedObject
 
 @property (nonatomic, retain) NSString * date;
+@property (nonatomic, retain) NSNumber * type;
 @property (nonatomic, retain) NSManagedObject *medicine;
 
 +(Date *)date;

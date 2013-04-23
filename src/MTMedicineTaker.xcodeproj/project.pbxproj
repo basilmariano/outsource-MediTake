@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC2CC753172635E700EC1913 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC752172635E700EC1913 /* Icon.png */; };
+		AC2CC755172635EE00EC1913 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC754172635EE00EC1913 /* Icon@2x.png */; };
+		AC2CC75F1726798500EC1913 /* MTReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2CC75D1726798500EC1913 /* MTReminderViewController.m */; };
+		AC2CC7601726798500EC1913 /* MTReminderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC75E1726798500EC1913 /* MTReminderViewController.xib */; };
+		AC2CC762172683A200EC1913 /* MTReminderViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC761172683A200EC1913 /* MTReminderViewController-h568.xib */; };
 		AC78BBEE1720D55000DF0C76 /* MTMedicineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC78BBED1720D55000DF0C76 /* MTMedicineCell.xib */; };
 		AC78BBF11720D56A00DF0C76 /* MTMedicineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC78BBF01720D56A00DF0C76 /* MTMedicineCell.m */; };
 		AC78BBF51721357B00DF0C76 /* MTTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC78BBF41721357B00DF0C76 /* MTTimeCell.m */; };
@@ -93,6 +98,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC2CC752172635E700EC1913 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		AC2CC754172635EE00EC1913 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		AC2CC75C1726798500EC1913 /* MTReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTReminderViewController.h; sourceTree = "<group>"; };
+		AC2CC75D1726798500EC1913 /* MTReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTReminderViewController.m; sourceTree = "<group>"; };
+		AC2CC75E1726798500EC1913 /* MTReminderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTReminderViewController.xib; sourceTree = "<group>"; };
+		AC2CC761172683A200EC1913 /* MTReminderViewController-h568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MTReminderViewController-h568.xib"; sourceTree = "<group>"; };
 		AC78BBED1720D55000DF0C76 /* MTMedicineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTMedicineCell.xib; sourceTree = "<group>"; };
 		AC78BBEF1720D56A00DF0C76 /* MTMedicineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMedicineCell.h; sourceTree = "<group>"; };
 		AC78BBF01720D56A00DF0C76 /* MTMedicineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMedicineCell.m; sourceTree = "<group>"; };
@@ -222,6 +233,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC2CC756172675A000EC1913 /* Reminder TableView */ = {
+			isa = PBXGroup;
+			children = (
+				AC2CC75C1726798500EC1913 /* MTReminderViewController.h */,
+				AC2CC75D1726798500EC1913 /* MTReminderViewController.m */,
+				AC2CC75E1726798500EC1913 /* MTReminderViewController.xib */,
+				AC2CC761172683A200EC1913 /* MTReminderViewController-h568.xib */,
+			);
+			name = "Reminder TableView";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		AC2CC757172675B000EC1913 /* TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				ACBD65E1170BD318007EABE6 /* ReminderCell */,
+				ACBD65E5170BD4BA007EABE6 /* ProfileCell */,
+				AC950B7F171CFA3C00F4F0D1 /* MedicineInfoCell */,
+				ACDA30C6171FEABF004FDEC6 /* TextFieldCell */,
+				ACDA30EB17206B76004FDEC6 /* frequencyCell */,
+				AC78BBEC1720D53400DF0C76 /* MedicineCell */,
+				AC78BBF21721356600DF0C76 /* TimeCell */,
+			);
+			name = "TableView Cells";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		AC2CC758172677DF00EC1913 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ACDA30E11720607A004FDEC6 /* FrequencyDatesView */,
+				ACDA30D317203601004FDEC6 /* Schedule */,
+				AC950B77171CF41400F4F0D1 /* MedicineInfo */,
+				AC92E7EA171BA86900F2BB4A /* ProfileInfo */,
+				ACB2CEB71712925B00648410 /* ProfileView */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		AC2CC7591726780200EC1913 /* Table Views */ = {
+			isa = PBXGroup;
+			children = (
+				AC2CC756172675A000EC1913 /* Reminder TableView */,
+				AC8B58CE170D1AA80036D854 /* Profile TableView */,
+			);
+			name = "Table Views";
+			sourceTree = "<group>";
+		};
 		AC78BBEC1720D53400DF0C76 /* MedicineCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +289,7 @@
 				AC78BBED1720D55000DF0C76 /* MTMedicineCell.xib */,
 			);
 			name = MedicineCell;
+			path = MTMedicineTaker;
 			sourceTree = "<group>";
 		};
 		AC78BBF21721356600DF0C76 /* TimeCell */ = {
@@ -240,9 +300,10 @@
 				AC78BBF61721358B00DF0C76 /* MTTimeCell.xib */,
 			);
 			name = TimeCell;
+			path = MTMedicineTaker;
 			sourceTree = "<group>";
 		};
-		AC8B58CE170D1AA80036D854 /* TableView */ = {
+		AC8B58CE170D1AA80036D854 /* Profile TableView */ = {
 			isa = PBXGroup;
 			children = (
 				ACBBD1A0170D5BD800CBD2C8 /* MTTableViewController.h */,
@@ -250,7 +311,7 @@
 				ACBBD1A2170D5BD800CBD2C8 /* MTTableViewController.xib */,
 				AC95CFD9171F81E40019211E /* MTTableViewController-h568.xib */,
 			);
-			name = TableView;
+			name = "Profile TableView";
 			sourceTree = "<group>";
 		};
 		AC9230221714F982002FEFF4 /* DataModel */ = {
@@ -294,6 +355,7 @@
 				AC950B80171CFA7A00F4F0D1 /* MTMedicineInfoCell.xib */,
 			);
 			name = MedicineInfoCell;
+			path = MTMedicineTaker;
 			sourceTree = "<group>";
 		};
 		AC959CE71712EB6B0006D685 /* Core Data */ = {
@@ -327,6 +389,8 @@
 		ACBD65AD170BC483007EABE6 = {
 			isa = PBXGroup;
 			children = (
+				AC2CC754172635EE00EC1913 /* Icon@2x.png */,
+				AC2CC752172635E700EC1913 /* Icon.png */,
 				ACDA30C0171FC876004FDEC6 /* ProfileManager */,
 				ACDA30BF171FC823004FDEC6 /* XCDeviceManager */,
 				AC959CE71712EB6B0006D685 /* Core Data */,
@@ -363,21 +427,11 @@
 		ACBD65BF170BC483007EABE6 /* MTMedicineTaker */ = {
 			isa = PBXGroup;
 			children = (
-				AC78BBF21721356600DF0C76 /* TimeCell */,
-				AC78BBEC1720D53400DF0C76 /* MedicineCell */,
-				ACDA30EB17206B76004FDEC6 /* frequencyCell */,
-				ACDA30E11720607A004FDEC6 /* FrequencyDatesView */,
-				ACDA30D317203601004FDEC6 /* Schedule */,
-				ACDA30C6171FEABF004FDEC6 /* TextFieldCell */,
-				AC950B7F171CFA3C00F4F0D1 /* MedicineInfoCell */,
-				AC950B77171CF41400F4F0D1 /* MedicineInfo */,
-				AC92E7EA171BA86900F2BB4A /* ProfileInfo */,
-				ACB2CEB71712925B00648410 /* ProfileView */,
-				AC8B58CE170D1AA80036D854 /* TableView */,
+				AC2CC7591726780200EC1913 /* Table Views */,
+				AC2CC758172677DF00EC1913 /* View Controllers */,
+				AC2CC757172675B000EC1913 /* TableView Cells */,
 				ACBD65EF170C0530007EABE6 /* Resources */,
 				ACBD65E8170BE0A4007EABE6 /* ControllerSubClasses */,
-				ACBD65E5170BD4BA007EABE6 /* ProfileCell */,
-				ACBD65E1170BD318007EABE6 /* ReminderCell */,
 				ACBD65C8170BC483007EABE6 /* MTAppDelegate.h */,
 				ACBD65C9170BC483007EABE6 /* MTAppDelegate.m */,
 				ACBD65C0170BC483007EABE6 /* Supporting Files */,
@@ -404,6 +458,7 @@
 				ACBBD1B1170D676F00CBD2C8 /* MTReminderCell.xib */,
 			);
 			name = ReminderCell;
+			path = MTMedicineTaker;
 			sourceTree = "<group>";
 		};
 		ACBD65E5170BD4BA007EABE6 /* ProfileCell */ = {
@@ -414,6 +469,7 @@
 				ACBBD1AE170D676F00CBD2C8 /* MTProfileCell.xib */,
 			);
 			name = ProfileCell;
+			path = MTMedicineTaker;
 			sourceTree = "<group>";
 		};
 		ACBD65E8170BE0A4007EABE6 /* ControllerSubClasses */ = {
@@ -490,6 +546,7 @@
 				ACDA30C4171FEAA9004FDEC6 /* MTTextFieldCell.xib */,
 			);
 			name = TextFieldCell;
+			path = MTMedicineTaker;
 			sourceTree = "<group>";
 		};
 		ACDA30D317203601004FDEC6 /* Schedule */ = {
@@ -523,6 +580,7 @@
 				ACDA30F117206BBA004FDEC6 /* MTFrequencyCell.xib */,
 			);
 			name = frequencyCell;
+			path = MTMedicineTaker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -628,6 +686,10 @@
 				ACDA30F217206BBA004FDEC6 /* MTFrequencyCell.xib in Resources */,
 				AC78BBEE1720D55000DF0C76 /* MTMedicineCell.xib in Resources */,
 				AC78BBF71721358B00DF0C76 /* MTTimeCell.xib in Resources */,
+				AC2CC753172635E700EC1913 /* Icon.png in Resources */,
+				AC2CC755172635EE00EC1913 /* Icon@2x.png in Resources */,
+				AC2CC7601726798500EC1913 /* MTReminderViewController.xib in Resources */,
+				AC2CC762172683A200EC1913 /* MTReminderViewController-h568.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +727,7 @@
 				ACDA30F017206BAD004FDEC6 /* MTFrequencyCell.m in Sources */,
 				AC78BBF11720D56A00DF0C76 /* MTMedicineCell.m in Sources */,
 				AC78BBF51721357B00DF0C76 /* MTTimeCell.m in Sources */,
+				AC2CC75F1726798500EC1913 /* MTReminderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

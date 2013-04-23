@@ -13,6 +13,7 @@
 #import "MTTabBarController.h"
 #import "Profile.h"
 #import "MTProfileViewController.h"
+#import "MTReminderViewController.h"
 
 @implementation MTAppDelegate
 
@@ -28,7 +29,7 @@
     // Override point for customization after application launch.
     MTTableViewController *profile = [[[MTTableViewController alloc] initWithTableViewName:@"Profile" andEntityName:@"Profile" andSectionNumber:1] autorelease];
     
-    MTTableViewController *reminder =[[[MTTableViewController alloc] initWithTableViewName:@"Reminders" andEntityName:@"Profile" andSectionNumber:1] autorelease];
+    MTReminderViewController *reminder =[[[MTReminderViewController alloc] initWithNibName:@"MTReminderViewController" bundle:nil]autorelease];
     
     UIImage *buttonRemindersNormal = [UIImage imageNamed:@"ButtonReminderNormal.png"];
     UIImage *buttonReminderPressed = [UIImage imageNamed:@"ButtonReminderClicked.png"];
@@ -72,7 +73,7 @@
     splashImageView.userInteractionEnabled = FALSE;
     
     [tabBarController.view addSubview:splashImageView];
-    [self performSelector:@selector(removeSplashImageView:) withObject:splashImageView afterDelay:2];
+    [self performSelector:@selector(removeSplashImageView:) withObject:splashImageView afterDelay:3];
     
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];

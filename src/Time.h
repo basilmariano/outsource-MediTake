@@ -12,9 +12,19 @@
 
 @interface Time : NSManagedObject
 
-@property (nonatomic, retain) NSString *time;
+@property (nonatomic, retain) NSNumber *time;
 @property (nonatomic, retain) NSManagedObject *medicine;
 
 + (Time *)time;
-
+/* NSdate *date;
+ 
+ NSNumber *num = [NSNumber numberWithDouble:[date timeIntervalSince1970]];
+ 
+ NSDate *date = [NSDate dateWithTimeIntervalSince1970:[num doubleValue]];
+ 
+ [NSDateFormatter]
+ 
+ 
+ [NSNumber numberWithDouble:[[NSDate dateWithTimeIntervalSince1970:0.0] timeoutInterval]];
+ */
 @end

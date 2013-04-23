@@ -31,7 +31,9 @@
 + (Medicine *)medicine
 {
     NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Medicine" inManagedObjectContext:[ManageObjectModel objectManager].managedObjectContext];
-    return [[[Medicine alloc] initWithEntity:entityDesc insertIntoManagedObjectContext:[ManageObjectModel objectManager].managedObjectContext] autorelease];
+    Medicine *m = [[[Medicine alloc] initWithEntity:entityDesc insertIntoManagedObjectContext:[ManageObjectModel objectManager].managedObjectContext] autorelease];
+    m.frequency = @"Weekly";
+    return m;
 }
 
 - (UIImage *)image

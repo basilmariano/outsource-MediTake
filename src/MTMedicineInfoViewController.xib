@@ -113,7 +113,7 @@
 						</object>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">MedsTime_ProfilePic@2x.png</string>
+							<string key="NSResourceName">MedsTime_MedPic@2x.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
@@ -443,7 +443,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="MedsTime_ProfilePic@2x.png">{100, 100}</string>
+			<string key="MedsTime_MedPic@2x.png">{100, 100}</string>
 			<string key="SectionBackground.png">{639, 44}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
