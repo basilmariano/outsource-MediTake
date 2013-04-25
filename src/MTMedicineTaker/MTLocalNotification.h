@@ -10,4 +10,10 @@
 
 @interface MTLocalNotification : NSObject
 
++(MTLocalNotification *)sharedInstance;
+
+- (void)scheduleNotificationWithFireDate: (NSDate *)fireDate frequencyType:(NSNumber *)frequencyType andMedicine:(Medicine *)medicine;
+- (void)showReminder:(NSString *)reminder;
+- (void)clearNotification;
+
 @end
