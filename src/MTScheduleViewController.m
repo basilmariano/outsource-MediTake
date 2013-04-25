@@ -28,8 +28,8 @@ PickerType;
 @property(nonatomic, retain) UIPickerView *pickerView;
 @property(nonatomic) PickerType pickerType;
 @property(nonatomic, retain) NSMutableArray *timeList;
-
-@property (nonatomic, retain) NSMutableArray *times;
+@property(nonatomic, retain) NSMutableArray *specificDays;
+@property (nonatomic,retain) NSMutableArray *times;
 
 -(IBAction)frequencyButtonClicked:(id)sender;
 -(IBAction)frequencyDayButtonClicked:(id)sender;
@@ -77,6 +77,7 @@ static MTScheduleViewController *_instance;
         self.navigationItem.rightBarButtonItem = barButtonCancel;
         
         _times = [[NSMutableArray alloc] init];
+        _specificDays = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -94,6 +95,7 @@ static MTScheduleViewController *_instance;
     [_datePicker release];
     [_timeList release];
     [_times release];
+    [_specificDays release];
     [_medicine release];
     [super dealloc];
 }
@@ -333,10 +335,30 @@ static MTScheduleViewController *_instance;
         [dateFormat setDateFormat:@"MMM:dd:yyyy"];
         NSString *strDate = [dateFormat stringFromDate:date]; //<- format the time
         
+        Date *newDate = nil;
+        if(self.specificDays.count) {
+            for(Date *spesDate in self.specificDays) {
+                if([strDate isEqualToString:spesDate.date]) {
+                    newDate = spesDate;
+                }
+            }
+        }
         NSLog(@"str %@",strDate);
-        Date *d = [Date date];
-        [d setDate:strDate];
-        [_medicine addDaysObject:d];
+        if(!newDate) {
+            newDate= [Date date];
+            [newDate setDate:strDate];
+            [newDate setType:[NSNumber numberWithInt:2]];
+            [_medicine addDaysObject:newDate];
+            [self.specificDays addObject:newDate];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:@"Date selected already exist"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+
+        }
         
     } else if(self.pickerType == TimePicker){
         
@@ -440,7 +462,9 @@ static MTScheduleViewController *_instance;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_specificDays addObjectsFromArray:[_medicine.days allObjects]];
     [_times addObjectsFromArray:[_medicine.times allObjects]];
+    
     [_tableView reloadData];
     self.labelFrequencyValue.text = _medicine.frequency;
     

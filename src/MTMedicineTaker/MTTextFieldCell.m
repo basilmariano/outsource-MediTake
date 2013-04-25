@@ -117,7 +117,7 @@ CGFloat TF_LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldWillStartTyping:)]) {
         
-        [self.delegate performSelector:@selector(textFieldWillStartTyping:) withObject:_index];
+        [self.delegate performSelector:@selector(textFieldWillStartTyping:) withObject:[NSNumber numberWithInt:_index]];
     }
 }
 

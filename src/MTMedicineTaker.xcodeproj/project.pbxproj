@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC05BFEB1727AF4100AA6E7E /* MTLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = AC05BFEA1727AF4100AA6E7E /* MTLocalNotification.m */; };
 		AC2CC753172635E700EC1913 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC752172635E700EC1913 /* Icon.png */; };
 		AC2CC755172635EE00EC1913 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC754172635EE00EC1913 /* Icon@2x.png */; };
 		AC2CC75F1726798500EC1913 /* MTReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2CC75D1726798500EC1913 /* MTReminderViewController.m */; };
@@ -98,6 +99,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC05BFE91727AF4100AA6E7E /* MTLocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLocalNotification.h; sourceTree = "<group>"; };
+		AC05BFEA1727AF4100AA6E7E /* MTLocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLocalNotification.m; sourceTree = "<group>"; };
 		AC2CC752172635E700EC1913 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		AC2CC754172635EE00EC1913 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		AC2CC75C1726798500EC1913 /* MTReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTReminderViewController.h; sourceTree = "<group>"; };
@@ -233,6 +236,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC05BFE81727AF1000AA6E7E /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				AC05BFE91727AF4100AA6E7E /* MTLocalNotification.h */,
+				AC05BFEA1727AF4100AA6E7E /* MTLocalNotification.m */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
 		AC2CC756172675A000EC1913 /* Reminder TableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,6 +439,7 @@
 		ACBD65BF170BC483007EABE6 /* MTMedicineTaker */ = {
 			isa = PBXGroup;
 			children = (
+				AC05BFE81727AF1000AA6E7E /* Notification */,
 				AC2CC7591726780200EC1913 /* Table Views */,
 				AC2CC758172677DF00EC1913 /* View Controllers */,
 				AC2CC757172675B000EC1913 /* TableView Cells */,
@@ -728,6 +741,7 @@
 				AC78BBF11720D56A00DF0C76 /* MTMedicineCell.m in Sources */,
 				AC78BBF51721357B00DF0C76 /* MTTimeCell.m in Sources */,
 				AC2CC75F1726798500EC1913 /* MTReminderViewController.m in Sources */,
+				AC05BFEB1727AF4100AA6E7E /* MTLocalNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

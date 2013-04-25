@@ -11,6 +11,9 @@
 #import "MTTextFieldCell.h"
 #import "MTScheduleViewController.h"
 #import "Medicine.h"
+#import "Time.h"
+#import "Date.h"
+#import "MTLocalNotification.h"
 
 @interface MTMedicineInfoViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,MTTextFieldCellDelegate>
 {
@@ -343,15 +346,126 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)setFireDate
+{
+    NSArray *timeList = [NSArray arrayWithArray:[_medicine.times allObjects]];
+    NSArray *dayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
+    
+    NSDate *finalDate = nil;
+    NSDate *time = nil;
+    NSDate *dayDate = nil;
+    NSDateComponents *dateComponents = [[[NSDateComponents alloc] init] autorelease];
+    NSDateComponents *timeComponents = [[[NSDateComponents alloc] init] autorelease];
+    NSNumber *type = nil;
+    
+    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    
+    for(Time *t in timeList) {
+       
+        for(Date *d in dayList) {
+       
+            switch ([d.type integerValue]) {
+                case 0: {
+                    
+                    NSString *dateStr = d.date;
+                    NSLog(@"%@",dateStr);
+                    NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];// <- Convert string to date object
+                    [dateFormat setDateFormat:@"EEEE"];
+                    
+                    NSDate *day = [dateFormat dateFromString:dateStr];
+                    NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:day];
+
+                    NSDate *now = [NSDate date];
+                    NSDateComponents *compsThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit fromDate:now];
+                    compsThisMonth.day = 1;
+                    NSDate *firstDayOfThisMonth = [calendar dateFromComponents:compsThisMonth];
+
+                    NSDateComponents *compsFirstDayOfThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:firstDayOfThisMonth];
+                    if (comps.weekday == compsFirstDayOfThisMonth.weekday) {
+                        dateComponents = compsFirstDayOfThisMonth;
+                    } else if (comps.weekday > compsFirstDayOfThisMonth.weekday) {
+                        NSUInteger daysNeed2Add = comps.weekday - compsFirstDayOfThisMonth.weekday;
+                        NSDate *dayOfWeek = [firstDayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
+                        dateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                    } else { // comps.weekday < compsFirstDayOfThisMonth.weekday
+                        NSUInteger daysNeed2Add = comps.weekday + 7 - compsFirstDayOfThisMonth.weekday;
+                        NSDate *dayOfWeek = [firstDayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
+                        dateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                    }
+
+                    dayDate = [calendar dateFromComponents:dateComponents];
+                    type =  [NSNumber numberWithInt:0];
+                 
+                    break;
+                }
+                case 1: {
+                    
+                    NSDate *d1 = [NSDate date];
+                    
+                    NSDateComponents *components = [calendar components:(NSMonthCalendarUnit | NSYearCalendarUnit) //<- update the  current date to date picked day (e.g) 1,2,3 ...
+                                                               fromDate:d1];
+                    [components setDay:[d.date integerValue]];
+    
+                    dateComponents = components;
+                    
+                    dayDate = [calendar dateFromComponents:dateComponents];
+                
+                    type =  [NSNumber numberWithInt:1];
+                    break;
+                }
+                case 2: {
+                    
+                    NSString *dateStr = d.date;
+                    // Convert string to date object
+                    NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+                    [dateFormat setDateFormat:@"MMM:dd:yyyy"];
+                    dayDate = [dateFormat dateFromString:dateStr];
+                    dateComponents = [calendar components:( NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit )
+                                                 fromDate:dayDate];
+                    type =  [NSNumber numberWithInt:2];
+                    break;
+                }
+            }
+            
+            NSTimeInterval timeInterval = dayDate.timeIntervalSince1970;
+            timeInterval = timeInterval + [t.time doubleValue];
+            
+            NSDate *dateForNotif = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+            
+            time = dateForNotif;
+            
+            timeComponents = [calendar components:( NSHourCalendarUnit | NSMinuteCalendarUnit )
+                                         fromDate:time];
+            
+            NSDateComponents *finalDateComp = [[[NSDateComponents alloc] init] autorelease];
+            [finalDateComp setMonth:[dateComponents month]];
+            [finalDateComp setDay:[dateComponents day]];
+            [finalDateComp setYear:[dateComponents year]];
+            [finalDateComp setWeekday:[dateComponents weekday]];
+            // Notification will fire in one minute
+            [finalDateComp setHour:[timeComponents hour]];
+            [finalDateComp setMinute:[timeComponents minute]];
+            
+            NSDate *itemDate = [calendar dateFromComponents:finalDateComp];
+        
+            finalDate = itemDate;
+            
+            NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+            [dateFormat setDateFormat:@"MMM:dd:yyyy hh:mm aa EEEE"];
+            
+            NSString *strTime = [dateFormat stringFromDate:finalDate];
+            NSLog(@"Final Date %@",strTime );
+            //[[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andMedicine:_medicine];
+        }
+        
+    }
+}
+
 - (void) onButtonDoneClicked
 {
     if(![self.medicineName.text isEqual:@""])
     {
-       // if([MTProfileManager profileManager].medicineList)
-           // [MTProfileManager profileManager].medicineList = [[[NSMutableArray alloc] init]autorelease];
-        //[[MTProfileManager profileManager].medicineList addObject:self.medicine];
-        NSLog(@"Profile is %@",self.medicine.medicineTaker.name);
-        
+        [self setFireDate];
         self.medicine.medicineName = _medicineName.text;
         self.medicine.medicineImage = [self.medicineImage.imageView.image data];
         self.medicine.willRemind = [NSNumber numberWithBool:self.switcher.on];

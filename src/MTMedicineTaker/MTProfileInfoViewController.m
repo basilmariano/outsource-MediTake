@@ -11,6 +11,7 @@
 #import "Medicine.h"
 #import "MTMedicineInfoViewController.h"
 #import "MTMedicineCell.h"
+#import "Time.h"
 
 @interface MTProfileInfoViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NSFetchedResultsControllerDelegate>
 {
@@ -289,12 +290,20 @@
     tbCell.unit.text = medicine.unit;
     tbCell.medicineImage.image = medicine.image;
     tbCell.frequency.text = medicine.frequency;;
-            
-    NSArray *timeSet = [medicine.times valueForKey:@"time"];
+    
+    NSArray *timeSet = [medicine.times allObjects];
     if(timeSet.count) {
+
         NSMutableString *string = [NSMutableString string];
-        for(NSString *date in timeSet) {
-            [string appendFormat:@"%@ ",date];
+        for(Time *t in timeSet) {
+            
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:[t.time doubleValue]]; //<- retrieve the date
+            NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+            dateFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+            [dateFormat setDateFormat:@"hh:mm aa"];
+            NSString *strTime = [dateFormat stringFromDate:date];
+            
+            [string appendFormat:@"%@ ",strTime];
         }
         tbCell.scheduleTime.text = string;
     }
