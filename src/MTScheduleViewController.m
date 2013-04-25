@@ -253,6 +253,8 @@ static MTScheduleViewController *_instance;
 
 - (void)showPickerActionSheet:(NSString *)title andRow:(NSUInteger)row andDate:(NSDate *)date
 {
+    CGRect okRect = CGRectMake(21.0f, 250.0f, 278.0f, 45.0f);
+    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     [actionSheet showInView:self.view];
@@ -283,8 +285,19 @@ static MTScheduleViewController *_instance;
         }
         case DatePicker: {
             self.datePicker = [self datePickerForActionSheet];
-            self.datePicker.date = date;
+            self.datePicker.date = [NSDate date];
             [actionSheet addSubview:self.datePicker];
+            
+            UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            deleteButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
+            [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+            //[okButton setBackgroundImage:[UIImage imageNamed:@"ButtonBg.png"] forState:UIControlStateNormal];
+            deleteButton.frame = CGRectMake(177.0f, 250.0f, 73.0f, 45.0f);
+            [deleteButton addTarget:self action:@selector(deleteTapped:) forControlEvents:UIControlEventTouchUpInside];
+            //[actionSheet addSubview:self.pickerView];
+            [actionSheet addSubview:deleteButton];
+            
+            okRect = CGRectMake(68.0f, 250.0f,73.0f, 45.0f);
             
             break;
         }
@@ -294,12 +307,24 @@ static MTScheduleViewController *_instance;
     okButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
     [okButton setTitle:@"OK" forState:UIControlStateNormal];
     //[okButton setBackgroundImage:[UIImage imageNamed:@"ButtonBg.png"] forState:UIControlStateNormal];
-    okButton.frame = CGRectMake(21.0f, 250.0f, 278.0f, 45.0f);
+    okButton.frame = okRect;
     [okButton addTarget:self action:@selector(okTapped:) forControlEvents:UIControlEventTouchUpInside];
     //[actionSheet addSubview:self.pickerView];
     [actionSheet addSubview:okButton];
     
     [actionSheet release];
+}
+
+- (void) deleteTapped: (NSObject *)sender
+{
+    [_actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Nothing to delete"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 - (void)okTapped:(NSObject *)sender
@@ -337,7 +362,7 @@ static MTScheduleViewController *_instance;
         
         Date *newDate = nil;
         if(self.specificDays.count) {
-            for(Date *spesDate in self.specificDays) {
+            for(Date *spesDate in _medicine.days) {
                 if([strDate isEqualToString:spesDate.date]) {
                     newDate = spesDate;
                 }
@@ -444,14 +469,24 @@ static MTScheduleViewController *_instance;
 
 - (void)onButtonDoneClicked
 {
-    /*if([MTProfileManager profileManager].timeList) {
-        self.medicine.times = [NSSet setWithArray:[MTProfileManager profileManager].timeList];
+    if(!(_medicine.days.count && _medicine.times.count)) {
+        NSString *message = @"Have atleast single Date and Time!";
+        
+        if(!_medicine.days.count)
+            message = @"Have atleast single Date!";
+        else if(!_medicine.times.count)
+            message = @"Have atleast single Time!";
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    if([MTProfileManager profileManager].dateList) {
-        self.medicine.days = [NSSet setWithArray:[MTProfileManager profileManager].dateList];
-    }
-*/
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated

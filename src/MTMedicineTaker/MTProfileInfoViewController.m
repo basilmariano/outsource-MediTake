@@ -374,7 +374,6 @@
         Profile *profile = [[MTProfileManager profileManager] profile];
         profile.name = self.profileName.text;
         profile.profileImage = [self.profileImage.imageView.image data];
-        
       /*  if([MTProfileManager profileManager].medicineList.count) {
             for(Medicine *med in [MTProfileManager profileManager].medicineList) {
                 [profile addMedicinesObject:med];

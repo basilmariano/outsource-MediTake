@@ -96,6 +96,7 @@
 		ACF2070C170E748B00827BD4 /* TextFiledBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F6170E748B00827BD4 /* TextFiledBG.png */; };
 		ACF2070E170EA5E500827BD4 /* BlueNavigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */; };
 		ACF20712170EB01500827BD4 /* Bread 10.46.46 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF20711170EB01400827BD4 /* Bread 10.46.46 AM.png */; };
+		ACF48CD217290B1400E6ECB4 /* RegisteredNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF48CD117290B1400E6ECB4 /* RegisteredNotification.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -218,6 +219,8 @@
 		ACF206F6170E748B00827BD4 /* TextFiledBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TextFiledBG.png; path = Resources/TextFiledBG.png; sourceTree = SOURCE_ROOT; };
 		ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueNavigationBar.png; path = Resources/BlueNavigationBar.png; sourceTree = SOURCE_ROOT; };
 		ACF20711170EB01400827BD4 /* Bread 10.46.46 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Bread 10.46.46 AM.png"; path = "../../../../.Trash/Bread 10.46.46 AM.png"; sourceTree = "<group>"; };
+		ACF48CD017290B1400E6ECB4 /* RegisteredNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredNotification.h; sourceTree = "<group>"; };
+		ACF48CD117290B1400E6ECB4 /* RegisteredNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredNotification.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +376,8 @@
 		AC959CE71712EB6B0006D685 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				ACF48CD017290B1400E6ECB4 /* RegisteredNotification.h */,
+				ACF48CD117290B1400E6ECB4 /* RegisteredNotification.m */,
 				ACDA30CD17203144004FDEC6 /* Time.h */,
 				ACDA30CE17203144004FDEC6 /* Time.m */,
 				ACDA30CA17203144004FDEC6 /* Date.h */,
@@ -742,6 +747,7 @@
 				AC78BBF51721357B00DF0C76 /* MTTimeCell.m in Sources */,
 				AC2CC75F1726798500EC1913 /* MTReminderViewController.m in Sources */,
 				AC05BFEB1727AF4100AA6E7E /* MTLocalNotification.m in Sources */,
+				ACF48CD217290B1400E6ECB4 /* RegisteredNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

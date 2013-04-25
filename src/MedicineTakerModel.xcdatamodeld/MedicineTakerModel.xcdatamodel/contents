@@ -16,6 +16,7 @@
         <attribute name="willRemind" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Date" inverseName="medicine" inverseEntity="Date" syncable="YES"/>
         <relationship name="medicineTaker" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="medicines" inverseEntity="Profile" syncable="YES"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RegisteredNotification" inverseName="medicine" inverseEntity="RegisteredNotification" syncable="YES"/>
         <relationship name="times" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Time" inverseName="medicine" inverseEntity="Time" syncable="YES"/>
     </entity>
     <entity name="Profile" representedClassName="Profile" syncable="YES">
@@ -23,18 +24,19 @@
         <attribute name="profileImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="medicines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Medicine" inverseName="medicineTaker" inverseEntity="Medicine" syncable="YES"/>
     </entity>
-    <entity name="RegisteredNotification" syncable="YES">
+    <entity name="RegisteredNotification" representedClassName="RegisteredNotification" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="medicine" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Medicine" inverseName="notifications" inverseEntity="Medicine" syncable="YES"/>
     </entity>
     <entity name="Time" representedClassName="Time" syncable="YES">
         <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="medicine" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Medicine" inverseName="times" inverseEntity="Medicine" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Date" positionX="-324" positionY="177" width="128" height="90"/>
-        <element name="Medicine" positionX="-569" positionY="189" width="128" height="210"/>
+        <element name="Date" positionX="-317" positionY="189" width="128" height="90"/>
+        <element name="Medicine" positionX="-569" positionY="189" width="128" height="225"/>
         <element name="Profile" positionX="-585" positionY="27" width="128" height="90"/>
+        <element name="RegisteredNotification" positionX="-308" positionY="318" width="173" height="75"/>
         <element name="Time" positionX="-297" positionY="429" width="128" height="75"/>
-        <element name="RegisteredNotification" positionX="-308" positionY="318" width="173" height="60"/>
     </elements>
 </model>

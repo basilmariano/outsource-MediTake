@@ -9,10 +9,12 @@
 #import "MTReminderViewController.h"
 #import "MTReminderCell.h"
 #import "MTNavigationViewController.h"
+#import "Medicine.h"
+#import "ManageObjectModel.h"
 
 @interface MTReminderViewController ()
 
-@property(nonatomic,retain) NSArray *reminderList;
+@property(nonatomic,retain) NSMutableArray *reminderList;
 
 @end
 
@@ -25,7 +27,8 @@
     self = [super initWithNibName:nibName bundle:nil];
     if (self) {
         // Custom initialization
-        _reminderList = [[NSArray alloc] init];
+        _reminderList = [[NSMutableArray alloc] init];
+        self.navigationItem.title = @"Reminder";
     }
     return self;
 }
@@ -41,8 +44,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id  sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
+    /*id  sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];*/
+   return self.reminderList.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -65,32 +69,27 @@
         
     }
     
-  /*  if(_list.count > 0)
+    if(!self.reminderList.count)
         return tbCell;
     
-    NSDictionary *contacts = (NSDictionary *) [_list objectAtIndex:rows];
-    NSString *name = [contacts objectForKey: @"takerName"];
-    NSString *medicine = [contacts objectForKey:@"medicineName"];
-    NSString *scheduleTime = [contacts objectForKey:@"scheduleTime"];
-    NSString *scheduleStatus = [contacts objectForKey:@"scheduleStatus"];
-    NSString *takenTime = [contacts objectForKey: @"takenTime"];
-    NSString *medicineQuantity = [contacts objectForKey:@"medicineQuantity"];
-    NSString *medicineUnit = [contacts objectForKey:@"medicineUnit"];
-    NSString *medicineImage = [contacts objectForKey:@"medicineImage"];
-    NSString *takerImage = [contacts objectForKey:@"takerImage"];
-    NSString *alarmImage = [contacts objectForKey:@"alerImage"];
+    NSDictionary *dict = [self.reminderList objectAtIndex:indexPath.row];
+    NSDate *fireDate = [dict objectForKey:@"fireDate"];
+    Medicine *med = (Medicine *) [dict objectForKey:@"Medicine"];
+    tbCell.takerName.text = med.medicineTaker.name;
+    tbCell.medicineName.text = med.medicineName;
+    tbCell.scheduleStatus.text = med.status;
+    //tbCell.takenTime.text = takenTime;
+    tbCell.medicineQuantity.text = [med.quantity stringValue];
+    tbCell.medicineUnit.text = med.unit;
+    tbCell.medicineImage.image = med.image;
+    tbCell.TakerImage.image = med.medicineTaker.image;
+    //tbCell.alarmImage.image = [UIImage imageNamed:alarmImage];
     
-    tbCell.takerName.text = name;
-    tbCell.medicineName.text = medicine;
-    tbCell.scheduleTime.text = scheduleTime;
-    tbCell.scheduleStatus.text = scheduleStatus;
-    tbCell.takenTime.text = takenTime;
-    tbCell.medicineQuantity.text = medicineQuantity;
-    tbCell.medicineUnit.text = medicineUnit;
-    tbCell.medicineImage.image = [UIImage imageNamed:medicineImage];
-    tbCell.TakerImage.image = [UIImage imageNamed:takerImage];
-    tbCell.alarmImage.image = [UIImage imageNamed:alarmImage];
-    */
+    NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormat setDateFormat:@"hh:mm aa"];
+    NSString *strTime = [dateFormat stringFromDate:fireDate];
+    tbCell.scheduleTime.text = strTime;
+    
     return tbCell;
 }
 /*- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -196,7 +195,42 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self retrieveNotificationList];
+}
+
+- (void)retrieveNotificationList
+{
+    NSArray *notifLIst = [UIApplication sharedApplication].scheduledLocalNotifications;
+    NSLog(@"notif %d",notifLIst.count);
+    if(self.reminderList.count)
+        [self.reminderList removeAllObjects];
+    
+    for(UILocalNotification *notif in notifLIst) {
+     
+        NSDictionary *dict = notif.userInfo;
+        NSArray *medPKList = (NSArray *) [dict objectForKey:@"Medicines"];
+        for(NSString *pk in medPKList) {
+            NSLog(@"String %@",pk);
+            NSManagedObject *managedObject=[[[ManageObjectModel objectManager] managedObjectContext] objectWithID: [[[ManageObjectModel objectManager] persistentStoreCoordinator] managedObjectIDForURIRepresentation:[NSURL URLWithString:pk]]];
+
+            Medicine *med = (Medicine *) managedObject;
+            NSLog(@"Med %@",med.medicineName);
+            NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  med,@"Medicine",
+                                  notif.fireDate,@"fireDate",
+                                   nil];
+            [self.reminderList addObject:dict2];
+            NSLog(@"reminderList %d",self.reminderList.count);
+        }
+    }
+    
+    [_tableView reloadData];
+
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self retrieveNotificationList];
 }
 
 - (void)didReceiveMemoryWarning

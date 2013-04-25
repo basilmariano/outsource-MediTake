@@ -455,7 +455,7 @@
             
             NSString *strTime = [dateFormat stringFromDate:finalDate];
             NSLog(@"Final Date %@",strTime );
-            //[[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andMedicine:_medicine];
+            [[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andMedicine:_medicine];
         }
         
     }
@@ -463,14 +463,18 @@
 
 - (void) onButtonDoneClicked
 {
-    if(![self.medicineName.text isEqual:@""])
-    {
-        [self setFireDate];
+    if(![self.medicineName.text isEqual:@""]) {
+        
         self.medicine.medicineName = _medicineName.text;
         self.medicine.medicineImage = [self.medicineImage.imageView.image data];
         self.medicine.willRemind = [NSNumber numberWithBool:self.switcher.on];
+        self.medicine.status = self.medicine.meal;
         [[ManageObjectModel objectManager] saveContext];
         
+        [self setFireDate];
+        
+         NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
+        NSLog(@"%d", notificationList.count);
         [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
         
     }

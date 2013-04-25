@@ -10,7 +10,7 @@
 #import "Date.h"
 #import "Profile.h"
 #import "Time.h"
-
+#import "RegisteredNotification.h"
 
 @implementation Medicine
 
@@ -25,6 +25,8 @@
 @dynamic medicineTaker;
 @dynamic days;
 @dynamic times;
+@dynamic notifications;
+//@dynamic idKey;
 
 @synthesize image = _image;
 
@@ -42,6 +44,25 @@
         _image = [[UIImage imageWithData:self.medicineImage] retain];
     }
     return _image;
+}
+
+-(Medicine *)medicineWithId:(NSNumber *)medId
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Medicine" inManagedObjectContext:[[ManageObjectModel objectManager] managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"(_PK = %d)",medId];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects =[[[ManageObjectModel objectManager] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    Medicine *med = (Medicine *) [fetchedObjects objectAtIndex:0];
+    NSLog(@"Profile name %@",med);
+    return med;
+    
 }
 
 @end

@@ -14,6 +14,7 @@
 #import "Profile.h"
 #import "MTProfileViewController.h"
 #import "MTReminderViewController.h"
+#import "MTLocalNotification.h"
 
 @implementation MTAppDelegate
 
@@ -77,6 +78,14 @@
     
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
+    
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+	application.applicationIconBadgeNumber = 0;
+    if (localNotification)
+	{
+		[[MTLocalNotification sharedInstance] handleReceivedNotification:localNotification];
+    }
+    
     return YES;
 }
 
@@ -99,6 +108,12 @@
         imageName = @"BlueNavigationBar.png";
     }
     nav.backgroundImageVIew.image =[UIImage imageNamed:imageName];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    application.applicationIconBadgeNumber = 0;
+    [[MTLocalNotification sharedInstance] handleReceivedNotification:notification];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

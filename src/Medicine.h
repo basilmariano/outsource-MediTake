@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Date, Profile, Time;
+@class Date, Profile, Time, RegisteredNotification;
 
 @interface Medicine : NSManagedObject
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSData * medicineImage;
 @property (nonatomic, retain) NSString * medicineName;
 @property (nonatomic, retain) NSNumber * quantity;
+//@property (nonatomic, retain) NSNumber * idKey;
 @property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * unit;
 @property (nonatomic, retain) NSNumber * willRemind;
@@ -25,6 +26,7 @@
 @property (nonatomic, retain) NSSet *days;
 @property (nonatomic, retain) NSSet *times;
 @property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, retain) NSSet *notifications;
 @end
 
 @interface Medicine (CoreDataGeneratedAccessors)
@@ -37,7 +39,9 @@
 - (void)removeTimesObject:(Time *)value;
 - (void)addTimes:(NSSet *)values;
 - (void)removeTimes:(NSSet *)values;
-
+- (void)addNotifications:(NSSet *)values;
+- (void)removeNotifications:(NSSet *)values;
 + (Medicine *)medicine;
+-(Medicine *)medicineWithId:(NSNumber *)medId;
 
 @end

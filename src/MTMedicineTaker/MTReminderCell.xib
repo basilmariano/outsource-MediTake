@@ -221,7 +221,7 @@
 							<object class="IBUILabel" id="971042880">
 								<reference key="NSNextResponder" ref="643024108"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{82, 59}, {63, 21}}</string>
+								<string key="NSFrame">{{82, 59}, {115, 21}}</string>
 								<reference key="NSSuperview" ref="643024108"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="133611055"/>
@@ -235,7 +235,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Taken at</string>
+								<string key="IBUIText"/>
 								<reference key="IBUITextColor" ref="81859732"/>
 								<reference key="IBUIHighlightedColor" ref="623499998"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -277,7 +277,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">5:00 PM</string>
+								<string key="IBUIText"/>
 								<reference key="IBUITextColor" ref="81859732"/>
 								<reference key="IBUIHighlightedColor" ref="623499998"/>
 								<int key="IBUIBaselineAdjustment">0</int>
