@@ -139,7 +139,7 @@
 					<object class="IBUIButton" id="395125588">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{292, 114}, {22, 18}}</string>
+						<string key="NSFrame">{{289, 111}, {25, 22}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -451,7 +451,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="ButtonPlus.png">{53, 52}</string>
+			<string key="ButtonPlus.png">{16, 16}</string>
 			<string key="MedsTime_ProfilePic@2x.png">{100, 100}</string>
 			<string key="SectionBackground.png">{639, 44}</string>
 		</dictionary>

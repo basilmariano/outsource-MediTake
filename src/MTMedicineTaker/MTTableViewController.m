@@ -49,7 +49,7 @@
         else
         {
             self.title = @"All Profile";
-            UIImage *entries = [UIImage imageNamed:@"ButtonPlus.png"];
+            UIImage *entries = [UIImage imageNamed:@"YellowTab_Plus.png"];
             UIButton *buttonEntries = [UIButton buttonWithType:UIButtonTypeCustom];
             buttonEntries.frame = CGRectMake(0, 0, 26.5, 26);
             [buttonEntries setImage:entries forState:UIControlStateNormal];

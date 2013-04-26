@@ -27,6 +27,8 @@
 @property(nonatomic, retain) NSArray *pickerList;
 @property(nonatomic, retain) NSArray *quantityList;
 @property(nonatomic, retain) NSArray *mealList;
+@property(nonatomic, retain) NSArray *previousTimeList;
+@property(nonatomic, retain) NSArray *previousDayList;
 
 - (IBAction)addMedicineImage:(id)sender;
 - (UIPickerView *)pickerViewInit;
@@ -46,6 +48,8 @@
         // Custom initialization
         self.navigationItem.title = @"New Medicine";
         _originalImage = [[UIImage alloc] init];
+        _previousTimeList = [[NSArray alloc] init];
+        _previousDayList = [[NSArray alloc] init];
         
         self.quantityList = [[[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil] autorelease];
         self.mealList = [[[NSArray alloc] initWithObjects:@"Before Meal",@"After Meal",@"None", nil] autorelease];
@@ -84,6 +88,8 @@
     [_pickerList release];
     [_quantityList release];
     [_medicine release];
+    [_previousDayList release];
+    [_previousTimeList release];
     [super dealloc];
 }
 
@@ -128,9 +134,27 @@
     } else {
         switch (indexPath.row) {
             case 0: {
-                NSLog(@"strQuantity %@",[self.medicine.quantity stringValue]);
+               /* NSLog(@"strQuantity %@",[self.medicine.quantity stringValue]);
                 cellName = @"Quantity";
-                cellValue = [self.medicine.quantity stringValue];
+                cellValue = [self.medicine.quantity stringValue];*/
+                NSString *CellIdentifier = @"MTTextFieldCell";
+                
+                MTTextFieldCell *tbCell = (MTTextFieldCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (tbCell == nil) {
+                    
+                    tbCell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil]objectAtIndex:0];
+                    
+                }
+                tbCell.delegate = self;
+                tbCell.title.text = @"Quantity";
+                tbCell.textFieldRange = 100;
+                tbCell.textField.text = [self.medicine.quantity stringValue];
+                tbCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+                tbCell.viewParam = self.view;
+                tbCell.placeHolder = @"1";
+                tbCell.textId = 1;
+                return tbCell;
                 break;
             }
             case 1: {
@@ -145,9 +169,12 @@
                     
                 }
                 tbCell.delegate = self;
+                tbCell.title.text = @"Unit";
                 tbCell.textFieldRange = 100;
                 tbCell.textField.text = self.medicine.unit;
                 tbCell.viewParam = self.view;
+                tbCell.placeHolder = @"ml, tbsp, tablet etc";
+                tbCell.textId = 0;
                 return tbCell;
                 break;
             }
@@ -335,9 +362,14 @@
 }
 
 
--(void) textFieldFinishedTyping:(UITextField *)textField
+-(void) textFieldFinishedTyping:(UITextField *)textField andTextFieldId:(NSNumber *)textFieldId
 {
-    self.medicine.unit = textField.text;
+    if([textFieldId integerValue] == 0) {
+        self.medicine.unit = textField.text;
+    } else if ([textFieldId integerValue] == 1) {
+        
+        self.medicine.quantity = [NSNumber numberWithInt: [textField.text integerValue]];
+    }
 }
 
 - (void) onButtonCancelClicked
@@ -361,7 +393,14 @@
     NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
     
     for(Time *t in timeList) {
-       
+        Time *t1 = nil;
+        for(Time *t3 in self.previousTimeList) {
+            if(t3.time == t.time) {
+                t1 = t3;
+            }
+        }
+        
+        if(!t1) {
         for(Date *d in dayList) {
        
             switch ([d.type integerValue]) {
@@ -381,20 +420,25 @@
                     NSDate *firstDayOfThisMonth = [calendar dateFromComponents:compsThisMonth];
 
                     NSDateComponents *compsFirstDayOfThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:firstDayOfThisMonth];
+                    
                     if (comps.weekday == compsFirstDayOfThisMonth.weekday) {
+                        
                         dateComponents = compsFirstDayOfThisMonth;
+                        
                     } else if (comps.weekday > compsFirstDayOfThisMonth.weekday) {
+                        
                         NSUInteger daysNeed2Add = comps.weekday - compsFirstDayOfThisMonth.weekday;
-                        NSDate *dayOfWeek = [firstDayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
-                        dateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                        NSDate *dayOfWeek       = [firstDayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
+                        dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                        
                     } else { // comps.weekday < compsFirstDayOfThisMonth.weekday
                         NSUInteger daysNeed2Add = comps.weekday + 7 - compsFirstDayOfThisMonth.weekday;
-                        NSDate *dayOfWeek = [firstDayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
-                        dateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                        NSDate *dayOfWeek       = [firstDayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
+                        dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
                     }
 
                     dayDate = [calendar dateFromComponents:dateComponents];
-                    type =  [NSNumber numberWithInt:0];
+                    type    =  [NSNumber numberWithInt:0];
                  
                     break;
                 }
@@ -411,6 +455,7 @@
                     dayDate = [calendar dateFromComponents:dateComponents];
                 
                     type =  [NSNumber numberWithInt:1];
+                    
                     break;
                 }
                 case 2: {
@@ -419,10 +464,12 @@
                     // Convert string to date object
                     NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
                     [dateFormat setDateFormat:@"MMM:dd:yyyy"];
+                    
                     dayDate = [dateFormat dateFromString:dateStr];
                     dateComponents = [calendar components:( NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit )
                                                  fromDate:dayDate];
                     type =  [NSNumber numberWithInt:2];
+                    
                     break;
                 }
             }
@@ -457,8 +504,9 @@
             NSLog(@"Final Date %@",strTime );
             [[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andMedicine:_medicine];
         }
-        
+        }
     }
+        
 }
 
 - (void) onButtonDoneClicked
@@ -568,8 +616,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+   // self.previousTimeList = [NSArray arrayWithArray:[_medicine.times allObjects]];
+   // self.previousDayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
     if(![self.medicineName.text isEqual:@""])
         
+
     [_tableView reloadData];
 }
 
@@ -583,6 +634,9 @@
         self.navigationItem.title = _medicine.medicineName;
     }
     self.originalImage = self.medicineImage.imageView.image;
+    
+   self.previousTimeList = [NSArray arrayWithArray:[_medicine.times allObjects]];
+   self.previousDayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
 }
 
 - (void)didReceiveMemoryWarning

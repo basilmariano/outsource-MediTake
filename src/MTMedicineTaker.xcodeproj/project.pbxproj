@@ -76,17 +76,11 @@
 		ACF206DE170E73EA00827BD4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206DD170E73EA00827BD4 /* Default.png */; };
 		ACF206F7170E748B00827BD4 /* ArrowBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E1170E748B00827BD4 /* ArrowBlack.png */; };
 		ACF206F8170E748B00827BD4 /* BrownCellBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E2170E748B00827BD4 /* BrownCellBG.png */; };
-		ACF206F9170E748B00827BD4 /* ButtonBack.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E3170E748B00827BD4 /* ButtonBack.png */; };
 		ACF206FA170E748B00827BD4 /* ButtonCancel.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E4170E748B00827BD4 /* ButtonCancel.png */; };
 		ACF206FB170E748B00827BD4 /* ButtonDisclaimer.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E5170E748B00827BD4 /* ButtonDisclaimer.png */; };
 		ACF206FC170E748B00827BD4 /* ButtonDone.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E6170E748B00827BD4 /* ButtonDone.png */; };
 		ACF206FD170E748B00827BD4 /* ButtonEdit.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E7170E748B00827BD4 /* ButtonEdit.png */; };
 		ACF206FE170E748B00827BD4 /* ButtonEntries.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E8170E748B00827BD4 /* ButtonEntries.png */; };
-		ACF206FF170E748B00827BD4 /* ButtonPlus.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E9170E748B00827BD4 /* ButtonPlus.png */; };
-		ACF20700170E748B00827BD4 /* ButtonProfileClicked.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206EA170E748B00827BD4 /* ButtonProfileClicked.png */; };
-		ACF20701170E748B00827BD4 /* ButtonProfileNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206EB170E748B00827BD4 /* ButtonProfileNormal.png */; };
-		ACF20702170E748B00827BD4 /* ButtonReminderClicked.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206EC170E748B00827BD4 /* ButtonReminderClicked.png */; };
-		ACF20703170E748B00827BD4 /* ButtonReminderNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206ED170E748B00827BD4 /* ButtonReminderNormal.png */; };
 		ACF20704170E748B00827BD4 /* DummyMed1.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206EE170E748B00827BD4 /* DummyMed1.png */; };
 		ACF20705170E748B00827BD4 /* DummyMed2.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206EF170E748B00827BD4 /* DummyMed2.png */; };
 		ACF20706170E748B00827BD4 /* DummyProfilePicBaby.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F0170E748B00827BD4 /* DummyProfilePicBaby.png */; };
@@ -97,6 +91,12 @@
 		ACF2070E170EA5E500827BD4 /* BlueNavigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */; };
 		ACF20712170EB01500827BD4 /* Bread 10.46.46 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF20711170EB01400827BD4 /* Bread 10.46.46 AM.png */; };
 		ACF48CD217290B1400E6ECB4 /* RegisteredNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF48CD117290B1400E6ECB4 /* RegisteredNotification.m */; };
+		ACF48CD41729B9ED00E6ECB4 /* ButtonBack.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD31729B9ED00E6ECB4 /* ButtonBack.png */; };
+		ACF48CD9172A785400E6ECB4 /* Profile-Active.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD5172A785400E6ECB4 /* Profile-Active.png */; };
+		ACF48CDA172A785400E6ECB4 /* Profile-inActive.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD6172A785400E6ECB4 /* Profile-inActive.png */; };
+		ACF48CDB172A785400E6ECB4 /* Reminder-Active.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD7172A785400E6ECB4 /* Reminder-Active.png */; };
+		ACF48CDC172A785400E6ECB4 /* Reminder-inActive.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD8172A785400E6ECB4 /* Reminder-inActive.png */; };
+		ACF48CDE172A791300E6ECB4 /* YellowTab_Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CDD172A791300E6ECB4 /* YellowTab_Plus.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,17 +199,11 @@
 		ACF206DD170E73EA00827BD4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		ACF206E1170E748B00827BD4 /* ArrowBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ArrowBlack.png; path = Resources/ArrowBlack.png; sourceTree = SOURCE_ROOT; };
 		ACF206E2170E748B00827BD4 /* BrownCellBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BrownCellBG.png; path = Resources/BrownCellBG.png; sourceTree = SOURCE_ROOT; };
-		ACF206E3170E748B00827BD4 /* ButtonBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBack.png; path = Resources/ButtonBack.png; sourceTree = SOURCE_ROOT; };
 		ACF206E4170E748B00827BD4 /* ButtonCancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCancel.png; path = Resources/ButtonCancel.png; sourceTree = SOURCE_ROOT; };
 		ACF206E5170E748B00827BD4 /* ButtonDisclaimer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonDisclaimer.png; path = Resources/ButtonDisclaimer.png; sourceTree = SOURCE_ROOT; };
 		ACF206E6170E748B00827BD4 /* ButtonDone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonDone.png; path = Resources/ButtonDone.png; sourceTree = SOURCE_ROOT; };
 		ACF206E7170E748B00827BD4 /* ButtonEdit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonEdit.png; path = Resources/ButtonEdit.png; sourceTree = SOURCE_ROOT; };
 		ACF206E8170E748B00827BD4 /* ButtonEntries.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonEntries.png; path = Resources/ButtonEntries.png; sourceTree = SOURCE_ROOT; };
-		ACF206E9170E748B00827BD4 /* ButtonPlus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPlus.png; path = Resources/ButtonPlus.png; sourceTree = SOURCE_ROOT; };
-		ACF206EA170E748B00827BD4 /* ButtonProfileClicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonProfileClicked.png; path = Resources/ButtonProfileClicked.png; sourceTree = SOURCE_ROOT; };
-		ACF206EB170E748B00827BD4 /* ButtonProfileNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonProfileNormal.png; path = Resources/ButtonProfileNormal.png; sourceTree = SOURCE_ROOT; };
-		ACF206EC170E748B00827BD4 /* ButtonReminderClicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonReminderClicked.png; path = Resources/ButtonReminderClicked.png; sourceTree = SOURCE_ROOT; };
-		ACF206ED170E748B00827BD4 /* ButtonReminderNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonReminderNormal.png; path = Resources/ButtonReminderNormal.png; sourceTree = SOURCE_ROOT; };
 		ACF206EE170E748B00827BD4 /* DummyMed1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DummyMed1.png; path = Resources/DummyMed1.png; sourceTree = SOURCE_ROOT; };
 		ACF206EF170E748B00827BD4 /* DummyMed2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DummyMed2.png; path = Resources/DummyMed2.png; sourceTree = SOURCE_ROOT; };
 		ACF206F0170E748B00827BD4 /* DummyProfilePicBaby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DummyProfilePicBaby.png; path = Resources/DummyProfilePicBaby.png; sourceTree = SOURCE_ROOT; };
@@ -221,6 +215,12 @@
 		ACF20711170EB01400827BD4 /* Bread 10.46.46 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Bread 10.46.46 AM.png"; path = "../../../../.Trash/Bread 10.46.46 AM.png"; sourceTree = "<group>"; };
 		ACF48CD017290B1400E6ECB4 /* RegisteredNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredNotification.h; sourceTree = "<group>"; };
 		ACF48CD117290B1400E6ECB4 /* RegisteredNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredNotification.m; sourceTree = "<group>"; };
+		ACF48CD31729B9ED00E6ECB4 /* ButtonBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBack.png; path = Resources/ButtonBack.png; sourceTree = SOURCE_ROOT; };
+		ACF48CD5172A785400E6ECB4 /* Profile-Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Profile-Active.png"; path = "Resources/Profile-Active.png"; sourceTree = SOURCE_ROOT; };
+		ACF48CD6172A785400E6ECB4 /* Profile-inActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Profile-inActive.png"; path = "Resources/Profile-inActive.png"; sourceTree = SOURCE_ROOT; };
+		ACF48CD7172A785400E6ECB4 /* Reminder-Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Reminder-Active.png"; path = "Resources/Reminder-Active.png"; sourceTree = SOURCE_ROOT; };
+		ACF48CD8172A785400E6ECB4 /* Reminder-inActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Reminder-inActive.png"; path = "Resources/Reminder-inActive.png"; sourceTree = SOURCE_ROOT; };
+		ACF48CDD172A791300E6ECB4 /* YellowTab_Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowTab_Plus.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -513,19 +513,19 @@
 				ACB2CEC317129A9200648410 /* MedsTime_ProfilePic@2x.png */,
 				ACF206E1170E748B00827BD4 /* ArrowBlack.png */,
 				ACF206E2170E748B00827BD4 /* BrownCellBG.png */,
-				ACF206E3170E748B00827BD4 /* ButtonBack.png */,
 				ACF206E4170E748B00827BD4 /* ButtonCancel.png */,
 				ACF206E5170E748B00827BD4 /* ButtonDisclaimer.png */,
+				ACF48CD5172A785400E6ECB4 /* Profile-Active.png */,
+				ACF48CD6172A785400E6ECB4 /* Profile-inActive.png */,
+				ACF48CD7172A785400E6ECB4 /* Reminder-Active.png */,
+				ACF48CD8172A785400E6ECB4 /* Reminder-inActive.png */,
+				ACF48CD31729B9ED00E6ECB4 /* ButtonBack.png */,
 				ACF206E6170E748B00827BD4 /* ButtonDone.png */,
 				ACF206E7170E748B00827BD4 /* ButtonEdit.png */,
 				ACF206E8170E748B00827BD4 /* ButtonEntries.png */,
-				ACF206E9170E748B00827BD4 /* ButtonPlus.png */,
-				ACF206EA170E748B00827BD4 /* ButtonProfileClicked.png */,
-				ACF206EB170E748B00827BD4 /* ButtonProfileNormal.png */,
+				ACF48CDD172A791300E6ECB4 /* YellowTab_Plus.png */,
 				AC950B63171CE13C00F4F0D1 /* ButtonAllProfile.png */,
 				ACF20711170EB01400827BD4 /* Bread 10.46.46 AM.png */,
-				ACF206EC170E748B00827BD4 /* ButtonReminderClicked.png */,
-				ACF206ED170E748B00827BD4 /* ButtonReminderNormal.png */,
 				ACF206EE170E748B00827BD4 /* DummyMed1.png */,
 				ACF206EF170E748B00827BD4 /* DummyMed2.png */,
 				ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */,
@@ -661,17 +661,11 @@
 				ACF206DE170E73EA00827BD4 /* Default.png in Resources */,
 				ACF206F7170E748B00827BD4 /* ArrowBlack.png in Resources */,
 				ACF206F8170E748B00827BD4 /* BrownCellBG.png in Resources */,
-				ACF206F9170E748B00827BD4 /* ButtonBack.png in Resources */,
 				ACF206FA170E748B00827BD4 /* ButtonCancel.png in Resources */,
 				ACF206FB170E748B00827BD4 /* ButtonDisclaimer.png in Resources */,
 				ACF206FC170E748B00827BD4 /* ButtonDone.png in Resources */,
 				ACF206FD170E748B00827BD4 /* ButtonEdit.png in Resources */,
 				ACF206FE170E748B00827BD4 /* ButtonEntries.png in Resources */,
-				ACF206FF170E748B00827BD4 /* ButtonPlus.png in Resources */,
-				ACF20700170E748B00827BD4 /* ButtonProfileClicked.png in Resources */,
-				ACF20701170E748B00827BD4 /* ButtonProfileNormal.png in Resources */,
-				ACF20702170E748B00827BD4 /* ButtonReminderClicked.png in Resources */,
-				ACF20703170E748B00827BD4 /* ButtonReminderNormal.png in Resources */,
 				ACF20704170E748B00827BD4 /* DummyMed1.png in Resources */,
 				ACF20705170E748B00827BD4 /* DummyMed2.png in Resources */,
 				ACF20706170E748B00827BD4 /* DummyProfilePicBaby.png in Resources */,
@@ -708,6 +702,12 @@
 				AC2CC755172635EE00EC1913 /* Icon@2x.png in Resources */,
 				AC2CC7601726798500EC1913 /* MTReminderViewController.xib in Resources */,
 				AC2CC762172683A200EC1913 /* MTReminderViewController-h568.xib in Resources */,
+				ACF48CD41729B9ED00E6ECB4 /* ButtonBack.png in Resources */,
+				ACF48CD9172A785400E6ECB4 /* Profile-Active.png in Resources */,
+				ACF48CDA172A785400E6ECB4 /* Profile-inActive.png in Resources */,
+				ACF48CDB172A785400E6ECB4 /* Reminder-Active.png in Resources */,
+				ACF48CDC172A785400E6ECB4 /* Reminder-inActive.png in Resources */,
+				ACF48CDE172A791300E6ECB4 /* YellowTab_Plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

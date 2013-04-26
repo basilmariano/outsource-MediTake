@@ -13,7 +13,7 @@
 @protocol MTTextFieldCellDelegate <NSObject>
 
 @optional
-- (void)textFieldFinishedTyping:(UITextField *)textField;
+- (void)textFieldFinishedTyping:(UITextField *)textField andTextFieldId:(NSNumber *)textFieldId;
 - (void)textFieldWillStartTyping:(NSUInteger) cellIndex;
 
 @end
@@ -21,10 +21,13 @@
 @interface MTTextFieldCell : UITableViewCell<UITextFieldDelegate>
 
 @property (nonatomic, assign) IBOutlet UITextField *textField;
-@property (nonatomic) int textFieldRange;
-@property (nonatomic, assign) UIView *viewParam;
-@property (nonatomic) NSUInteger index;
+@property (nonatomic, assign) IBOutlet UILabel *title;
 @property (nonatomic, assign) IBOutlet UIButton *buttonDone;
+@property (nonatomic, assign) UIView *viewParam;
+@property (nonatomic, retain) NSString *placeHolder;
 @property (nonatomic, assign) id<MTTextFieldCellDelegate> delegate;
+@property (nonatomic) int textFieldRange;
+@property (nonatomic) NSUInteger textId;
+@property (nonatomic) NSUInteger index;
 
 @end

@@ -25,6 +25,12 @@ CGFloat TF_LANDSCAPE_KEYBOARD_HEIGHT = 162;
     return self;
 }
 
+- (void) dealloc
+{
+    [_placeHolder release];
+    [super dealloc];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
@@ -65,9 +71,8 @@ CGFloat TF_LANDSCAPE_KEYBOARD_HEIGHT = 162;
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     self.viewParam.frame = CGRectMake(0, 0, self.viewParam.bounds.size.width, self.viewParam.bounds.size.height);
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldFinishedTyping:)]) {
-        [self.delegate performSelector:@selector(textFieldFinishedTyping:) withObject:textField];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldFinishedTyping:andTextFieldId:)]) {
+        [self.delegate performSelector:@selector(textFieldFinishedTyping:andTextFieldId:) withObject:textField withObject:[NSNumber numberWithInt:_textId]];
     }
     
     return YES;

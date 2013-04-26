@@ -192,40 +192,112 @@
     
 }
 
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
     [super viewDidLoad];
     [self retrieveNotificationList];
 }
 
-- (void)retrieveNotificationList
+- (void) retrieveNotificationList
 {
     NSArray *notifLIst = [UIApplication sharedApplication].scheduledLocalNotifications;
     NSLog(@"notif %d",notifLIst.count);
+    if(!notifLIst.count)
+        return;
+    
     if(self.reminderList.count)
         [self.reminderList removeAllObjects];
     
     for(UILocalNotification *notif in notifLIst) {
-     
-        NSDictionary *dict = notif.userInfo;
-        NSArray *medPKList = (NSArray *) [dict objectForKey:@"Medicines"];
-        for(NSString *pk in medPKList) {
-            NSLog(@"String %@",pk);
-            NSManagedObject *managedObject=[[[ManageObjectModel objectManager] managedObjectContext] objectWithID: [[[ManageObjectModel objectManager] persistentStoreCoordinator] managedObjectIDForURIRepresentation:[NSURL URLWithString:pk]]];
 
-            Medicine *med = (Medicine *) managedObject;
-            NSLog(@"Med %@",med.medicineName);
-            NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  med,@"Medicine",
-                                  notif.fireDate,@"fireDate",
-                                   nil];
-            [self.reminderList addObject:dict2];
-            NSLog(@"reminderList %d",self.reminderList.count);
+         NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+         NSDate *now = [NSDate date];
+         NSDateComponents *compsNow  = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday fromDate:now];
+         NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday  fromDate:notif.fireDate];
+         NSDate *current             = [calendar dateFromComponents:compsNow];
+         NSDate *fDate               = [calendar dateFromComponents:compsFire];
+        
+        if(notif.repeatInterval == NSWeekCalendarUnit) {
+            if(compsNow.weekday == compsFire.weekday) {
+                [self saveNotifInfoToReminderListWithNotif:notif];
+            }
+        } else if (notif.repeatInterval == NSDayCalendarUnit) {
+            if(compsNow.day == compsFire.day) {
+                [self saveNotifInfoToReminderListWithNotif:notif];
+            }
+        } else {
+            if([current isEqualToDate:fDate]) {
+                [self saveNotifInfoToReminderListWithNotif:notif];
+            }
+        }
+
+    }
+    
+    [self syncReminders];
+}
+
+- (void) saveNotifInfoToReminderListWithNotif:(UILocalNotification *)notif
+{
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSDateComponents *compsNow  = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:now];
+    NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday |kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:notif.fireDate];
+    
+    NSInteger currentTimeInSecs = compsNow.hour*3600 + compsNow.minute*60 + compsNow.second;
+    NSInteger fireTimeInSecs    = compsFire.hour*3600 + compsFire.minute*60  + compsFire.second;
+    
+    if(currentTimeInSecs >= fireTimeInSecs)
+        return;
+    
+    NSDictionary *dict = notif.userInfo;
+    NSArray *medPKList = (NSArray *) [dict objectForKey:@"Medicines"];
+    
+    for(NSString *pk in medPKList) {
+        //get object using primary key
+        NSManagedObject *managedObject=[[[ManageObjectModel objectManager] managedObjectContext] objectWithID: [[[ManageObjectModel objectManager] persistentStoreCoordinator] managedObjectIDForURIRepresentation:[NSURL URLWithString:pk]]];
+        
+        Medicine *medicine = (Medicine *) managedObject;
+        NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                               medicine,@"Medicine",
+                               notif.fireDate,@"fireDate",
+                               nil];
+        [self.reminderList addObject:dict2];
+    }
+}
+
+- (void) syncReminders
+{
+    NSMutableArray *reminderListHandler = [NSMutableArray arrayWithArray:self.reminderList];
+    if(!reminderListHandler.count) {
+        [_tableView reloadData];
+        return;
+    }
+    
+    for(int x = 0; x < reminderListHandler.count-1; x++) {
+        NSDictionary *dict = self.reminderList[x];
+        NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+        NSDate *fireDate = [dict objectForKey:@"fireDate"];
+        NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:fireDate];
+        NSInteger dateInSecs = compsFire.hour*3600 + compsFire.minute*60 + compsFire.second;
+        
+        int nexyIdx = x;
+        nexyIdx++;
+        NSDictionary *dict2 = self.reminderList[nexyIdx];
+
+        NSDate *fireDate2 = [dict2 objectForKey:@"fireDate"];
+        NSDateComponents *compsFire2 = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:fireDate2];
+        NSInteger dateInSecs2 = compsFire2.hour*3600 + compsFire2.minute*60 + compsFire2.second;
+        
+        NSDictionary *tempHandler = nil;
+        
+        if(dateInSecs > dateInSecs2) {
+            tempHandler = dict2;
+            [self.reminderList insertObject:dict2 atIndex:x];
+            [self.reminderList insertObject:dict atIndex:nexyIdx];
         }
     }
     
     [_tableView reloadData];
-
 }
 
 - (void) viewWillAppear:(BOOL)animated

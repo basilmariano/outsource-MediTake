@@ -41,9 +41,9 @@
         _originalImage = [[UIImage alloc] init];
         _name = [profileName retain];
         
-        UIImage *allProfileImage = [UIImage imageNamed:@"ButtonAllProfile.png"];
+        UIImage *allProfileImage = [UIImage imageNamed:@"ButtonBack.png"];
         UIButton *buttonAllProfile = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonAllProfile.frame = CGRectMake(0.0f, 0.0f, 66.0f, 27.0f);
+        buttonAllProfile.frame = CGRectMake(0.0f, 0.0f, 52.0f, 28.0f);
         [buttonAllProfile setImage:allProfileImage forState:UIControlStateNormal];
         [buttonAllProfile addTarget:self action:@selector(onButtonAllProfilelicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonAllprofile = [[[UIBarButtonItem alloc] initWithCustomView:buttonAllProfile]autorelease];

@@ -62,7 +62,7 @@ static MTScheduleViewController *_instance;
         UIImage *backImage = [UIImage imageNamed:@"ButtonBack.png"];
         
         UIButton *buttonBack = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonBack.frame = CGRectMake(0.0f, 0.0f, 50.0f, 27.0f);
+        buttonBack.frame = CGRectMake(0.0f, 0.0f, 52.0f, 28.0f);
         [buttonBack setImage:backImage forState:UIControlStateNormal];
         [buttonBack addTarget:self action:@selector(onButtonCancelClicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonBack = [[[UIBarButtonItem alloc] initWithCustomView:buttonBack]autorelease];
