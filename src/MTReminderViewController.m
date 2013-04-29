@@ -11,6 +11,7 @@
 #import "MTNavigationViewController.h"
 #import "Medicine.h"
 #import "ManageObjectModel.h"
+#import "MTLocalNotification.h"
 
 @interface MTReminderViewController ()
 
@@ -73,7 +74,8 @@
         return tbCell;
     
     NSDictionary *dict = [self.reminderList objectAtIndex:indexPath.row];
-    NSDate *fireDate = [dict objectForKey:@"fireDate"];
+    UILocalNotification *notif = [dict objectForKey:@"notification"];
+    NSDate *fireDate = notif.fireDate;
     Medicine *med = (Medicine *) [dict objectForKey:@"Medicine"];
     tbCell.takerName.text = med.medicineTaker.name;
     tbCell.medicineName.text = med.medicineName;
@@ -128,8 +130,12 @@
 
 - (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Profile *profile = [_fetchedResultsController objectAtIndexPath:indexPath];
-    [MTProfileManager deleteProfile:profile];
+    NSDictionary *dict = [self.reminderList objectAtIndex:indexPath.row];
+    UILocalNotification *notif = [dict objectForKey:@"notification"];
+    Medicine *med = (Medicine *) [dict objectForKey:@"Medicine"];
+    [[MTLocalNotification sharedInstance] deleteNotificationWithMedicine:med fromNotification:notif];
+    [self retrieveNotificationList];
+    [_tableView reloadData];
 }
 
 #pragma mark NSFetchedResultsControllerDelegate
@@ -202,11 +208,13 @@
 {
     NSArray *notifLIst = [UIApplication sharedApplication].scheduledLocalNotifications;
     NSLog(@"notif %d",notifLIst.count);
-    if(!notifLIst.count)
-        return;
-    
-    if(self.reminderList.count)
+    if(self.reminderList.count) {
         [self.reminderList removeAllObjects];
+    }
+    if(!notifLIst.count) {
+        [_tableView reloadData];
+        return;
+    }
     
     for(UILocalNotification *notif in notifLIst) {
 
@@ -259,9 +267,28 @@
         Medicine *medicine = (Medicine *) managedObject;
         NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:
                                medicine,@"Medicine",
-                               notif.fireDate,@"fireDate",
+                               notif,@"notification",
                                nil];
-        [self.reminderList addObject:dict2];
+        
+        //prevent duplicated notification info in reminder
+        Medicine *newMedicine = nil;
+        for(NSDictionary *remDIct in self.reminderList) {
+            Medicine *remMed  = [remDIct objectForKey:@"Medicine"];
+            UILocalNotification *remNotif = [remDIct objectForKey:@"notification"];
+            
+            NSDate *remDate = remNotif.fireDate;
+            NSDate *newRemDate = notif.fireDate;
+            
+            NSString *newMedicineTakerName = medicine.medicineTaker.name;
+            NSString *remMedicineTakerName = remMed.medicineTaker.name;
+            
+            if([remMedicineTakerName isEqualToString:newMedicineTakerName] && [remMed.medicineName isEqualToString:medicine.medicineName] && [remDate isEqualToDate:newRemDate]) {
+                newMedicine = remMed;
+            }
+        }
+        
+        if(!newMedicine)
+            [self.reminderList addObject:dict2];
     }
 }
 
@@ -276,15 +303,17 @@
     for(int x = 0; x < reminderListHandler.count-1; x++) {
         NSDictionary *dict = self.reminderList[x];
         NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
-        NSDate *fireDate = [dict objectForKey:@"fireDate"];
+        UILocalNotification *notif1 = [dict objectForKey:@"notification"];
+        NSDate *fireDate = notif1.fireDate;
         NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:fireDate];
         NSInteger dateInSecs = compsFire.hour*3600 + compsFire.minute*60 + compsFire.second;
         
         int nexyIdx = x;
         nexyIdx++;
+        
         NSDictionary *dict2 = self.reminderList[nexyIdx];
-
-        NSDate *fireDate2 = [dict2 objectForKey:@"fireDate"];
+        UILocalNotification *notif2 = [dict2 objectForKey:@"notification"];
+        NSDate *fireDate2 = notif2.fireDate;
         NSDateComponents *compsFire2 = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:fireDate2];
         NSInteger dateInSecs2 = compsFire2.hour*3600 + compsFire2.minute*60 + compsFire2.second;
         

@@ -68,7 +68,6 @@
 
 -(IBAction)setProfilePicture:(id)sender
 {
-    
     UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
                                                     cancelButtonTitle:nil
@@ -171,9 +170,6 @@
             [[ManageObjectModel objectManager] saveContext];
     
             [self.navigationController popViewControllerAnimated:YES];
-        /*if ([Profile profileCount] > 0) {
-            self.navigationItem.leftBarButtonItem.customView.hidden = NO;
-        }*/
         }
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:@"Please fill out the Profile Name!"

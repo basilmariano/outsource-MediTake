@@ -266,7 +266,7 @@
 					<object class="IBUIButton" id="116691629">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{289, 157}, {22, 18}}</string>
+						<string key="NSFrame">{{289, 155}, {25, 24}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="940069924"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -283,7 +283,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="77989792"/>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">ButtonPlus.png</string>
+							<string key="NSResourceName">YellowTab_Plus.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="216015522"/>
 						<reference key="IBUIFont" ref="814223527"/>
@@ -589,8 +589,8 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="ArrowBlack.png">{24, 36}</string>
-			<string key="ButtonPlus.png">{53, 52}</string>
 			<string key="SectionBackground.png">{639, 44}</string>
+			<string key="YellowTab_Plus.png">{46, 46}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

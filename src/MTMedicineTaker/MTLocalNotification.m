@@ -46,23 +46,18 @@ static MTLocalNotification *_instance;
         for(UILocalNotification *localNotif in notificationList) {
             if([localNotif.fireDate isEqualToDate:fireDate]) {
                 NSManagedObject *object = medicine;
-                NSString *strPK = [[[object objectID] URIRepresentation] absoluteString];
-                NSString *tempPK = strPK;
-                NSLog(@"Temp key %@",tempPK);
-                NSDictionary *dict = localNotif.userInfo;
-            
-                NSString *alertBody = (NSString *) [dict objectForKey:@"Alert"];
-                alertBody = [alertBody stringByAppendingFormat:@" and %@",medicine.medicineName];//<- update the body
-                
-                NSArray *medPKList = (NSArray *) [dict objectForKey:@"Medicines"]; //<- add medicinePK in list
-                NSLog(@"PKList %d",medPKList.count);
+                NSString *strPK         = [[[object objectID] URIRepresentation] absoluteString];
+                NSString *tempPK        = strPK;
+                NSDictionary *dict      = localNotif.userInfo;
                 NSMutableArray *tempPkHolderList = [[[NSMutableArray alloc] init]autorelease];
+                NSArray *medPKList      = (NSArray *) [dict objectForKey:@"Medicines"]; //<- add medicinePK in list
                 
                 NSString *medicine_PK  = nil;
                 for(NSString *primaryKey in medPKList) {
                     if([primaryKey isEqualToString:tempPK]) {
-                        medicine_PK = primaryKey;
-                        [tempPkHolderList addObject:primaryKey];
+                       /* medicine_PK = primaryKey;
+                        [tempPkHolderList addObject:primaryKey];*/
+                        return;
                     } else {
                         [tempPkHolderList addObject:primaryKey];
                     }
@@ -70,7 +65,9 @@ static MTLocalNotification *_instance;
                 
                 if(!medicine_PK)
                     [tempPkHolderList addObject:tempPK];
-                NSLog(@"tempPkHolderList %d", tempPkHolderList.count);
+                
+                NSString *alertBody = (NSString *) [dict objectForKey:@"Alert"];
+                alertBody = [alertBody stringByAppendingFormat:@" and %@",medicine.medicineName];//<- update the body
                 NSArray *finalPKList = [NSArray arrayWithArray:tempPkHolderList];
                 
                 NSDictionary *userInfoDictObject = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -154,6 +151,72 @@ static MTLocalNotification *_instance;
                                               otherButtonTitles:nil];
 	[alertView show];
 	[alertView release];
+}
+
+- (void)deleteNotificationWithMedicine:(Medicine *)medicine fromNotification:(UILocalNotification *)notification
+{
+    if(notification) {
+        NSString *alertBody = @"";
+        NSDictionary *dict  = notification.userInfo;
+        NSArray *medPKList  = (NSArray *) [dict objectForKey:@"Medicines"];
+        NSMutableArray *tempPkHolderList = [[[NSMutableArray alloc] init]autorelease];
+        
+        if(medPKList.count > 1) {
+            for(NSString *pk in medPKList) {
+                NSManagedObject *object = medicine;
+                NSString *medicinePK    = [[[object objectID] URIRepresentation] absoluteString];
+                
+                if(![medicinePK isEqualToString:pk]){
+                    [tempPkHolderList addObject:pk];
+                    NSManagedObject *managedObject=[[[ManageObjectModel objectManager] managedObjectContext] objectWithID: [[[ManageObjectModel objectManager] persistentStoreCoordinator] managedObjectIDForURIRepresentation:[NSURL URLWithString:pk]]];
+                    
+                    Medicine *med = (Medicine *) managedObject;
+                    alertBody     = [alertBody stringByAppendingFormat:@"Time to take Medicine! %@, ",med.medicineName];//<- update the body
+                }
+            }
+        } else{
+            [[UIApplication sharedApplication] cancelLocalNotification:notification];
+            return;
+        }
+        
+        NSArray *finalPKList = [NSArray arrayWithArray:tempPkHolderList];
+        NSDictionary *userInfoDictObject = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                            finalPKList, @"Medicines",
+                                            alertBody,@"Alert",
+                                            nil];
+        
+        Class cls = NSClassFromString(@"UILocalNotification");
+        
+        UILocalNotification *notif = [[cls alloc] init];
+        notif.fireDate = notification.fireDate;
+        notif.timeZone = [NSTimeZone defaultTimeZone];
+        
+        notif.alertBody      = notification.alertBody;
+        notif.alertAction    = @"Show me";
+        notif.soundName      = UILocalNotificationDefaultSoundName;
+        notif.applicationIconBadgeNumber = 1;
+        notif.repeatInterval = notification.repeatInterval;
+        notif.userInfo       = userInfoDictObject;
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+        [notif release];
+        NSLog(@"dictObject %@",notif.userInfo);
+        [[UIApplication sharedApplication] cancelLocalNotification:notification];
+    } else {
+        NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
+        for(UILocalNotification *localNotif in notificationList) {
+            NSDictionary *dict      = localNotif.userInfo;
+            NSManagedObject *object = medicine;
+            NSString *medicinePK    = [[[object objectID] URIRepresentation] absoluteString];
+            NSArray *medPKList      = (NSArray *) [dict objectForKey:@"Medicines"];
+            
+            for(NSString *strPK in medPKList) {
+                if([strPK isEqualToString:medicinePK]) {
+                    [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
+                }
+            }
+        }
+    }
 }
 
 - (void)clearNotification {

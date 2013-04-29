@@ -133,8 +133,15 @@ static MTScheduleViewController *_instance;
         }
         NSDate *date2 = [NSDate date];
         if (date) {
-            NSDate *secsDate = [NSDate dateWithTimeIntervalSince1970:[date.date doubleValue]];
-            date2 = secsDate;
+            
+            NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+            [dateFormat setDateFormat:@"MMM:dd:yyyy"];
+            NSDate *d = [dateFormat dateFromString:date.date];
+            
+            //NSDate *secsDate = [NSDate dateWithTimeIntervalSince1970:[date.date doubleValue]];
+            date2 = d;
+            //NSLog(@"date %@",date);
+            NSLog(@"date2 %@",date2);
         }
         [self showPickerActionSheet:@"Date" andRow:0 andDate:date2];
     } else {
@@ -285,19 +292,19 @@ static MTScheduleViewController *_instance;
         }
         case DatePicker: {
             self.datePicker = [self datePickerForActionSheet];
-            self.datePicker.date = [NSDate date];
+            self.datePicker.date = date;
             [actionSheet addSubview:self.datePicker];
             
-            UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            /*UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
             deleteButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
             [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
             //[okButton setBackgroundImage:[UIImage imageNamed:@"ButtonBg.png"] forState:UIControlStateNormal];
             deleteButton.frame = CGRectMake(177.0f, 250.0f, 73.0f, 45.0f);
             [deleteButton addTarget:self action:@selector(deleteTapped:) forControlEvents:UIControlEventTouchUpInside];
             //[actionSheet addSubview:self.pickerView];
-            [actionSheet addSubview:deleteButton];
+            [actionSheet addSubview:deleteButton];*/
             
-            okRect = CGRectMake(68.0f, 250.0f,73.0f, 45.0f);
+           // okRect = CGRectMake(68.0f, 250.0f,73.0f, 45.0f);
             
             break;
         }
@@ -315,7 +322,7 @@ static MTScheduleViewController *_instance;
     [actionSheet release];
 }
 
-- (void) deleteTapped: (NSObject *)sender
+/*- (void) deleteTapped: (NSObject *)sender
 {
     [_actionSheet dismissWithClickedButtonIndex:0 animated:YES];
     
@@ -325,7 +332,7 @@ static MTScheduleViewController *_instance;
                                           otherButtonTitles:nil];
     [alert show];
     [alert release];
-}
+}*/
 
 - (void)okTapped:(NSObject *)sender
 {
@@ -360,31 +367,36 @@ static MTScheduleViewController *_instance;
         [dateFormat setDateFormat:@"MMM:dd:yyyy"];
         NSString *strDate = [dateFormat stringFromDate:date]; //<- format the time
         
-        Date *newDate = nil;
         if(self.specificDays.count) {
             for(Date *spesDate in _medicine.days) {
-                if([strDate isEqualToString:spesDate.date]) {
-                    newDate = spesDate;
+                if([strDate isEqualToString:spesDate.date] && [spesDate.type integerValue] == 2) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:@"Date selected already exist"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"Ok"
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                    [alert release];
+                    break;
+                } else if ([spesDate.type integerValue] == 2) {
+                    NSManagedObject *objectToRemove = spesDate;
+                    [[ManageObjectModel objectManager] deleteObject:objectToRemove];
+                    
+                    Date *newDate= [Date date];
+                    [newDate setDate:strDate];
+                    [newDate setType:[NSNumber numberWithInt:2]];
+                    [_medicine addDaysObject:newDate];
+                    [self.specificDays addObject:newDate];
+                    break;
                 }
             }
-        }
-        NSLog(@"str %@",strDate);
-        if(!newDate) {
-            newDate= [Date date];
+        } else {
+            Date *newDate= [Date date];
             [newDate setDate:strDate];
             [newDate setType:[NSNumber numberWithInt:2]];
             [_medicine addDaysObject:newDate];
             [self.specificDays addObject:newDate];
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:@"Date selected already exist"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            [alert release];
-
         }
-        
+     
     } else if(self.pickerType == TimePicker){
         
         NSDate *date = _datePicker.date;
@@ -475,7 +487,7 @@ static MTScheduleViewController *_instance;
         if(!_medicine.days.count)
             message = @"Have atleast single Date!";
         else if(!_medicine.times.count)
-            message = @"Have atleast single Time!";
+            message = @"Please enter a time for this schedule";
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:message
                                                        delegate:nil

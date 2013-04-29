@@ -13,6 +13,7 @@
 #import "MTProfileViewController.h"
 #import "Profile.h"
 #import "MTProfileInfoViewController.h"
+#import "MTLocalNotification.h"
 
 @interface MTTableViewController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -228,7 +229,13 @@
 - (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Profile *profile = [_fetchedResultsController objectAtIndexPath:indexPath];
+    NSArray *medicineList = [profile.medicines allObjects];
+    for(Medicine *med in medicineList) {
+        [[MTLocalNotification sharedInstance] deleteNotificationWithMedicine:med fromNotification:nil];
+    }
+    
     [MTProfileManager deleteProfile:profile];
+    
 }
 
 #pragma mark NSFetchedResultsControllerDelegate

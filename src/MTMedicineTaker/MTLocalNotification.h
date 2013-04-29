@@ -13,6 +13,7 @@
 +(MTLocalNotification *)sharedInstance;
 - (void) handleReceivedNotification:(UILocalNotification*) thisNotification;
 - (void)scheduleNotificationWithFireDate: (NSDate *)fireDate frequencyType:(NSNumber *)frequencyType andMedicine:(Medicine *)medicine;
+- (void)deleteNotificationWithMedicine:(Medicine *)medicine fromNotification:(UILocalNotification *)notification;
 - (void)showReminder:(NSString *)reminder;
 - (void)clearNotification;
 

@@ -266,7 +266,7 @@
 					<object class="IBUIButton" id="20035916">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{289, 155}, {22, 18}}</string>
+						<string key="NSFrame">{{289, 152}, {25, 23}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="811695523"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -274,7 +274,6 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
 						<reference key="IBUIHighlightedTitleColor" ref="452972975"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -283,7 +282,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="808532307"/>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">ButtonPlus.png</string>
+							<string key="NSResourceName">YellowTab_Plus.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="994988440"/>
 						<reference key="IBUIFont" ref="890486078"/>
@@ -293,7 +292,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 173}, {320, 194}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="452972975"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -457,8 +455,8 @@
 							<reference ref="182829151"/>
 							<reference ref="339603315"/>
 							<reference ref="20035916"/>
-							<reference ref="811695523"/>
 							<reference ref="509218887"/>
+							<reference ref="811695523"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -573,8 +571,8 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="ArrowBlack.png">{24, 36}</string>
-			<string key="ButtonPlus.png">{16, 16}</string>
 			<string key="SectionBackground.png">{639, 44}</string>
+			<string key="YellowTab_Plus.png">{46, 46}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

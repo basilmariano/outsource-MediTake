@@ -134,9 +134,6 @@
     } else {
         switch (indexPath.row) {
             case 0: {
-               /* NSLog(@"strQuantity %@",[self.medicine.quantity stringValue]);
-                cellName = @"Quantity";
-                cellValue = [self.medicine.quantity stringValue];*/
                 NSString *CellIdentifier = @"MTTextFieldCell";
                 
                 MTTextFieldCell *tbCell = (MTTextFieldCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -151,8 +148,8 @@
                 tbCell.textFieldRange = 100;
                 tbCell.textField.text = [self.medicine.quantity stringValue];
                 tbCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+                tbCell.textField.placeholder = @"1";
                 tbCell.viewParam = self.view;
-                tbCell.placeHolder = @"1";
                 tbCell.textId = 1;
                 return tbCell;
                 break;
@@ -172,8 +169,8 @@
                 tbCell.title.text = @"Unit";
                 tbCell.textFieldRange = 100;
                 tbCell.textField.text = self.medicine.unit;
+                tbCell.textField.placeholder = @"ml, tbsp, tablet etc";
                 tbCell.viewParam = self.view;
-                tbCell.placeHolder = @"ml, tbsp, tablet etc";
                 tbCell.textId = 0;
                 return tbCell;
                 break;
@@ -223,8 +220,6 @@
     } else {
         switch (indexPath.row) {
             case 0: {
-                self.pickerList = _quantityList;
-                 [self showPickerActionSheet:@"Quantity"];
                 break;
             }
             case 1: {
@@ -272,7 +267,6 @@
     
     return headerView;
 }
-
 #pragma mark UIImagePickerControllerDelegate
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -367,7 +361,6 @@
     if([textFieldId integerValue] == 0) {
         self.medicine.unit = textField.text;
     } else if ([textFieldId integerValue] == 1) {
-        
         self.medicine.quantity = [NSNumber numberWithInt: [textField.text integerValue]];
     }
 }

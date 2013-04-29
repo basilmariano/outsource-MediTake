@@ -12,6 +12,7 @@
 #import "MTMedicineInfoViewController.h"
 #import "MTMedicineCell.h"
 #import "Time.h"
+#import "MTLocalNotification.h"
 
 @interface MTProfileInfoViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NSFetchedResultsControllerDelegate>
 {
@@ -357,6 +358,7 @@
     NSManagedObject *manageObject = medicine;
     [[ManageObjectModel objectManager] deleteObject:manageObject];
     [[ManageObjectModel objectManager] saveContext];
+    [[MTLocalNotification sharedInstance] deleteNotificationWithMedicine:medicine fromNotification:nil];
 }
 
 - (void) onButtonDoneClicked

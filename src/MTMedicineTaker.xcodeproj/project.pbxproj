@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AC05BFEB1727AF4100AA6E7E /* MTLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = AC05BFEA1727AF4100AA6E7E /* MTLocalNotification.m */; };
+		AC244632172E6A04004E0B3B /* PCAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC244631172E6A04004E0B3B /* PCAsyncImageView.m */; };
+		AC244639172E7860004E0B3B /* PCImageDirectorySaver.m in Sources */ = {isa = PBXBuildFile; fileRef = AC244638172E7860004E0B3B /* PCImageDirectorySaver.m */; };
 		AC2CC753172635E700EC1913 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC752172635E700EC1913 /* Icon.png */; };
 		AC2CC755172635EE00EC1913 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC754172635EE00EC1913 /* Icon@2x.png */; };
 		AC2CC75F1726798500EC1913 /* MTReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2CC75D1726798500EC1913 /* MTReminderViewController.m */; };
@@ -102,6 +104,10 @@
 /* Begin PBXFileReference section */
 		AC05BFE91727AF4100AA6E7E /* MTLocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLocalNotification.h; sourceTree = "<group>"; };
 		AC05BFEA1727AF4100AA6E7E /* MTLocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLocalNotification.m; sourceTree = "<group>"; };
+		AC244630172E6A04004E0B3B /* PCAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCAsyncImageView.h; sourceTree = "<group>"; };
+		AC244631172E6A04004E0B3B /* PCAsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCAsyncImageView.m; sourceTree = "<group>"; };
+		AC244637172E7860004E0B3B /* PCImageDirectorySaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCImageDirectorySaver.h; sourceTree = "<group>"; };
+		AC244638172E7860004E0B3B /* PCImageDirectorySaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCImageDirectorySaver.m; sourceTree = "<group>"; };
 		AC2CC752172635E700EC1913 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		AC2CC754172635EE00EC1913 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		AC2CC75C1726798500EC1913 /* MTReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTReminderViewController.h; sourceTree = "<group>"; };
@@ -246,6 +252,24 @@
 				AC05BFEA1727AF4100AA6E7E /* MTLocalNotification.m */,
 			);
 			name = Notification;
+			sourceTree = "<group>";
+		};
+		AC24462F172E69E5004E0B3B /* PCAsyncImageView */ = {
+			isa = PBXGroup;
+			children = (
+				AC244630172E6A04004E0B3B /* PCAsyncImageView.h */,
+				AC244631172E6A04004E0B3B /* PCAsyncImageView.m */,
+			);
+			name = PCAsyncImageView;
+			sourceTree = "<group>";
+		};
+		AC244636172E7702004E0B3B /* ImageDirectorySaver */ = {
+			isa = PBXGroup;
+			children = (
+				AC244637172E7860004E0B3B /* PCImageDirectorySaver.h */,
+				AC244638172E7860004E0B3B /* PCImageDirectorySaver.m */,
+			);
+			name = ImageDirectorySaver;
 			sourceTree = "<group>";
 		};
 		AC2CC756172675A000EC1913 /* Reminder TableView */ = {
@@ -406,9 +430,10 @@
 		ACBD65AD170BC483007EABE6 = {
 			isa = PBXGroup;
 			children = (
+				AC244636172E7702004E0B3B /* ImageDirectorySaver */,
+				AC24462F172E69E5004E0B3B /* PCAsyncImageView */,
 				AC2CC754172635EE00EC1913 /* Icon@2x.png */,
 				AC2CC752172635E700EC1913 /* Icon.png */,
-				ACDA30C0171FC876004FDEC6 /* ProfileManager */,
 				ACDA30BF171FC823004FDEC6 /* XCDeviceManager */,
 				AC959CE71712EB6B0006D685 /* Core Data */,
 				ACF206DD170E73EA00827BD4 /* Default.png */,
@@ -444,6 +469,7 @@
 		ACBD65BF170BC483007EABE6 /* MTMedicineTaker */ = {
 			isa = PBXGroup;
 			children = (
+				ACDA30C0171FC876004FDEC6 /* ProfileManager */,
 				AC05BFE81727AF1000AA6E7E /* Notification */,
 				AC2CC7591726780200EC1913 /* Table Views */,
 				AC2CC758172677DF00EC1913 /* View Controllers */,
@@ -554,6 +580,7 @@
 				ACDA30C2171FC892004FDEC6 /* MTProfileManager.m */,
 			);
 			name = ProfileManager;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		ACDA30C6171FEABF004FDEC6 /* TextFieldCell */ = {
@@ -748,6 +775,8 @@
 				AC2CC75F1726798500EC1913 /* MTReminderViewController.m in Sources */,
 				AC05BFEB1727AF4100AA6E7E /* MTLocalNotification.m in Sources */,
 				ACF48CD217290B1400E6ECB4 /* RegisteredNotification.m in Sources */,
+				AC244632172E6A04004E0B3B /* PCAsyncImageView.m in Sources */,
+				AC244639172E7860004E0B3B /* PCImageDirectorySaver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -40,7 +40,7 @@ CGFloat TF_LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSLog(@"range=%d,%d, %@", range.location, range.length, string);
+    //NSLog(@"range=%d,%d, %@", range.location, range.length, string);
     if([self textFieldRange] >= textField.text.length)
         return  YES;
     else {

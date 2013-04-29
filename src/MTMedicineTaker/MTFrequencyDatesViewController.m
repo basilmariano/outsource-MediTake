@@ -221,6 +221,23 @@
                 [self.selectedFrequencyDay addObject:date];
             }
         }
+    } else {
+        for(int i = 0; i < _dayList.count ; i++) {
+            NSString *strValue = [[_dayList objectAtIndex:i] valueForKey:[[NSNumber numberWithInt:i] stringValue]];
+            if(self.selectedFrequencyDay) {
+                
+                for(Date *date in self.selectedFrequencyDay) {
+                    
+                    if([date.date isEqualToString:strValue]) {
+                        NSManagedObject *object = date;
+                        [[ManageObjectModel objectManager] deleteObject:object];
+                        break;
+                    }
+                }
+            }
+        }
+        
+        [self.selectedFrequencyDay removeAllObjects];
     }
 
     [_tableView reloadData];
