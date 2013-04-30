@@ -13,5 +13,4 @@
 - (NSData *)data {
     return UIImagePNGRepresentation(self);
 }
-
 @end

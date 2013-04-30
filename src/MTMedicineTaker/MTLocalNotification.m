@@ -27,6 +27,7 @@ static MTLocalNotification *_instance;
 - (void)scheduleNotificationWithFireDate: (NSDate *)fireDate frequencyType:(NSNumber *)frequencyType andMedicine:(Medicine *)medicine {
 	
    /* NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSDateComponents *dateComponents = [[[NSDateComponents alloc] init] autorelease];
     NSDate *now = [NSDate date];
     NSDateComponents *compsNow = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:now];
     
@@ -34,8 +35,109 @@ static MTLocalNotification *_instance;
     
     NSDate *current = [calendar dateFromComponents:compsNow];
     NSDate *fDate = [calendar dateFromComponents:compsFire];
-	if(current > fDate) {
-        return;
+    
+    NSNumber *fdateInSecs = [NSNumber numberWithDouble:[fDate timeIntervalSince1970]];
+    NSNumber *currentdateInSecs = [NSNumber numberWithDouble:[current timeIntervalSince1970]];
+    NSLog(@"%@ vs %@",currentdateInSecs,fdateInSecs);
+	if(currentdateInSecs > fdateInSecs) {
+        switch ([frequencyType integerValue]) {
+            case 0: {
+            
+                NSDate *now = [NSDate date];
+                NSDateComponents *compsThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit fromDate:now];
+                NSDate *dayOfThisMonth = [calendar dateFromComponents:compsThisMonth];
+                
+                NSDateComponents *compsDayOfThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfThisMonth];
+                
+                if (compsFire.weekday == compsDayOfThisMonth.weekday) {
+                    
+                    dateComponents = compsDayOfThisMonth;
+                    
+                } else if (compsFire.weekday > compsDayOfThisMonth.weekday) {
+                    
+                    NSUInteger daysNeed2Add = compsFire.weekday - compsDayOfThisMonth.weekday;
+                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
+                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                    
+                } else { // comps.weekday < compsFirstDayOfThisMonth.weekday
+                    NSUInteger daysNeed2Add = compsFire.weekday + 7 - compsDayOfThisMonth.weekday;
+                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
+                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                }
+                NSLog(@"FireDate1 %@",fireDate);
+                fireDate = [calendar dateFromComponents:dateComponents];
+                NSLog(@"Firedate %@",fireDate);
+                break;
+            }
+            case 1:{
+                NSDate *now = [NSDate date];
+                NSDateComponents *compsThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit fromDate:now];
+                NSDate *dayOfThisMonth = [calendar dateFromComponents:compsThisMonth];
+                
+                NSDateComponents *compsDayOfThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfThisMonth];
+                
+                if (compsFire.weekday == compsDayOfThisMonth.weekday) {
+                    
+                    dateComponents = compsDayOfThisMonth;
+                    
+                } else if (compsFire.day > compsDayOfThisMonth.day) {
+                    
+                    NSUInteger daysNeed2Add = compsFire.day - compsDayOfThisMonth.day;
+                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
+                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                    
+                } else { // comps.weekday < compsFirstDayOfThisMonth.weekday
+                    int additionalDays = 30;
+                    
+                    if(compsFire.day%2 == 0)
+                        additionalDays = 31;
+                    
+                    NSUInteger daysNeed2Add = compsFire.day + additionalDays - compsDayOfThisMonth.day;
+                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
+                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                }
+                NSLog(@"FireDate1 %@",fireDate);
+                fireDate = [calendar dateFromComponents:dateComponents];
+                NSLog(@"Firedate %@",fireDate);
+                break;
+            }
+            case 2:{
+                NSDate *now = [NSDate date];
+                NSDateComponents *compsThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit fromDate:now];
+                NSDate *dayOfThisMonth = [calendar dateFromComponents:compsThisMonth];
+                
+                NSDateComponents *compsDayOfThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfThisMonth];
+                
+                if (compsFire.day == compsDayOfThisMonth.day) {
+                    
+                    dateComponents = compsDayOfThisMonth;
+                    
+                } else if (compsFire.day > compsDayOfThisMonth.day) {
+                    int additionalDays = 1;
+                    
+                    if(compsFire.month%2 == 0)
+                        additionalDays = 0;
+                    
+                    NSUInteger daysNeed2Add = compsFire.day + additionalDays - compsDayOfThisMonth.day;
+                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
+                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                    
+                } else { // comps.weekday < compsFirstDayOfThisMonth.weekday
+                    int additionalDays = 31;
+                    
+                    if(compsFire.month%2 == 0)
+                        additionalDays = 30;
+                    
+                    NSUInteger daysNeed2Add = compsFire.day + additionalDays - compsDayOfThisMonth.day;
+                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
+                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
+                }
+                NSLog(@"FireDate1 %@",fireDate);
+                fireDate = [calendar dateFromComponents:dateComponents];
+                NSLog(@"Firedate %@",fireDate);
+                break;
+            }
+        }
     }
     */
     Class cls = NSClassFromString(@"UILocalNotification");

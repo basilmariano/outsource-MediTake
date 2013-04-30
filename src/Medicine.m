@@ -16,7 +16,7 @@
 
 @dynamic frequency;
 @dynamic meal;
-@dynamic medicineImage;
+@dynamic medicineImagePath;
 @dynamic medicineName;
 @dynamic quantity;
 @dynamic status;
@@ -28,7 +28,7 @@
 @dynamic notifications;
 //@dynamic idKey;
 
-@synthesize image = _image;
+//@synthesize image = _image;
 
 + (Medicine *)medicine
 {
@@ -38,13 +38,13 @@
     return m;
 }
 
-- (UIImage *)image
+/*- (UIImage *)image
 {
     if (!_image) {
         _image = [[UIImage imageWithData:self.medicineImage] retain];
     }
     return _image;
-}
+}*/
 
 -(Medicine *)medicineWithId:(NSNumber *)medId
 {
@@ -63,6 +63,34 @@
     NSLog(@"Profile name %@",med);
     return med;
     
+}
+
+-(Medicine *)medicineWithName:(NSString *)medicineName
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Medicine" inManagedObjectContext:[[ManageObjectModel objectManager] managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"(medicineName like %@)",medicineName];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects =[[[ManageObjectModel objectManager] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    Medicine *med = (Medicine *) [fetchedObjects objectAtIndex:0];
+    NSLog(@"Profile name %@",med);
+    return med;
+}
+
++ (NSArray *)medicineList
+{
+    NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init]autorelease];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Medicine" inManagedObjectContext:[[ManageObjectModel objectManager] managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    NSError *error = nil;
+    NSArray *fetchedObjects = [[[ManageObjectModel objectManager] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    return  fetchedObjects;
 }
 
 @end

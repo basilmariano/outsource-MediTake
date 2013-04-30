@@ -8,6 +8,7 @@
 
 #import "MTProfileViewController.h"
 #import "Profile.h"
+#import "PCImageDirectorySaver.h"
 
 @interface MTProfileViewController ()<UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -112,7 +113,7 @@
 }
 
 
-#pragma UIImagePickerControllerDelegate
+#pragma mark UIImagePickerControllerDelegate
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
@@ -134,8 +135,10 @@
     {
         originalImage = [info objectForKey:UIImagePickerControllerCropRect];
     }
+    
+    UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:originalImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
     //At this point you have the selected image in originalImage
-    [self.profileImage setImage:originalImage forState:UIControlStateNormal];
+    [self.profileImage setImage:finalImage forState:UIControlStateNormal];
     
 }
 
@@ -165,7 +168,8 @@
         }else{
             Profile *profile = [Profile profile];
             profile.name = self.profileName.text;
-            profile.profileImage = [self.profileImage.imageView.image data];
+            NSLog(@"image %@",self.profileImage.imageView.image);
+            profile.profileImagePath = [[PCImageDirectorySaver directorySaver] saveImageInDocumentFileWithImage:self.profileImage.imageView.image andAppendingImageName:[NSString stringWithFormat:@"Profile_%@",self.profileName.text]];
     
             [[ManageObjectModel objectManager] saveContext];
     

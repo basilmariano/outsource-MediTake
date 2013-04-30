@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PCAsyncImageView.h"
 
 @interface MTProfileCell : UITableViewCell
 @property(nonatomic,assign) IBOutlet UILabel *profileName;
-@property(nonatomic,assign) IBOutlet UIImageView *profileImage;
 @property(nonatomic,assign) IBOutlet UIImageView *arrowImage;
+@property(nonatomic,assign) IBOutlet PCAsyncImageView *profileImageView;
 @end

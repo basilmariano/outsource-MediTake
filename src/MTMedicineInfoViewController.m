@@ -14,6 +14,7 @@
 #import "Time.h"
 #import "Date.h"
 #import "MTLocalNotification.h"
+#import "PCImageDirectorySaver.h"
 
 @interface MTMedicineInfoViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,MTTextFieldCellDelegate>
 {
@@ -29,6 +30,7 @@
 @property(nonatomic, retain) NSArray *mealList;
 @property(nonatomic, retain) NSArray *previousTimeList;
 @property(nonatomic, retain) NSArray *previousDayList;
+@property(nonatomic, retain) NSString *proviousMedicineName;
 
 - (IBAction)addMedicineImage:(id)sender;
 - (UIPickerView *)pickerViewInit;
@@ -50,7 +52,7 @@
         _originalImage = [[UIImage alloc] init];
         _previousTimeList = [[NSArray alloc] init];
         _previousDayList = [[NSArray alloc] init];
-        
+
         self.quantityList = [[[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil] autorelease];
         self.mealList = [[[NSArray alloc] initWithObjects:@"Before Meal",@"After Meal",@"None", nil] autorelease];
         
@@ -256,7 +258,7 @@
     label.text = [tableView.dataSource tableView:tableView titleForHeaderInSection:section];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:17];
-    [label setTextColor:[UIColor colorWithRed:93.0/255 green:93.0/255 blue:93.0/255 alpha:1.0]];
+    [label setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0]];
     
     UIImage *background = [UIImage imageNamed:@"SectionBackground.png"];
     UIImageView *bgImageView = [[UIImageView alloc] initWithImage:background];
@@ -289,8 +291,10 @@
     {
         originalImage = [info objectForKey:UIImagePickerControllerCropRect];
     }
+    
+    UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:originalImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
     //At this point you have the selected image in originalImage
-    [self.medicineImage setImage:originalImage forState:UIControlStateNormal];
+    [self.medicineImage setImage:finalImage forState:UIControlStateNormal];
     
 }
 
@@ -502,24 +506,58 @@
         
 }
 
+- (BOOL) isMedicineExist
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Medicine" inManagedObjectContext:[[ManageObjectModel objectManager] managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"(medicineName like %@)",_medicineName.text];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects =[[[ManageObjectModel objectManager] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if(fetchedObjects.count ==0)
+        return NO;
+    else
+        return YES;
+    
+    return NO;
+}
+
 - (void) onButtonDoneClicked
 {
     if(![self.medicineName.text isEqual:@""]) {
+     
+        if(!([self isMedicineExist]) || [self.medicineName.text isEqualToString:self.proviousMedicineName]) {
+            self.medicine.medicineName = _medicineName.text;
+            self.medicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] saveImageInDocumentFileWithImage:self.medicineImage.imageView.image andAppendingImageName:[NSString stringWithFormat:@"Medicine_%@%@",_medicineName.text,_medicine.medicineTaker.name]];
+            NSLog(@"path %@",self.medicine.medicineImagePath);
+            self.medicine.willRemind = [NSNumber numberWithBool:self.switcher.on];
+            self.medicine.status = self.medicine.meal;
+            [[ManageObjectModel objectManager] saveContext];
         
-        self.medicine.medicineName = _medicineName.text;
-        self.medicine.medicineImage = [self.medicineImage.imageView.image data];
-        self.medicine.willRemind = [NSNumber numberWithBool:self.switcher.on];
-        self.medicine.status = self.medicine.meal;
-        [[ManageObjectModel objectManager] saveContext];
+            if(self.switcher.on) {
+                [self setFireDate];
+            } else {
+                NSLog(@"Reminder is not On!");
+            }
         
-        [self setFireDate];
-        
-         NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
-        NSLog(@"%d", notificationList.count);
-        [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
-        
-    }
-    else {
+            NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
+            NSLog(@"%d", notificationList.count);
+            [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Medicine already exist!!"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+
+        }
+    } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error:" message:@"Please fill out Medicine name!"
                                                        delegate:nil
                                               cancelButtonTitle:@"Ok"
@@ -620,11 +658,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if(_medicine.image)
-        self.medicineImage.imageView.image = _medicine.image;
+    if(_medicine.medicineImagePath)
+        [self.medicineImage setImage:[[PCImageDirectorySaver directorySaver]imageFilePath:_medicine.medicineImagePath] forState:UIControlStateNormal];
     if(_medicine.medicineName) {
         self.medicineName.text = _medicine.medicineName;
         self.navigationItem.title = _medicine.medicineName;
+        self.proviousMedicineName = _medicine.medicineName;
     }
     self.originalImage = self.medicineImage.imageView.image;
     

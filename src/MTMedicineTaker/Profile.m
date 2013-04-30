@@ -13,10 +13,10 @@
 @implementation Profile
 
 @dynamic name;
-@dynamic profileImage;
+@dynamic profileImagePath;
 @dynamic medicines;
 
-@synthesize image = _image;
+//@synthesize image = _image;
 
 +(NSInteger)profileCount
 {
@@ -44,12 +44,12 @@
     return  fetchedObjects;
 }
 
-- (UIImage *)image
+/*- (UIImage *)image
 {
     if (!_image) {
         _image = [[UIImage imageWithData:self.profileImage] retain];
     }
     return _image;
-}
+}*/
 
 @end

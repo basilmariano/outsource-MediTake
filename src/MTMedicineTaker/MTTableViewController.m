@@ -14,6 +14,8 @@
 #import "Profile.h"
 #import "MTProfileInfoViewController.h"
 #import "MTLocalNotification.h"
+#import "PCImageDirectorySaver.h"
+#import "PCAsyncImageView.h"
 
 @interface MTTableViewController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -179,13 +181,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int selecteRow = (int) indexPath.row;
-    
-    if([_name isEqualToString:@"Reminders"])
-        return  [self reminder:tableView andRow:selecteRow];
-    else
-        return  [self profile:tableView andRow:indexPath];
-    
+    return  [self profile:tableView andRow:indexPath];
 }
 /*- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -322,50 +318,9 @@
     Profile *profile = [_fetchedResultsController objectAtIndexPath:indexPath];
     
     tbCell.profileName.text = profile.name;
-    tbCell.profileImage.image = profile.image;
+    //tbCell.profileImage.image = [[PCImageDirectorySaver directorySaver]imageFilePath:profile.profileImagePath];//profile.image;
+    [tbCell.profileImageView loadImageFromURL:[NSURL URLWithString:profile.profileImagePath]];
     tbCell.arrowImage.image = [UIImage imageNamed:@"ArrowBlack"];
-    
-    return tbCell;
-}
-
-
-- (UITableViewCell *)reminder :(UITableView *)tableView andRow:(int) rows
-{
-    NSString *CellIdentifier = @"MTReminderCell";
-    
-    MTReminderCell *tbCell = (MTReminderCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (tbCell == nil) {
-        
-        tbCell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil]objectAtIndex:0];
-        
-    }
-    
-    if(_list.count > 0)
-        return tbCell;
-    
-    NSDictionary *contacts = (NSDictionary *) [_list objectAtIndex:rows];
-    NSString *name = [contacts objectForKey: @"takerName"];
-    NSString *medicine = [contacts objectForKey:@"medicineName"];
-    NSString *scheduleTime = [contacts objectForKey:@"scheduleTime"];
-    NSString *scheduleStatus = [contacts objectForKey:@"scheduleStatus"];
-    NSString *takenTime = [contacts objectForKey: @"takenTime"];
-    NSString *medicineQuantity = [contacts objectForKey:@"medicineQuantity"];
-    NSString *medicineUnit = [contacts objectForKey:@"medicineUnit"];
-    NSString *medicineImage = [contacts objectForKey:@"medicineImage"];
-    NSString *takerImage = [contacts objectForKey:@"takerImage"];
-    NSString *alarmImage = [contacts objectForKey:@"alerImage"];
-    
-    tbCell.takerName.text = name;
-    tbCell.medicineName.text = medicine;
-    tbCell.scheduleTime.text = scheduleTime;
-    tbCell.scheduleStatus.text = scheduleStatus;
-    tbCell.takenTime.text = takenTime;
-    tbCell.medicineQuantity.text = medicineQuantity;
-    tbCell.medicineUnit.text = medicineUnit;
-    tbCell.medicineImage.image = [UIImage imageNamed:medicineImage];
-    tbCell.TakerImage.image = [UIImage imageNamed:takerImage];
-    tbCell.alarmImage.image = [UIImage imageNamed:alarmImage];
     
     return tbCell;
 }

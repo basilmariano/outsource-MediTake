@@ -11,7 +11,7 @@
 @interface PCImageDirectorySaver : NSObject
 
 +(PCImageDirectorySaver *)directorySaver;
--(NSString *)saveImageInDocumentFileWithImageData:(NSData *)pngData andAppendingImageName:(NSString *)imageName;
+-(NSString *)saveImageInDocumentFileWithImage:(UIImage *)image andAppendingImageName:(NSString *)imageName;
 -(UIImage *)imageFilePath:(NSString *)path;
-
+-(UIImage *)scaleImage:(UIImage *)image  withScaleToSize: (CGSize)size;
 @end

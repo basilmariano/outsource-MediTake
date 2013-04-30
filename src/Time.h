@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) NSNumber *time;
 @property (nonatomic, retain) NSManagedObject *medicine;
+@property (nonatomic, retain) NSString *status;
 
 + (Time *)time;
 /* NSdate *date;

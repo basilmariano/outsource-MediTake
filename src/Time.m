@@ -13,6 +13,7 @@
 
 @dynamic time;
 @dynamic medicine;
+@dynamic status;
 
 + (Time *)time
 {

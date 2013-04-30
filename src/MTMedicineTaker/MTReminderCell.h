@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PCAsyncImageView.h"
 
 @interface MTReminderCell : UITableViewCell
 
@@ -17,8 +18,9 @@
 @property(nonatomic,assign) IBOutlet UILabel *takenTime;
 @property(nonatomic,assign) IBOutlet UILabel *medicineQuantity;
 @property(nonatomic,assign) IBOutlet UILabel *medicineUnit;
-@property(nonatomic,assign) IBOutlet UIImageView *medicineImage;
-@property(nonatomic,assign) IBOutlet UIImageView *TakerImage;
+@property(nonatomic,assign) IBOutlet UILabel *scheduleDate;
+@property(nonatomic,assign) IBOutlet PCAsyncImageView *medicineImage;
+@property(nonatomic,assign) IBOutlet PCAsyncImageView *TakerImage;
 @property(nonatomic,assign) IBOutlet UIImageView *alarmImage;
 
 @end

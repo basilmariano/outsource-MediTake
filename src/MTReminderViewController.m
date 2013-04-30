@@ -12,11 +12,16 @@
 #import "Medicine.h"
 #import "ManageObjectModel.h"
 #import "MTLocalNotification.h"
+#import "PCImageDirectorySaver.h"
+#import "Time.h"
 
-@interface MTReminderViewController ()
-
-@property(nonatomic,retain) NSMutableArray *reminderList;
-
+@interface MTReminderViewController () <UIActionSheetDelegate,UIWebViewDelegate>
+{
+    int selectedIndexPathRow;
+}
+@property (nonatomic, retain) NSMutableArray *reminderList;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, retain) UIButton *cancelButton;
 @end
 
 @implementation MTReminderViewController
@@ -36,6 +41,7 @@
 
 - (void) dealloc
 {
+    [_webView release];
     [_tableView release];
     [_fetchedResultsController release];
     [super dealloc];
@@ -79,18 +85,46 @@
     Medicine *med = (Medicine *) [dict objectForKey:@"Medicine"];
     tbCell.takerName.text = med.medicineTaker.name;
     tbCell.medicineName.text = med.medicineName;
-    tbCell.scheduleStatus.text = med.status;
     //tbCell.takenTime.text = takenTime;
     tbCell.medicineQuantity.text = [med.quantity stringValue];
     tbCell.medicineUnit.text = med.unit;
-    tbCell.medicineImage.image = med.image;
-    tbCell.TakerImage.image = med.medicineTaker.image;
+    [tbCell.medicineImage loadImageFromURL:[NSURL URLWithString:med.medicineImagePath]];
+    [tbCell.TakerImage loadImageFromURL:[NSURL URLWithString:med.medicineTaker.profileImagePath]];
     //tbCell.alarmImage.image = [UIImage imageNamed:alarmImage];
+    
+    NSString *status = nil;
+    NSArray *arrTime = [NSArray arrayWithArray:[med.times allObjects]];
+    for(Time *time in arrTime) {
+        
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[time.time doubleValue]]; //<- retrieve the date
+        NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+        dateFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        [dateFormat setDateFormat:@"hh:mm aa"];
+        NSString *strTime = [dateFormat stringFromDate:date];
+        
+        NSDateFormatter *fireDateFormat = [[[NSDateFormatter alloc] init] autorelease];
+        //fireDateFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        [fireDateFormat setDateFormat:@"hh:mm aa"];
+        NSString *strFireTime = [fireDateFormat stringFromDate:fireDate];
+        NSLog(@"FTime %@ and CTime %@",strFireTime,strTime);
+        if([strFireTime isEqualToString:strTime]) {
+            status = time.status;
+        }
+    }
+    
+    if(status) {
+        tbCell.scheduleStatus.text = status;
+    }
     
     NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormat setDateFormat:@"hh:mm aa"];
     NSString *strTime = [dateFormat stringFromDate:fireDate];
     tbCell.scheduleTime.text = strTime;
+    
+    NSDateFormatter *dateFormat2 = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormat2 setDateFormat:@"MM/dd/yy"];
+    NSString *strDate= [dateFormat2 stringFromDate:fireDate];
+    tbCell.scheduleDate.text = strDate;
     
     return tbCell;
 }
@@ -109,7 +143,65 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    selectedIndexPathRow = indexPath.row;
+    NSString *medicineCurrentStatus = nil;
+    NSDictionary *dict = [self.reminderList objectAtIndex:selectedIndexPathRow];
+    UILocalNotification *notif = [dict objectForKey:@"notification"];
+    NSDate *fireDate = notif.fireDate;
+    Medicine *med = (Medicine *) [dict objectForKey:@"Medicine"];
+    NSArray *arrTime = [NSArray arrayWithArray:[med.times allObjects]];
+    
+    for(Time *time in arrTime) {
+        
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[time.time doubleValue]]; //<- retrieve the date
+        NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+        dateFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        [dateFormat setDateFormat:@"hh:mm aa"];
+        NSString *strTime = [dateFormat stringFromDate:date];
+        
+        NSDateFormatter *fireDateFormat = [[[NSDateFormatter alloc] init] autorelease];
+        //fireDateFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        [fireDateFormat setDateFormat:@"hh:mm aa"];
+        NSString *strFireTime = [fireDateFormat stringFromDate:fireDate];
+        NSLog(@"FTime %@ and CTime %@",strFireTime,strTime);
+        if([strFireTime isEqualToString:strTime]) {
+            
+            NSArray *stringList = [time.status componentsSeparatedByString:@" "];
+            medicineCurrentStatus = (NSString *) [stringList objectAtIndex:0];
+            break;
+        }
+    }
+    BOOL disableFirst2Buttons = NO;
+    if([medicineCurrentStatus isEqualToString:@"Skip"] || [medicineCurrentStatus isEqualToString:@"Taken"]) {
+        disableFirst2Buttons = YES;
+    }
+    
+    UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
+                                                              delegate:self
+                                                     cancelButtonTitle:nil
+                                                destructiveButtonTitle:nil
+                                                     otherButtonTitles:nil] autorelease];
+    
+    [actionSheet addButtonWithTitle:@"Take Now"];
+    [actionSheet addButtonWithTitle:@"Skip Now"];
+    [actionSheet addButtonWithTitle:@"View Details"];
+    actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
+    
+    if(disableFirst2Buttons) {
+        NSUInteger buttonIndex = 0;
+    for (UIView* view in actionSheet.subviews)
+    {
+        if ([view isKindOfClass:[UIButton class]])
+        {
+            if (buttonIndex == 0 || buttonIndex == 1) {
+                UIButton* button = (UIButton*)view;
+                button.enabled = NO;
+            }
+            buttonIndex++;
+        }
+    }
+    }
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -198,10 +290,100 @@
     
 }
 
+#pragma mark UIActionSheelDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+  
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 2) {
+        self.webView.hidden = FALSE;
+        self.cancelButton.hidden = FALSE;
+        NSDictionary *dict = [self.reminderList objectAtIndex:selectedIndexPathRow];
+        //UILocalNotification *notif = [dict objectForKey:@"notification"];
+        Medicine *med = (Medicine *) [dict objectForKey:@"Medicine"];
+        NSString *stringTest = [NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@",med.medicineName];
+        NSURL *url = [NSURL URLWithString:stringTest];
+        NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+        [_webView loadRequest:requestObj];
+        
+       
+       // [[UIApplication sharedApplication]openURL:[NSURL URLWithString:stringTest]];
+        return;
+    } else if(buttonIndex == 3) {
+        return;
+    }
+    
+    NSDictionary *dict = [self.reminderList objectAtIndex:selectedIndexPathRow];
+    UILocalNotification *notif = [dict objectForKey:@"notification"];
+    NSDate *fireDate = notif.fireDate;
+    Medicine *med = (Medicine *) [dict objectForKey:@"Medicine"];
+    NSArray *arrTime = [NSArray arrayWithArray:[med.times allObjects]];
+    
+    for(Time *time in arrTime) {
+        
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[time.time doubleValue]]; //<- retrieve the date
+        NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+        dateFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        [dateFormat setDateFormat:@"hh:mm aa"];
+        NSString *strTime = [dateFormat stringFromDate:date];
+        
+        NSDateFormatter *fireDateFormat = [[[NSDateFormatter alloc] init] autorelease];
+        //fireDateFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        [fireDateFormat setDateFormat:@"hh:mm aa"];
+        NSString *strFireTime = [fireDateFormat stringFromDate:fireDate];
+        NSLog(@"FTime %@ and CTime %@",strFireTime,strTime);
+        if([strFireTime isEqualToString:strTime]) {
+            NSDate *current = [NSDate date];
+            NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+            [dateFormat setDateFormat:@"MM/dd/yy hh:mm aa"];
+            NSString *strTime = [dateFormat stringFromDate:current];
+            
+            Time *time2 = [Time time];
+            time2.time = time.time;
+           
+            if(buttonIndex == 0) {
+                time2.status = [NSString stringWithFormat:@"Taken at %@",strTime];
+            } else if (buttonIndex == 1) {
+                time2.status = [NSString stringWithFormat:@"Skip at %@",strTime];
+            }
+        
+            NSManagedObject *object = time;
+            [[ManageObjectModel objectManager] deleteObject:object];
+            
+            [med addTimesObject:time2];
+            [[ManageObjectModel objectManager] saveContext];
+            break;
+        }
+    }
+    [_tableView reloadData];
+}
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    self.webView.hidden = TRUE;
+    UIImage *backImage = [UIImage imageNamed:@"ButtonBack.png"];
+    
+    self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.cancelButton.frame = CGRectMake(0.0f, 0.0f, 52.0f, 28.0f);
+    [_cancelButton setImage:backImage forState:UIControlStateNormal];
+    [_cancelButton addTarget:self action:@selector(onButtonCancelClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButtonBack = [[[UIBarButtonItem alloc] initWithCustomView:_cancelButton]autorelease];
+    self.navigationItem.leftBarButtonItem = barButtonBack;
+    self.cancelButton.hidden = TRUE;
     [self retrieveNotificationList];
+}
+
+- (void)onButtonCancelClicked
+{
+    if ([_webView canGoBack]) {
+        [_webView goBack];
+    } else {
+        self.cancelButton.hidden = TRUE;
+    }
 }
 
 - (void) retrieveNotificationList
@@ -218,6 +400,24 @@
     
     for(UILocalNotification *notif in notifLIst) {
 
+        NSArray *medList = [Medicine medicineList];
+        NSString *PKHolder = nil;
+        for(Medicine *meds in medList) {
+            NSDictionary *dict = notif.userInfo;
+            NSArray *medPKList = (NSArray *) [dict objectForKey:@"Medicines"];
+            for(NSString *pk in medPKList) {
+                NSManagedObject *object = meds;
+                NSString *strPK = [[[object objectID] URIRepresentation] absoluteString];
+                if([strPK isEqualToString:pk]) {
+                    PKHolder = strPK;
+                }
+            }
+        }
+        
+        if(!PKHolder) {
+            [[UIApplication sharedApplication] cancelLocalNotification:notif];
+        } else {
+        
          NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
          NSDate *now = [NSDate date];
          NSDateComponents *compsNow  = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday fromDate:now];
@@ -238,7 +438,7 @@
                 [self saveNotifInfoToReminderListWithNotif:notif];
             }
         }
-
+        }
     }
     
     [self syncReminders];
@@ -249,7 +449,7 @@
     NSDate *now = [NSDate date];
     NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
     NSDateComponents *compsNow  = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:now];
-    NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday |kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:notif.fireDate];
+    NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:notif.fireDate];
     
     NSInteger currentTimeInSecs = compsNow.hour*3600 + compsNow.minute*60 + compsNow.second;
     NSInteger fireTimeInSecs    = compsFire.hour*3600 + compsFire.minute*60  + compsFire.second;
@@ -259,7 +459,6 @@
     
     NSDictionary *dict = notif.userInfo;
     NSArray *medPKList = (NSArray *) [dict objectForKey:@"Medicines"];
-    
     for(NSString *pk in medPKList) {
         //get object using primary key
         NSManagedObject *managedObject=[[[ManageObjectModel objectManager] managedObjectContext] objectWithID: [[[ManageObjectModel objectManager] persistentStoreCoordinator] managedObjectIDForURIRepresentation:[NSURL URLWithString:pk]]];

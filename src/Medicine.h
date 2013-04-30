@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSString * frequency;
 @property (nonatomic, retain) NSString * meal;
-@property (nonatomic, retain) NSData * medicineImage;
+@property (nonatomic, retain) NSString * medicineImagePath;
 @property (nonatomic, retain) NSString * medicineName;
 @property (nonatomic, retain) NSNumber * quantity;
 //@property (nonatomic, retain) NSNumber * idKey;
@@ -41,7 +41,9 @@
 - (void)removeTimes:(NSSet *)values;
 - (void)addNotifications:(NSSet *)values;
 - (void)removeNotifications:(NSSet *)values;
-+ (Medicine *)medicine;
--(Medicine *)medicineWithId:(NSNumber *)medId;
 
+-(Medicine *)medicineWithId:(NSNumber *)medId;
+-(Medicine *)medicineWithName:(NSString *)medicineNamel;
++ (Medicine *)medicine;
++ (NSArray *)medicineList;
 @end

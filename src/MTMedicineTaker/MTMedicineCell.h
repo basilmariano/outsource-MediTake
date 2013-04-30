@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PCAsyncImageView.h"
 
 @interface MTMedicineCell : UITableViewCell
 
-@property (nonatomic,retain) IBOutlet UIImageView *medicineImage;
+@property (nonatomic,retain) IBOutlet PCAsyncImageView *medicineImage;
 @property (nonatomic,retain) IBOutlet UILabel *medicineName;
 @property (nonatomic,retain) IBOutlet UILabel *quantity;
 @property (nonatomic,retain) IBOutlet UILabel *unit;

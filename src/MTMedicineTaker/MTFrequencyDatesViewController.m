@@ -29,6 +29,7 @@
     self = [super initWithNibName:nibName bundle:nil];
     if (self) {
         // Custom initialization
+        
         _selectedFrequencyDay = [[NSMutableArray alloc] init];
         _dayList = [[NSMutableArray alloc] init];
         self.frequencyName = frequencyName;
@@ -268,9 +269,12 @@
     self.switcher.on = NO;
     if([self.frequencyName isEqualToString:@"Weekly"] || [self.frequencyName isEqualToString:@"Daily"]) {
       [self.frequencyWeekView setHidden:NO];
+        self.monthIndicator.text = @"Day of the Week";
     }
     else {
-        [self.monthIndicator setHidden:NO];
+        //[self.monthIndicator setHidden:NO];
+        self.monthIndicator.text = @"Day of the Month";
+        self.tableView.frame = CGRectMake(0.0, 43.0, 320.0f, 393.0f);
     }
 }
 

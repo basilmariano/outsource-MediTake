@@ -13,8 +13,10 @@
 #import "MTMedicineCell.h"
 #import "Time.h"
 #import "MTLocalNotification.h"
+#import "PCImageDirectorySaver.h"
+#import "PCAsyncImageView.h"
 
-@interface MTProfileInfoViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NSFetchedResultsControllerDelegate>
+@interface MTProfileInfoViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NSFetchedResultsControllerDelegate,PCAsyncImageViewDelegate>
 {
     UIImagePickerController *imagePicker;
 }
@@ -70,6 +72,12 @@
     [super dealloc];
 }
 
+//- (void)didLoadAsyncImageView:(PCAsyncImageView *)asyncImageView
+- (void)clickedAsyncImageView:(PCAsyncImageView *)asyncImageView
+{
+
+}
+
 - (void) onButtonAllProfilelicked
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -79,8 +87,8 @@
 {
     Profile *profile = [[MTProfileManager profileManager] profile];
     self.profileName.text = profile.name;
-    self.profileImage.imageView.image = profile.image;
-    self.originalImage = profile.image;
+    [self.profileImage setImage:[[PCImageDirectorySaver directorySaver]imageFilePath:profile.profileImagePath] forState:UIControlStateNormal];
+    self.originalImage = [[PCImageDirectorySaver directorySaver]imageFilePath:profile.profileImagePath];//profile.image;
     
     NSError *error = nil;
     if(![[self fetchedResultsControllerwithEntityName:@"Profile" andSortDescriptorName:@"name" andCacheName:@"profileMedicine"] performFetch:&error])
@@ -155,7 +163,7 @@
 }
 
 
-#pragma UITextFieldDelegate
+#pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -168,11 +176,11 @@
 }
 
 
-#pragma UIImagePickerControllerDelegate
+#pragma mark UIImagePickerControllerDelegate
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self.profileImage setImage:_previousImage forState:UIControlStateNormal];
+    [self.profileImage setImage:self.previousImage forState:UIControlStateNormal];
     [picker dismissModalViewControllerAnimated:YES];
 }
 
@@ -190,14 +198,16 @@
     {
         originalImage = [info objectForKey:UIImagePickerControllerCropRect];
     }
+    
+    UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:originalImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
     //At this point you have the selected image in originalImage
-    [self.profileImage setImage:originalImage forState:UIControlStateNormal];
+    [self.profileImage setImage:finalImage forState:UIControlStateNormal];
     
 }
 
 
 
-#pragma NSFetchedResultsControllerDelegate
+#pragma mark NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
@@ -289,7 +299,9 @@
     tbCell.medicineName.text = medicine.medicineName;
     tbCell.quantity.text = [medicine.quantity stringValue];
     tbCell.unit.text = medicine.unit;
-    tbCell.medicineImage.image = medicine.image;
+    [tbCell.medicineImage loadImageFromURL:[NSURL URLWithString:medicine.medicineImagePath]];
+    //tbCell.medicineImage.image = [[PCImageDirectorySaver directorySaver]imageFilePath:medicine.medicineImagePath];//medicine.image;
+   
     tbCell.frequency.text = medicine.frequency;;
     
     NSArray *timeSet = [medicine.times allObjects];
@@ -375,13 +387,9 @@
         
         Profile *profile = [[MTProfileManager profileManager] profile];
         profile.name = self.profileName.text;
-        profile.profileImage = [self.profileImage.imageView.image data];
-      /*  if([MTProfileManager profileManager].medicineList.count) {
-            for(Medicine *med in [MTProfileManager profileManager].medicineList) {
-                [profile addMedicinesObject:med];
-            }
-        }
-*/
+        NSLog(@"image %@",self.profileImage.imageView.image);
+        profile.profileImagePath = [[PCImageDirectorySaver directorySaver] saveImageInDocumentFileWithImage:self.profileImage.imageView.image andAppendingImageName:[NSString stringWithFormat:@"Profile_%@",self.profileName.text]];
+
         [[ManageObjectModel objectManager] saveContext];
         
         [self.navigationController popViewControllerAnimated:YES];
