@@ -32,10 +32,10 @@
     
     MTReminderViewController *reminder =[[[MTReminderViewController alloc] initWithNibName:@"MTReminderViewController" bundle:nil]autorelease];
     
-    UIImage *buttonRemindersNormal = [UIImage imageNamed:@"Reminder-inActive.png"];
-    UIImage *buttonReminderPressed = [UIImage imageNamed:@"Reminder-Active.png"];
-    UIImage *buttonProfileNormal = [UIImage imageNamed:@"Profile-inActive.png"];
-    UIImage *buttonProfilePressed = [UIImage imageNamed:@"Profile-Active.png"];
+    UIImage *buttonRemindersNormal = [UIImage imageNamed:@"Reminder-s.png"];
+    UIImage *buttonReminderPressed = [UIImage imageNamed:@"Reminder-ss.png"];
+    UIImage *buttonProfileNormal = [UIImage imageNamed:@"Profile-s.png"];
+    UIImage *buttonProfilePressed = [UIImage imageNamed:@"Profile-ss.png"];
     UIImage *splashImage = nil;
     
     UIButton *btnReminders = [UIButton buttonWithType:UIButtonTypeCustom];

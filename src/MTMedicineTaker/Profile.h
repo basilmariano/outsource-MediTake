@@ -16,7 +16,6 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * profileImagePath;
 @property (nonatomic, retain) NSSet *medicines;
-@property (nonatomic, readonly) UIImage *image;
 
 @end
 

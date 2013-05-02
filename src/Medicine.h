@@ -18,15 +18,15 @@
 @property (nonatomic, retain) NSString * medicineImagePath;
 @property (nonatomic, retain) NSString * medicineName;
 @property (nonatomic, retain) NSNumber * quantity;
-//@property (nonatomic, retain) NSNumber * idKey;
 @property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * unit;
 @property (nonatomic, retain) NSNumber * willRemind;
+
 @property (nonatomic, retain) Profile *medicineTaker;
 @property (nonatomic, retain) NSSet *days;
 @property (nonatomic, retain) NSSet *times;
-@property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, retain) NSSet *notifications;
+
 @end
 
 @interface Medicine (CoreDataGeneratedAccessors)
@@ -42,8 +42,9 @@
 - (void)addNotifications:(NSSet *)values;
 - (void)removeNotifications:(NSSet *)values;
 
--(Medicine *)medicineWithId:(NSNumber *)medId;
--(Medicine *)medicineWithName:(NSString *)medicineNamel;
+- (Medicine *)medicineWithId:(NSNumber *)medId;
+- (Medicine *)medicineWithName:(NSString *)medicineNamel;
 + (Medicine *)medicine;
 + (NSArray *)medicineList;
+
 @end

@@ -52,10 +52,13 @@
         else
         {
             self.title = @"All Profile";
-            UIImage *entries = [UIImage imageNamed:@"YellowTab_Plus.png"];
+            UIImage *addButtonActive = [UIImage imageNamed:@"Addbutton-Active.png"];
+            UIImage *addButtonInActive = [UIImage imageNamed:@"Addbutton-inActive.png"];
             UIButton *buttonEntries = [UIButton buttonWithType:UIButtonTypeCustom];
-            buttonEntries.frame = CGRectMake(0, 0, 26.5, 26);
-            [buttonEntries setImage:entries forState:UIControlStateNormal];
+            buttonEntries.frame = CGRectMake(0, 0, 56, 31);
+            [buttonEntries setImage:addButtonInActive forState:UIControlStateNormal];
+            [buttonEntries setImage:addButtonActive forState:UIControlStateSelected];
+            [buttonEntries setImage:addButtonActive forState:UIControlStateHighlighted];
             [buttonEntries addTarget:self action:@selector(onButtonAddProfileClicked) forControlEvents:UIControlEventTouchUpInside];
             UIBarButtonItem *barButton = [[[UIBarButtonItem alloc] initWithCustomView:buttonEntries]autorelease];
             
@@ -318,10 +321,9 @@
     Profile *profile = [_fetchedResultsController objectAtIndexPath:indexPath];
     
     tbCell.profileName.text = profile.name;
-    //tbCell.profileImage.image = [[PCImageDirectorySaver directorySaver]imageFilePath:profile.profileImagePath];//profile.image;
-    [tbCell.profileImageView loadImageFromURL:[NSURL URLWithString:profile.profileImagePath]];
+    tbCell.profileImage.image = [[PCImageDirectorySaver directorySaver]imageFilePath:profile.profileImagePath];//profile.image;
     tbCell.arrowImage.image = [UIImage imageNamed:@"ArrowBlack"];
-    
+    //[tbCell.profileImageView loadImageFromURL:[NSURL URLWithString:profile.profileImagePath]];
     return tbCell;
 }
 

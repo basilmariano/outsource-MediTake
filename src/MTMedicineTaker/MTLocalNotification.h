@@ -14,6 +14,7 @@
 - (void) handleReceivedNotification:(UILocalNotification*) thisNotification;
 - (void)scheduleNotificationWithFireDate: (NSDate *)fireDate frequencyType:(NSNumber *)frequencyType andMedicine:(Medicine *)medicine;
 - (void)deleteNotificationWithMedicine:(Medicine *)medicine fromNotification:(UILocalNotification *)notification;
+- (void)cancelNotificationWithMedicine: (Medicine *)medicine andFireDate:(NSDate *)fireTime;
 - (void)showReminder:(NSString *)reminder;
 - (void)clearNotification;
 

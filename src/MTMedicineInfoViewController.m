@@ -28,7 +28,7 @@
 @property(nonatomic, retain) NSArray *pickerList;
 @property(nonatomic, retain) NSArray *quantityList;
 @property(nonatomic, retain) NSArray *mealList;
-@property(nonatomic, retain) NSArray *previousTimeList;
+@property(nonatomic, retain) NSMutableArray *previousTimeList;
 @property(nonatomic, retain) NSArray *previousDayList;
 @property(nonatomic, retain) NSString *proviousMedicineName;
 
@@ -42,6 +42,7 @@
 @end
 
 @implementation MTMedicineInfoViewController
+static MTMedicineInfoViewController *_instance;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,7 +51,7 @@
         // Custom initialization
         self.navigationItem.title = @"New Medicine";
         _originalImage = [[UIImage alloc] init];
-        _previousTimeList = [[NSArray alloc] init];
+        _previousTimeList = [[NSMutableArray alloc] init];
         _previousDayList = [[NSArray alloc] init];
 
         self.quantityList = [[[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil] autorelease];
@@ -73,10 +74,14 @@
         
         UIBarButtonItem *barButtonDone = [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
         self.navigationItem.rightBarButtonItem = barButtonDone;
-
+        _instance = self;
     }
     
     return self;
+}
++(MTMedicineInfoViewController *)sharedInstance
+{
+    return _instance;
 }
 
 - (void) dealloc
@@ -392,9 +397,11 @@
     for(Time *t in timeList) {
         Time *t1 = nil;
         for(Time *t3 in self.previousTimeList) {
+            NSLog(@"%@",t3);
             if(t3.time == t.time) {
-                t1 = t3;
+                    t1 = t3;
             }
+            
         }
         
         if(!t1) {
@@ -441,12 +448,18 @@
                 }
                 case 1: {
                     
-                    NSDate *d1 = [NSDate date];
+                    NSDate *now = [NSDate date];
+                    NSDateComponents *compsThisMonth = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:now];
                     
-                    NSDateComponents *components = [calendar components:(NSMonthCalendarUnit | NSYearCalendarUnit) //<- update the  current date to date picked day (e.g) 1,2,3 ...
-                                                               fromDate:d1];
+                    NSDate *d1 = [NSDate date];
+                    NSDateComponents *components = [calendar components:(NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:d1];
                     [components setDay:[d.date integerValue]];
-    
+                    NSLog(@"%d and %d",compsThisMonth.day,components.day);
+                    if(compsThisMonth.day > components.day) {
+                        [components setMonth:compsThisMonth.month + 1];
+                        dateComponents = components;
+                    }
+                    
                     dateComponents = components;
                     
                     dayDate = [calendar dateFromComponents:dateComponents];
@@ -532,11 +545,12 @@
     if(![self.medicineName.text isEqual:@""]) {
      
         if(!([self isMedicineExist]) || [self.medicineName.text isEqualToString:self.proviousMedicineName]) {
-            self.medicine.medicineName = _medicineName.text;
+            
+            self.medicine.medicineName      = _medicineName.text;
             self.medicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] saveImageInDocumentFileWithImage:self.medicineImage.imageView.image andAppendingImageName:[NSString stringWithFormat:@"Medicine_%@%@",_medicineName.text,_medicine.medicineTaker.name]];
-            NSLog(@"path %@",self.medicine.medicineImagePath);
-            self.medicine.willRemind = [NSNumber numberWithBool:self.switcher.on];
-            self.medicine.status = self.medicine.meal;
+            self.medicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
+            self.medicine.status            = self.medicine.meal;
+            
             [[ManageObjectModel objectManager] saveContext];
         
             if(self.switcher.on) {
@@ -544,11 +558,13 @@
             } else {
                 NSLog(@"Reminder is not On!");
             }
-        
-            NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
-            NSLog(@"%d", notificationList.count);
+            
             [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
+            /*NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
+            NSLog(@"%d", notificationList.count);*/
+            
         } else {
+            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Medicine already exist!!"
                                                            delegate:nil
                                                   cancelButtonTitle:@"Ok"
@@ -558,6 +574,7 @@
 
         }
     } else {
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error:" message:@"Please fill out Medicine name!"
                                                        delegate:nil
                                               cancelButtonTitle:@"Ok"
@@ -654,6 +671,10 @@
 
     [_tableView reloadData];
 }
+-(NSMutableArray *)medicineTimeList
+{
+    return self.previousTimeList;
+}
 
 - (void)viewDidLoad
 {
@@ -667,7 +688,11 @@
     }
     self.originalImage = self.medicineImage.imageView.image;
     
-   self.previousTimeList = [NSArray arrayWithArray:[_medicine.times allObjects]];
+    NSArray *arrTimeList = [NSArray arrayWithArray:[_medicine.times allObjects]];
+   //self.previousTimeList = [NSArray arrayWithArray:[_medicine.times allObjects]];
+    for(Time *time in arrTimeList) {
+        [self.previousTimeList addObject:time];
+    }
    self.previousDayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
 }
 

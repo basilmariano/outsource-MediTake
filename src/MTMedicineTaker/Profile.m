@@ -16,8 +16,6 @@
 @dynamic profileImagePath;
 @dynamic medicines;
 
-//@synthesize image = _image;
-
 +(NSInteger)profileCount
 {
     NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init]autorelease];
@@ -43,13 +41,5 @@
     NSArray *fetchedObjects = [[[ManageObjectModel objectManager] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     return  fetchedObjects;
 }
-
-/*- (UIImage *)image
-{
-    if (!_image) {
-        _image = [[UIImage imageWithData:self.profileImage] retain];
-    }
-    return _image;
-}*/
 
 @end

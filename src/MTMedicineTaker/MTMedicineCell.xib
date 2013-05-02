@@ -12,6 +12,7 @@
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
+			<string>IBUIImageView</string>
 			<string>IBUILabel</string>
 			<string>IBUITableViewCell</string>
 			<string>IBUIView</string>
@@ -213,7 +214,6 @@
 								<string key="NSFrame">{{84, 66}, {174, 21}}</string>
 								<reference key="NSSuperview" ref="1056348054"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -227,6 +227,16 @@
 								<reference key="IBUIFontDescription" ref="351761513"/>
 								<reference key="IBUIFont" ref="236818463"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+							</object>
+							<object class="IBUIImageView" id="89349946">
+								<reference key="NSNextResponder" ref="1056348054"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{15, 20}, {61, 57}}</string>
+								<reference key="NSSuperview" ref="1056348054"/>
+								<reference key="NSWindow"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
 						<string key="NSFrameSize">{300, 100}</string>
@@ -300,11 +310,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">medicineImage</string>
+						<string key="label">medicineImageView</string>
 						<reference key="source" ref="77489461"/>
-						<reference key="destination" ref="949165043"/>
+						<reference key="destination" ref="89349946"/>
 					</object>
-					<int key="connectionID">22</int>
+					<int key="connectionID">24</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -337,6 +347,7 @@
 							<reference ref="597465950"/>
 							<reference ref="15251132"/>
 							<reference ref="949165043"/>
+							<reference ref="89349946"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -379,7 +390,14 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">21</int>
 						<reference key="object" ref="949165043"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="77489461"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">23</int>
+						<reference key="object" ref="89349946"/>
+						<reference key="parent" ref="77489461"/>
+						<string key="objectName">medicineImageView</string>
 					</object>
 				</array>
 			</object>
@@ -404,6 +422,7 @@
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="21.CustomClassName">PCAsyncImageView</string>
 				<string key="21.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="23.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.CustomClassName">MTMedicineCell</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -417,7 +436,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">22</int>
+			<int key="maxID">24</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -426,7 +445,7 @@
 					<string key="superclassName">UITableViewCell</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="frequency">UILabel</string>
-						<string key="medicineImage">PCAsyncImageView</string>
+						<string key="medicineImageView">UIImageView</string>
 						<string key="medicineName">UILabel</string>
 						<string key="quantity">UILabel</string>
 						<string key="scheduleTime">UILabel</string>
@@ -437,9 +456,9 @@
 							<string key="name">frequency</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="medicineImage">
-							<string key="name">medicineImage</string>
-							<string key="candidateClassName">PCAsyncImageView</string>
+						<object class="IBToOneOutletInfo" key="medicineImageView">
+							<string key="name">medicineImageView</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="medicineName">
 							<string key="name">medicineName</string>

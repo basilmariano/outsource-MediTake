@@ -44,7 +44,6 @@
 		ACB2CEBD171292B000648410 /* MTProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB2CEBB171292B000648410 /* MTProfileViewController.m */; };
 		ACB2CEBE171292B000648410 /* MTProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACB2CEBC171292B000648410 /* MTProfileViewController.xib */; };
 		ACB2CEC417129A9200648410 /* MedsTime_MedPic.png in Resources */ = {isa = PBXBuildFile; fileRef = ACB2CEC017129A9200648410 /* MedsTime_MedPic.png */; };
-		ACB2CEC517129A9200648410 /* MedsTime_MedPic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACB2CEC117129A9200648410 /* MedsTime_MedPic@2x.png */; };
 		ACB2CEC617129A9200648410 /* MedsTime_ProfilePic.png in Resources */ = {isa = PBXBuildFile; fileRef = ACB2CEC217129A9200648410 /* MedsTime_ProfilePic.png */; };
 		ACB2CEC717129A9200648410 /* MedsTime_ProfilePic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACB2CEC317129A9200648410 /* MedsTime_ProfilePic@2x.png */; };
 		ACBBD1A3170D5BD800CBD2C8 /* MTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBBD1A1170D5BD800CBD2C8 /* MTTableViewController.m */; };
@@ -61,6 +60,16 @@
 		ACBD65CA170BC483007EABE6 /* MTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBD65C9170BC483007EABE6 /* MTAppDelegate.m */; };
 		ACBD65EB170BE10B007EABE6 /* MTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBD65EA170BE10B007EABE6 /* MTNavigationViewController.m */; };
 		ACBD65EE170BF688007EABE6 /* MTTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBD65ED170BF688007EABE6 /* MTTabBarItem.m */; };
+		ACCA8B6717320A5600E315B3 /* MTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCA8B6517320A5600E315B3 /* MTWebViewController.m */; };
+		ACCA8B6817320A5600E315B3 /* MTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6617320A5600E315B3 /* MTWebViewController.xib */; };
+		ACCA8B6A1732151E00E315B3 /* MTWebViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B691732151E00E315B3 /* MTWebViewController-h568.xib */; };
+		ACCA8B6C1732677000E315B3 /* MedsTime_MedPic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6B1732677000E315B3 /* MedsTime_MedPic@2x.png */; };
+		ACCA8B6E1732769900E315B3 /* Addbutton-Active.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6D1732769900E315B3 /* Addbutton-Active.png */; };
+		ACCA8B70173276A200E315B3 /* Addbutton-inActive.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6F173276A200E315B3 /* Addbutton-inActive.png */; };
+		ACCA8B7617327DEB00E315B3 /* Profile-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7217327DEA00E315B3 /* Profile-s.png */; };
+		ACCA8B7717327DEB00E315B3 /* Profile-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7317327DEA00E315B3 /* Profile-ss.png */; };
+		ACCA8B7817327DEB00E315B3 /* Reminder-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7417327DEB00E315B3 /* Reminder-s.png */; };
+		ACCA8B7917327DEB00E315B3 /* Reminder-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7517327DEB00E315B3 /* Reminder-ss.png */; };
 		ACD34B9B170DAA2700768F45 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACD34B9A170DAA2700768F45 /* Default@2x.png */; };
 		ACDA30C3171FC892004FDEC6 /* MTProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30C2171FC892004FDEC6 /* MTProfileManager.m */; };
 		ACDA30C5171FEAA9004FDEC6 /* MTTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30C4171FEAA9004FDEC6 /* MTTextFieldCell.xib */; };
@@ -91,13 +100,8 @@
 		ACF2070B170E748B00827BD4 /* SectionBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F5170E748B00827BD4 /* SectionBackground.png */; };
 		ACF2070C170E748B00827BD4 /* TextFiledBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F6170E748B00827BD4 /* TextFiledBG.png */; };
 		ACF2070E170EA5E500827BD4 /* BlueNavigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */; };
-		ACF20712170EB01500827BD4 /* Bread 10.46.46 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF20711170EB01400827BD4 /* Bread 10.46.46 AM.png */; };
 		ACF48CD217290B1400E6ECB4 /* RegisteredNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF48CD117290B1400E6ECB4 /* RegisteredNotification.m */; };
 		ACF48CD41729B9ED00E6ECB4 /* ButtonBack.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD31729B9ED00E6ECB4 /* ButtonBack.png */; };
-		ACF48CD9172A785400E6ECB4 /* Profile-Active.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD5172A785400E6ECB4 /* Profile-Active.png */; };
-		ACF48CDA172A785400E6ECB4 /* Profile-inActive.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD6172A785400E6ECB4 /* Profile-inActive.png */; };
-		ACF48CDB172A785400E6ECB4 /* Reminder-Active.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD7172A785400E6ECB4 /* Reminder-Active.png */; };
-		ACF48CDC172A785400E6ECB4 /* Reminder-inActive.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD8172A785400E6ECB4 /* Reminder-inActive.png */; };
 		ACF48CDE172A791300E6ECB4 /* YellowTab_Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CDD172A791300E6ECB4 /* YellowTab_Plus.png */; };
 /* End PBXBuildFile section */
 
@@ -155,7 +159,6 @@
 		ACB2CEBB171292B000648410 /* MTProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTProfileViewController.m; sourceTree = "<group>"; };
 		ACB2CEBC171292B000648410 /* MTProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTProfileViewController.xib; sourceTree = "<group>"; };
 		ACB2CEC017129A9200648410 /* MedsTime_MedPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MedsTime_MedPic.png; path = Resources/MedsTime_MedPic.png; sourceTree = SOURCE_ROOT; };
-		ACB2CEC117129A9200648410 /* MedsTime_MedPic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MedsTime_MedPic@2x.png"; path = "Resources/MedsTime_MedPic@2x.png"; sourceTree = SOURCE_ROOT; };
 		ACB2CEC217129A9200648410 /* MedsTime_ProfilePic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MedsTime_ProfilePic.png; path = Resources/MedsTime_ProfilePic.png; sourceTree = SOURCE_ROOT; };
 		ACB2CEC317129A9200648410 /* MedsTime_ProfilePic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MedsTime_ProfilePic@2x.png"; path = "Resources/MedsTime_ProfilePic@2x.png"; sourceTree = SOURCE_ROOT; };
 		ACBBD1A0170D5BD800CBD2C8 /* MTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTableViewController.h; sourceTree = "<group>"; };
@@ -181,6 +184,18 @@
 		ACBD65EA170BE10B007EABE6 /* MTNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTNavigationViewController.m; sourceTree = "<group>"; };
 		ACBD65EC170BF688007EABE6 /* MTTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTabBarItem.h; sourceTree = "<group>"; };
 		ACBD65ED170BF688007EABE6 /* MTTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTabBarItem.m; sourceTree = "<group>"; };
+		ACCA8B6417320A5600E315B3 /* MTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTWebViewController.h; sourceTree = "<group>"; };
+		ACCA8B6517320A5600E315B3 /* MTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTWebViewController.m; sourceTree = "<group>"; };
+		ACCA8B6617320A5600E315B3 /* MTWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTWebViewController.xib; sourceTree = "<group>"; };
+		ACCA8B691732151E00E315B3 /* MTWebViewController-h568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "MTWebViewController-h568.xib"; path = "../MTWebViewController-h568.xib"; sourceTree = "<group>"; };
+		ACCA8B6B1732677000E315B3 /* MedsTime_MedPic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MedsTime_MedPic@2x.png"; sourceTree = "<group>"; };
+		ACCA8B6D1732769900E315B3 /* Addbutton-Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Addbutton-Active.png"; sourceTree = "<group>"; };
+		ACCA8B6F173276A200E315B3 /* Addbutton-inActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Addbutton-inActive.png"; sourceTree = "<group>"; };
+		ACCA8B71173277A000E315B3 /* Addbutton-Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Addbutton-Active.png"; sourceTree = "<group>"; };
+		ACCA8B7217327DEA00E315B3 /* Profile-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Profile-s.png"; sourceTree = "<group>"; };
+		ACCA8B7317327DEA00E315B3 /* Profile-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Profile-ss.png"; sourceTree = "<group>"; };
+		ACCA8B7417327DEB00E315B3 /* Reminder-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reminder-s.png"; sourceTree = "<group>"; };
+		ACCA8B7517327DEB00E315B3 /* Reminder-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reminder-ss.png"; sourceTree = "<group>"; };
 		ACD34B9A170DAA2700768F45 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		ACDA30C1171FC892004FDEC6 /* MTProfileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTProfileManager.h; sourceTree = "<group>"; };
 		ACDA30C2171FC892004FDEC6 /* MTProfileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTProfileManager.m; sourceTree = "<group>"; };
@@ -218,14 +233,9 @@
 		ACF206F5170E748B00827BD4 /* SectionBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SectionBackground.png; path = Resources/SectionBackground.png; sourceTree = SOURCE_ROOT; };
 		ACF206F6170E748B00827BD4 /* TextFiledBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TextFiledBG.png; path = Resources/TextFiledBG.png; sourceTree = SOURCE_ROOT; };
 		ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueNavigationBar.png; path = Resources/BlueNavigationBar.png; sourceTree = SOURCE_ROOT; };
-		ACF20711170EB01400827BD4 /* Bread 10.46.46 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Bread 10.46.46 AM.png"; path = "../../../../.Trash/Bread 10.46.46 AM.png"; sourceTree = "<group>"; };
 		ACF48CD017290B1400E6ECB4 /* RegisteredNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredNotification.h; sourceTree = "<group>"; };
 		ACF48CD117290B1400E6ECB4 /* RegisteredNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredNotification.m; sourceTree = "<group>"; };
 		ACF48CD31729B9ED00E6ECB4 /* ButtonBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBack.png; path = Resources/ButtonBack.png; sourceTree = SOURCE_ROOT; };
-		ACF48CD5172A785400E6ECB4 /* Profile-Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Profile-Active.png"; path = "Resources/Profile-Active.png"; sourceTree = SOURCE_ROOT; };
-		ACF48CD6172A785400E6ECB4 /* Profile-inActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Profile-inActive.png"; path = "Resources/Profile-inActive.png"; sourceTree = SOURCE_ROOT; };
-		ACF48CD7172A785400E6ECB4 /* Reminder-Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Reminder-Active.png"; path = "Resources/Reminder-Active.png"; sourceTree = SOURCE_ROOT; };
-		ACF48CD8172A785400E6ECB4 /* Reminder-inActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Reminder-inActive.png"; path = "Resources/Reminder-inActive.png"; sourceTree = SOURCE_ROOT; };
 		ACF48CDD172A791300E6ECB4 /* YellowTab_Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowTab_Plus.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -469,6 +479,7 @@
 		ACBD65BF170BC483007EABE6 /* MTMedicineTaker */ = {
 			isa = PBXGroup;
 			children = (
+				ACCA8B6317320A1300E315B3 /* WebView */,
 				ACDA30C0171FC876004FDEC6 /* ProfileManager */,
 				AC05BFE81727AF1000AA6E7E /* Notification */,
 				AC2CC7591726780200EC1913 /* Table Views */,
@@ -534,24 +545,26 @@
 			children = (
 				AC950B7D171CF6BA00F4F0D1 /* ScheduleCellBG.png */,
 				ACB2CEC017129A9200648410 /* MedsTime_MedPic.png */,
-				ACB2CEC117129A9200648410 /* MedsTime_MedPic@2x.png */,
+				ACCA8B6B1732677000E315B3 /* MedsTime_MedPic@2x.png */,
 				ACB2CEC217129A9200648410 /* MedsTime_ProfilePic.png */,
 				ACB2CEC317129A9200648410 /* MedsTime_ProfilePic@2x.png */,
 				ACF206E1170E748B00827BD4 /* ArrowBlack.png */,
 				ACF206E2170E748B00827BD4 /* BrownCellBG.png */,
 				ACF206E4170E748B00827BD4 /* ButtonCancel.png */,
+				ACCA8B7217327DEA00E315B3 /* Profile-s.png */,
+				ACCA8B7317327DEA00E315B3 /* Profile-ss.png */,
+				ACCA8B7417327DEB00E315B3 /* Reminder-s.png */,
+				ACCA8B7517327DEB00E315B3 /* Reminder-ss.png */,
 				ACF206E5170E748B00827BD4 /* ButtonDisclaimer.png */,
-				ACF48CD5172A785400E6ECB4 /* Profile-Active.png */,
-				ACF48CD6172A785400E6ECB4 /* Profile-inActive.png */,
-				ACF48CD7172A785400E6ECB4 /* Reminder-Active.png */,
-				ACF48CD8172A785400E6ECB4 /* Reminder-inActive.png */,
+				ACCA8B6D1732769900E315B3 /* Addbutton-Active.png */,
 				ACF48CD31729B9ED00E6ECB4 /* ButtonBack.png */,
 				ACF206E6170E748B00827BD4 /* ButtonDone.png */,
+				ACCA8B6F173276A200E315B3 /* Addbutton-inActive.png */,
 				ACF206E7170E748B00827BD4 /* ButtonEdit.png */,
 				ACF206E8170E748B00827BD4 /* ButtonEntries.png */,
+				ACCA8B71173277A000E315B3 /* Addbutton-Active.png */,
 				ACF48CDD172A791300E6ECB4 /* YellowTab_Plus.png */,
 				AC950B63171CE13C00F4F0D1 /* ButtonAllProfile.png */,
-				ACF20711170EB01400827BD4 /* Bread 10.46.46 AM.png */,
 				ACF206EE170E748B00827BD4 /* DummyMed1.png */,
 				ACF206EF170E748B00827BD4 /* DummyMed2.png */,
 				ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */,
@@ -562,6 +575,17 @@
 				ACF206F6170E748B00827BD4 /* TextFiledBG.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		ACCA8B6317320A1300E315B3 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				ACCA8B6417320A5600E315B3 /* MTWebViewController.h */,
+				ACCA8B6517320A5600E315B3 /* MTWebViewController.m */,
+				ACCA8B691732151E00E315B3 /* MTWebViewController-h568.xib */,
+				ACCA8B6617320A5600E315B3 /* MTWebViewController.xib */,
+			);
+			name = WebView;
 			sourceTree = "<group>";
 		};
 		ACDA30BF171FC823004FDEC6 /* XCDeviceManager */ = {
@@ -701,10 +725,8 @@
 				ACF2070B170E748B00827BD4 /* SectionBackground.png in Resources */,
 				ACF2070C170E748B00827BD4 /* TextFiledBG.png in Resources */,
 				ACF2070E170EA5E500827BD4 /* BlueNavigationBar.png in Resources */,
-				ACF20712170EB01500827BD4 /* Bread 10.46.46 AM.png in Resources */,
 				ACB2CEBE171292B000648410 /* MTProfileViewController.xib in Resources */,
 				ACB2CEC417129A9200648410 /* MedsTime_MedPic.png in Resources */,
-				ACB2CEC517129A9200648410 /* MedsTime_MedPic@2x.png in Resources */,
 				ACB2CEC617129A9200648410 /* MedsTime_ProfilePic.png in Resources */,
 				ACB2CEC717129A9200648410 /* MedsTime_ProfilePic@2x.png in Resources */,
 				AC92E7F1171BA8FB00F2BB4A /* MTProfileInfoViewController.xib in Resources */,
@@ -730,11 +752,16 @@
 				AC2CC7601726798500EC1913 /* MTReminderViewController.xib in Resources */,
 				AC2CC762172683A200EC1913 /* MTReminderViewController-h568.xib in Resources */,
 				ACF48CD41729B9ED00E6ECB4 /* ButtonBack.png in Resources */,
-				ACF48CD9172A785400E6ECB4 /* Profile-Active.png in Resources */,
-				ACF48CDA172A785400E6ECB4 /* Profile-inActive.png in Resources */,
-				ACF48CDB172A785400E6ECB4 /* Reminder-Active.png in Resources */,
-				ACF48CDC172A785400E6ECB4 /* Reminder-inActive.png in Resources */,
 				ACF48CDE172A791300E6ECB4 /* YellowTab_Plus.png in Resources */,
+				ACCA8B6817320A5600E315B3 /* MTWebViewController.xib in Resources */,
+				ACCA8B6A1732151E00E315B3 /* MTWebViewController-h568.xib in Resources */,
+				ACCA8B6C1732677000E315B3 /* MedsTime_MedPic@2x.png in Resources */,
+				ACCA8B6E1732769900E315B3 /* Addbutton-Active.png in Resources */,
+				ACCA8B70173276A200E315B3 /* Addbutton-inActive.png in Resources */,
+				ACCA8B7617327DEB00E315B3 /* Profile-s.png in Resources */,
+				ACCA8B7717327DEB00E315B3 /* Profile-ss.png in Resources */,
+				ACCA8B7817327DEB00E315B3 /* Reminder-s.png in Resources */,
+				ACCA8B7917327DEB00E315B3 /* Reminder-ss.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,6 +804,7 @@
 				ACF48CD217290B1400E6ECB4 /* RegisteredNotification.m in Sources */,
 				AC244632172E6A04004E0B3B /* PCAsyncImageView.m in Sources */,
 				AC244639172E7860004E0B3B /* PCImageDirectorySaver.m in Sources */,
+				ACCA8B6717320A5600E315B3 /* MTWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

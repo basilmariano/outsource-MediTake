@@ -22,13 +22,18 @@
 @dynamic status;
 @dynamic unit;
 @dynamic willRemind;
+
 @dynamic medicineTaker;
 @dynamic days;
 @dynamic times;
 @dynamic notifications;
-//@dynamic idKey;
 
 //@synthesize image = _image;
+
+- (void)dealloc
+{
+    [super dealloc];
+}
 
 + (Medicine *)medicine
 {

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MTWebViewController : UIViewController
+@interface MTWebViewController : UIViewController <UIWebViewDelegate>
+
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loadingIndicatior;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
+- (id) initWithSearchString:(NSString *)seachValue;
 
 @end

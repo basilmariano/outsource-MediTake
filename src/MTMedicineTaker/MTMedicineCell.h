@@ -11,11 +11,12 @@
 
 @interface MTMedicineCell : UITableViewCell
 
-@property (nonatomic,retain) IBOutlet PCAsyncImageView *medicineImage;
-@property (nonatomic,retain) IBOutlet UILabel *medicineName;
-@property (nonatomic,retain) IBOutlet UILabel *quantity;
-@property (nonatomic,retain) IBOutlet UILabel *unit;
-@property (nonatomic,retain) IBOutlet UILabel *frequency;
-@property (nonatomic,retain) IBOutlet UILabel *scheduleTime;
+//@property (nonatomic,retain) IBOutlet PCAsyncImageView *medicineImage;
+@property (nonatomic, assign) IBOutlet UILabel *medicineName;
+@property (nonatomic, assign) IBOutlet UILabel *quantity;
+@property (nonatomic, assign) IBOutlet UILabel *unit;
+@property (nonatomic, assign) IBOutlet UILabel *frequency;
+@property (nonatomic, assign) IBOutlet UILabel *scheduleTime;
+@property (nonatomic, assign) IBOutlet UIImageView *medicineImageView;
 
 @end

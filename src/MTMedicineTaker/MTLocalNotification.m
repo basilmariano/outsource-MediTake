@@ -26,120 +26,6 @@ static MTLocalNotification *_instance;
 
 - (void)scheduleNotificationWithFireDate: (NSDate *)fireDate frequencyType:(NSNumber *)frequencyType andMedicine:(Medicine *)medicine {
 	
-   /* NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
-    NSDateComponents *dateComponents = [[[NSDateComponents alloc] init] autorelease];
-    NSDate *now = [NSDate date];
-    NSDateComponents *compsNow = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:now];
-    
-    NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:fireDate];
-    
-    NSDate *current = [calendar dateFromComponents:compsNow];
-    NSDate *fDate = [calendar dateFromComponents:compsFire];
-    
-    NSNumber *fdateInSecs = [NSNumber numberWithDouble:[fDate timeIntervalSince1970]];
-    NSNumber *currentdateInSecs = [NSNumber numberWithDouble:[current timeIntervalSince1970]];
-    NSLog(@"%@ vs %@",currentdateInSecs,fdateInSecs);
-	if(currentdateInSecs > fdateInSecs) {
-        switch ([frequencyType integerValue]) {
-            case 0: {
-            
-                NSDate *now = [NSDate date];
-                NSDateComponents *compsThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit fromDate:now];
-                NSDate *dayOfThisMonth = [calendar dateFromComponents:compsThisMonth];
-                
-                NSDateComponents *compsDayOfThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfThisMonth];
-                
-                if (compsFire.weekday == compsDayOfThisMonth.weekday) {
-                    
-                    dateComponents = compsDayOfThisMonth;
-                    
-                } else if (compsFire.weekday > compsDayOfThisMonth.weekday) {
-                    
-                    NSUInteger daysNeed2Add = compsFire.weekday - compsDayOfThisMonth.weekday;
-                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
-                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
-                    
-                } else { // comps.weekday < compsFirstDayOfThisMonth.weekday
-                    NSUInteger daysNeed2Add = compsFire.weekday + 7 - compsDayOfThisMonth.weekday;
-                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
-                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
-                }
-                NSLog(@"FireDate1 %@",fireDate);
-                fireDate = [calendar dateFromComponents:dateComponents];
-                NSLog(@"Firedate %@",fireDate);
-                break;
-            }
-            case 1:{
-                NSDate *now = [NSDate date];
-                NSDateComponents *compsThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit fromDate:now];
-                NSDate *dayOfThisMonth = [calendar dateFromComponents:compsThisMonth];
-                
-                NSDateComponents *compsDayOfThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfThisMonth];
-                
-                if (compsFire.weekday == compsDayOfThisMonth.weekday) {
-                    
-                    dateComponents = compsDayOfThisMonth;
-                    
-                } else if (compsFire.day > compsDayOfThisMonth.day) {
-                    
-                    NSUInteger daysNeed2Add = compsFire.day - compsDayOfThisMonth.day;
-                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
-                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
-                    
-                } else { // comps.weekday < compsFirstDayOfThisMonth.weekday
-                    int additionalDays = 30;
-                    
-                    if(compsFire.day%2 == 0)
-                        additionalDays = 31;
-                    
-                    NSUInteger daysNeed2Add = compsFire.day + additionalDays - compsDayOfThisMonth.day;
-                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
-                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
-                }
-                NSLog(@"FireDate1 %@",fireDate);
-                fireDate = [calendar dateFromComponents:dateComponents];
-                NSLog(@"Firedate %@",fireDate);
-                break;
-            }
-            case 2:{
-                NSDate *now = [NSDate date];
-                NSDateComponents *compsThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit fromDate:now];
-                NSDate *dayOfThisMonth = [calendar dateFromComponents:compsThisMonth];
-                
-                NSDateComponents *compsDayOfThisMonth = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfThisMonth];
-                
-                if (compsFire.day == compsDayOfThisMonth.day) {
-                    
-                    dateComponents = compsDayOfThisMonth;
-                    
-                } else if (compsFire.day > compsDayOfThisMonth.day) {
-                    int additionalDays = 1;
-                    
-                    if(compsFire.month%2 == 0)
-                        additionalDays = 0;
-                    
-                    NSUInteger daysNeed2Add = compsFire.day + additionalDays - compsDayOfThisMonth.day;
-                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
-                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
-                    
-                } else { // comps.weekday < compsFirstDayOfThisMonth.weekday
-                    int additionalDays = 31;
-                    
-                    if(compsFire.month%2 == 0)
-                        additionalDays = 30;
-                    
-                    NSUInteger daysNeed2Add = compsFire.day + additionalDays - compsDayOfThisMonth.day;
-                    NSDate *dayOfWeek       = [dayOfThisMonth dateByAddingTimeInterval:60.0*60.0*24 * daysNeed2Add];
-                    dateComponents          = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit fromDate:dayOfWeek];
-                }
-                NSLog(@"FireDate1 %@",fireDate);
-                fireDate = [calendar dateFromComponents:dateComponents];
-                NSLog(@"Firedate %@",fireDate);
-                break;
-            }
-        }
-    }
-    */
     Class cls = NSClassFromString(@"UILocalNotification");
 	if (cls != nil) {
         
@@ -270,7 +156,7 @@ static MTLocalNotification *_instance;
                 
                 if(![medicinePK isEqualToString:pk]){
                     [tempPkHolderList addObject:pk];
-                    NSManagedObject *managedObject=[[[ManageObjectModel objectManager] managedObjectContext] objectWithID: [[[ManageObjectModel objectManager] persistentStoreCoordinator] managedObjectIDForURIRepresentation:[NSURL URLWithString:pk]]];
+                    NSManagedObject *managedObject = [[[ManageObjectModel objectManager] managedObjectContext] objectWithID: [[[ManageObjectModel objectManager] persistentStoreCoordinator] managedObjectIDForURIRepresentation:[NSURL URLWithString:pk]]];
                     
                     Medicine *med = (Medicine *) managedObject;
                     alertBody     = [alertBody stringByAppendingFormat:@"Time to take Medicine! %@, ",med.medicineName];//<- update the body
@@ -307,6 +193,35 @@ static MTLocalNotification *_instance;
     } else {
         NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
         for(UILocalNotification *localNotif in notificationList) {
+            NSDictionary *dict      = localNotif.userInfo;
+            NSManagedObject *object = medicine;
+            NSString *medicinePK    = [[[object objectID] URIRepresentation] absoluteString];
+            NSArray *medPKList      = (NSArray *) [dict objectForKey:@"Medicines"];
+            
+            for(NSString *strPK in medPKList) {
+                if([strPK isEqualToString:medicinePK]) {
+                    [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
+                }
+            }
+        }
+    }
+}
+
+- (void)cancelNotificationWithMedicine: (Medicine *)medicine andFireDate:(NSDate *)fireTime
+{
+    NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
+    for(UILocalNotification *localNotif in notificationList) {
+        
+        NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+        [dateFormat setDateFormat:@"hh:mm aa"];
+        NSString *strNotifFTime = [dateFormat stringFromDate:localNotif.fireDate];
+        
+        NSDateFormatter *dateFormat2 = [[[NSDateFormatter alloc] init] autorelease];
+        dateFormat2.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        [dateFormat2 setDateFormat:@"hh:mm aa"];
+        NSString *strFTime = [dateFormat2 stringFromDate:fireTime];
+        
+        if([strFTime isEqualToString:strNotifFTime]) {
             NSDictionary *dict      = localNotif.userInfo;
             NSManagedObject *object = medicine;
             NSString *medicinePK    = [[[object objectID] URIRepresentation] absoluteString];

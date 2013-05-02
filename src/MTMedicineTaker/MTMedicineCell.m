@@ -28,12 +28,13 @@
 
 - (void) dealloc
 {
-    [_medicineImage release];
+    //[_medicineImage release];
+   /* [_medicineImageView release];
     [_medicineName release];
     [_quantity release];
     [_unit release];
     [_frequency release];
-    [_scheduleTime release];
+    [_scheduleTime release];*/
     [super dealloc];
 }
 

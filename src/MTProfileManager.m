@@ -35,9 +35,9 @@ static MTProfileManager *_instance;
 
 -(Profile *)profileWithName:(NSString *)profileName;
 {
-    if(_profile)
+   /* if(_profile)
         if([_profile.name isEqualToString:profileName])
-            return _profile;
+            return _profile;*/
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile" inManagedObjectContext:[[ManageObjectModel objectManager] managedObjectContext]];

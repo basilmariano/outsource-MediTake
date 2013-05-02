@@ -299,10 +299,9 @@
     tbCell.medicineName.text = medicine.medicineName;
     tbCell.quantity.text = [medicine.quantity stringValue];
     tbCell.unit.text = medicine.unit;
-    [tbCell.medicineImage loadImageFromURL:[NSURL URLWithString:medicine.medicineImagePath]];
-    //tbCell.medicineImage.image = [[PCImageDirectorySaver directorySaver]imageFilePath:medicine.medicineImagePath];//medicine.image;
-   
+    tbCell.medicineImageView.image = [[PCImageDirectorySaver directorySaver]imageFilePath:medicine.medicineImagePath];//medicine.image;
     tbCell.frequency.text = medicine.frequency;;
+    //[tbCell.medicineImage loadImageFromURL:[NSURL URLWithString:medicine.medicineImagePath]];
     
     NSArray *timeSet = [medicine.times allObjects];
     if(timeSet.count) {
