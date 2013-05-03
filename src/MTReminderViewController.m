@@ -160,10 +160,10 @@
             break;
         }
     }
-    BOOL disableFirst2Buttons = NO;
+    /*BOOL disableFirst2Buttons = NO;
     if([medicineCurrentStatus isEqualToString:@"Skip"] || [medicineCurrentStatus isEqualToString:@"Taken"]) {
         disableFirst2Buttons = YES;
-    }
+    }*/
     
     UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                               delegate:self
@@ -176,7 +176,7 @@
     [actionSheet addButtonWithTitle:@"View Details"];
     actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
     
-    if(disableFirst2Buttons) {
+    /*if(disableFirst2Buttons) {
         NSUInteger buttonIndex = 0;
     if([[XCDeviceManager manager] deviceType] == iPhone4_Device ) { //IPHONE4
         //<-disable the actionsheet buttons
@@ -204,7 +204,7 @@
         }
     }
         
-    }
+    }*/
     [actionSheet showFromTabBar:self.tabBarController.tabBar];
 }
 
@@ -215,8 +215,21 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
+    NSDictionary *dict = [self.reminderList objectAtIndex:indexPath.row];
+    UILocalNotification *notif = [dict objectForKey:@"notification"];
+        
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSDateComponents *compsNow  = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:now];
+    NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:notif.fireDate];
+        
+    NSInteger currentTimeInSecs = compsNow.hour*3600 + compsNow.minute*60 + compsNow.second;
+    NSInteger fireTimeInSecs    = compsFire.hour*3600 + compsFire.minute*60  + compsFire.second;
+        
+    if(currentTimeInSecs >= fireTimeInSecs) {
+
+        [cell setBackgroundColor: [UIColor colorWithPatternImage:[UIImage imageNamed:@"Grey_bar_640x162.png"]]];
+    }
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -421,7 +434,7 @@
 
 - (void) saveNotifInfoToReminderListWithNotif:(UILocalNotification *)notif
 {
-    NSDate *now = [NSDate date];
+    /*NSDate *now = [NSDate date];
     NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
     NSDateComponents *compsNow  = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:now];
     NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:notif.fireDate];
@@ -429,8 +442,8 @@
     NSInteger currentTimeInSecs = compsNow.hour*3600 + compsNow.minute*60 + compsNow.second;
     NSInteger fireTimeInSecs    = compsFire.hour*3600 + compsFire.minute*60  + compsFire.second;
     
-    if(currentTimeInSecs >= fireTimeInSecs)
-        return;
+   if(currentTimeInSecs >= fireTimeInSecs)
+        return;*/
     
     NSDictionary *dict = notif.userInfo;
     NSArray *medPKList = (NSArray *) [dict objectForKey:@"Medicines"];

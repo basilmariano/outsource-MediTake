@@ -73,6 +73,9 @@
 		ACBE578B173356F6005920B0 /* Done_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5789173356F5005920B0 /* Done_btn-s.png */; };
 		ACBE578C173356F6005920B0 /* Done_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE578A173356F6005920B0 /* Done_btn-ss.png */; };
 		ACBE579217336D93005920B0 /* UIImage+UIImage_fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBE579117336D92005920B0 /* UIImage+UIImage_fixOrientation.m */; };
+		ACBE579617338FB8005920B0 /* pink_bar_640x90.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE579417338FB8005920B0 /* pink_bar_640x90.png */; };
+		ACBE579717338FB8005920B0 /* yellow_bar_640x90.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE579517338FB8005920B0 /* yellow_bar_640x90.png */; };
+		ACBE57991733B964005920B0 /* Grey_bar_640x162.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE57981733B964005920B0 /* Grey_bar_640x162.png */; };
 		ACCA8B6717320A5600E315B3 /* MTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCA8B6517320A5600E315B3 /* MTWebViewController.m */; };
 		ACCA8B6817320A5600E315B3 /* MTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6617320A5600E315B3 /* MTWebViewController.xib */; };
 		ACCA8B6A1732151E00E315B3 /* MTWebViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B691732151E00E315B3 /* MTWebViewController-h568.xib */; };
@@ -203,6 +206,9 @@
 		ACBE578A173356F6005920B0 /* Done_btn-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Done_btn-ss.png"; sourceTree = "<group>"; };
 		ACBE579017336D91005920B0 /* UIImage+UIImage_fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImage_fixOrientation.h"; sourceTree = "<group>"; };
 		ACBE579117336D92005920B0 /* UIImage+UIImage_fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImage_fixOrientation.m"; sourceTree = "<group>"; };
+		ACBE579417338FB8005920B0 /* pink_bar_640x90.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink_bar_640x90.png; sourceTree = "<group>"; };
+		ACBE579517338FB8005920B0 /* yellow_bar_640x90.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_bar_640x90.png; sourceTree = "<group>"; };
+		ACBE57981733B964005920B0 /* Grey_bar_640x162.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grey_bar_640x162.png; sourceTree = "<group>"; };
 		ACCA8B6417320A5600E315B3 /* MTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTWebViewController.h; sourceTree = "<group>"; };
 		ACCA8B6517320A5600E315B3 /* MTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTWebViewController.m; sourceTree = "<group>"; };
 		ACCA8B6617320A5600E315B3 /* MTWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTWebViewController.xib; sourceTree = "<group>"; };
@@ -560,6 +566,9 @@
 				ACCA8B6B1732677000E315B3 /* MedsTime_MedPic@2x.png */,
 				ACB2CEC217129A9200648410 /* MedsTime_ProfilePic.png */,
 				ACB2CEC317129A9200648410 /* MedsTime_ProfilePic@2x.png */,
+				ACBE579417338FB8005920B0 /* pink_bar_640x90.png */,
+				ACBE57981733B964005920B0 /* Grey_bar_640x162.png */,
+				ACBE579517338FB8005920B0 /* yellow_bar_640x90.png */,
 				ACF206E1170E748B00827BD4 /* ArrowBlack.png */,
 				ACF206E2170E748B00827BD4 /* BrownCellBG.png */,
 				ACF206E4170E748B00827BD4 /* ButtonCancel.png */,
@@ -781,6 +790,9 @@
 				ACBE5788173355FA005920B0 /* Cancel_btn-ss.png in Resources */,
 				ACBE578B173356F6005920B0 /* Done_btn-s.png in Resources */,
 				ACBE578C173356F6005920B0 /* Done_btn-ss.png in Resources */,
+				ACBE579617338FB8005920B0 /* pink_bar_640x90.png in Resources */,
+				ACBE579717338FB8005920B0 /* yellow_bar_640x90.png in Resources */,
+				ACBE57991733B964005920B0 /* Grey_bar_640x162.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
