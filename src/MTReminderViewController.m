@@ -178,17 +178,32 @@
     
     if(disableFirst2Buttons) {
         NSUInteger buttonIndex = 0;
-    for (UIView* view in actionSheet.subviews)
-    {
-        if ([view isKindOfClass:[UIButton class]])
-        {
-            if (buttonIndex == 0 || buttonIndex == 1) {
-                UIButton* button = (UIButton*)view;
-                button.enabled = NO;
+    if([[XCDeviceManager manager] deviceType] == iPhone4_Device ) { //IPHONE4
+        //<-disable the actionsheet buttons
+        for (UIView* actionView in actionSheet.subviews){
+            NSLog(@"Class %@",[actionView class]);
+            if([[actionView description] hasPrefix: @"<UIThreePartButton"] )        {
+                if (buttonIndex == 0 || buttonIndex == 1) {
+                    UIButton* button = (UIButton*)actionView;
+                    button.enabled = NO;
+                }
+                buttonIndex++;
             }
-            buttonIndex++;
+        }
+    } else if([[XCDeviceManager manager] deviceType] == iPhone5_Device) {//IPHONE5
+        //<-disable the actionsheet buttons
+        for (UIView* actionView in actionSheet.subviews){
+            NSLog(@"Class %@",[actionView class]);
+            if([actionView isKindOfClass:[UIButton class]])        {
+                if (buttonIndex == 0 || buttonIndex == 1) {
+                    UIButton* button = (UIButton*)actionView;
+                    button.enabled = NO;
+                }
+                buttonIndex++;
+            }
         }
     }
+        
     }
     [actionSheet showFromTabBar:self.tabBarController.tabBar];
 }
@@ -311,7 +326,6 @@
         NSString *strTime = [dateFormat stringFromDate:date];
         
         NSDateFormatter *fireDateFormat = [[[NSDateFormatter alloc] init] autorelease];
-        //fireDateFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
         [fireDateFormat setDateFormat:@"hh:mm aa"];
         NSString *strFireTime = [fireDateFormat stringFromDate:fireDate];
        
@@ -425,6 +439,7 @@
         NSManagedObject *managedObject=[[[ManageObjectModel objectManager] managedObjectContext] objectWithID: [[[ManageObjectModel objectManager] persistentStoreCoordinator] managedObjectIDForURIRepresentation:[NSURL URLWithString:pk]]];
         
         Medicine *medicine = (Medicine *) managedObject;
+        NSLog(@"Med status %@", medicine.status);
         NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:
                                medicine,@"Medicine",
                                notif,@"notification",
@@ -446,43 +461,26 @@
                 newMedicine = remMed;
             }
         }
-       /*
+       
         NSDateFormatter *fireDateFormatter = [[[NSDateFormatter alloc] init] autorelease];
         [fireDateFormatter setDateFormat:@"MM/dd/yy"];
         NSString *strfireDate = [fireDateFormatter stringFromDate:notif.fireDate];
-        NSDate *fireDate = [fireDateFormatter dateFromString:strfireDate];
-        NSNumber *secsInfireDate = [NSNumber numberWithDouble:[fireDate timeIntervalSince1970]];
         
         NSArray *timeList = [medicine.times allObjects];
         for(Time *time in timeList) {
             
-             NSArray *stringFields = [time.status componentsSeparatedByString:@" "];
+            NSArray *stringFields = [time.status componentsSeparatedByString:@" "];
             NSString *currentStatus = (NSString *)[stringFields objectAtIndex:0];
             if([currentStatus isEqualToString:@"Taken"] || [currentStatus isEqualToString:@"Skip"]) {
                 NSString *lastDateStatusUpdated = (NSString *)[stringFields objectAtIndex:2];
-                NSDateFormatter *fireDateFormatter2 = [[[NSDateFormatter alloc] init] autorelease];
-                [fireDateFormatter2 setDateFormat:@"MM/dd/yy"];
-                NSDate *lastDateUpdated = [fireDateFormatter dateFromString:lastDateStatusUpdated];
-                NSNumber *secsInlastDateUpdated = [NSNumber numberWithDouble:[lastDateUpdated timeIntervalSince1970]];
-                NSLog(@"Time.status %@",time.status);
-                if(secsInlastDateUpdated < secsInfireDate) {//<-change the time status
-                    Time *newTime = [Time time];
-                    newMedicine.status = medicine.status;
-                    newTime.time = time.time;
-                    [medicine addTimesObject:newTime];
-                    
-                    NSManagedObject *object = time;
-                    [[ManageObjectModel objectManager] deleteObject:object];
-                    [[ManageObjectModel objectManager] saveContext];
-                    NSLog(@"Medicine.status %@",medicine.status);
-                    NSLog(@"Time.status %@",newTime.status);
+                if(![lastDateStatusUpdated isEqualToString:strfireDate]) {//<-change the time status
+
+                    time.status = medicine.status;
                     break;
                 }
             }
         }
-        
-        // get the date for firedate MM/dd/yy
-        // get idx 2 of time.status MM/dd/yy <- this is lower, change the time.status to med.status*/
+        [[ManageObjectModel objectManager] saveContext];
         if(!newMedicine)
             [self.reminderList addObject:dict2];
     }

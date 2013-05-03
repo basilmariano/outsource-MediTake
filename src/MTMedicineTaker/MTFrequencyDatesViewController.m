@@ -258,15 +258,13 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    [self.selectedFrequencyDay addObjectsFromArray:[_medicine.days allObjects]];
-    [_tableView reloadData];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.switcher.on = NO;
+    
     if([self.frequencyName isEqualToString:@"Weekly"] || [self.frequencyName isEqualToString:@"Daily"]) {
       [self.frequencyWeekView setHidden:NO];
         self.monthIndicator.text = @"Day of the Week";
@@ -276,6 +274,14 @@
         self.monthIndicator.text = @"Day of the Month";
         self.tableView.frame = CGRectMake(0.0, 43.0, 320.0f, 393.0f);
     }
+    
+    [self.selectedFrequencyDay addObjectsFromArray:[_medicine.days allObjects]];
+    if(self.selectedFrequencyDay.count == 7) {
+       self.switcher.on = YES;
+    } else {
+        self.switcher.on = NO;
+    }
+    [_tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning

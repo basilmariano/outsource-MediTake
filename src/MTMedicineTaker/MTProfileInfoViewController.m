@@ -44,18 +44,23 @@
         _originalImage = [[UIImage alloc] init];
         _name = [profileName retain];
         
-        UIImage *allProfileImage = [UIImage imageNamed:@"ButtonBack.png"];
+        UIImage *allProfileImageInactive = [UIImage imageNamed:@"All-Profile_btn-ss.png"];
+        UIImage *allProfileImageActive = [UIImage imageNamed:@"All-Profile_btn-s.png"];
         UIButton *buttonAllProfile = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonAllProfile.frame = CGRectMake(0.0f, 0.0f, 52.0f, 28.0f);
-        [buttonAllProfile setImage:allProfileImage forState:UIControlStateNormal];
+        buttonAllProfile.frame = CGRectMake(0.0f, 0.0f, 83.5f, 33.5f);
+        [buttonAllProfile setImage:allProfileImageInactive forState:UIControlStateNormal];
+        [buttonAllProfile setImage:allProfileImageActive forState:UIControlStateHighlighted];
         [buttonAllProfile addTarget:self action:@selector(onButtonAllProfilelicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonAllprofile = [[[UIBarButtonItem alloc] initWithCustomView:buttonAllProfile]autorelease];
         self.navigationItem.leftBarButtonItem = barButtonAllprofile;
    
-        UIImage *doneImage = [UIImage imageNamed:@"ButtonDone.png"];
+        UIImage *doneImageInActive = [UIImage imageNamed:@"Done_btn-ss.png"];
+        UIImage *doneImageActive = [UIImage imageNamed:@"Done_btn-s.png"];
+        
         UIButton *buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonDone.frame = CGRectMake(0, 0, 50, 26);
-        [buttonDone setImage:doneImage forState:UIControlStateNormal];
+        buttonDone.frame = CGRectMake(0, 0, 62.5, 33.5);
+        [buttonDone setImage:doneImageInActive forState:UIControlStateNormal];
+        [buttonDone setImage:doneImageActive forState:UIControlStateHighlighted];
         [buttonDone addTarget:self action:@selector(onButtonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonDone = [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
         self.navigationItem.rightBarButtonItem = barButtonDone;
@@ -189,7 +194,7 @@
     [picker dismissModalViewControllerAnimated:YES];
     
     UIImage* originalImage = nil;
-    originalImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     if(originalImage==nil)
     {
         originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -199,7 +204,12 @@
         originalImage = [info objectForKey:UIImagePickerControllerCropRect];
     }
     
-    UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:originalImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
+    UIImage *fixedOrientationImage = originalImage;
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        fixedOrientationImage = [originalImage fixOrientation];
+    }
+    
+    UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:fixedOrientationImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
     //At this point you have the selected image in originalImage
     [self.profileImage setImage:finalImage forState:UIControlStateNormal];
     

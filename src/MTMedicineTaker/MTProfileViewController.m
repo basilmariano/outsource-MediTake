@@ -27,19 +27,24 @@
         // Custom initialization
         self.title = @"Profile";
         
-        UIImage *cancelImage = [UIImage imageNamed:@"ButtonCancel.png"];
+        UIImage *cancelImageInactive = [UIImage imageNamed:@"Cancel_btn-ss.png"];
+        UIImage *cancelImageActive = [UIImage imageNamed:@"Cancel_btn-s.png"];
+        
         UIButton *buttonCancel = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonCancel.frame = CGRectMake(0, 0, 50, 26);
-        [buttonCancel setImage:cancelImage forState:UIControlStateNormal];
+        buttonCancel.frame = CGRectMake(0, 0, 65.5, 33.5);
+        [buttonCancel setImage:cancelImageInactive forState:UIControlStateNormal];
+        [buttonCancel setImage:cancelImageActive forState:UIControlStateHighlighted];
         [buttonCancel addTarget:self action:@selector(onButtonCancelClicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonCancel = [[[UIBarButtonItem alloc] initWithCustomView:buttonCancel]autorelease];
         self.navigationItem.leftBarButtonItem = barButtonCancel;
         
-       
-        UIImage *doneImage = [UIImage imageNamed:@"ButtonDone.png"];
+        UIImage *doneImageInActive = [UIImage imageNamed:@"Done_btn-ss.png"];
+        UIImage *doneImageActive = [UIImage imageNamed:@"Done_btn-s.png"];
+        
         UIButton *buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonDone.frame = CGRectMake(0, 0, 50, 26);
-        [buttonDone setImage:doneImage forState:UIControlStateNormal];
+        buttonDone.frame = CGRectMake(0, 0, 62.5, 33.5);
+        [buttonDone setImage:doneImageInActive forState:UIControlStateNormal];
+        [buttonDone setImage:doneImageActive forState:UIControlStateHighlighted];
         [buttonDone addTarget:self action:@selector(onButtonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonDone = [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
         self.navigationItem.rightBarButtonItem = barButtonDone;
@@ -136,7 +141,12 @@
         originalImage = [info objectForKey:UIImagePickerControllerCropRect];
     }
     
-    UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:originalImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
+    UIImage *fixedOrientationImage = originalImage;
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        fixedOrientationImage = [originalImage fixOrientation];
+    }
+    
+    UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:fixedOrientationImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
     //At this point you have the selected image in originalImage
     [self.profileImage setImage:finalImage forState:UIControlStateNormal];
     

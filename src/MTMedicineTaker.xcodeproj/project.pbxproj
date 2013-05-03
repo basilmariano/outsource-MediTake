@@ -60,12 +60,23 @@
 		ACBD65CA170BC483007EABE6 /* MTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBD65C9170BC483007EABE6 /* MTAppDelegate.m */; };
 		ACBD65EB170BE10B007EABE6 /* MTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBD65EA170BE10B007EABE6 /* MTNavigationViewController.m */; };
 		ACBD65EE170BF688007EABE6 /* MTTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBD65ED170BF688007EABE6 /* MTTabBarItem.m */; };
+		ACBE57761733531F005920B0 /* Addbutton-Active.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE57751733531F005920B0 /* Addbutton-Active.png */; };
+		ACBE577817335351005920B0 /* Addbutton-inActive.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE577717335350005920B0 /* Addbutton-inActive.png */; };
+		ACBE577B17335361005920B0 /* All-Profile_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE57791733535F005920B0 /* All-Profile_btn-s.png */; };
+		ACBE577C17335361005920B0 /* All-Profile_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE577A1733535F005920B0 /* All-Profile_btn-ss.png */; };
+		ACBE577F173354C6005920B0 /* Back-blue_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE577D173354C5005920B0 /* Back-blue_btn-s.png */; };
+		ACBE5780173354C6005920B0 /* Back-blue_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE577E173354C5005920B0 /* Back-blue_btn-ss.png */; };
+		ACBE5783173354F4005920B0 /* Back-pink_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5781173354F3005920B0 /* Back-pink_btn-s.png */; };
+		ACBE5784173354F4005920B0 /* Back-pink_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5782173354F3005920B0 /* Back-pink_btn-ss.png */; };
+		ACBE5787173355FA005920B0 /* Cancel_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5785173355F9005920B0 /* Cancel_btn-s.png */; };
+		ACBE5788173355FA005920B0 /* Cancel_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5786173355F9005920B0 /* Cancel_btn-ss.png */; };
+		ACBE578B173356F6005920B0 /* Done_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5789173356F5005920B0 /* Done_btn-s.png */; };
+		ACBE578C173356F6005920B0 /* Done_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE578A173356F6005920B0 /* Done_btn-ss.png */; };
+		ACBE579217336D93005920B0 /* UIImage+UIImage_fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBE579117336D92005920B0 /* UIImage+UIImage_fixOrientation.m */; };
 		ACCA8B6717320A5600E315B3 /* MTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCA8B6517320A5600E315B3 /* MTWebViewController.m */; };
 		ACCA8B6817320A5600E315B3 /* MTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6617320A5600E315B3 /* MTWebViewController.xib */; };
 		ACCA8B6A1732151E00E315B3 /* MTWebViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B691732151E00E315B3 /* MTWebViewController-h568.xib */; };
 		ACCA8B6C1732677000E315B3 /* MedsTime_MedPic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6B1732677000E315B3 /* MedsTime_MedPic@2x.png */; };
-		ACCA8B6E1732769900E315B3 /* Addbutton-Active.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6D1732769900E315B3 /* Addbutton-Active.png */; };
-		ACCA8B70173276A200E315B3 /* Addbutton-inActive.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6F173276A200E315B3 /* Addbutton-inActive.png */; };
 		ACCA8B7617327DEB00E315B3 /* Profile-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7217327DEA00E315B3 /* Profile-s.png */; };
 		ACCA8B7717327DEB00E315B3 /* Profile-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7317327DEA00E315B3 /* Profile-ss.png */; };
 		ACCA8B7817327DEB00E315B3 /* Reminder-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7417327DEB00E315B3 /* Reminder-s.png */; };
@@ -89,19 +100,13 @@
 		ACF206F8170E748B00827BD4 /* BrownCellBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E2170E748B00827BD4 /* BrownCellBG.png */; };
 		ACF206FA170E748B00827BD4 /* ButtonCancel.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E4170E748B00827BD4 /* ButtonCancel.png */; };
 		ACF206FB170E748B00827BD4 /* ButtonDisclaimer.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E5170E748B00827BD4 /* ButtonDisclaimer.png */; };
-		ACF206FC170E748B00827BD4 /* ButtonDone.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E6170E748B00827BD4 /* ButtonDone.png */; };
 		ACF206FD170E748B00827BD4 /* ButtonEdit.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E7170E748B00827BD4 /* ButtonEdit.png */; };
 		ACF206FE170E748B00827BD4 /* ButtonEntries.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E8170E748B00827BD4 /* ButtonEntries.png */; };
-		ACF20704170E748B00827BD4 /* DummyMed1.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206EE170E748B00827BD4 /* DummyMed1.png */; };
-		ACF20705170E748B00827BD4 /* DummyMed2.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206EF170E748B00827BD4 /* DummyMed2.png */; };
-		ACF20706170E748B00827BD4 /* DummyProfilePicBaby.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F0170E748B00827BD4 /* DummyProfilePicBaby.png */; };
-		ACF20707170E748B00827BD4 /* DummyProfilePicFather.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F1170E748B00827BD4 /* DummyProfilePicFather.png */; };
 		ACF20709170E748B00827BD4 /* PinkNavigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F3170E748B00827BD4 /* PinkNavigationBar.png */; };
 		ACF2070B170E748B00827BD4 /* SectionBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F5170E748B00827BD4 /* SectionBackground.png */; };
 		ACF2070C170E748B00827BD4 /* TextFiledBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F6170E748B00827BD4 /* TextFiledBG.png */; };
 		ACF2070E170EA5E500827BD4 /* BlueNavigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */; };
 		ACF48CD217290B1400E6ECB4 /* RegisteredNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF48CD117290B1400E6ECB4 /* RegisteredNotification.m */; };
-		ACF48CD41729B9ED00E6ECB4 /* ButtonBack.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CD31729B9ED00E6ECB4 /* ButtonBack.png */; };
 		ACF48CDE172A791300E6ECB4 /* YellowTab_Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CDD172A791300E6ECB4 /* YellowTab_Plus.png */; };
 /* End PBXBuildFile section */
 
@@ -184,14 +189,25 @@
 		ACBD65EA170BE10B007EABE6 /* MTNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTNavigationViewController.m; sourceTree = "<group>"; };
 		ACBD65EC170BF688007EABE6 /* MTTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTabBarItem.h; sourceTree = "<group>"; };
 		ACBD65ED170BF688007EABE6 /* MTTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTabBarItem.m; sourceTree = "<group>"; };
+		ACBE57751733531F005920B0 /* Addbutton-Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Addbutton-Active.png"; sourceTree = "<group>"; };
+		ACBE577717335350005920B0 /* Addbutton-inActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Addbutton-inActive.png"; sourceTree = "<group>"; };
+		ACBE57791733535F005920B0 /* All-Profile_btn-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "All-Profile_btn-s.png"; sourceTree = "<group>"; };
+		ACBE577A1733535F005920B0 /* All-Profile_btn-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "All-Profile_btn-ss.png"; sourceTree = "<group>"; };
+		ACBE577D173354C5005920B0 /* Back-blue_btn-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back-blue_btn-s.png"; sourceTree = "<group>"; };
+		ACBE577E173354C5005920B0 /* Back-blue_btn-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back-blue_btn-ss.png"; sourceTree = "<group>"; };
+		ACBE5781173354F3005920B0 /* Back-pink_btn-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back-pink_btn-s.png"; sourceTree = "<group>"; };
+		ACBE5782173354F3005920B0 /* Back-pink_btn-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back-pink_btn-ss.png"; sourceTree = "<group>"; };
+		ACBE5785173355F9005920B0 /* Cancel_btn-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cancel_btn-s.png"; sourceTree = "<group>"; };
+		ACBE5786173355F9005920B0 /* Cancel_btn-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cancel_btn-ss.png"; sourceTree = "<group>"; };
+		ACBE5789173356F5005920B0 /* Done_btn-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Done_btn-s.png"; sourceTree = "<group>"; };
+		ACBE578A173356F6005920B0 /* Done_btn-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Done_btn-ss.png"; sourceTree = "<group>"; };
+		ACBE579017336D91005920B0 /* UIImage+UIImage_fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImage_fixOrientation.h"; sourceTree = "<group>"; };
+		ACBE579117336D92005920B0 /* UIImage+UIImage_fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImage_fixOrientation.m"; sourceTree = "<group>"; };
 		ACCA8B6417320A5600E315B3 /* MTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTWebViewController.h; sourceTree = "<group>"; };
 		ACCA8B6517320A5600E315B3 /* MTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTWebViewController.m; sourceTree = "<group>"; };
 		ACCA8B6617320A5600E315B3 /* MTWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTWebViewController.xib; sourceTree = "<group>"; };
 		ACCA8B691732151E00E315B3 /* MTWebViewController-h568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "MTWebViewController-h568.xib"; path = "../MTWebViewController-h568.xib"; sourceTree = "<group>"; };
 		ACCA8B6B1732677000E315B3 /* MedsTime_MedPic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MedsTime_MedPic@2x.png"; sourceTree = "<group>"; };
-		ACCA8B6D1732769900E315B3 /* Addbutton-Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Addbutton-Active.png"; sourceTree = "<group>"; };
-		ACCA8B6F173276A200E315B3 /* Addbutton-inActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Addbutton-inActive.png"; sourceTree = "<group>"; };
-		ACCA8B71173277A000E315B3 /* Addbutton-Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Addbutton-Active.png"; sourceTree = "<group>"; };
 		ACCA8B7217327DEA00E315B3 /* Profile-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Profile-s.png"; sourceTree = "<group>"; };
 		ACCA8B7317327DEA00E315B3 /* Profile-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Profile-ss.png"; sourceTree = "<group>"; };
 		ACCA8B7417327DEB00E315B3 /* Reminder-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reminder-s.png"; sourceTree = "<group>"; };
@@ -222,20 +238,14 @@
 		ACF206E2170E748B00827BD4 /* BrownCellBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BrownCellBG.png; path = Resources/BrownCellBG.png; sourceTree = SOURCE_ROOT; };
 		ACF206E4170E748B00827BD4 /* ButtonCancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCancel.png; path = Resources/ButtonCancel.png; sourceTree = SOURCE_ROOT; };
 		ACF206E5170E748B00827BD4 /* ButtonDisclaimer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonDisclaimer.png; path = Resources/ButtonDisclaimer.png; sourceTree = SOURCE_ROOT; };
-		ACF206E6170E748B00827BD4 /* ButtonDone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonDone.png; path = Resources/ButtonDone.png; sourceTree = SOURCE_ROOT; };
 		ACF206E7170E748B00827BD4 /* ButtonEdit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonEdit.png; path = Resources/ButtonEdit.png; sourceTree = SOURCE_ROOT; };
 		ACF206E8170E748B00827BD4 /* ButtonEntries.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonEntries.png; path = Resources/ButtonEntries.png; sourceTree = SOURCE_ROOT; };
-		ACF206EE170E748B00827BD4 /* DummyMed1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DummyMed1.png; path = Resources/DummyMed1.png; sourceTree = SOURCE_ROOT; };
-		ACF206EF170E748B00827BD4 /* DummyMed2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DummyMed2.png; path = Resources/DummyMed2.png; sourceTree = SOURCE_ROOT; };
-		ACF206F0170E748B00827BD4 /* DummyProfilePicBaby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DummyProfilePicBaby.png; path = Resources/DummyProfilePicBaby.png; sourceTree = SOURCE_ROOT; };
-		ACF206F1170E748B00827BD4 /* DummyProfilePicFather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DummyProfilePicFather.png; path = Resources/DummyProfilePicFather.png; sourceTree = SOURCE_ROOT; };
 		ACF206F3170E748B00827BD4 /* PinkNavigationBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PinkNavigationBar.png; path = Resources/PinkNavigationBar.png; sourceTree = SOURCE_ROOT; };
 		ACF206F5170E748B00827BD4 /* SectionBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SectionBackground.png; path = Resources/SectionBackground.png; sourceTree = SOURCE_ROOT; };
 		ACF206F6170E748B00827BD4 /* TextFiledBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TextFiledBG.png; path = Resources/TextFiledBG.png; sourceTree = SOURCE_ROOT; };
 		ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueNavigationBar.png; path = Resources/BlueNavigationBar.png; sourceTree = SOURCE_ROOT; };
 		ACF48CD017290B1400E6ECB4 /* RegisteredNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredNotification.h; sourceTree = "<group>"; };
 		ACF48CD117290B1400E6ECB4 /* RegisteredNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredNotification.m; sourceTree = "<group>"; };
-		ACF48CD31729B9ED00E6ECB4 /* ButtonBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBack.png; path = Resources/ButtonBack.png; sourceTree = SOURCE_ROOT; };
 		ACF48CDD172A791300E6ECB4 /* YellowTab_Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowTab_Plus.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -490,6 +500,8 @@
 				ACBD65C8170BC483007EABE6 /* MTAppDelegate.h */,
 				ACBD65C9170BC483007EABE6 /* MTAppDelegate.m */,
 				ACBD65C0170BC483007EABE6 /* Supporting Files */,
+				ACBE579017336D91005920B0 /* UIImage+UIImage_fixOrientation.h */,
+				ACBE579117336D92005920B0 /* UIImage+UIImage_fixOrientation.m */,
 			);
 			path = MTMedicineTaker;
 			sourceTree = "<group>";
@@ -554,22 +566,25 @@
 				ACCA8B7217327DEA00E315B3 /* Profile-s.png */,
 				ACCA8B7317327DEA00E315B3 /* Profile-ss.png */,
 				ACCA8B7417327DEB00E315B3 /* Reminder-s.png */,
+				ACBE57791733535F005920B0 /* All-Profile_btn-s.png */,
+				ACBE577A1733535F005920B0 /* All-Profile_btn-ss.png */,
 				ACCA8B7517327DEB00E315B3 /* Reminder-ss.png */,
+				ACBE577717335350005920B0 /* Addbutton-inActive.png */,
+				ACBE5785173355F9005920B0 /* Cancel_btn-s.png */,
+				ACBE5789173356F5005920B0 /* Done_btn-s.png */,
+				ACBE578A173356F6005920B0 /* Done_btn-ss.png */,
+				ACBE5786173355F9005920B0 /* Cancel_btn-ss.png */,
+				ACBE577D173354C5005920B0 /* Back-blue_btn-s.png */,
+				ACBE5781173354F3005920B0 /* Back-pink_btn-s.png */,
+				ACBE5782173354F3005920B0 /* Back-pink_btn-ss.png */,
+				ACBE577E173354C5005920B0 /* Back-blue_btn-ss.png */,
 				ACF206E5170E748B00827BD4 /* ButtonDisclaimer.png */,
-				ACCA8B6D1732769900E315B3 /* Addbutton-Active.png */,
-				ACF48CD31729B9ED00E6ECB4 /* ButtonBack.png */,
-				ACF206E6170E748B00827BD4 /* ButtonDone.png */,
-				ACCA8B6F173276A200E315B3 /* Addbutton-inActive.png */,
 				ACF206E7170E748B00827BD4 /* ButtonEdit.png */,
+				ACBE57751733531F005920B0 /* Addbutton-Active.png */,
 				ACF206E8170E748B00827BD4 /* ButtonEntries.png */,
-				ACCA8B71173277A000E315B3 /* Addbutton-Active.png */,
 				ACF48CDD172A791300E6ECB4 /* YellowTab_Plus.png */,
 				AC950B63171CE13C00F4F0D1 /* ButtonAllProfile.png */,
-				ACF206EE170E748B00827BD4 /* DummyMed1.png */,
-				ACF206EF170E748B00827BD4 /* DummyMed2.png */,
 				ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */,
-				ACF206F0170E748B00827BD4 /* DummyProfilePicBaby.png */,
-				ACF206F1170E748B00827BD4 /* DummyProfilePicFather.png */,
 				ACF206F3170E748B00827BD4 /* PinkNavigationBar.png */,
 				ACF206F5170E748B00827BD4 /* SectionBackground.png */,
 				ACF206F6170E748B00827BD4 /* TextFiledBG.png */,
@@ -714,13 +729,8 @@
 				ACF206F8170E748B00827BD4 /* BrownCellBG.png in Resources */,
 				ACF206FA170E748B00827BD4 /* ButtonCancel.png in Resources */,
 				ACF206FB170E748B00827BD4 /* ButtonDisclaimer.png in Resources */,
-				ACF206FC170E748B00827BD4 /* ButtonDone.png in Resources */,
 				ACF206FD170E748B00827BD4 /* ButtonEdit.png in Resources */,
 				ACF206FE170E748B00827BD4 /* ButtonEntries.png in Resources */,
-				ACF20704170E748B00827BD4 /* DummyMed1.png in Resources */,
-				ACF20705170E748B00827BD4 /* DummyMed2.png in Resources */,
-				ACF20706170E748B00827BD4 /* DummyProfilePicBaby.png in Resources */,
-				ACF20707170E748B00827BD4 /* DummyProfilePicFather.png in Resources */,
 				ACF20709170E748B00827BD4 /* PinkNavigationBar.png in Resources */,
 				ACF2070B170E748B00827BD4 /* SectionBackground.png in Resources */,
 				ACF2070C170E748B00827BD4 /* TextFiledBG.png in Resources */,
@@ -751,17 +761,26 @@
 				AC2CC755172635EE00EC1913 /* Icon@2x.png in Resources */,
 				AC2CC7601726798500EC1913 /* MTReminderViewController.xib in Resources */,
 				AC2CC762172683A200EC1913 /* MTReminderViewController-h568.xib in Resources */,
-				ACF48CD41729B9ED00E6ECB4 /* ButtonBack.png in Resources */,
 				ACF48CDE172A791300E6ECB4 /* YellowTab_Plus.png in Resources */,
 				ACCA8B6817320A5600E315B3 /* MTWebViewController.xib in Resources */,
 				ACCA8B6A1732151E00E315B3 /* MTWebViewController-h568.xib in Resources */,
 				ACCA8B6C1732677000E315B3 /* MedsTime_MedPic@2x.png in Resources */,
-				ACCA8B6E1732769900E315B3 /* Addbutton-Active.png in Resources */,
-				ACCA8B70173276A200E315B3 /* Addbutton-inActive.png in Resources */,
 				ACCA8B7617327DEB00E315B3 /* Profile-s.png in Resources */,
 				ACCA8B7717327DEB00E315B3 /* Profile-ss.png in Resources */,
 				ACCA8B7817327DEB00E315B3 /* Reminder-s.png in Resources */,
 				ACCA8B7917327DEB00E315B3 /* Reminder-ss.png in Resources */,
+				ACBE57761733531F005920B0 /* Addbutton-Active.png in Resources */,
+				ACBE577817335351005920B0 /* Addbutton-inActive.png in Resources */,
+				ACBE577B17335361005920B0 /* All-Profile_btn-s.png in Resources */,
+				ACBE577C17335361005920B0 /* All-Profile_btn-ss.png in Resources */,
+				ACBE577F173354C6005920B0 /* Back-blue_btn-s.png in Resources */,
+				ACBE5780173354C6005920B0 /* Back-blue_btn-ss.png in Resources */,
+				ACBE5783173354F4005920B0 /* Back-pink_btn-s.png in Resources */,
+				ACBE5784173354F4005920B0 /* Back-pink_btn-ss.png in Resources */,
+				ACBE5787173355FA005920B0 /* Cancel_btn-s.png in Resources */,
+				ACBE5788173355FA005920B0 /* Cancel_btn-ss.png in Resources */,
+				ACBE578B173356F6005920B0 /* Done_btn-s.png in Resources */,
+				ACBE578C173356F6005920B0 /* Done_btn-ss.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,6 +824,7 @@
 				AC244632172E6A04004E0B3B /* PCAsyncImageView.m in Sources */,
 				AC244639172E7860004E0B3B /* PCImageDirectorySaver.m in Sources */,
 				ACCA8B6717320A5600E315B3 /* MTWebViewController.m in Sources */,
+				ACBE579217336D93005920B0 /* UIImage+UIImage_fixOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

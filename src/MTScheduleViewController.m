@@ -61,22 +61,27 @@ static MTScheduleViewController *_instance;
         _timeList = [[NSMutableArray alloc] init];
         _dayList = [[NSMutableArray alloc] init];
         
-        UIImage *backImage = [UIImage imageNamed:@"ButtonBack.png"];
+        UIImage *backImageInActive = [UIImage imageNamed:@"Back-blue_btn-ss.png"];
+        UIImage *backImageActive = [UIImage imageNamed:@"Back-blue_btn-s.png"];
         
         UIButton *buttonBack = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonBack.frame = CGRectMake(0.0f, 0.0f, 52.0f, 28.0f);
-        [buttonBack setImage:backImage forState:UIControlStateNormal];
-        [buttonBack addTarget:self action:@selector(onButtonCancelClicked) forControlEvents:UIControlEventTouchUpInside];
+        buttonBack.frame = CGRectMake(0.0f, 0.0f, 61.0f, 33.5f);
+        [buttonBack setImage:backImageInActive forState:UIControlStateNormal];
+        [buttonBack setImage:backImageActive forState:UIControlStateHighlighted];
+        [buttonBack addTarget:self action:@selector(onButtonBackClicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonBack = [[[UIBarButtonItem alloc] initWithCustomView:buttonBack]autorelease];
         self.navigationItem.leftBarButtonItem = barButtonBack;
         
-        UIImage *doneImage = [UIImage imageNamed:@"ButtonDone.png"];
+        UIImage *doneImageInActive = [UIImage imageNamed:@"Done_btn-ss.png"];
+        UIImage *doneImageActive = [UIImage imageNamed:@"Done_btn-s.png"];
+        
         UIButton *buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonDone.frame = CGRectMake(0, 0, 50, 26);
-        [buttonDone setImage:doneImage forState:UIControlStateNormal];
+        buttonDone.frame = CGRectMake(0, 0, 62.5, 33.5);
+        [buttonDone setImage:doneImageInActive forState:UIControlStateNormal];
+        [buttonDone setImage:doneImageActive forState:UIControlStateHighlighted];
         [buttonDone addTarget:self action:@selector(onButtonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *barButtonCancel = [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
-        self.navigationItem.rightBarButtonItem = barButtonCancel;
+        UIBarButtonItem *barButtonDone= [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
+        self.navigationItem.rightBarButtonItem = barButtonDone;
         
         _times = [[NSMutableArray alloc] init];
         _specificDays = [[NSMutableArray alloc] init];
@@ -480,7 +485,7 @@ static MTScheduleViewController *_instance;
     return [pickerView autorelease];
 }
     
-- (void)onButtonCancelClicked
+- (void)onButtonBackClicked
 {
     [self.navigationController popViewControllerAnimated:YES];
 }

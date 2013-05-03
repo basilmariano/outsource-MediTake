@@ -25,12 +25,14 @@
         self.navigationItem.title = seachValue;
         self.searchValue = seachValue;
         
-        UIImage *backImage = [UIImage imageNamed:@"ButtonBack.png"];
+        UIImage *backImageInActive = [UIImage imageNamed:@"Back-pink_btn-ss.png"];
+        UIImage *backImageActive = [UIImage imageNamed:@"Back-pink_btn-s.png"];
         
         self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.backButton.frame = CGRectMake(0.0f, 0.0f, 52.0f, 28.0f);
-        [_backButton setImage:backImage forState:UIControlStateNormal];
-        [_backButton addTarget:self action:@selector(onButtonCancelClicked) forControlEvents:UIControlEventTouchUpInside];
+        self.backButton.frame = CGRectMake(0.0f, 0.0f, 61.0f, 33.5f);
+        [_backButton setImage:backImageInActive forState:UIControlStateNormal];
+        [_backButton setImage:backImageActive forState:UIControlStateHighlighted];
+        [_backButton addTarget:self action:@selector(onButtonBackClicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonBack = [[[UIBarButtonItem alloc] initWithCustomView:_backButton]autorelease];
         self.navigationItem.leftBarButtonItem = barButtonBack;
     }
@@ -77,7 +79,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
-- (void) onButtonCancelClicked
+- (void) onButtonBackClicked
 {
     if ([_webView canGoBack]) {
         [_webView goBack];

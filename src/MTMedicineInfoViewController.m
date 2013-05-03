@@ -57,19 +57,24 @@ static MTMedicineInfoViewController *_instance;
         self.quantityList = [[[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil] autorelease];
         self.mealList = [[[NSArray alloc] initWithObjects:@"Before Meal",@"After Meal",@"None", nil] autorelease];
         
-        UIImage *cancelImage = [UIImage imageNamed:@"ButtonCancel.png"];
+        UIImage *cancelImageInactive = [UIImage imageNamed:@"Cancel_btn-ss.png"];
+        UIImage *cancelImageActive = [UIImage imageNamed:@"Cancel_btn-s.png"];
     
         UIButton *buttonCancel = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonCancel.frame = CGRectMake(0.0f, 0.0f, 50.0f, 27.0f);
-        [buttonCancel setImage:cancelImage forState:UIControlStateNormal];
+        buttonCancel.frame = CGRectMake(0.0f, 0.0f, 65.5f, 33.5f);
+        [buttonCancel setImage:cancelImageInactive forState:UIControlStateNormal];
+        [buttonCancel setImage:cancelImageActive forState:UIControlStateHighlighted];
         [buttonCancel addTarget:self action:@selector(onButtonCancelClicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonAllprofile = [[[UIBarButtonItem alloc] initWithCustomView:buttonCancel]autorelease];
         self.navigationItem.leftBarButtonItem = barButtonAllprofile;
         
-        UIImage *doneImage = [UIImage imageNamed:@"ButtonDone.png"];
+        UIImage *doneImageInActive = [UIImage imageNamed:@"Done_btn-ss.png"];
+        UIImage *doneImageActive = [UIImage imageNamed:@"Done_btn-s.png"];
+        
         UIButton *buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonDone.frame = CGRectMake(0, 0, 50, 26);
-        [buttonDone setImage:doneImage forState:UIControlStateNormal];
+        buttonDone.frame = CGRectMake(0, 0, 62.5, 33.5);
+        [buttonDone setImage:doneImageInActive forState:UIControlStateNormal];
+        [buttonDone setImage:doneImageActive forState:UIControlStateHighlighted];
         [buttonDone addTarget:self action:@selector(onButtonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
         
         UIBarButtonItem *barButtonDone = [[[UIBarButtonItem alloc] initWithCustomView:buttonDone]autorelease];
@@ -199,9 +204,9 @@ static MTMedicineInfoViewController *_instance;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 0)
-        return @"Dosage";
+        return @"  Dosage";
     else if (section == 1)
-        return @"Schedule";
+        return @"  Schedule";
     return @"Unknown";
 }
 
@@ -297,10 +302,14 @@ static MTMedicineInfoViewController *_instance;
         originalImage = [info objectForKey:UIImagePickerControllerCropRect];
     }
     
-    UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:originalImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
+    UIImage *fixedOrientationImage = originalImage;
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        fixedOrientationImage = [originalImage fixOrientation];
+    }
+    
+    UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:fixedOrientationImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
     //At this point you have the selected image in originalImage
     [self.medicineImage setImage:finalImage forState:UIControlStateNormal];
-    
 }
 
 #pragma mark - UIPickerViewDataSource and UIPickerViewDelegate

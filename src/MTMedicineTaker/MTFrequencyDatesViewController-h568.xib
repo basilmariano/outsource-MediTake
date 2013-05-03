@@ -57,7 +57,7 @@
 					<object class="IBUITableView" id="898868512">
 						<reference key="NSNextResponder" ref="800667153"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 94}, {320, 342}}</string>
+						<string key="NSFrame">{{0, 89}, {320, 347}}</string>
 						<reference key="NSSuperview" ref="800667153"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -154,7 +154,7 @@
 								<bool key="IBUIOn">YES</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 44}, {320, 51}}</string>
+						<string key="NSFrame">{{0, 44}, {320, 45}}</string>
 						<reference key="NSSuperview" ref="800667153"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="327120748"/>
@@ -168,7 +168,7 @@
 					<object class="IBUIButton" id="754506534">
 						<reference key="NSNextResponder" ref="800667153"/>
 						<int key="NSvFlags">289</int>
-						<string key="NSFrame">{{260, 9}, {50, 26}}</string>
+						<string key="NSFrame">{{254, 5}, {62, 34}}</string>
 						<reference key="NSSuperview" ref="800667153"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="115950517"/>
@@ -177,7 +177,6 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">Done</string>
 						<reference key="IBUIHighlightedTitleColor" ref="101087901"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
@@ -190,7 +189,7 @@
 						</object>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">ButtonDone.png</string>
+							<string key="NSResourceName">Done_btn-ss.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
@@ -458,7 +457,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="BlueNavigationBar.png">{640, 80}</string>
-			<string key="ButtonDone.png">{103, 52}</string>
+			<string key="Done_btn-ss.png">{125, 67}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
