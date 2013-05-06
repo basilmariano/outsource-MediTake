@@ -402,13 +402,17 @@ static MTMedicineInfoViewController *_instance;
     NSNumber *type = nil;
     
     NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
-    
+   
     for(Time *t in timeList) {
         Time *t1 = nil;
         for(Time *t3 in self.previousTimeList) {
-            NSLog(@"%@",t3);
+         
             if(t3.time == t.time) {
+                NSDate *time = [NSDate dateWithTimeIntervalSince1970:[t3.time doubleValue]];
+                BOOL isNotificationExist = [[MTLocalNotification sharedInstance] isNotificationExistWithMedicine:self.medicine andFireTime:time];
+                if(isNotificationExist) {
                     t1 = t3;
+                }
             }
             
         }
@@ -420,7 +424,7 @@ static MTMedicineInfoViewController *_instance;
                 case 0: {
                     
                     NSString *dateStr = d.date;
-                    NSLog(@"%@",dateStr);
+                
                     NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];// <- Convert string to date object
                     [dateFormat setDateFormat:@"EEEE"];
                     
@@ -565,7 +569,7 @@ static MTMedicineInfoViewController *_instance;
             if(self.switcher.on) {
                 [self setFireDate];
             } else {
-                NSLog(@"Reminder is not On!");
+                [[MTLocalNotification sharedInstance] deleteNotificationWithMedicine:self.medicine fromNotification:nil];
             }
             
             [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
@@ -688,12 +692,21 @@ static MTMedicineInfoViewController *_instance;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if(_medicine.medicineImagePath)
+    
+    if(_medicine.medicineImagePath) {
         [self.medicineImage setImage:[[PCImageDirectorySaver directorySaver]imageFilePath:_medicine.medicineImagePath] forState:UIControlStateNormal];
+    }
+    
     if(_medicine.medicineName) {
         self.medicineName.text = _medicine.medicineName;
         self.navigationItem.title = _medicine.medicineName;
         self.proviousMedicineName = _medicine.medicineName;
+    }
+    
+    if([_medicine.willRemind integerValue] == 1) {
+        self.switcher.on = YES;
+    } else {
+         self.switcher.on = NO;
     }
     self.originalImage = self.medicineImage.imageView.image;
     

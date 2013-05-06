@@ -236,6 +236,38 @@ static MTLocalNotification *_instance;
     }
 }
 
+- (BOOL)isNotificationExistWithMedicine: (Medicine *)medicine andFireTime:(NSDate *)fireTime
+{
+    BOOL exist = NO;
+    NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
+    for(UILocalNotification *localNotif in notificationList) {
+        
+        NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+        [dateFormat setDateFormat:@"hh:mm aa"];
+        NSString *strNotifFTime = [dateFormat stringFromDate:localNotif.fireDate];
+        
+        NSDateFormatter *dateFormat2 = [[[NSDateFormatter alloc] init] autorelease];
+        dateFormat2.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        [dateFormat2 setDateFormat:@"hh:mm aa"];
+        NSString *strFTime = [dateFormat2 stringFromDate:fireTime];
+        
+        if([strFTime isEqualToString:strNotifFTime]) {
+            NSDictionary *dict      = localNotif.userInfo;
+            NSManagedObject *object = medicine;
+            NSString *medicinePK    = [[[object objectID] URIRepresentation] absoluteString];
+            NSArray *medPKList      = (NSArray *) [dict objectForKey:@"Medicines"];
+            
+            for(NSString *strPK in medPKList) {
+                if([strPK isEqualToString:medicinePK]) {
+                    exist = YES;
+                }
+            }
+        }
+    }
+    NSLog(@"Exits %d",exist);
+    return  exist;
+}
+
 - (void)clearNotification {
 	
 	[[UIApplication sharedApplication] cancelAllLocalNotifications];

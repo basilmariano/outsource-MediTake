@@ -17,5 +17,6 @@
 - (void)cancelNotificationWithMedicine: (Medicine *)medicine andFireDate:(NSDate *)fireTime;
 - (void)showReminder:(NSString *)reminder;
 - (void)clearNotification;
+- (BOOL)isNotificationExistWithMedicine: (Medicine *)medicine andFireTime:(NSDate *)fireTime;
 
 @end
