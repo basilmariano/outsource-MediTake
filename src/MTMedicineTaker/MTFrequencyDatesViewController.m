@@ -252,7 +252,6 @@
             _medicine.frequency = @"Daily";
         }
     }
-    
     [self dismissModalViewControllerAnimated:YES];
 }
 

@@ -98,6 +98,13 @@
 		ACDA30EA172063B2004FDEC6 /* MTFrequencyDatesViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30E9172063B2004FDEC6 /* MTFrequencyDatesViewController-h568.xib */; };
 		ACDA30F017206BAD004FDEC6 /* MTFrequencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30EF17206BAD004FDEC6 /* MTFrequencyCell.m */; };
 		ACDA30F217206BBA004FDEC6 /* MTFrequencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30F117206BBA004FDEC6 /* MTFrequencyCell.xib */; };
+		ACEF7D1E17375C960035773D /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D1C17375C950035773D /* libGoogleAdMobAds.a */; };
+		ACEF7D1F17375C960035773D /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = ACEF7D1D17375C950035773D /* README.txt */; };
+		ACEF7D2117375D3A0035773D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D2017375D3A0035773D /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		ACEF7D231737688D0035773D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D221737688D0035773D /* AudioToolbox.framework */; };
+		ACEF7D25173768970035773D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D24173768970035773D /* MessageUI.framework */; };
+		ACEF7D271737689F0035773D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D261737689F0035773D /* SystemConfiguration.framework */; };
+		ACEF7D2917377DE20035773D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D2817377DE20035773D /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		ACF206DE170E73EA00827BD4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206DD170E73EA00827BD4 /* Default.png */; };
 		ACF206F7170E748B00827BD4 /* ArrowBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E1170E748B00827BD4 /* ArrowBlack.png */; };
 		ACF206F8170E748B00827BD4 /* BrownCellBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E2170E748B00827BD4 /* BrownCellBG.png */; };
@@ -239,6 +246,22 @@
 		ACDA30EE17206BAD004FDEC6 /* MTFrequencyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTFrequencyCell.h; sourceTree = "<group>"; };
 		ACDA30EF17206BAD004FDEC6 /* MTFrequencyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTFrequencyCell.m; sourceTree = "<group>"; };
 		ACDA30F117206BBA004FDEC6 /* MTFrequencyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTFrequencyCell.xib; sourceTree = "<group>"; };
+		ACEF7D1317375C950035773D /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		ACEF7D1417375C950035773D /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		ACEF7D1517375C950035773D /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		ACEF7D1617375C950035773D /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		ACEF7D1717375C950035773D /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		ACEF7D1817375C950035773D /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		ACEF7D1917375C950035773D /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		ACEF7D1A17375C950035773D /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		ACEF7D1B17375C950035773D /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		ACEF7D1C17375C950035773D /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		ACEF7D1D17375C950035773D /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		ACEF7D2017375D3A0035773D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		ACEF7D221737688D0035773D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		ACEF7D24173768970035773D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		ACEF7D261737689F0035773D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		ACEF7D2817377DE20035773D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		ACF206DD170E73EA00827BD4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		ACF206E1170E748B00827BD4 /* ArrowBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ArrowBlack.png; path = Resources/ArrowBlack.png; sourceTree = SOURCE_ROOT; };
 		ACF206E2170E748B00827BD4 /* BrownCellBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BrownCellBG.png; path = Resources/BrownCellBG.png; sourceTree = SOURCE_ROOT; };
@@ -260,11 +283,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACEF7D2917377DE20035773D /* StoreKit.framework in Frameworks */,
+				ACBD65BE170BC483007EABE6 /* CoreGraphics.framework in Frameworks */,
+				ACEF7D271737689F0035773D /* SystemConfiguration.framework in Frameworks */,
+				ACEF7D25173768970035773D /* MessageUI.framework in Frameworks */,
+				ACEF7D231737688D0035773D /* AudioToolbox.framework in Frameworks */,
+				ACEF7D2117375D3A0035773D /* AdSupport.framework in Frameworks */,
 				AC959CE31712EAEB0006D685 /* CoreData.framework in Frameworks */,
 				AC959CE11712E46D0006D685 /* AssetsLibrary.framework in Frameworks */,
 				ACBD65BA170BC483007EABE6 /* UIKit.framework in Frameworks */,
 				ACBD65BC170BC483007EABE6 /* Foundation.framework in Frameworks */,
-				ACBD65BE170BC483007EABE6 /* CoreGraphics.framework in Frameworks */,
+				ACEF7D1E17375C960035773D /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +485,21 @@
 		ACBD65AD170BC483007EABE6 = {
 			isa = PBXGroup;
 			children = (
+				ACEF7D2817377DE20035773D /* StoreKit.framework */,
+				ACEF7D261737689F0035773D /* SystemConfiguration.framework */,
+				ACEF7D24173768970035773D /* MessageUI.framework */,
+				ACEF7D221737688D0035773D /* AudioToolbox.framework */,
+				ACEF7D1317375C950035773D /* GADAdMobExtras.h */,
+				ACEF7D1417375C950035773D /* GADAdNetworkExtras.h */,
+				ACEF7D1517375C950035773D /* GADAdSize.h */,
+				ACEF7D1617375C950035773D /* GADBannerView.h */,
+				ACEF7D1717375C950035773D /* GADBannerViewDelegate.h */,
+				ACEF7D1817375C950035773D /* GADInterstitial.h */,
+				ACEF7D1917375C950035773D /* GADInterstitialDelegate.h */,
+				ACEF7D1A17375C950035773D /* GADRequest.h */,
+				ACEF7D1B17375C950035773D /* GADRequestError.h */,
+				ACEF7D1C17375C950035773D /* libGoogleAdMobAds.a */,
+				ACEF7D1D17375C950035773D /* README.txt */,
 				AC244636172E7702004E0B3B /* ImageDirectorySaver */,
 				AC24462F172E69E5004E0B3B /* PCAsyncImageView */,
 				AC2CC754172635EE00EC1913 /* Icon@2x.png */,
@@ -483,6 +527,7 @@
 		ACBD65B8170BC483007EABE6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACEF7D2017375D3A0035773D /* AdSupport.framework */,
 				AC959CE21712EAEB0006D685 /* CoreData.framework */,
 				AC959CE01712E46D0006D685 /* AssetsLibrary.framework */,
 				ACBD65B9170BC483007EABE6 /* UIKit.framework */,
@@ -793,6 +838,7 @@
 				ACBE579617338FB8005920B0 /* pink_bar_640x90.png in Resources */,
 				ACBE579717338FB8005920B0 /* yellow_bar_640x90.png in Resources */,
 				ACBE57991733B964005920B0 /* Grey_bar_640x162.png in Resources */,
+				ACEF7D1F17375C960035773D /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,6 +926,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -903,6 +950,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -915,6 +963,12 @@
 				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
 				INFOPLIST_FILE = "MTMedicineTaker/MTMedicineTaker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MTMedicineTaker\"",
+					"\"$(SRCROOT)\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -927,10 +981,112 @@
 				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
 				INFOPLIST_FILE = "MTMedicineTaker/MTMedicineTaker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MTMedicineTaker\"",
+					"\"$(SRCROOT)\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
+		};
+		ACEF7D02173759B40035773D /* Free Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DFREE";
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+			};
+			name = "Free Debug";
+		};
+		ACEF7D03173759B40035773D /* Free Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
+				INFOPLIST_FILE = "MTMedicineTaker/MTMedicineTaker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MTMedicineTaker\"",
+					"\"$(SRCROOT)\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Free Debug";
+		};
+		ACEF7D04173759C00035773D /* Free Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"-DFREE",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Free Release";
+		};
+		ACEF7D05173759C00035773D /* Free Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
+				INFOPLIST_FILE = "MTMedicineTaker/MTMedicineTaker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MTMedicineTaker\"",
+					"\"$(SRCROOT)\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Free Release";
 		};
 /* End XCBuildConfiguration section */
 
@@ -939,7 +1095,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ACBD65D7170BC483007EABE6 /* Debug */,
+				ACEF7D02173759B40035773D /* Free Debug */,
 				ACBD65D8170BC483007EABE6 /* Release */,
+				ACEF7D04173759C00035773D /* Free Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -948,7 +1106,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ACBD65DA170BC483007EABE6 /* Debug */,
+				ACEF7D03173759B40035773D /* Free Debug */,
 				ACBD65DB170BC483007EABE6 /* Release */,
+				ACEF7D05173759C00035773D /* Free Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -15,12 +15,15 @@
 #import "PCImageDirectorySaver.h"
 #import "Time.h"
 #import "MTWebViewController.h"
+#import "GADBannerView.h"
 
 @interface MTReminderViewController () <UIActionSheetDelegate>
 {
     int selectedIndexPathRow;
+    GADBannerView *_gadBannerView;
 }
 @property (nonatomic, retain) NSMutableArray *reminderList;
+
 @end
 
 @implementation MTReminderViewController
@@ -40,6 +43,7 @@
 
 - (void) dealloc
 {
+    [_gadBannerView release];
     [_tableView release];
     [_fetchedResultsController release];
     [super dealloc];
@@ -371,6 +375,41 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
+#ifdef FREE
+    
+    CGRect bannerFrameRect = CGRectMake(0.0,
+                                        367.0 - GAD_SIZE_320x50.height,
+                                        GAD_SIZE_320x50.width,
+                                        GAD_SIZE_320x50.height);
+    
+    self.tableView.frame = CGRectMake(0.0, 0.0, 320, 316.5);
+    
+    if([[XCDeviceManager manager] deviceType] == iPhone5_Device) {//IPHONE5
+        bannerFrameRect =  CGRectMake(0.0,
+                                      454 - GAD_SIZE_320x50.height,
+                                      GAD_SIZE_320x50.width,
+                                      GAD_SIZE_320x50.height);
+        
+        self.tableView.frame = CGRectMake(0.0, 0.0, 320, 424);
+        
+    }
+    // Create a view of the standard size at the top of the screen.
+    // Available AdSize constants are explained in GADAdSize.h.
+    _gadBannerView = [[GADBannerView alloc] initWithFrame:bannerFrameRect];
+    // Specify the ad's "unit identifier". This is your AdMob Publisher ID.
+    _gadBannerView.adUnitID =  @"a15187234656c91";
+    
+    // Let the runtime know which UIViewController to restore after taking
+    // the user wherever the ad goes and add it to the view hierarchy.
+    _gadBannerView.rootViewController = self;
+    [self.view addSubview:_gadBannerView];
+    
+    // Initiate a generic request to load it with an ad.
+    [_gadBannerView loadRequest:[GADRequest request]];
+     
+#endif
+    
     [self retrieveNotificationList];
 }
 
