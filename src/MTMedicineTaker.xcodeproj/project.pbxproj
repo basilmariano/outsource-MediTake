@@ -105,6 +105,117 @@
 		ACEF7D25173768970035773D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D24173768970035773D /* MessageUI.framework */; };
 		ACEF7D271737689F0035773D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D261737689F0035773D /* SystemConfiguration.framework */; };
 		ACEF7D2917377DE20035773D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D2817377DE20035773D /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		ACEF7D2C1737948D0035773D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBD65C5170BC483007EABE6 /* main.m */; };
+		ACEF7D2D1737948D0035773D /* MTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBD65C9170BC483007EABE6 /* MTAppDelegate.m */; };
+		ACEF7D2E1737948D0035773D /* MTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBD65EA170BE10B007EABE6 /* MTNavigationViewController.m */; };
+		ACEF7D2F1737948D0035773D /* MTTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBD65ED170BF688007EABE6 /* MTTabBarItem.m */; };
+		ACEF7D301737948D0035773D /* MTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8B58DE170D2CE00036D854 /* MTTabBarController.m */; };
+		ACEF7D311737948D0035773D /* MTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBBD1A1170D5BD800CBD2C8 /* MTTableViewController.m */; };
+		ACEF7D321737948D0035773D /* MTProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBBD1AD170D676F00CBD2C8 /* MTProfileCell.m */; };
+		ACEF7D331737948D0035773D /* MTReminderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBBD1B0170D676F00CBD2C8 /* MTReminderCell.m */; };
+		ACEF7D341737948D0035773D /* MTProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB2CEBB171292B000648410 /* MTProfileViewController.m */; };
+		ACEF7D351737948D0035773D /* MedicineTakerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC959CE41712EB1A0006D685 /* MedicineTakerModel.xcdatamodeld */; };
+		ACEF7D361737948D0035773D /* ManageObjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9230241714FBC5002FEFF4 /* ManageObjectModel.m */; };
+		ACEF7D371737948D0035773D /* UIImage+NSData.m in Sources */ = {isa = PBXBuildFile; fileRef = AC92302717151490002FEFF4 /* UIImage+NSData.m */; };
+		ACEF7D381737948D0035773D /* MTProfileInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC92E7EE171BA8FB00F2BB4A /* MTProfileInfoViewController.m */; };
+		ACEF7D391737948D0035773D /* Medicine.m in Sources */ = {isa = PBXBuildFile; fileRef = AC950B72171CF1A300F4F0D1 /* Medicine.m */; };
+		ACEF7D3A1737948D0035773D /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = AC950B75171CF23100F4F0D1 /* Profile.m */; };
+		ACEF7D3B1737948D0035773D /* MTMedicineInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC950B79171CF43200F4F0D1 /* MTMedicineInfoViewController.m */; };
+		ACEF7D3C1737948D0035773D /* MTMedicineInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC950B83171CFB9300F4F0D1 /* MTMedicineInfoCell.m */; };
+		ACEF7D3D1737948D0035773D /* XCDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC95CFE8171F938E0019211E /* XCDeviceManager.m */; };
+		ACEF7D3E1737948D0035773D /* MTProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30C2171FC892004FDEC6 /* MTProfileManager.m */; };
+		ACEF7D3F1737948D0035773D /* MTTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30C8171FEB16004FDEC6 /* MTTextFieldCell.m */; };
+		ACEF7D401737948D0035773D /* Date.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30CB17203144004FDEC6 /* Date.m */; };
+		ACEF7D411737948D0035773D /* Time.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30CE17203144004FDEC6 /* Time.m */; };
+		ACEF7D421737948D0035773D /* MTScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30D917203674004FDEC6 /* MTScheduleViewController.m */; };
+		ACEF7D431737948D0035773D /* MTFrequencyDatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30E5172060C2004FDEC6 /* MTFrequencyDatesViewController.m */; };
+		ACEF7D441737948D0035773D /* MTFrequencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDA30EF17206BAD004FDEC6 /* MTFrequencyCell.m */; };
+		ACEF7D451737948D0035773D /* MTMedicineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC78BBF01720D56A00DF0C76 /* MTMedicineCell.m */; };
+		ACEF7D461737948D0035773D /* MTTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC78BBF41721357B00DF0C76 /* MTTimeCell.m */; };
+		ACEF7D471737948D0035773D /* MTReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2CC75D1726798500EC1913 /* MTReminderViewController.m */; };
+		ACEF7D481737948D0035773D /* MTLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = AC05BFEA1727AF4100AA6E7E /* MTLocalNotification.m */; };
+		ACEF7D491737948D0035773D /* RegisteredNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF48CD117290B1400E6ECB4 /* RegisteredNotification.m */; };
+		ACEF7D4A1737948D0035773D /* PCAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC244631172E6A04004E0B3B /* PCAsyncImageView.m */; };
+		ACEF7D4B1737948D0035773D /* PCImageDirectorySaver.m in Sources */ = {isa = PBXBuildFile; fileRef = AC244638172E7860004E0B3B /* PCImageDirectorySaver.m */; };
+		ACEF7D4C1737948D0035773D /* MTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCA8B6517320A5600E315B3 /* MTWebViewController.m */; };
+		ACEF7D4D1737948D0035773D /* UIImage+UIImage_fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBE579117336D92005920B0 /* UIImage+UIImage_fixOrientation.m */; };
+		ACEF7D4F1737948D0035773D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D2817377DE20035773D /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		ACEF7D501737948D0035773D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBD65BD170BC483007EABE6 /* CoreGraphics.framework */; };
+		ACEF7D511737948D0035773D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D261737689F0035773D /* SystemConfiguration.framework */; };
+		ACEF7D521737948D0035773D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D24173768970035773D /* MessageUI.framework */; };
+		ACEF7D531737948D0035773D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D221737688D0035773D /* AudioToolbox.framework */; };
+		ACEF7D541737948D0035773D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D2017375D3A0035773D /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		ACEF7D551737948D0035773D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC959CE21712EAEB0006D685 /* CoreData.framework */; };
+		ACEF7D561737948D0035773D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC959CE01712E46D0006D685 /* AssetsLibrary.framework */; };
+		ACEF7D571737948D0035773D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBD65B9170BC483007EABE6 /* UIKit.framework */; };
+		ACEF7D581737948D0035773D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBD65BB170BC483007EABE6 /* Foundation.framework */; };
+		ACEF7D591737948D0035773D /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEF7D1C17375C950035773D /* libGoogleAdMobAds.a */; };
+		ACEF7D5B1737948D0035773D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACBD65C2170BC483007EABE6 /* InfoPlist.strings */; };
+		ACEF7D5C1737948D0035773D /* MTTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACBBD1A2170D5BD800CBD2C8 /* MTTableViewController.xib */; };
+		ACEF7D5D1737948D0035773D /* MTProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACBBD1AE170D676F00CBD2C8 /* MTProfileCell.xib */; };
+		ACEF7D5E1737948D0035773D /* MTReminderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACBBD1B1170D676F00CBD2C8 /* MTReminderCell.xib */; };
+		ACEF7D5F1737948D0035773D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACD34B9A170DAA2700768F45 /* Default@2x.png */; };
+		ACEF7D601737948D0035773D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206DD170E73EA00827BD4 /* Default.png */; };
+		ACEF7D611737948D0035773D /* ArrowBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E1170E748B00827BD4 /* ArrowBlack.png */; };
+		ACEF7D621737948D0035773D /* BrownCellBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E2170E748B00827BD4 /* BrownCellBG.png */; };
+		ACEF7D631737948D0035773D /* ButtonCancel.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E4170E748B00827BD4 /* ButtonCancel.png */; };
+		ACEF7D641737948D0035773D /* ButtonDisclaimer.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E5170E748B00827BD4 /* ButtonDisclaimer.png */; };
+		ACEF7D651737948D0035773D /* ButtonEdit.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E7170E748B00827BD4 /* ButtonEdit.png */; };
+		ACEF7D661737948D0035773D /* ButtonEntries.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E8170E748B00827BD4 /* ButtonEntries.png */; };
+		ACEF7D671737948D0035773D /* PinkNavigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F3170E748B00827BD4 /* PinkNavigationBar.png */; };
+		ACEF7D681737948D0035773D /* SectionBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F5170E748B00827BD4 /* SectionBackground.png */; };
+		ACEF7D691737948D0035773D /* TextFiledBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206F6170E748B00827BD4 /* TextFiledBG.png */; };
+		ACEF7D6A1737948D0035773D /* BlueNavigationBar.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF2070D170EA5E500827BD4 /* BlueNavigationBar.png */; };
+		ACEF7D6B1737948D0035773D /* MTProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACB2CEBC171292B000648410 /* MTProfileViewController.xib */; };
+		ACEF7D6C1737948D0035773D /* MedsTime_MedPic.png in Resources */ = {isa = PBXBuildFile; fileRef = ACB2CEC017129A9200648410 /* MedsTime_MedPic.png */; };
+		ACEF7D6D1737948D0035773D /* MedsTime_ProfilePic.png in Resources */ = {isa = PBXBuildFile; fileRef = ACB2CEC217129A9200648410 /* MedsTime_ProfilePic.png */; };
+		ACEF7D6E1737948D0035773D /* MedsTime_ProfilePic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACB2CEC317129A9200648410 /* MedsTime_ProfilePic@2x.png */; };
+		ACEF7D6F1737948D0035773D /* MTProfileInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC92E7EF171BA8FB00F2BB4A /* MTProfileInfoViewController.xib */; };
+		ACEF7D701737948D0035773D /* ButtonAllProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = AC950B63171CE13C00F4F0D1 /* ButtonAllProfile.png */; };
+		ACEF7D711737948D0035773D /* MTMedicineInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC950B7A171CF43200F4F0D1 /* MTMedicineInfoViewController.xib */; };
+		ACEF7D721737948D0035773D /* ScheduleCellBG.png in Resources */ = {isa = PBXBuildFile; fileRef = AC950B7D171CF6BA00F4F0D1 /* ScheduleCellBG.png */; };
+		ACEF7D731737948D0035773D /* MTMedicineInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC950B80171CFA7A00F4F0D1 /* MTMedicineInfoCell.xib */; };
+		ACEF7D741737948D0035773D /* MTTableViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC95CFD9171F81E40019211E /* MTTableViewController-h568.xib */; };
+		ACEF7D751737948D0035773D /* MTProfileViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC95CFDB171F86810019211E /* MTProfileViewController-h568.xib */; };
+		ACEF7D761737948D0035773D /* MTProfileInfoViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC95CFDD171F8A000019211E /* MTProfileInfoViewController-h568.xib */; };
+		ACEF7D771737948D0035773D /* MTMedicineInfoViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC95CFE1171F8BB90019211E /* MTMedicineInfoViewController-h568.xib */; };
+		ACEF7D781737948D0035773D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC95CFEA171FA5900019211E /* Default-568h@2x.png */; };
+		ACEF7D791737948D0035773D /* MTTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30C4171FEAA9004FDEC6 /* MTTextFieldCell.xib */; };
+		ACEF7D7A1737948D0035773D /* MTScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30DA17203674004FDEC6 /* MTScheduleViewController.xib */; };
+		ACEF7D7B1737948D0035773D /* MTScheduleViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30DF17203B97004FDEC6 /* MTScheduleViewController-h568.xib */; };
+		ACEF7D7C1737948D0035773D /* MTFrequencyDatesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30E6172060C2004FDEC6 /* MTFrequencyDatesViewController.xib */; };
+		ACEF7D7D1737948D0035773D /* MTFrequencyDatesViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30E9172063B2004FDEC6 /* MTFrequencyDatesViewController-h568.xib */; };
+		ACEF7D7E1737948D0035773D /* MTFrequencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACDA30F117206BBA004FDEC6 /* MTFrequencyCell.xib */; };
+		ACEF7D7F1737948D0035773D /* MTMedicineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC78BBED1720D55000DF0C76 /* MTMedicineCell.xib */; };
+		ACEF7D801737948D0035773D /* MTTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC78BBF61721358B00DF0C76 /* MTTimeCell.xib */; };
+		ACEF7D811737948D0035773D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC752172635E700EC1913 /* Icon.png */; };
+		ACEF7D821737948D0035773D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC754172635EE00EC1913 /* Icon@2x.png */; };
+		ACEF7D831737948D0035773D /* MTReminderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC75E1726798500EC1913 /* MTReminderViewController.xib */; };
+		ACEF7D841737948D0035773D /* MTReminderViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC2CC761172683A200EC1913 /* MTReminderViewController-h568.xib */; };
+		ACEF7D851737948D0035773D /* YellowTab_Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF48CDD172A791300E6ECB4 /* YellowTab_Plus.png */; };
+		ACEF7D861737948D0035773D /* MTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6617320A5600E315B3 /* MTWebViewController.xib */; };
+		ACEF7D871737948D0035773D /* MTWebViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B691732151E00E315B3 /* MTWebViewController-h568.xib */; };
+		ACEF7D881737948D0035773D /* MedsTime_MedPic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B6B1732677000E315B3 /* MedsTime_MedPic@2x.png */; };
+		ACEF7D891737948D0035773D /* Profile-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7217327DEA00E315B3 /* Profile-s.png */; };
+		ACEF7D8A1737948D0035773D /* Profile-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7317327DEA00E315B3 /* Profile-ss.png */; };
+		ACEF7D8B1737948D0035773D /* Reminder-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7417327DEB00E315B3 /* Reminder-s.png */; };
+		ACEF7D8C1737948D0035773D /* Reminder-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCA8B7517327DEB00E315B3 /* Reminder-ss.png */; };
+		ACEF7D8D1737948D0035773D /* Addbutton-Active.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE57751733531F005920B0 /* Addbutton-Active.png */; };
+		ACEF7D8E1737948D0035773D /* Addbutton-inActive.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE577717335350005920B0 /* Addbutton-inActive.png */; };
+		ACEF7D8F1737948D0035773D /* All-Profile_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE57791733535F005920B0 /* All-Profile_btn-s.png */; };
+		ACEF7D901737948D0035773D /* All-Profile_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE577A1733535F005920B0 /* All-Profile_btn-ss.png */; };
+		ACEF7D911737948D0035773D /* Back-blue_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE577D173354C5005920B0 /* Back-blue_btn-s.png */; };
+		ACEF7D921737948D0035773D /* Back-blue_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE577E173354C5005920B0 /* Back-blue_btn-ss.png */; };
+		ACEF7D931737948D0035773D /* Back-pink_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5781173354F3005920B0 /* Back-pink_btn-s.png */; };
+		ACEF7D941737948D0035773D /* Back-pink_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5782173354F3005920B0 /* Back-pink_btn-ss.png */; };
+		ACEF7D951737948D0035773D /* Cancel_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5785173355F9005920B0 /* Cancel_btn-s.png */; };
+		ACEF7D961737948D0035773D /* Cancel_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5786173355F9005920B0 /* Cancel_btn-ss.png */; };
+		ACEF7D971737948D0035773D /* Done_btn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE5789173356F5005920B0 /* Done_btn-s.png */; };
+		ACEF7D981737948D0035773D /* Done_btn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE578A173356F6005920B0 /* Done_btn-ss.png */; };
+		ACEF7D991737948D0035773D /* pink_bar_640x90.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE579417338FB8005920B0 /* pink_bar_640x90.png */; };
+		ACEF7D9A1737948D0035773D /* yellow_bar_640x90.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE579517338FB8005920B0 /* yellow_bar_640x90.png */; };
+		ACEF7D9B1737948D0035773D /* Grey_bar_640x162.png in Resources */ = {isa = PBXBuildFile; fileRef = ACBE57981733B964005920B0 /* Grey_bar_640x162.png */; };
+		ACEF7D9C1737948D0035773D /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = ACEF7D1D17375C950035773D /* README.txt */; };
 		ACF206DE170E73EA00827BD4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206DD170E73EA00827BD4 /* Default.png */; };
 		ACF206F7170E748B00827BD4 /* ArrowBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E1170E748B00827BD4 /* ArrowBlack.png */; };
 		ACF206F8170E748B00827BD4 /* BrownCellBG.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF206E2170E748B00827BD4 /* BrownCellBG.png */; };
@@ -262,6 +373,8 @@
 		ACEF7D24173768970035773D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		ACEF7D261737689F0035773D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ACEF7D2817377DE20035773D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		ACEF7DA21737948D0035773D /* MTMedicineTakerFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTMedicineTakerFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACEF7DA31737948D0035773D /* MTMedicineTakerFree-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MTMedicineTakerFree-Info.plist"; path = "/Users/panfilo/Documents/MTMedicineTaker/src/MTMedicineTakerFree-Info.plist"; sourceTree = "<absolute>"; };
 		ACF206DD170E73EA00827BD4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		ACF206E1170E748B00827BD4 /* ArrowBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ArrowBlack.png; path = Resources/ArrowBlack.png; sourceTree = SOURCE_ROOT; };
 		ACF206E2170E748B00827BD4 /* BrownCellBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BrownCellBG.png; path = Resources/BrownCellBG.png; sourceTree = SOURCE_ROOT; };
@@ -294,6 +407,24 @@
 				ACBD65BA170BC483007EABE6 /* UIKit.framework in Frameworks */,
 				ACBD65BC170BC483007EABE6 /* Foundation.framework in Frameworks */,
 				ACEF7D1E17375C960035773D /* libGoogleAdMobAds.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACEF7D4E1737948D0035773D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACEF7D4F1737948D0035773D /* StoreKit.framework in Frameworks */,
+				ACEF7D501737948D0035773D /* CoreGraphics.framework in Frameworks */,
+				ACEF7D511737948D0035773D /* SystemConfiguration.framework in Frameworks */,
+				ACEF7D521737948D0035773D /* MessageUI.framework in Frameworks */,
+				ACEF7D531737948D0035773D /* AudioToolbox.framework in Frameworks */,
+				ACEF7D541737948D0035773D /* AdSupport.framework in Frameworks */,
+				ACEF7D551737948D0035773D /* CoreData.framework in Frameworks */,
+				ACEF7D561737948D0035773D /* AssetsLibrary.framework in Frameworks */,
+				ACEF7D571737948D0035773D /* UIKit.framework in Frameworks */,
+				ACEF7D581737948D0035773D /* Foundation.framework in Frameworks */,
+				ACEF7D591737948D0035773D /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +651,7 @@
 			isa = PBXGroup;
 			children = (
 				ACBD65B6170BC483007EABE6 /* MTMedicineTaker.app */,
+				ACEF7DA21737948D0035773D /* MTMedicineTakerFree.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -560,6 +692,7 @@
 		ACBD65C0170BC483007EABE6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ACEF7DA31737948D0035773D /* MTMedicineTakerFree-Info.plist */,
 				ACBD65C1170BC483007EABE6 /* MTMedicineTaker-Info.plist */,
 				ACBD65C2170BC483007EABE6 /* InfoPlist.strings */,
 				ACBD65C5170BC483007EABE6 /* main.m */,
@@ -741,6 +874,23 @@
 			productReference = ACBD65B6170BC483007EABE6 /* MTMedicineTaker.app */;
 			productType = "com.apple.product-type.application";
 		};
+		ACEF7D2A1737948D0035773D /* MTMedicineTakerFree */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACEF7D9D1737948D0035773D /* Build configuration list for PBXNativeTarget "MTMedicineTakerFree" */;
+			buildPhases = (
+				ACEF7D2B1737948D0035773D /* Sources */,
+				ACEF7D4E1737948D0035773D /* Frameworks */,
+				ACEF7D5A1737948D0035773D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MTMedicineTakerFree;
+			productName = MTMedicineTaker;
+			productReference = ACEF7DA21737948D0035773D /* MTMedicineTakerFree.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -764,6 +914,7 @@
 			projectRoot = "";
 			targets = (
 				ACBD65B5170BC483007EABE6 /* MTMedicineTaker */,
+				ACEF7D2A1737948D0035773D /* MTMedicineTakerFree */,
 			);
 		};
 /* End PBXProject section */
@@ -842,6 +993,79 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ACEF7D5A1737948D0035773D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACEF7D5B1737948D0035773D /* InfoPlist.strings in Resources */,
+				ACEF7D5C1737948D0035773D /* MTTableViewController.xib in Resources */,
+				ACEF7D5D1737948D0035773D /* MTProfileCell.xib in Resources */,
+				ACEF7D5E1737948D0035773D /* MTReminderCell.xib in Resources */,
+				ACEF7D5F1737948D0035773D /* Default@2x.png in Resources */,
+				ACEF7D601737948D0035773D /* Default.png in Resources */,
+				ACEF7D611737948D0035773D /* ArrowBlack.png in Resources */,
+				ACEF7D621737948D0035773D /* BrownCellBG.png in Resources */,
+				ACEF7D631737948D0035773D /* ButtonCancel.png in Resources */,
+				ACEF7D641737948D0035773D /* ButtonDisclaimer.png in Resources */,
+				ACEF7D651737948D0035773D /* ButtonEdit.png in Resources */,
+				ACEF7D661737948D0035773D /* ButtonEntries.png in Resources */,
+				ACEF7D671737948D0035773D /* PinkNavigationBar.png in Resources */,
+				ACEF7D681737948D0035773D /* SectionBackground.png in Resources */,
+				ACEF7D691737948D0035773D /* TextFiledBG.png in Resources */,
+				ACEF7D6A1737948D0035773D /* BlueNavigationBar.png in Resources */,
+				ACEF7D6B1737948D0035773D /* MTProfileViewController.xib in Resources */,
+				ACEF7D6C1737948D0035773D /* MedsTime_MedPic.png in Resources */,
+				ACEF7D6D1737948D0035773D /* MedsTime_ProfilePic.png in Resources */,
+				ACEF7D6E1737948D0035773D /* MedsTime_ProfilePic@2x.png in Resources */,
+				ACEF7D6F1737948D0035773D /* MTProfileInfoViewController.xib in Resources */,
+				ACEF7D701737948D0035773D /* ButtonAllProfile.png in Resources */,
+				ACEF7D711737948D0035773D /* MTMedicineInfoViewController.xib in Resources */,
+				ACEF7D721737948D0035773D /* ScheduleCellBG.png in Resources */,
+				ACEF7D731737948D0035773D /* MTMedicineInfoCell.xib in Resources */,
+				ACEF7D741737948D0035773D /* MTTableViewController-h568.xib in Resources */,
+				ACEF7D751737948D0035773D /* MTProfileViewController-h568.xib in Resources */,
+				ACEF7D761737948D0035773D /* MTProfileInfoViewController-h568.xib in Resources */,
+				ACEF7D771737948D0035773D /* MTMedicineInfoViewController-h568.xib in Resources */,
+				ACEF7D781737948D0035773D /* Default-568h@2x.png in Resources */,
+				ACEF7D791737948D0035773D /* MTTextFieldCell.xib in Resources */,
+				ACEF7D7A1737948D0035773D /* MTScheduleViewController.xib in Resources */,
+				ACEF7D7B1737948D0035773D /* MTScheduleViewController-h568.xib in Resources */,
+				ACEF7D7C1737948D0035773D /* MTFrequencyDatesViewController.xib in Resources */,
+				ACEF7D7D1737948D0035773D /* MTFrequencyDatesViewController-h568.xib in Resources */,
+				ACEF7D7E1737948D0035773D /* MTFrequencyCell.xib in Resources */,
+				ACEF7D7F1737948D0035773D /* MTMedicineCell.xib in Resources */,
+				ACEF7D801737948D0035773D /* MTTimeCell.xib in Resources */,
+				ACEF7D811737948D0035773D /* Icon.png in Resources */,
+				ACEF7D821737948D0035773D /* Icon@2x.png in Resources */,
+				ACEF7D831737948D0035773D /* MTReminderViewController.xib in Resources */,
+				ACEF7D841737948D0035773D /* MTReminderViewController-h568.xib in Resources */,
+				ACEF7D851737948D0035773D /* YellowTab_Plus.png in Resources */,
+				ACEF7D861737948D0035773D /* MTWebViewController.xib in Resources */,
+				ACEF7D871737948D0035773D /* MTWebViewController-h568.xib in Resources */,
+				ACEF7D881737948D0035773D /* MedsTime_MedPic@2x.png in Resources */,
+				ACEF7D891737948D0035773D /* Profile-s.png in Resources */,
+				ACEF7D8A1737948D0035773D /* Profile-ss.png in Resources */,
+				ACEF7D8B1737948D0035773D /* Reminder-s.png in Resources */,
+				ACEF7D8C1737948D0035773D /* Reminder-ss.png in Resources */,
+				ACEF7D8D1737948D0035773D /* Addbutton-Active.png in Resources */,
+				ACEF7D8E1737948D0035773D /* Addbutton-inActive.png in Resources */,
+				ACEF7D8F1737948D0035773D /* All-Profile_btn-s.png in Resources */,
+				ACEF7D901737948D0035773D /* All-Profile_btn-ss.png in Resources */,
+				ACEF7D911737948D0035773D /* Back-blue_btn-s.png in Resources */,
+				ACEF7D921737948D0035773D /* Back-blue_btn-ss.png in Resources */,
+				ACEF7D931737948D0035773D /* Back-pink_btn-s.png in Resources */,
+				ACEF7D941737948D0035773D /* Back-pink_btn-ss.png in Resources */,
+				ACEF7D951737948D0035773D /* Cancel_btn-s.png in Resources */,
+				ACEF7D961737948D0035773D /* Cancel_btn-ss.png in Resources */,
+				ACEF7D971737948D0035773D /* Done_btn-s.png in Resources */,
+				ACEF7D981737948D0035773D /* Done_btn-ss.png in Resources */,
+				ACEF7D991737948D0035773D /* pink_bar_640x90.png in Resources */,
+				ACEF7D9A1737948D0035773D /* yellow_bar_640x90.png in Resources */,
+				ACEF7D9B1737948D0035773D /* Grey_bar_640x162.png in Resources */,
+				ACEF7D9C1737948D0035773D /* README.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -883,6 +1107,47 @@
 				AC244639172E7860004E0B3B /* PCImageDirectorySaver.m in Sources */,
 				ACCA8B6717320A5600E315B3 /* MTWebViewController.m in Sources */,
 				ACBE579217336D93005920B0 /* UIImage+UIImage_fixOrientation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACEF7D2B1737948D0035773D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACEF7D2C1737948D0035773D /* main.m in Sources */,
+				ACEF7D2D1737948D0035773D /* MTAppDelegate.m in Sources */,
+				ACEF7D2E1737948D0035773D /* MTNavigationViewController.m in Sources */,
+				ACEF7D2F1737948D0035773D /* MTTabBarItem.m in Sources */,
+				ACEF7D301737948D0035773D /* MTTabBarController.m in Sources */,
+				ACEF7D311737948D0035773D /* MTTableViewController.m in Sources */,
+				ACEF7D321737948D0035773D /* MTProfileCell.m in Sources */,
+				ACEF7D331737948D0035773D /* MTReminderCell.m in Sources */,
+				ACEF7D341737948D0035773D /* MTProfileViewController.m in Sources */,
+				ACEF7D351737948D0035773D /* MedicineTakerModel.xcdatamodeld in Sources */,
+				ACEF7D361737948D0035773D /* ManageObjectModel.m in Sources */,
+				ACEF7D371737948D0035773D /* UIImage+NSData.m in Sources */,
+				ACEF7D381737948D0035773D /* MTProfileInfoViewController.m in Sources */,
+				ACEF7D391737948D0035773D /* Medicine.m in Sources */,
+				ACEF7D3A1737948D0035773D /* Profile.m in Sources */,
+				ACEF7D3B1737948D0035773D /* MTMedicineInfoViewController.m in Sources */,
+				ACEF7D3C1737948D0035773D /* MTMedicineInfoCell.m in Sources */,
+				ACEF7D3D1737948D0035773D /* XCDeviceManager.m in Sources */,
+				ACEF7D3E1737948D0035773D /* MTProfileManager.m in Sources */,
+				ACEF7D3F1737948D0035773D /* MTTextFieldCell.m in Sources */,
+				ACEF7D401737948D0035773D /* Date.m in Sources */,
+				ACEF7D411737948D0035773D /* Time.m in Sources */,
+				ACEF7D421737948D0035773D /* MTScheduleViewController.m in Sources */,
+				ACEF7D431737948D0035773D /* MTFrequencyDatesViewController.m in Sources */,
+				ACEF7D441737948D0035773D /* MTFrequencyCell.m in Sources */,
+				ACEF7D451737948D0035773D /* MTMedicineCell.m in Sources */,
+				ACEF7D461737948D0035773D /* MTTimeCell.m in Sources */,
+				ACEF7D471737948D0035773D /* MTReminderViewController.m in Sources */,
+				ACEF7D481737948D0035773D /* MTLocalNotification.m in Sources */,
+				ACEF7D491737948D0035773D /* RegisteredNotification.m in Sources */,
+				ACEF7D4A1737948D0035773D /* PCAsyncImageView.m in Sources */,
+				ACEF7D4B1737948D0035773D /* PCImageDirectorySaver.m in Sources */,
+				ACEF7D4C1737948D0035773D /* MTWebViewController.m in Sources */,
+				ACEF7D4D1737948D0035773D /* UIImage+UIImage_fixOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -992,101 +1257,46 @@
 			};
 			name = Release;
 		};
-		ACEF7D02173759B40035773D /* Free Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-DFREE";
-				OTHER_LDFLAGS = "-ObjC";
-				SDKROOT = iphoneos;
-			};
-			name = "Free Debug";
-		};
-		ACEF7D03173759B40035773D /* Free Debug */ = {
+		ACEF7D9E1737948D0035773D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
-				INFOPLIST_FILE = "MTMedicineTaker/MTMedicineTaker-Info.plist";
+				INFOPLIST_FILE = "MTMedicineTakerFree-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/MTMedicineTaker\"",
 					"\"$(SRCROOT)\"",
 				);
+				OTHER_CFLAGS = "-DFREE";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MTMedicineTakerFree;
 				WRAPPER_EXTENSION = app;
 			};
-			name = "Free Debug";
+			name = Debug;
 		};
-		ACEF7D04173759C00035773D /* Free Release */ = {
+		ACEF7DA01737948D0035773D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
+				INFOPLIST_FILE = "MTMedicineTakerFree-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MTMedicineTaker\"",
+					"\"$(SRCROOT)\"",
+				);
 				OTHER_CFLAGS = (
 					"-DNS_BLOCK_ASSERTIONS=1",
 					"-DFREE",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Free Release";
-		};
-		ACEF7D05173759C00035773D /* Free Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
-				INFOPLIST_FILE = "MTMedicineTaker/MTMedicineTaker-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/MTMedicineTaker\"",
-					"\"$(SRCROOT)\"",
-				);
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MTMedicineTakerFree;
 				WRAPPER_EXTENSION = app;
 			};
-			name = "Free Release";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1095,9 +1305,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ACBD65D7170BC483007EABE6 /* Debug */,
-				ACEF7D02173759B40035773D /* Free Debug */,
 				ACBD65D8170BC483007EABE6 /* Release */,
-				ACEF7D04173759C00035773D /* Free Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1106,9 +1314,16 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ACBD65DA170BC483007EABE6 /* Debug */,
-				ACEF7D03173759B40035773D /* Free Debug */,
 				ACBD65DB170BC483007EABE6 /* Release */,
-				ACEF7D05173759C00035773D /* Free Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACEF7D9D1737948D0035773D /* Build configuration list for PBXNativeTarget "MTMedicineTakerFree" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACEF7D9E1737948D0035773D /* Debug */,
+				ACEF7DA01737948D0035773D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -7,6 +7,7 @@
 //
 
 #import "MTLocalNotification.h"
+#import "Date.h"
 
 static MTLocalNotification *_instance;
 
@@ -201,6 +202,29 @@ static MTLocalNotification *_instance;
             for(NSString *strPK in medPKList) {
                 if([strPK isEqualToString:medicinePK]) {
                     [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
+                }
+            }
+        }
+    }
+}
+
+- (void)cancelNotificationWithMedicine: (Medicine *)medicine andWithMedicineDayType: (NSUInteger)dayType
+{
+    NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
+    for(UILocalNotification *localNotif in notificationList) {
+        NSDictionary *dict      = localNotif.userInfo;
+        NSManagedObject *object = medicine;
+        NSString *medicinePK    = [[[object objectID] URIRepresentation] absoluteString];
+        NSArray *medPKList      = (NSArray *) [dict objectForKey:@"Medicines"];
+        
+        for(NSString *strPK in medPKList) {
+            if([strPK isEqualToString:medicinePK]) {
+                NSArray *medicineDayList = [NSArray arrayWithArray:[medicine.days allObjects]];
+                NSLog(@"%d",medicineDayList.count);
+                for(Date *d in medicineDayList) {
+                    if(![d.type isEqualToNumber:[NSNumber numberWithInteger:dayType]]) {
+                        [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
+                    }
                 }
             }
         }

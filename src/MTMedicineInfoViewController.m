@@ -29,7 +29,7 @@
 @property(nonatomic, retain) NSArray *quantityList;
 @property(nonatomic, retain) NSArray *mealList;
 @property(nonatomic, retain) NSMutableArray *previousTimeList;
-@property(nonatomic, retain) NSArray *previousDayList;
+@property(nonatomic, retain) NSMutableArray *previousDayList;
 @property(nonatomic, retain) NSString *proviousMedicineName;
 
 - (IBAction)addMedicineImage:(id)sender;
@@ -52,7 +52,7 @@ static MTMedicineInfoViewController *_instance;
         self.navigationItem.title = @"New Medicine";
         _originalImage = [[UIImage alloc] init];
         _previousTimeList = [[NSMutableArray alloc] init];
-        _previousDayList = [[NSArray alloc] init];
+        _previousDayList = [[NSMutableArray alloc] init];
 
         self.quantityList = [[[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil] autorelease];
         self.mealList = [[[NSArray alloc] initWithObjects:@"Before Meal",@"After Meal",@"None", nil] autorelease];
@@ -419,7 +419,7 @@ static MTMedicineInfoViewController *_instance;
         
         if(!t1) {
         for(Date *d in dayList) {
-       
+            
             switch ([d.type integerValue]) {
                 case 0: {
                     
@@ -565,12 +565,14 @@ static MTMedicineInfoViewController *_instance;
             self.medicine.status            = self.medicine.meal;
             
             [[ManageObjectModel objectManager] saveContext];
-        
+            
             if(self.switcher.on) {
                 [self setFireDate];
             } else {
                 [[MTLocalNotification sharedInstance] deleteNotificationWithMedicine:self.medicine fromNotification:nil];
             }
+            
+            
             
             [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
             /*NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
@@ -689,6 +691,11 @@ static MTMedicineInfoViewController *_instance;
     return self.previousTimeList;
 }
 
+-(NSMutableArray *)medicineDayList
+{
+    return self.previousDayList;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -715,7 +722,11 @@ static MTMedicineInfoViewController *_instance;
     for(Time *time in arrTimeList) {
         [self.previousTimeList addObject:time];
     }
-   self.previousDayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
+    
+    NSArray *arrDayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
+    for(Date *date in arrDayList) {
+        [self.previousDayList addObject:date];
+    }
 }
 
 - (void)didReceiveMemoryWarning

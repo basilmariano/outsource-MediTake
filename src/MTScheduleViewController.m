@@ -25,13 +25,14 @@ PickerType;
 
 @interface MTScheduleViewController ()<UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 
-@property(nonatomic, retain) UIActionSheet *actionSheet;
-@property(nonatomic, retain) UIDatePicker *datePicker;
-@property(nonatomic, retain) UIPickerView *pickerView;
-@property(nonatomic) PickerType pickerType;
-@property(nonatomic, retain) NSMutableArray *timeList;
-@property(nonatomic, retain) NSMutableArray *specificDays;
-@property (nonatomic,retain) NSMutableArray *times;
+@property (nonatomic, retain) UIActionSheet *actionSheet;
+@property (nonatomic, retain) UIDatePicker *datePicker;
+@property (nonatomic, retain) UIPickerView *pickerView;
+@property (nonatomic) PickerType pickerType;
+@property (nonatomic, retain) NSMutableArray *timeList;
+@property (nonatomic, retain) NSMutableArray *specificDays;
+@property (nonatomic, retain) NSMutableArray *times;
+@property (nonatomic, retain) NSString *previousFrequency;
 
 -(IBAction)frequencyButtonClicked:(id)sender;
 -(IBAction)frequencyDayButtonClicked:(id)sender;
@@ -378,6 +379,7 @@ static MTScheduleViewController *_instance;
         NSString *strDate = [dateFormat stringFromDate:date]; //<- format the time
          NSLog(@"Date %@",strDate);
         if(self.specificDays.count) {
+            int specificDaysCount = 0;
             for(Date *spesDate in _medicine.days) {
                 if([strDate isEqualToString:spesDate.date] && [spesDate.type integerValue] == 2) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:@"Date selected already exist"
@@ -386,6 +388,7 @@ static MTScheduleViewController *_instance;
                                                           otherButtonTitles:nil];
                     [alert show];
                     [alert release];
+                    specificDaysCount = 1;
                     break;
                 } else if ([spesDate.type integerValue] == 2) {
                     NSManagedObject *objectToRemove = spesDate;
@@ -396,8 +399,16 @@ static MTScheduleViewController *_instance;
                     [newDate setType:[NSNumber numberWithInt:2]];
                     [_medicine addDaysObject:newDate];
                     [self.specificDays addObject:newDate];
+                    specificDaysCount = 1;
                     break;
                 }
+            }
+            if(specificDaysCount == 0) {
+                Date *newDate= [Date date];
+                [newDate setDate:strDate];
+                [newDate setType:[NSNumber numberWithInt:2]];
+                [_medicine addDaysObject:newDate];
+                [self.specificDays addObject:newDate];
             }
         } else {
             Date *newDate= [Date date];
@@ -508,7 +519,84 @@ static MTScheduleViewController *_instance;
         [alert release];
 
     } else {
-        [self.navigationController popViewControllerAnimated:YES];
+        if(_medicine.days.count) {
+            BOOL valid = false;
+            int dayType = 0;
+            if(![self.previousFrequency isEqualToString:_medicine.frequency]) {
+               
+                if([self.medicine.frequency isEqualToString:@"Weekly"] || [self.medicine.frequency isEqualToString:@"Daily"]){
+                    [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine andWithMedicineDayType:0];
+                    dayType = 0;
+                }
+                else if([self.medicine.frequency isEqualToString:@"Monthly"]) {
+                    [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine andWithMedicineDayType:1];
+                    dayType = 1;
+                }
+                else {
+                    [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine andWithMedicineDayType:2];
+                    dayType = 2;
+                }
+                
+                if([_medicine.frequency isEqualToString:@"Weekly"] || [_medicine.frequency isEqualToString:@"Daily"]){
+                    [self deleteMedicineDaysExeptDaysWithType:0];
+                }
+                else if([_medicine.frequency isEqualToString:@"Monthly"]) {
+                    [self deleteMedicineDaysExeptDaysWithType:1];
+                }
+                else {
+                    [self deleteMedicineDaysExeptDaysWithType:2];
+                }
+            } else {
+                
+                if([_medicine.frequency isEqualToString:@"Weekly"] || [_medicine.frequency isEqualToString:@"Daily"]){
+                   dayType = 0;
+                }
+                else if([_medicine.frequency isEqualToString:@"Monthly"]) {
+                   dayType = 1;
+                }
+                else {
+                   dayType = 2;
+                }
+            }
+    
+            NSArray *medicineDayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
+            
+            for(Date *d in medicineDayList) {
+                if ([[NSNumber numberWithInt:dayType] isEqualToNumber:d.type]) {
+                    valid = TRUE;
+                }
+            }
+            
+            if(!valid) {
+                NSString *message = @"Have atleast single Date and Time!";
+                
+                if(!_medicine.days.count)
+                    message = @"Have atleast single Date!";
+                else if(!_medicine.times.count)
+                    message = @"Please enter a time for this schedule";
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:message
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+        }
+}
+
+- (void) deleteMedicineDaysExeptDaysWithType: (NSUInteger)numberType
+{
+    NSArray *medicineDayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
+    for(Date *d in medicineDayList) {
+        if (![[NSNumber numberWithInteger:numberType] isEqualToNumber:d.type]) {
+            [[MTMedicineInfoViewController sharedInstance].medicineDayList removeObject:d];
+            NSManagedObject *object = d;
+            [[ManageObjectModel objectManager] deleteObject:object];
+        }
     }
 }
 
@@ -525,7 +613,7 @@ static MTScheduleViewController *_instance;
     
     [_tableView reloadData];
     self.labelFrequencyValue.text = _medicine.frequency;
-    
+    self.previousFrequency = _medicine.frequency;
     if([_medicine.frequency isEqualToString:@"Weekly"] || [_medicine.frequency isEqualToString:@"Daily"]){
         self.labelFrequencyDayTitle.text = @"Day of Week";
     }

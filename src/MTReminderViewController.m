@@ -48,7 +48,6 @@
     [_fetchedResultsController release];
     [super dealloc];
 }
-
 #pragma mark  UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -107,6 +106,7 @@
         
         if([strFireTime isEqualToString:strTime]) {
             status = time.status;
+            NSLog(@"%@",status);
         }
     }
     
@@ -354,7 +354,7 @@
             
             Time *time2 = [Time time];
             time2.time = time.time;
-           
+            time2.status = time.status;
             if(buttonIndex == 0) {
                 time2.status = [NSString stringWithFormat:@"Taken at %@",strTime];
             } else if (buttonIndex == 1) {
@@ -375,7 +375,7 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
+
 #ifdef FREE
     
     CGRect bannerFrameRect = CGRectMake(0.0,

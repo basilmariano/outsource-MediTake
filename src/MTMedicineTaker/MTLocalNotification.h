@@ -15,6 +15,7 @@
 - (void)scheduleNotificationWithFireDate: (NSDate *)fireDate frequencyType:(NSNumber *)frequencyType andMedicine:(Medicine *)medicine;
 - (void)deleteNotificationWithMedicine:(Medicine *)medicine fromNotification:(UILocalNotification *)notification;
 - (void)cancelNotificationWithMedicine: (Medicine *)medicine andFireDate:(NSDate *)fireTime;
+- (void)cancelNotificationWithMedicine: (Medicine *)medicine andWithMedicineDayType: (NSUInteger)dayType;
 - (void)showReminder:(NSString *)reminder;
 - (void)clearNotification;
 - (BOOL)isNotificationExistWithMedicine: (Medicine *)medicine andFireTime:(NSDate *)fireTime;

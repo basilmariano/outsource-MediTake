@@ -18,5 +18,6 @@
 @property (nonatomic,retain) IBOutlet UISwitch *switcher;
 +(MTMedicineInfoViewController *)sharedInstance;
 -(NSMutableArray *)medicineTimeList;
+-(NSMutableArray *)medicineDayList;
 
 @end
