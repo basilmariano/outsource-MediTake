@@ -44,6 +44,7 @@
 
 - (Medicine *)medicineWithId:(NSNumber *)medId;
 - (Medicine *)medicineWithName:(NSString *)medicineNamel;
++ (Medicine *)medicineWithImagePath:(NSString *)imagePath;
 + (Medicine *)medicine;
 + (NSArray *)medicineList;
 

@@ -557,13 +557,28 @@ static MTMedicineInfoViewController *_instance;
 {
     if(![self.medicineName.text isEqual:@""]) {
      
-        if(!([self isMedicineExist]) || [self.medicineName.text isEqualToString:self.proviousMedicineName]) {
-            
+       // if(![self.medicineName.text isEqualToString:self.proviousMedicineName]) {
+        
+        NSString *imagePath = [NSString stringWithFormat:@"Medicine_%@%@",_medicineName.text,_medicine.medicineTaker.name];
+        
             self.medicine.medicineName      = _medicineName.text;
-            self.medicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] saveImageInDocumentFileWithImage:self.medicineImage.imageView.image andAppendingImageName:[NSString stringWithFormat:@"Medicine_%@%@",_medicineName.text,_medicine.medicineTaker.name]];
+            self.medicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] saveImageInDocumentFileWithImage:self.medicineImage.imageView.image andAppendingImageName:imagePath];
             self.medicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
             self.medicine.status            = self.medicine.meal;
             
+            [[ManageObjectModel objectManager] saveContext];
+            
+            NSManagedObject *object = [Medicine medicineWithImagePath:self.medicine.medicineImagePath];
+            int primaryKey = [[[[[[object objectID] URIRepresentation] absoluteString] lastPathComponent] substringFromIndex:1] intValue];
+            NSString *strPK = [[NSNumber numberWithInt:primaryKey] stringValue];
+       
+            NSLog(@"PK %@",strPK);
+            Medicine *updateMedicine = (Medicine *) object;
+            updateMedicine.medicineName      = _medicineName.text;
+            updateMedicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] replaceFile:imagePath withImage:self.medicineImage.imageView.image withNewFile:strPK];
+            updateMedicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
+            updateMedicine.status            = self.medicine.meal;
+        
             [[ManageObjectModel objectManager] saveContext];
             
             if(self.switcher.on) {
@@ -578,16 +593,16 @@ static MTMedicineInfoViewController *_instance;
             /*NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
             NSLog(@"%d", notificationList.count);*/
             
-        } else {
+        //} else {
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Medicine already exist!!"
+           /* UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Medicine already exist!!"
                                                            delegate:nil
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
+            [alert release];*/
 
-        }
+        //}
     } else {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error:" message:@"Please fill out Medicine name!"

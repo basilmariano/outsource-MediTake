@@ -23,6 +23,25 @@ static PCImageDirectorySaver *_instance;
     return _instance;
 }
 
+- (NSString *) replaceFile: (NSString *)oldPath withImage: (UIImage *)image withNewFile: (NSString *)newFilePath
+{
+    NSData *pngData = UIImagePNGRepresentation(image);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:oldPath]; //Add the file name
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
+        
+        NSError *error = nil;
+        if ([fileMgr removeItemAtPath:filePath error:&error] != YES)
+            NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+        
+        filePath = [documentsPath stringByAppendingPathComponent:newFilePath]; //Add the file name
+    }
+    [pngData writeToFile:filePath atomically:YES]; //Write the file
+    return filePath;
+}
+
 -(NSString *)saveImageInDocumentFileWithImage:(UIImage *)image andAppendingImageName:(NSString *)imageName
 {
     NSData *pngData = UIImagePNGRepresentation(image);
@@ -44,6 +63,7 @@ static PCImageDirectorySaver *_instance;
 
 -(UIImage *)imageFilePath:(NSString *)path
 {
+    NSLog(@"Path -> %@",path);
     NSData *pngData = [NSData dataWithContentsOfFile:path];
     UIImage *image = [UIImage imageWithData:pngData];
     return image;

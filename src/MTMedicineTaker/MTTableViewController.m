@@ -149,7 +149,7 @@
     _gadBannerView = [[GADBannerView alloc] initWithFrame:bannerFrameRect];
     
     // Specify the ad's "unit identifier". This is your AdMob Publisher ID.
-    _gadBannerView.adUnitID =  @"a15187234656c91";
+    _gadBannerView.adUnitID =  @"a1519055a78a132";
     
     // Let the runtime know which UIViewController to restore after taking
     // the user wherever the ad goes and add it to the view hierarchy.

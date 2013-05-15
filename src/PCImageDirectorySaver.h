@@ -12,6 +12,7 @@
 
 +(PCImageDirectorySaver *)directorySaver;
 -(NSString *)saveImageInDocumentFileWithImage:(UIImage *)image andAppendingImageName:(NSString *)imageName;
+- (NSString *) replaceFile: (NSString *)oldPath withImage: (UIImage *)image withNewFile: (NSString *)newFilePath;
 -(UIImage *)imageFilePath:(NSString *)path;
 -(UIImage *)scaleImage:(UIImage *)image  withScaleToSize: (CGSize)size;
 @end

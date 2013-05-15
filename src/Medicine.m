@@ -70,6 +70,24 @@
     
 }
 
++ (Medicine *)medicineWithImagePath:(NSString *)imagePath
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Medicine" inManagedObjectContext:[[ManageObjectModel objectManager] managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"(medicineImagePath like %@)",imagePath];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects =[[[ManageObjectModel objectManager] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    Medicine *med = (Medicine *) [fetchedObjects objectAtIndex:0];
+    NSLog(@"Profile name %@",med);
+    return med;
+}
+
 -(Medicine *)medicineWithName:(NSString *)medicineName
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];

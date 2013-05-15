@@ -398,7 +398,7 @@
     // Available AdSize constants are explained in GADAdSize.h.
     _gadBannerView = [[GADBannerView alloc] initWithFrame:bannerFrameRect];
     // Specify the ad's "unit identifier". This is your AdMob Publisher ID.
-    _gadBannerView.adUnitID =  @"a15187234656c91";
+    _gadBannerView.adUnitID =  @"a1519055a78a132";
     
     // Let the runtime know which UIViewController to restore after taking
     // the user wherever the ad goes and add it to the view hierarchy.
@@ -540,7 +540,33 @@
 
 - (void) syncReminders
 {
-    NSMutableArray *reminderListHandler = [NSMutableArray arrayWithArray:self.reminderList];
+    if(self.reminderList.count >= 2 || self.reminderList.count == 0) {
+        [_reminderList sortUsingComparator:^NSComparisonResult(NSDictionary * a1, NSDictionary * a2) {
+            
+            NSDictionary *dict = a1;
+            NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+            UILocalNotification *notif1 = [dict objectForKey:@"notification"];
+            NSDate *fireDate = notif1.fireDate;
+            NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:fireDate];
+            NSInteger dateInSecs = compsFire.hour*3600 + compsFire.minute*60 + compsFire.second;
+            
+            NSDictionary *dict2 = a2;
+            UILocalNotification *notif2 = [dict2 objectForKey:@"notification"];
+            NSDate *fireDate2 = notif2.fireDate;
+            NSDateComponents *compsFire2 = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:fireDate2];
+            NSInteger dateInSecs2 = compsFire2.hour*3600 + compsFire2.minute*60 + compsFire2.second;
+            
+            
+            NSComparisonResult result = [[NSNumber numberWithInt: dateInSecs ] compare: [NSNumber numberWithInt: dateInSecs2]];
+            return result;
+            /*if (result != NSOrderedSame) return result;
+             return [a1.appointmentTime compare:a2.appointmentTime];*/
+        }];
+    }
+    [_tableView reloadData];
+    
+    
+   /* NSMutableArray *reminderListHandler = [NSMutableArray arrayWithArray:self.reminderList];
     if(!reminderListHandler.count) {
         [_tableView reloadData];
         return;
@@ -571,8 +597,8 @@
             [self.reminderList insertObject:dict atIndex:nexyIdx];
         }
     }
-    
     [_tableView reloadData];
+    */
 }
 
 - (void) viewWillAppear:(BOOL)animated

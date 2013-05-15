@@ -44,7 +44,7 @@ static MTLocalNotification *_instance;
                 NSString *medicine_PK  = nil;
                 for(NSString *primaryKey in medPKList) {
                     if([primaryKey isEqualToString:tempPK]) {
-                       /* medicine_PK = primaryKey;
+                        /*medicine_PK = primaryKey;
                         [tempPkHolderList addObject:primaryKey];*/
                         return;
                     } else {
@@ -121,6 +121,7 @@ static MTLocalNotification *_instance;
         
         NSManagedObject *object = medicine;
         NSString *strPK = [[[object objectID] URIRepresentation] absoluteString];
+    
         NSMutableDictionary *dictObject = [NSMutableDictionary dictionaryWithObjectsAndKeys:
         [NSArray arrayWithObject:strPK], @"Medicines",
                                  notif.alertBody, @"Alert",
