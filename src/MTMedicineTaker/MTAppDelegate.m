@@ -16,7 +16,7 @@
 #import "MTReminderViewController.h"
 #import "MTLocalNotification.h"
 
-@implementation MTAppDelegate
+@implementation MTAppDelegate 
 
 - (void)dealloc
 {
@@ -114,8 +114,13 @@
 {
     application.applicationIconBadgeNumber = 0;
     [[MTLocalNotification sharedInstance] handleReceivedNotification:notification];
-}
 
+    NSString *path2 = [[NSBundle mainBundle] pathForResource:@"NotifSound" ofType:@"wav"];
+    AVAudioPlayer* theAudio=[[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path2] error:NULL];
+    //theAudio.delegate = self;
+    [theAudio play];
+
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

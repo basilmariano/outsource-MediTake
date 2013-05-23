@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#include <AVFoundation/AVFoundation.h>
 
 @class MTViewController;
 
-@interface MTAppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate>
+@interface MTAppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
