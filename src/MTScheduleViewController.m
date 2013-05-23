@@ -25,14 +25,13 @@ PickerType;
 
 @interface MTScheduleViewController ()<UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 
-@property (nonatomic, retain) UIActionSheet *actionSheet;
-@property (nonatomic, retain) UIDatePicker *datePicker;
-@property (nonatomic, retain) UIPickerView *pickerView;
-@property (nonatomic) PickerType pickerType;
-@property (nonatomic, retain) NSMutableArray *timeList;
-@property (nonatomic, retain) NSMutableArray *specificDays;
-@property (nonatomic, retain) NSMutableArray *times;
-@property (nonatomic, retain) NSString *previousFrequency;
+@property(nonatomic, retain) UIActionSheet *actionSheet;
+@property(nonatomic, retain) UIDatePicker *datePicker;
+@property(nonatomic, retain) UIPickerView *pickerView;
+@property(nonatomic) PickerType pickerType;
+@property(nonatomic, retain) NSMutableArray *timeList;
+@property(nonatomic, retain) NSMutableArray *specificDays;
+@property (nonatomic,retain) NSMutableArray *times;
 
 -(IBAction)frequencyButtonClicked:(id)sender;
 -(IBAction)frequencyDayButtonClicked:(id)sender;
@@ -143,7 +142,7 @@ static MTScheduleViewController *_instance;
         if (date) {
             
             NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
-            [dateFormat setDateFormat:@"MMM:dd:yyyy"];
+            [dateFormat setDateFormat:@"MMM dd, yyyy"];
             NSDate *d = [dateFormat dateFromString:date.date];
             
             //NSDate *secsDate = [NSDate dateWithTimeIntervalSince1970:[date.date doubleValue]];
@@ -306,16 +305,16 @@ static MTScheduleViewController *_instance;
             self.datePicker.date = date;
             [actionSheet addSubview:self.datePicker];
             
-            /*UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
             deleteButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
             [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
-            //[okButton setBackgroundImage:[UIImage imageNamed:@"ButtonBg.png"] forState:UIControlStateNormal];
+           // [deleteButton setBackgroundImage:[UIImage imageNamed:@"ButtonBg.png"] forState:UIControlStateNormal];
             deleteButton.frame = CGRectMake(177.0f, 250.0f, 73.0f, 45.0f);
             [deleteButton addTarget:self action:@selector(deleteTapped:) forControlEvents:UIControlEventTouchUpInside];
             //[actionSheet addSubview:self.pickerView];
-            [actionSheet addSubview:deleteButton];*/
+            [actionSheet addSubview:deleteButton];
             
-           // okRect = CGRectMake(68.0f, 250.0f,73.0f, 45.0f);
+            okRect = CGRectMake(68.0f, 250.0f,73.0f, 45.0f);
             
             break;
         }
@@ -344,6 +343,55 @@ static MTScheduleViewController *_instance;
     [alert show];
     [alert release];
 }*/
+
+- (void)deleteTapped:(NSObject *)sender
+{
+    NSLog(@"delete");
+    NSDate *date = _datePicker.date;
+    NSLog(@"Date %@",date);
+    NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+    
+    dateFormat.timeZone = _datePicker.timeZone;
+    [dateFormat setDateFormat:@"MMM dd, yyyy"];
+    NSString *strDate = [dateFormat stringFromDate:date]; //<- format the time
+    NSLog(@"Date %@",strDate);
+    Date *dateHandler = nil;
+    if(self.specificDays.count) {
+        for(Date *spesDate in _medicine.days) {
+            if([strDate isEqualToString:spesDate.date] && [spesDate.type integerValue] == 2) {
+                dateHandler = spesDate;
+                 break;
+            } 
+        }
+    }
+    
+    if(dateHandler) {
+        NSManagedObject *objectToRemove = dateHandler;
+        [[ManageObjectModel objectManager] deleteObject:objectToRemove];
+        [self.specificDays removeObject:dateHandler];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete!" message:@"Date Successfully Deleted."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        
+        self.labelFrequencyDayValue.text = @"";
+        
+       
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"Nothing to Delete."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    [_actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    self.actionSheet = nil;
+    self.datePicker = nil;
+}
 
 - (void)okTapped:(NSObject *)sender
 {
@@ -375,11 +423,10 @@ static MTScheduleViewController *_instance;
         NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
         
         dateFormat.timeZone = _datePicker.timeZone;
-        [dateFormat setDateFormat:@"MMM:dd:yyyy"];
+        [dateFormat setDateFormat:@"MMM dd, yyyy"];
         NSString *strDate = [dateFormat stringFromDate:date]; //<- format the time
          NSLog(@"Date %@",strDate);
         if(self.specificDays.count) {
-            int specificDaysCount = 0;
             for(Date *spesDate in _medicine.days) {
                 if([strDate isEqualToString:spesDate.date] && [spesDate.type integerValue] == 2) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:@"Date selected already exist"
@@ -388,7 +435,6 @@ static MTScheduleViewController *_instance;
                                                           otherButtonTitles:nil];
                     [alert show];
                     [alert release];
-                    specificDaysCount = 1;
                     break;
                 } else if ([spesDate.type integerValue] == 2) {
                     NSManagedObject *objectToRemove = spesDate;
@@ -399,11 +445,11 @@ static MTScheduleViewController *_instance;
                     [newDate setType:[NSNumber numberWithInt:2]];
                     [_medicine addDaysObject:newDate];
                     [self.specificDays addObject:newDate];
-                    specificDaysCount = 1;
                     break;
                 }
             }
-            if(specificDaysCount == 0) {
+            
+            if(!_medicine.days.count) {
                 Date *newDate= [Date date];
                 [newDate setDate:strDate];
                 [newDate setType:[NSNumber numberWithInt:2]];
@@ -418,6 +464,8 @@ static MTScheduleViewController *_instance;
             [self.specificDays addObject:newDate];
         }
      
+        self.labelFrequencyDayValue.text = strDate;
+        
     } else if(self.pickerType == TimePicker){
         
         NSDate *date = _datePicker.date;
@@ -504,10 +552,10 @@ static MTScheduleViewController *_instance;
 - (void)onButtonDoneClicked
 {
     if(!(_medicine.days.count && _medicine.times.count)) {
-        NSString *message = @"Have atleast single Date and Time!";
+        NSString *message = @"Have at least single Date and Time!";
         
         if(!_medicine.days.count)
-            message = @"Have atleast single Date!";
+            message = @"Have at least single Date!";
         else if(!_medicine.times.count)
             message = @"Please enter a time for this schedule";
         
@@ -519,84 +567,7 @@ static MTScheduleViewController *_instance;
         [alert release];
 
     } else {
-        if(_medicine.days.count) {
-            BOOL valid = false;
-            int dayType = 0;
-            if(![self.previousFrequency isEqualToString:_medicine.frequency]) {
-               
-                if([self.medicine.frequency isEqualToString:@"Weekly"] || [self.medicine.frequency isEqualToString:@"Daily"]){
-                    [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine andWithMedicineDayType:0];
-                    dayType = 0;
-                }
-                else if([self.medicine.frequency isEqualToString:@"Monthly"]) {
-                    [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine andWithMedicineDayType:1];
-                    dayType = 1;
-                }
-                else {
-                    [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine andWithMedicineDayType:2];
-                    dayType = 2;
-                }
-                
-                if([_medicine.frequency isEqualToString:@"Weekly"] || [_medicine.frequency isEqualToString:@"Daily"]){
-                    [self deleteMedicineDaysExeptDaysWithType:0];
-                }
-                else if([_medicine.frequency isEqualToString:@"Monthly"]) {
-                    [self deleteMedicineDaysExeptDaysWithType:1];
-                }
-                else {
-                    [self deleteMedicineDaysExeptDaysWithType:2];
-                }
-            } else {
-                
-                if([_medicine.frequency isEqualToString:@"Weekly"] || [_medicine.frequency isEqualToString:@"Daily"]){
-                   dayType = 0;
-                }
-                else if([_medicine.frequency isEqualToString:@"Monthly"]) {
-                   dayType = 1;
-                }
-                else {
-                   dayType = 2;
-                }
-            }
-    
-            NSArray *medicineDayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
-            
-            for(Date *d in medicineDayList) {
-                if ([[NSNumber numberWithInt:dayType] isEqualToNumber:d.type]) {
-                    valid = TRUE;
-                }
-            }
-            
-            if(!valid) {
-                NSString *message = @"Have atleast single Date and Time!";
-                
-                if(!_medicine.days.count)
-                    message = @"Have atleast single Date!";
-                else if(!_medicine.times.count)
-                    message = @"Please enter a time for this schedule";
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning:" message:message
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-                [alert show];
-                [alert release];
-            } else {
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        }
-        }
-}
-
-- (void) deleteMedicineDaysExeptDaysWithType: (NSUInteger)numberType
-{
-    NSArray *medicineDayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
-    for(Date *d in medicineDayList) {
-        if (![[NSNumber numberWithInteger:numberType] isEqualToNumber:d.type]) {
-            [[MTMedicineInfoViewController sharedInstance].medicineDayList removeObject:d];
-            NSManagedObject *object = d;
-            [[ManageObjectModel objectManager] deleteObject:object];
-        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -613,7 +584,7 @@ static MTScheduleViewController *_instance;
     
     [_tableView reloadData];
     self.labelFrequencyValue.text = _medicine.frequency;
-    self.previousFrequency = _medicine.frequency;
+    
     if([_medicine.frequency isEqualToString:@"Weekly"] || [_medicine.frequency isEqualToString:@"Daily"]){
         self.labelFrequencyDayTitle.text = @"Day of Week";
     }
@@ -624,6 +595,17 @@ static MTScheduleViewController *_instance;
         self.labelFrequencyValue.text = @"Specific Date";
     }
 
+    NSString *frequencies = @"";
+    for(Date *date in self.specificDays) {
+        if([self.specificDays.lastObject isEqual:date]) {
+            frequencies = [frequencies stringByAppendingString:date.date];
+            break;
+        }
+        frequencies = [frequencies stringByAppendingString:[NSString stringWithFormat:@"%@, ",date.date]];
+    }
+   self.labelFrequencyDayValue.text = frequencies;
+    
+    NSLog(@"asd %@",frequencies);
     // Do any additional setup after loading the view from its nib.
 }
 

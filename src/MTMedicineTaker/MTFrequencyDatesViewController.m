@@ -250,8 +250,19 @@
 
         if(self.switcher.on || self.selectedFrequencyDay.count == 7) {
             _medicine.frequency = @"Daily";
+        } else {
+             _medicine.frequency = @"Weekly";
         }
     }
+    NSString *frequencies = @"";
+    for(Date *date in self.selectedFrequencyDay) {
+        if([self.selectedFrequencyDay.lastObject isEqual:date]) {
+            frequencies = [frequencies stringByAppendingString:date.date];
+            break;
+        }
+        frequencies = [frequencies stringByAppendingString:[NSString stringWithFormat:@"%@, ",date.date]];
+    }
+    [MTScheduleViewController scheduleController].labelFrequencyDayValue.text = frequencies;
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -271,7 +282,7 @@
     }
     
     if([self.frequencyName isEqualToString:@"Weekly"] || [self.frequencyName isEqualToString:@"Daily"]) {
-      [self.frequencyWeekView setHidden:NO];
+        [self.frequencyWeekView setHidden:NO];
         self.monthIndicator.text = @"Day of the Week";
     }
     else {

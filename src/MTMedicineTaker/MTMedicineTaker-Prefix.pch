@@ -19,5 +19,5 @@
     #import "ManageObjectModel.h"
     #import "XCDeviceManager.h"
     #import "MTProfileManager.h"
-    #import "XCDeviceManager.h"
+
 #endif

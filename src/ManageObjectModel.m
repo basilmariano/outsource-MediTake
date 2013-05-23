@@ -40,7 +40,6 @@ static ManageObjectModel *_object;
             abort();
         }
     }
-    
 }
 
 - (void)deleteObject:(NSManagedObject *)object

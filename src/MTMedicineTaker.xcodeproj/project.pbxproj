@@ -7,6 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		633CC432173CA8F800FCBD67 /* MTHelpViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633CC42E173CA8F800FCBD67 /* MTHelpViewController-h568.xib */; };
+		633CC433173CA8F800FCBD67 /* MTHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633CC430173CA8F800FCBD67 /* MTHelpViewController.m */; };
+		633CC434173CA8F800FCBD67 /* MTHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633CC431173CA8F800FCBD67 /* MTHelpViewController.xib */; };
+		633CC43A173CAFF900FCBD67 /* Ok-helpbox-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC435173CAFF900FCBD67 /* Ok-helpbox-ss.png */; };
+		633CC43B173CAFF900FCBD67 /* Ok-helpbox-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC435173CAFF900FCBD67 /* Ok-helpbox-ss.png */; };
+		633CC43C173CAFF900FCBD67 /* Ok-helpbox-s.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC436173CAFF900FCBD67 /* Ok-helpbox-s.png */; };
+		633CC43D173CAFF900FCBD67 /* Ok-helpbox-s.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC436173CAFF900FCBD67 /* Ok-helpbox-s.png */; };
+		633CC43E173CAFF900FCBD67 /* Helpbox-popup.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC437173CAFF900FCBD67 /* Helpbox-popup.png */; };
+		633CC43F173CAFF900FCBD67 /* Helpbox-popup.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC437173CAFF900FCBD67 /* Helpbox-popup.png */; };
+		633CC440173CAFF900FCBD67 /* Help_buttn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC438173CAFF900FCBD67 /* Help_buttn-ss.png */; };
+		633CC441173CAFF900FCBD67 /* Help_buttn-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC438173CAFF900FCBD67 /* Help_buttn-ss.png */; };
+		633CC442173CAFF900FCBD67 /* Help_buttn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC439173CAFF900FCBD67 /* Help_buttn-s.png */; };
+		633CC443173CAFF900FCBD67 /* Help_buttn-s.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC439173CAFF900FCBD67 /* Help_buttn-s.png */; };
+		633CC448173CB74300FCBD67 /* Help_buttnBlue-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC444173CB74300FCBD67 /* Help_buttnBlue-ss.png */; };
+		633CC449173CB74300FCBD67 /* Help_buttnBlue-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC444173CB74300FCBD67 /* Help_buttnBlue-ss.png */; };
+		633CC44A173CB74300FCBD67 /* Help_buttnPink-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC445173CB74300FCBD67 /* Help_buttnPink-ss.png */; };
+		633CC44B173CB74300FCBD67 /* Help_buttnPink-ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC445173CB74300FCBD67 /* Help_buttnPink-ss.png */; };
+		633CC44C173CB74300FCBD67 /* Help_buttnPink-s.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC446173CB74300FCBD67 /* Help_buttnPink-s.png */; };
+		633CC44D173CB74300FCBD67 /* Help_buttnPink-s.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC446173CB74300FCBD67 /* Help_buttnPink-s.png */; };
+		633CC44E173CB74300FCBD67 /* Help_buttnBlue-s.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC447173CB74300FCBD67 /* Help_buttnBlue-s.png */; };
+		633CC44F173CB74300FCBD67 /* Help_buttnBlue-s.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CC447173CB74300FCBD67 /* Help_buttnBlue-s.png */; };
+		633CC450173CBC7400FCBD67 /* MTHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633CC431173CA8F800FCBD67 /* MTHelpViewController.xib */; };
+		63F607B7173E97C400DAFF50 /* MTHelpViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633CC42E173CA8F800FCBD67 /* MTHelpViewController-h568.xib */; };
+		63F607B9173E97C800DAFF50 /* MTHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633CC430173CA8F800FCBD67 /* MTHelpViewController.m */; };
+		63F607BB173E98D500DAFF50 /* Icon-free@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63F607BA173E98D500DAFF50 /* Icon-free@2x.png */; };
+		63F607BD173E98DE00DAFF50 /* Icon-free.png in Resources */ = {isa = PBXBuildFile; fileRef = 63F607BC173E98DE00DAFF50 /* Icon-free.png */; };
 		AC05BFEB1727AF4100AA6E7E /* MTLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = AC05BFEA1727AF4100AA6E7E /* MTLocalNotification.m */; };
 		AC244632172E6A04004E0B3B /* PCAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC244631172E6A04004E0B3B /* PCAsyncImageView.m */; };
 		AC244639172E7860004E0B3B /* PCImageDirectorySaver.m in Sources */ = {isa = PBXBuildFile; fileRef = AC244638172E7860004E0B3B /* PCImageDirectorySaver.m */; };
@@ -232,6 +258,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		633CC42E173CA8F800FCBD67 /* MTHelpViewController-h568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MTHelpViewController-h568.xib"; sourceTree = "<group>"; };
+		633CC42F173CA8F800FCBD67 /* MTHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTHelpViewController.h; sourceTree = "<group>"; };
+		633CC430173CA8F800FCBD67 /* MTHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTHelpViewController.m; sourceTree = "<group>"; };
+		633CC431173CA8F800FCBD67 /* MTHelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTHelpViewController.xib; sourceTree = "<group>"; };
+		633CC435173CAFF900FCBD67 /* Ok-helpbox-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ok-helpbox-ss.png"; sourceTree = "<group>"; };
+		633CC436173CAFF900FCBD67 /* Ok-helpbox-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ok-helpbox-s.png"; sourceTree = "<group>"; };
+		633CC437173CAFF900FCBD67 /* Helpbox-popup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Helpbox-popup.png"; sourceTree = "<group>"; };
+		633CC438173CAFF900FCBD67 /* Help_buttn-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Help_buttn-ss.png"; sourceTree = "<group>"; };
+		633CC439173CAFF900FCBD67 /* Help_buttn-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Help_buttn-s.png"; sourceTree = "<group>"; };
+		633CC444173CB74300FCBD67 /* Help_buttnBlue-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Help_buttnBlue-ss.png"; sourceTree = "<group>"; };
+		633CC445173CB74300FCBD67 /* Help_buttnPink-ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Help_buttnPink-ss.png"; sourceTree = "<group>"; };
+		633CC446173CB74300FCBD67 /* Help_buttnPink-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Help_buttnPink-s.png"; sourceTree = "<group>"; };
+		633CC447173CB74300FCBD67 /* Help_buttnBlue-s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Help_buttnBlue-s.png"; sourceTree = "<group>"; };
+		63F607BA173E98D500DAFF50 /* Icon-free@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-free@2x.png"; sourceTree = "<group>"; };
+		63F607BC173E98DE00DAFF50 /* Icon-free.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-free.png"; sourceTree = "<group>"; };
 		AC05BFE91727AF4100AA6E7E /* MTLocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLocalNotification.h; sourceTree = "<group>"; };
 		AC05BFEA1727AF4100AA6E7E /* MTLocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLocalNotification.m; sourceTree = "<group>"; };
 		AC244630172E6A04004E0B3B /* PCAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCAsyncImageView.h; sourceTree = "<group>"; };
@@ -296,7 +337,7 @@
 		ACBBD1AF170D676F00CBD2C8 /* MTReminderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTReminderCell.h; sourceTree = "<group>"; };
 		ACBBD1B0170D676F00CBD2C8 /* MTReminderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTReminderCell.m; sourceTree = "<group>"; };
 		ACBBD1B1170D676F00CBD2C8 /* MTReminderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTReminderCell.xib; sourceTree = "<group>"; };
-		ACBD65B6170BC483007EABE6 /* MTMedicineTaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTMedicineTaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACBD65B6170BC483007EABE6 /* MedsTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedsTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACBD65B9170BC483007EABE6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACBD65BB170BC483007EABE6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ACBD65BD170BC483007EABE6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -373,7 +414,7 @@
 		ACEF7D24173768970035773D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		ACEF7D261737689F0035773D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ACEF7D2817377DE20035773D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		ACEF7DA21737948D0035773D /* MTMedicineTakerFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTMedicineTakerFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACEF7DA21737948D0035773D /* MedsTimefree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedsTimefree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACEF7DA31737948D0035773D /* MTMedicineTakerFree-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MTMedicineTakerFree-Info.plist"; path = "/Users/panfilo/Documents/MTMedicineTaker/src/MTMedicineTakerFree-Info.plist"; sourceTree = "<absolute>"; };
 		ACF206DD170E73EA00827BD4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		ACF206E1170E748B00827BD4 /* ArrowBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ArrowBlack.png; path = Resources/ArrowBlack.png; sourceTree = SOURCE_ROOT; };
@@ -431,6 +472,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		633CC42A173CA74700FCBD67 /* HelpView */ = {
+			isa = PBXGroup;
+			children = (
+				633CC42F173CA8F800FCBD67 /* MTHelpViewController.h */,
+				633CC430173CA8F800FCBD67 /* MTHelpViewController.m */,
+				633CC42E173CA8F800FCBD67 /* MTHelpViewController-h568.xib */,
+				633CC431173CA8F800FCBD67 /* MTHelpViewController.xib */,
+			);
+			name = HelpView;
+			sourceTree = "<group>";
+		};
 		AC05BFE81727AF1000AA6E7E /* Notification */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,6 +540,7 @@
 		AC2CC758172677DF00EC1913 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				633CC42A173CA74700FCBD67 /* HelpView */,
 				ACDA30E11720607A004FDEC6 /* FrequencyDatesView */,
 				ACDA30D317203601004FDEC6 /* Schedule */,
 				AC950B77171CF41400F4F0D1 /* MedicineInfo */,
@@ -616,6 +669,8 @@
 		ACBD65AD170BC483007EABE6 = {
 			isa = PBXGroup;
 			children = (
+				63F607BC173E98DE00DAFF50 /* Icon-free.png */,
+				63F607BA173E98D500DAFF50 /* Icon-free@2x.png */,
 				ACEF7D2817377DE20035773D /* StoreKit.framework */,
 				ACEF7D261737689F0035773D /* SystemConfiguration.framework */,
 				ACEF7D24173768970035773D /* MessageUI.framework */,
@@ -650,8 +705,8 @@
 		ACBD65B7170BC483007EABE6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ACBD65B6170BC483007EABE6 /* MTMedicineTaker.app */,
-				ACEF7DA21737948D0035773D /* MTMedicineTakerFree.app */,
+				ACBD65B6170BC483007EABE6 /* MedsTime.app */,
+				ACEF7DA21737948D0035773D /* MedsTimefree.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -743,6 +798,11 @@
 				ACB2CEC017129A9200648410 /* MedsTime_MedPic.png */,
 				ACCA8B6B1732677000E315B3 /* MedsTime_MedPic@2x.png */,
 				ACB2CEC217129A9200648410 /* MedsTime_ProfilePic.png */,
+				633CC435173CAFF900FCBD67 /* Ok-helpbox-ss.png */,
+				633CC436173CAFF900FCBD67 /* Ok-helpbox-s.png */,
+				633CC437173CAFF900FCBD67 /* Helpbox-popup.png */,
+				633CC438173CAFF900FCBD67 /* Help_buttn-ss.png */,
+				633CC439173CAFF900FCBD67 /* Help_buttn-s.png */,
 				ACB2CEC317129A9200648410 /* MedsTime_ProfilePic@2x.png */,
 				ACBE579417338FB8005920B0 /* pink_bar_640x90.png */,
 				ACBE57981733B964005920B0 /* Grey_bar_640x162.png */,
@@ -763,6 +823,10 @@
 				ACBE5786173355F9005920B0 /* Cancel_btn-ss.png */,
 				ACBE577D173354C5005920B0 /* Back-blue_btn-s.png */,
 				ACBE5781173354F3005920B0 /* Back-pink_btn-s.png */,
+				633CC444173CB74300FCBD67 /* Help_buttnBlue-ss.png */,
+				633CC445173CB74300FCBD67 /* Help_buttnPink-ss.png */,
+				633CC446173CB74300FCBD67 /* Help_buttnPink-s.png */,
+				633CC447173CB74300FCBD67 /* Help_buttnBlue-s.png */,
 				ACBE5782173354F3005920B0 /* Back-pink_btn-ss.png */,
 				ACBE577E173354C5005920B0 /* Back-blue_btn-ss.png */,
 				ACF206E5170E748B00827BD4 /* ButtonDisclaimer.png */,
@@ -871,7 +935,7 @@
 			);
 			name = MTMedicineTaker;
 			productName = MTMedicineTaker;
-			productReference = ACBD65B6170BC483007EABE6 /* MTMedicineTaker.app */;
+			productReference = ACBD65B6170BC483007EABE6 /* MedsTime.app */;
 			productType = "com.apple.product-type.application";
 		};
 		ACEF7D2A1737948D0035773D /* MTMedicineTakerFree */ = {
@@ -888,7 +952,7 @@
 			);
 			name = MTMedicineTakerFree;
 			productName = MTMedicineTaker;
-			productReference = ACEF7DA21737948D0035773D /* MTMedicineTakerFree.app */;
+			productReference = ACEF7DA21737948D0035773D /* MedsTimefree.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -990,6 +1054,17 @@
 				ACBE579717338FB8005920B0 /* yellow_bar_640x90.png in Resources */,
 				ACBE57991733B964005920B0 /* Grey_bar_640x162.png in Resources */,
 				ACEF7D1F17375C960035773D /* README.txt in Resources */,
+				633CC432173CA8F800FCBD67 /* MTHelpViewController-h568.xib in Resources */,
+				633CC434173CA8F800FCBD67 /* MTHelpViewController.xib in Resources */,
+				633CC43A173CAFF900FCBD67 /* Ok-helpbox-ss.png in Resources */,
+				633CC43C173CAFF900FCBD67 /* Ok-helpbox-s.png in Resources */,
+				633CC43E173CAFF900FCBD67 /* Helpbox-popup.png in Resources */,
+				633CC440173CAFF900FCBD67 /* Help_buttn-ss.png in Resources */,
+				633CC442173CAFF900FCBD67 /* Help_buttn-s.png in Resources */,
+				633CC448173CB74300FCBD67 /* Help_buttnBlue-ss.png in Resources */,
+				633CC44A173CB74300FCBD67 /* Help_buttnPink-ss.png in Resources */,
+				633CC44C173CB74300FCBD67 /* Help_buttnPink-s.png in Resources */,
+				633CC44E173CB74300FCBD67 /* Help_buttnBlue-s.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1063,6 +1138,19 @@
 				ACEF7D9A1737948D0035773D /* yellow_bar_640x90.png in Resources */,
 				ACEF7D9B1737948D0035773D /* Grey_bar_640x162.png in Resources */,
 				ACEF7D9C1737948D0035773D /* README.txt in Resources */,
+				633CC43B173CAFF900FCBD67 /* Ok-helpbox-ss.png in Resources */,
+				633CC43D173CAFF900FCBD67 /* Ok-helpbox-s.png in Resources */,
+				633CC43F173CAFF900FCBD67 /* Helpbox-popup.png in Resources */,
+				633CC441173CAFF900FCBD67 /* Help_buttn-ss.png in Resources */,
+				633CC443173CAFF900FCBD67 /* Help_buttn-s.png in Resources */,
+				633CC449173CB74300FCBD67 /* Help_buttnBlue-ss.png in Resources */,
+				633CC44B173CB74300FCBD67 /* Help_buttnPink-ss.png in Resources */,
+				633CC44D173CB74300FCBD67 /* Help_buttnPink-s.png in Resources */,
+				633CC44F173CB74300FCBD67 /* Help_buttnBlue-s.png in Resources */,
+				633CC450173CBC7400FCBD67 /* MTHelpViewController.xib in Resources */,
+				63F607B7173E97C400DAFF50 /* MTHelpViewController-h568.xib in Resources */,
+				63F607BB173E98D500DAFF50 /* Icon-free@2x.png in Resources */,
+				63F607BD173E98DE00DAFF50 /* Icon-free.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,6 +1195,7 @@
 				AC244639172E7860004E0B3B /* PCImageDirectorySaver.m in Sources */,
 				ACCA8B6717320A5600E315B3 /* MTWebViewController.m in Sources */,
 				ACBE579217336D93005920B0 /* UIImage+UIImage_fixOrientation.m in Sources */,
+				633CC433173CA8F800FCBD67 /* MTHelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,6 +1237,7 @@
 				ACEF7D4B1737948D0035773D /* PCImageDirectorySaver.m in Sources */,
 				ACEF7D4C1737948D0035773D /* MTWebViewController.m in Sources */,
 				ACEF7D4D1737948D0035773D /* UIImage+UIImage_fixOrientation.m in Sources */,
+				63F607B9173E97C800DAFF50 /* MTHelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1234,7 +1324,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MedsTime;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1252,7 +1342,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MedsTime;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1271,7 +1361,7 @@
 				);
 				OTHER_CFLAGS = "-DFREE";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = MTMedicineTakerFree;
+				PRODUCT_NAME = MedsTimefree;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1293,7 +1383,7 @@
 					"-DFREE",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = MTMedicineTakerFree;
+				PRODUCT_NAME = MedsTimefree;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

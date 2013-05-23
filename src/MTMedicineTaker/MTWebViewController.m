@@ -22,8 +22,7 @@
     self = [super initWithNibName:nibName bundle:nil];
     if (self) {
         // Custom initialization
-         self.navigationItem.title = seachValue;
-        
+        self.navigationItem.title = seachValue;
         seachValue = [seachValue stringByReplacingOccurrencesOfString:@" " withString:@"_"];
         NSLog(@"valueToSearch %@",seachValue);
         self.searchValue = seachValue;
@@ -38,7 +37,6 @@
         [_backButton addTarget:self action:@selector(onButtonBackClicked) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barButtonBack = [[[UIBarButtonItem alloc] initWithCustomView:_backButton]autorelease];
         self.navigationItem.leftBarButtonItem = barButtonBack;
-        
     }
     return  self;
 }

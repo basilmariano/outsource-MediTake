@@ -63,7 +63,6 @@ static PCImageDirectorySaver *_instance;
 
 -(UIImage *)imageFilePath:(NSString *)path
 {
-    NSLog(@"Path -> %@",path);
     NSData *pngData = [NSData dataWithContentsOfFile:path];
     UIImage *image = [UIImage imageWithData:pngData];
     return image;

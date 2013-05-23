@@ -16,6 +16,7 @@
 #import "Time.h"
 #import "MTWebViewController.h"
 #import "GADBannerView.h"
+#import "MTHelpViewController.h"
 
 @interface MTReminderViewController () <UIActionSheetDelegate>
 {
@@ -38,6 +39,17 @@
         _reminderList = [[NSMutableArray alloc] init];
         self.navigationItem.title = @"Reminder";
     }
+    
+    UIImage *helpImageInActive = [UIImage imageNamed:@"Help_buttnPink-ss"];
+    UIImage *helpImageActive = [UIImage imageNamed:@"Help_buttnPink-s.png"];
+    
+    UIButton *buttonHelp = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonHelp.frame = CGRectMake(0, 0, 28, 28);
+    [buttonHelp setImage:helpImageInActive forState:UIControlStateNormal];
+    [buttonHelp setImage:helpImageActive forState:UIControlStateHighlighted];
+    [buttonHelp addTarget:self action:@selector(onButtonHelpClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButtonHelp = [[[UIBarButtonItem alloc] initWithCustomView:buttonHelp]autorelease];
+    self.navigationItem.leftBarButtonItem = barButtonHelp;
     return self;
 }
 
@@ -48,6 +60,7 @@
     [_fetchedResultsController release];
     [super dealloc];
 }
+
 #pragma mark  UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -119,11 +132,12 @@
     NSString *strTime = [dateFormat stringFromDate:fireDate];
     tbCell.scheduleTime.text = strTime;
     
+    NSDate *date = [NSDate date];
     NSDateFormatter *dateFormat2 = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormat2 setDateFormat:@"MM/dd/yy"];
-    NSString *strDate= [dateFormat2 stringFromDate:fireDate];
+    [dateFormat2 setDateFormat:@"dd/MM/yy"];
+    NSString *strDate= [dateFormat2 stringFromDate:date];
     tbCell.scheduleDate.text = strDate;
-
+    
     return tbCell;
 }
 
@@ -131,7 +145,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 81.0f;
+    return 110.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -156,7 +170,7 @@
         //fireDateFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
         [fireDateFormat setDateFormat:@"hh:mm aa"];
         NSString *strFireTime = [fireDateFormat stringFromDate:fireDate];
-       
+        
         if([strFireTime isEqualToString:strTime]) {
             
             NSArray *stringList = [time.status componentsSeparatedByString:@" "];
@@ -165,9 +179,9 @@
         }
     }
     /*BOOL disableFirst2Buttons = NO;
-    if([medicineCurrentStatus isEqualToString:@"Skip"] || [medicineCurrentStatus isEqualToString:@"Taken"]) {
-        disableFirst2Buttons = YES;
-    }*/
+     if([medicineCurrentStatus isEqualToString:@"Skip"] || [medicineCurrentStatus isEqualToString:@"Taken"]) {
+     disableFirst2Buttons = YES;
+     }*/
     
     UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                               delegate:self
@@ -181,34 +195,34 @@
     actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
     
     /*if(disableFirst2Buttons) {
-        NSUInteger buttonIndex = 0;
-    if([[XCDeviceManager manager] deviceType] == iPhone4_Device ) { //IPHONE4
-        //<-disable the actionsheet buttons
-        for (UIView* actionView in actionSheet.subviews){
-            NSLog(@"Class %@",[actionView class]);
-            if([[actionView description] hasPrefix: @"<UIThreePartButton"] )        {
-                if (buttonIndex == 0 || buttonIndex == 1) {
-                    UIButton* button = (UIButton*)actionView;
-                    button.enabled = NO;
-                }
-                buttonIndex++;
-            }
-        }
-    } else if([[XCDeviceManager manager] deviceType] == iPhone5_Device) {//IPHONE5
-        //<-disable the actionsheet buttons
-        for (UIView* actionView in actionSheet.subviews){
-            NSLog(@"Class %@",[actionView class]);
-            if([actionView isKindOfClass:[UIButton class]])        {
-                if (buttonIndex == 0 || buttonIndex == 1) {
-                    UIButton* button = (UIButton*)actionView;
-                    button.enabled = NO;
-                }
-                buttonIndex++;
-            }
-        }
-    }
-        
-    }*/
+     NSUInteger buttonIndex = 0;
+     if([[XCDeviceManager manager] deviceType] == iPhone4_Device ) { //IPHONE4
+     //<-disable the actionsheet buttons
+     for (UIView* actionView in actionSheet.subviews){
+     NSLog(@"Class %@",[actionView class]);
+     if([[actionView description] hasPrefix: @"<UIThreePartButton"] )        {
+     if (buttonIndex == 0 || buttonIndex == 1) {
+     UIButton* button = (UIButton*)actionView;
+     button.enabled = NO;
+     }
+     buttonIndex++;
+     }
+     }
+     } else if([[XCDeviceManager manager] deviceType] == iPhone5_Device) {//IPHONE5
+     //<-disable the actionsheet buttons
+     for (UIView* actionView in actionSheet.subviews){
+     NSLog(@"Class %@",[actionView class]);
+     if([actionView isKindOfClass:[UIButton class]])        {
+     if (buttonIndex == 0 || buttonIndex == 1) {
+     UIButton* button = (UIButton*)actionView;
+     button.enabled = NO;
+     }
+     buttonIndex++;
+     }
+     }
+     }
+     
+     }*/
     [actionSheet showFromTabBar:self.tabBarController.tabBar];
 }
 
@@ -221,17 +235,17 @@
 {
     NSDictionary *dict = [self.reminderList objectAtIndex:indexPath.row];
     UILocalNotification *notif = [dict objectForKey:@"notification"];
-        
+    
     NSDate *now = [NSDate date];
     NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
     NSDateComponents *compsNow  = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:now];
     NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:notif.fireDate];
-        
+    
     NSInteger currentTimeInSecs = compsNow.hour*3600 + compsNow.minute*60 + compsNow.second;
     NSInteger fireTimeInSecs    = compsFire.hour*3600 + compsFire.minute*60  + compsFire.second;
-        
+    
     if(currentTimeInSecs >= fireTimeInSecs) {
-
+        
         [cell setBackgroundColor: [UIColor colorWithPatternImage:[UIImage imageNamed:@"Grey_bar_640x162.png"]]];
     }
 }
@@ -316,13 +330,13 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 2) {
-
+        
         NSDictionary *dict = [self.reminderList objectAtIndex:selectedIndexPathRow];
         //UILocalNotification *notif = [dict objectForKey:@"notification"];
         Medicine *med = (Medicine *) [dict objectForKey:@"Medicine"];
         MTWebViewController *webViewController = [[[MTWebViewController alloc] initWithSearchString:med.medicineName]autorelease];
-        [self.navigationController pushViewController:webViewController animated:YES];        
-       
+        [self.navigationController pushViewController:webViewController animated:YES];
+        
         return;
     } else if(buttonIndex == 3) {
         return;
@@ -345,7 +359,7 @@
         NSDateFormatter *fireDateFormat = [[[NSDateFormatter alloc] init] autorelease];
         [fireDateFormat setDateFormat:@"hh:mm aa"];
         NSString *strFireTime = [fireDateFormat stringFromDate:fireDate];
-       
+        
         if([strFireTime isEqualToString:strTime]) {
             NSDate *current = [NSDate date];
             NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
@@ -360,7 +374,7 @@
             } else if (buttonIndex == 1) {
                 time2.status = [NSString stringWithFormat:@"Skip at %@",strTime];
             }
-        
+            
             NSManagedObject *object = time;
             [[ManageObjectModel objectManager] deleteObject:object];
             
@@ -370,12 +384,13 @@
         }
     }
     [_tableView reloadData];
+
 }
 
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-
+    
 #ifdef FREE
     
     CGRect bannerFrameRect = CGRectMake(0.0,
@@ -516,7 +531,8 @@
        
         NSDateFormatter *fireDateFormatter = [[[NSDateFormatter alloc] init] autorelease];
         [fireDateFormatter setDateFormat:@"MM/dd/yy"];
-        NSString *strfireDate = [fireDateFormatter stringFromDate:notif.fireDate];
+        NSDate *now = [NSDate date];
+        NSString *strfireDate = [fireDateFormatter stringFromDate:now];
         
         NSArray *timeList = [medicine.times allObjects];
         for(Time *time in timeList) {
@@ -525,6 +541,7 @@
             NSString *currentStatus = (NSString *)[stringFields objectAtIndex:0];
             if([currentStatus isEqualToString:@"Taken"] || [currentStatus isEqualToString:@"Skip"]) {
                 NSString *lastDateStatusUpdated = (NSString *)[stringFields objectAtIndex:2];
+                NSLog(@"%@ == %@",strfireDate,lastDateStatusUpdated);
                 if(![lastDateStatusUpdated isEqualToString:strfireDate]) {//<-change the time status
 
                     time.status = medicine.status;
@@ -564,41 +581,16 @@
         }];
     }
     [_tableView reloadData];
+}
+
+- (void) onButtonHelpClicked
+{
+    NSLog(@"Help Clicked");
     
+    NSString *nibName = [[XCDeviceManager manager] xibNameForDevice:@"MTHelpViewController"];
     
-   /* NSMutableArray *reminderListHandler = [NSMutableArray arrayWithArray:self.reminderList];
-    if(!reminderListHandler.count) {
-        [_tableView reloadData];
-        return;
-    }
-    
-    for(int x = 0; x < reminderListHandler.count-1; x++) {
-        NSDictionary *dict = self.reminderList[x];
-        NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
-        UILocalNotification *notif1 = [dict objectForKey:@"notification"];
-        NSDate *fireDate = notif1.fireDate;
-        NSDateComponents *compsFire = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:fireDate];
-        NSInteger dateInSecs = compsFire.hour*3600 + compsFire.minute*60 + compsFire.second;
-        
-        int nexyIdx = x;
-        nexyIdx++;
-        
-        NSDictionary *dict2 = self.reminderList[nexyIdx];
-        UILocalNotification *notif2 = [dict2 objectForKey:@"notification"];
-        NSDate *fireDate2 = notif2.fireDate;
-        NSDateComponents *compsFire2 = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | kCFCalendarUnitWeekday | kCFCalendarUnitHour | kCFCalendarUnitMinute fromDate:fireDate2];
-        NSInteger dateInSecs2 = compsFire2.hour*3600 + compsFire2.minute*60 + compsFire2.second;
-        
-        NSDictionary *tempHandler = nil;
-        
-        if(dateInSecs > dateInSecs2) {
-            tempHandler = dict2;
-            [self.reminderList insertObject:dict2 atIndex:x];
-            [self.reminderList insertObject:dict atIndex:nexyIdx];
-        }
-    }
-    [_tableView reloadData];
-    */
+    MTHelpViewController *profileController = [[[MTHelpViewController alloc] initWithNibName:nibName bundle:nil] autorelease];
+    [self.navigationController pushViewController:profileController animated:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated

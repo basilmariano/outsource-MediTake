@@ -7,7 +7,6 @@
 //
 
 #import "MTLocalNotification.h"
-#import "Date.h"
 
 static MTLocalNotification *_instance;
 
@@ -25,8 +24,8 @@ static MTLocalNotification *_instance;
     [super dealloc];
 }
 
-- (void)scheduleNotificationWithFireDate: (NSDate *)fireDate frequencyType:(NSNumber *)frequencyType andMedicine:(Medicine *)medicine {
-	
+- (void)scheduleNotificationWithFireDate: (NSDate *)fireDate frequencyType:(NSNumber *)frequencyType andDayValue: (Date *)day andMedicine:(Medicine *)medicine {
+	NSLog(@"day %@",day);
     Class cls = NSClassFromString(@"UILocalNotification");
 	if (cls != nil) {
         
@@ -37,23 +36,31 @@ static MTLocalNotification *_instance;
                 NSManagedObject *object = medicine;
                 NSString *strPK         = [[[object objectID] URIRepresentation] absoluteString];
                 NSString *tempPK        = strPK;
+                
+                NSManagedObject *object2 = day;
+                NSString *strPK2         = [[[object2 objectID] URIRepresentation] absoluteString];
+                
                 NSDictionary *dict      = localNotif.userInfo;
                 NSMutableArray *tempPkHolderList = [[[NSMutableArray alloc] init]autorelease];
+                NSMutableArray *tempDayHolderList = [[[NSMutableArray alloc] init]autorelease];
                 NSArray *medPKList      = (NSArray *) [dict objectForKey:@"Medicines"]; //<- add medicinePK in list
                 
                 NSString *medicine_PK  = nil;
                 for(NSString *primaryKey in medPKList) {
                     if([primaryKey isEqualToString:tempPK]) {
-                        /*medicine_PK = primaryKey;
+                       /* medicine_PK = primaryKey;
                         [tempPkHolderList addObject:primaryKey];*/
                         return;
                     } else {
                         [tempPkHolderList addObject:primaryKey];
+                        [tempDayHolderList addObject:strPK2];
                     }
                 }
                 
-                if(!medicine_PK)
+                if(!medicine_PK) {
                     [tempPkHolderList addObject:tempPK];
+                    [tempDayHolderList addObject:day];
+                }
                 
                 NSString *alertBody = (NSString *) [dict objectForKey:@"Alert"];
                 alertBody = [alertBody stringByAppendingFormat:@" and %@",medicine.medicineName];//<- update the body
@@ -121,9 +128,13 @@ static MTLocalNotification *_instance;
         
         NSManagedObject *object = medicine;
         NSString *strPK = [[[object objectID] URIRepresentation] absoluteString];
-    
+        
+        NSManagedObject *objectD = day;
+        NSString *strPKDay = [[[objectD objectID] URIRepresentation] absoluteString];
+        
         NSMutableDictionary *dictObject = [NSMutableDictionary dictionaryWithObjectsAndKeys:
         [NSArray arrayWithObject:strPK], @"Medicines",
+        [NSArray arrayWithObject:strPKDay], @"day",
                                  notif.alertBody, @"Alert",
                                  nil];
 		notif.userInfo = dictObject;
@@ -209,27 +220,46 @@ static MTLocalNotification *_instance;
     }
 }
 
-- (void)cancelNotificationWithMedicine: (Medicine *)medicine andWithMedicineDayType: (NSUInteger)dayType
+- (void)cancelNotificationWithMedicine: (Medicine *)medicine withDay:(Date *)day
 {
     NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
     for(UILocalNotification *localNotif in notificationList) {
-        NSDictionary *dict      = localNotif.userInfo;
-        NSManagedObject *object = medicine;
-        NSString *medicinePK    = [[[object objectID] URIRepresentation] absoluteString];
-        NSArray *medPKList      = (NSArray *) [dict objectForKey:@"Medicines"];
-        
-        for(NSString *strPK in medPKList) {
-            if([strPK isEqualToString:medicinePK]) {
-                NSArray *medicineDayList = [NSArray arrayWithArray:[medicine.days allObjects]];
-                NSLog(@"%d",medicineDayList.count);
-                for(Date *d in medicineDayList) {
-                    if(![d.type isEqualToNumber:[NSNumber numberWithInteger:dayType]]) {
-                        [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
-                    }
+        //check if in localNotif
+        NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
+        for(UILocalNotification *localNotif in notificationList) {
+           /* NSDictionary *dict    = localNotif.userInfo;
+            NSArray *dayList      = (NSArray *) [dict objectForKey:@"day"];
+            
+            NSManagedObject *objectD = day;
+            NSString *strPKDay = [[[objectD objectID] URIRepresentation] absoluteString];
+            
+            for(NSString *specificDay in dayList) {
+                
+                if([specificDay isEqualToString:strPKDay]) {
+                    
+                    [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
+
+                }
+            }*/
+            
+            NSDictionary *dict    = localNotif.userInfo;
+            NSArray *dayList      = (NSArray *) [dict objectForKey:@"day"];
+            NSLog(@"dayLIstCouhnt %@",dayList);
+            
+            for(NSString *strDay in dayList) {
+                
+                NSManagedObject *objectD = day;
+                NSString *strPKDay = [[[objectD objectID] URIRepresentation] absoluteString];
+                NSLog(@"%@ ==  %@", strDay, strPKDay);
+                if([strPKDay isEqualToString:strDay]) {
+                    //[[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine withDay:date];
+                    [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
                 }
             }
         }
+
     }
+
 }
 
 - (void)cancelNotificationWithMedicine: (Medicine *)medicine andFireDate:(NSDate *)fireTime
@@ -291,6 +321,28 @@ static MTLocalNotification *_instance;
     }
     NSLog(@"Exits %d",exist);
     return  exist;
+}
+
+- (NSMutableArray *) medicineNotificationList:(Medicine *)medicine
+{
+    NSMutableArray *medicineInLocalNotificationList = [NSMutableArray array];
+    
+    NSArray *localNotificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
+    for(UILocalNotification *localNotif in localNotificationList) {
+        NSDictionary *dict      = localNotif.userInfo;
+        NSArray *medPKList      = (NSArray *) [dict objectForKey:@"Medicines"];
+        
+        NSManagedObject *object = medicine;
+        NSString *medicinePK    = [[[object objectID] URIRepresentation] absoluteString];
+        
+        for(NSString *strPK in medPKList) {
+            if([strPK isEqualToString:medicinePK]) {
+                [medicineInLocalNotificationList addObject:localNotif];
+            }
+        }
+    }
+    
+    return medicineInLocalNotificationList;
 }
 
 - (void)clearNotification {

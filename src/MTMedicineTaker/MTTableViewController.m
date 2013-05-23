@@ -18,6 +18,7 @@
 #import "PCAsyncImageView.h"
 #import "GADBannerView.h"
 #import "XCDeviceManager.h"
+#import "MTHelpViewController.h"
 
 @interface MTTableViewController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -70,6 +71,17 @@
         }
         
     }
+    
+    UIImage *helpImageInActive = [UIImage imageNamed:@"Help_buttnBlue-ss"];
+    UIImage *helpImageActive = [UIImage imageNamed:@"Help_buttnBlue-s.png"];
+
+    UIButton *buttonHelp = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonHelp.frame = CGRectMake(0, 0, 28, 28);
+    [buttonHelp setImage:helpImageInActive forState:UIControlStateNormal];
+    [buttonHelp setImage:helpImageActive forState:UIControlStateHighlighted];
+    [buttonHelp addTarget:self action:@selector(onButtonHelpClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButtonHelp = [[[UIBarButtonItem alloc] initWithCustomView:buttonHelp]autorelease];
+    self.navigationItem.leftBarButtonItem = barButtonHelp;
     return self;
 }
 
@@ -236,7 +248,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 81.0f;
+    return 75.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -366,6 +378,17 @@
     //[tbCell.profileImageView loadImageFromURL:[NSURL URLWithString:profile.profileImagePath]];
     return tbCell;
 }
+
+- (void) onButtonHelpClicked
+{
+    NSLog(@"Help Clicked");
+    
+    NSString *nibName = [[XCDeviceManager manager] xibNameForDevice:@"MTHelpViewController"];
+    
+    MTHelpViewController *profileController = [[[MTHelpViewController alloc] initWithNibName:nibName bundle:nil] autorelease];
+    [self.navigationController pushViewController:profileController animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

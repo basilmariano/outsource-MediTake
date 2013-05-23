@@ -214,7 +214,7 @@ static MTMedicineInfoViewController *_instance;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 61.0f;
+    return 60.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -262,17 +262,17 @@ static MTMedicineInfoViewController *_instance;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 22)] autorelease];
+    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 32)] autorelease];
     
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0,119, 22)] autorelease];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0,119, 32)] autorelease];
     label.text = [tableView.dataSource tableView:tableView titleForHeaderInSection:section];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:17];
-    [label setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0]];
+    label.font = [UIFont boldSystemFontOfSize:18];
+    [label setTextColor:[UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1.0]];
     
     UIImage *background = [UIImage imageNamed:@"SectionBackground.png"];
     UIImageView *bgImageView = [[UIImageView alloc] initWithImage:background];
-    bgImageView.frame = CGRectMake(0, 0, 320, 22);
+    bgImageView.frame = CGRectMake(0, 0, 320, 32);
     
     [headerView addSubview:bgImageView];
     [headerView addSubview:label];
@@ -389,10 +389,71 @@ static MTMedicineInfoViewController *_instance;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void) removeNotificationWithDeletedDays
+{
+    NSMutableArray *notificationListWithMedicine = [[MTLocalNotification sharedInstance] medicineNotificationList:self.medicine];
+    NSArray *dayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
+    for(Date *date in dayList) {
+        Date *dateHandler = nil;
+        Date *prevDateStr = nil;
+        for(Date *prevDate in self.previousDayList) {
+            NSLog(@"day %@",prevDate);
+//NSLog(@"day2 %@",prevDate.date);
+            
+            prevDateStr = prevDate;//<- on  tuesday :)
+            if([date isEqual:prevDate]) {
+                dateHandler = date;
+            }
+        }
+        if(!dateHandler) {
+            //check if in localNotif
+            for(UILocalNotification *localNotif in notificationListWithMedicine) {
+                NSDictionary *dict    = localNotif.userInfo;
+                NSArray *dayList      = (NSArray *) [dict objectForKey:@"day"];
+                NSLog(@"dayLIstCouhnt %@",dayList);
+                
+                for(NSString *strDay in dayList) {
+                    
+                    NSManagedObject *objectD = prevDateStr;
+                    NSString *strPKDay = [[[objectD objectID] URIRepresentation] absoluteString];
+                    NSLog(@"%@ ==  %@", strDay, strPKDay);
+                    if([strPKDay isEqualToString:strDay]) {
+                        [self.previousDayList removeObject:prevDateStr];
+                        [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine withDay:prevDateStr];
+                    }
+                }
+            }
+        }
+    }
+    
+    for(Date *prevDate in self.previousDayList) {
+        NSLog(@"day %@",prevDate);
+
+        for(UILocalNotification *localNotif in notificationListWithMedicine) {
+            NSDictionary *dict    = localNotif.userInfo;
+            NSArray *dayList      = (NSArray *) [dict objectForKey:@"day"];
+            NSLog(@"dayLIstCouhnt %@",dayList);
+            
+            for(NSString *strDay in dayList) {
+                
+                NSManagedObject *objectD = prevDate;
+                NSString *strPKDay = [[[objectD objectID] URIRepresentation] absoluteString];
+                NSLog(@"%@ ==  %@", strDay, strPKDay);
+                if([strPKDay isEqualToString:strDay]) {
+                   
+                    [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine withDay:prevDate];
+                }
+            }
+        }
+    }
+}
+
 - (void)setFireDate
 {
     NSArray *timeList = [NSArray arrayWithArray:[_medicine.times allObjects]];
     NSArray *dayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
+    
+    [self removeNotificationWithDeletedDays];
     
     NSDate *finalDate = nil;
     NSDate *time = nil;
@@ -419,7 +480,7 @@ static MTMedicineInfoViewController *_instance;
         
         if(!t1) {
         for(Date *d in dayList) {
-            
+       
             switch ([d.type integerValue]) {
                 case 0: {
                     
@@ -486,7 +547,7 @@ static MTMedicineInfoViewController *_instance;
                     NSString *dateStr = d.date;
                     // Convert string to date object
                     NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
-                    [dateFormat setDateFormat:@"MMM:dd:yyyy"];
+                    [dateFormat setDateFormat:@"MMM dd, yyyy"];
                     
                     dayDate = [dateFormat dateFromString:dateStr];
                     dateComponents = [calendar components:( NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit )
@@ -525,7 +586,9 @@ static MTMedicineInfoViewController *_instance;
             
             NSString *strTime = [dateFormat stringFromDate:finalDate];
             NSLog(@"Final Date %@",strTime );
-            [[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andMedicine:_medicine];
+            NSLog(@"day %@",d.date );
+            [[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andDayValue:d andMedicine:_medicine];
+            //[[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andDayValue: (NSString *)day andMedicine:_medicine];
         }
         }
     }
@@ -556,52 +619,52 @@ static MTMedicineInfoViewController *_instance;
 - (void) onButtonDoneClicked
 {
     if(![self.medicineName.text isEqual:@""]) {
-     
-       // if(![self.medicineName.text isEqualToString:self.proviousMedicineName]) {
+        
+        // if(![self.medicineName.text isEqualToString:self.proviousMedicineName]) {
         
         NSString *imagePath = [NSString stringWithFormat:@"Medicine_%@%@",_medicineName.text,_medicine.medicineTaker.name];
         
-            self.medicine.medicineName      = _medicineName.text;
-            self.medicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] saveImageInDocumentFileWithImage:self.medicineImage.imageView.image andAppendingImageName:imagePath];
-            self.medicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
-            self.medicine.status            = self.medicine.meal;
-            
-            [[ManageObjectModel objectManager] saveContext];
-            
-            NSManagedObject *object = [Medicine medicineWithImagePath:self.medicine.medicineImagePath];
-            int primaryKey = [[[[[[object objectID] URIRepresentation] absoluteString] lastPathComponent] substringFromIndex:1] intValue];
-            NSString *strPK = [[NSNumber numberWithInt:primaryKey] stringValue];
-       
-            NSLog(@"PK %@",strPK);
-            Medicine *updateMedicine = (Medicine *) object;
-            updateMedicine.medicineName      = _medicineName.text;
-            updateMedicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] replaceFile:imagePath withImage:self.medicineImage.imageView.image withNewFile:strPK];
-            updateMedicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
-            updateMedicine.status            = self.medicine.meal;
+        self.medicine.medicineName      = _medicineName.text;
+        self.medicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] saveImageInDocumentFileWithImage:self.medicineImage.imageView.image andAppendingImageName:imagePath];
+        self.medicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
+        self.medicine.status            = self.medicine.meal;
         
-            [[ManageObjectModel objectManager] saveContext];
-            
-            if(self.switcher.on) {
-                [self setFireDate];
-            } else {
-                [[MTLocalNotification sharedInstance] deleteNotificationWithMedicine:self.medicine fromNotification:nil];
-            }
-            
-            
-            
-            [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
-            /*NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
-            NSLog(@"%d", notificationList.count);*/
-            
+        [[ManageObjectModel objectManager] saveContext];
+        
+        NSManagedObject *object = [Medicine medicineWithImagePath:self.medicine.medicineImagePath];
+        int primaryKey = [[[[[[object objectID] URIRepresentation] absoluteString] lastPathComponent] substringFromIndex:1] intValue];
+        NSString *strPK = [[NSNumber numberWithInt:primaryKey] stringValue];
+        
+        NSLog(@"PK %@",strPK);
+        Medicine *updateMedicine = (Medicine *) object;
+        updateMedicine.medicineName      = _medicineName.text;
+        updateMedicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] replaceFile:imagePath withImage:self.medicineImage.imageView.image withNewFile:strPK];
+        updateMedicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
+        updateMedicine.status            = self.medicine.meal;
+        
+        [[ManageObjectModel objectManager] saveContext];
+        
+        if(self.switcher.on) {
+            [self setFireDate];
+        } else {
+            [[MTLocalNotification sharedInstance] deleteNotificationWithMedicine:self.medicine fromNotification:nil];
+        }
+        
+        
+        
+        [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
+        /*NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
+         NSLog(@"%d", notificationList.count);*/
+        
         //} else {
-            
-           /* UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Medicine already exist!!"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            [alert release];*/
-
+        
+        /* UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Medicine already exist!!"
+         delegate:nil
+         cancelButtonTitle:@"Ok"
+         otherButtonTitles:nil];
+         [alert show];
+         [alert release];*/
+        
         //}
     } else {
         
@@ -706,11 +769,6 @@ static MTMedicineInfoViewController *_instance;
     return self.previousTimeList;
 }
 
--(NSMutableArray *)medicineDayList
-{
-    return self.previousDayList;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -733,7 +791,6 @@ static MTMedicineInfoViewController *_instance;
     self.originalImage = self.medicineImage.imageView.image;
     
     NSArray *arrTimeList = [NSArray arrayWithArray:[_medicine.times allObjects]];
-   //self.previousTimeList = [NSArray arrayWithArray:[_medicine.times allObjects]];
     for(Time *time in arrTimeList) {
         [self.previousTimeList addObject:time];
     }

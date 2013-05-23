@@ -325,7 +325,12 @@
             [dateFormat setDateFormat:@"hh:mm aa"];
             NSString *strTime = [dateFormat stringFromDate:date];
             
-            [string appendFormat:@"%@ ",strTime];
+            if(![t isEqual:timeSet.lastObject]) {
+                [string appendFormat:@"%@, ",strTime];
+            } else {
+                [string appendFormat:@"%@ ",strTime];
+            }
+            
         }
         tbCell.scheduleTime.text = string;
     }
