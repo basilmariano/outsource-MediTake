@@ -16,6 +16,8 @@
 @property (nonatomic,retain) IBOutlet UIButton *medicineImage;
 @property (nonatomic,retain) IBOutlet UITextField *medicineName;
 @property (nonatomic,retain) IBOutlet UISwitch *switcher;
+@property (nonatomic,retain) IBOutlet UIActivityIndicatorView *spinner;
+
 +(MTMedicineInfoViewController *)sharedInstance;
 -(NSMutableArray *)medicineTimeList;
 

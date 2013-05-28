@@ -25,7 +25,7 @@ static MTLocalNotification *_instance;
 }
 
 - (void)scheduleNotificationWithFireDate: (NSDate *)fireDate frequencyType:(NSNumber *)frequencyType andDayValue: (Date *)day andMedicine:(Medicine *)medicine {
-	NSLog(@"day %@",day);
+	//NSLog(@"day %@",day);
     Class cls = NSClassFromString(@"UILocalNotification");
 	if (cls != nil) {
         
@@ -97,7 +97,7 @@ static MTLocalNotification *_instance;
                 [[UIApplication sharedApplication] scheduleLocalNotification:notif];
                 [notif release];
                 
-                NSLog(@"dictObject %@",notif.userInfo);
+                //NSLog(@"dictObject %@",notif.userInfo);
                
                 return;
             }
@@ -201,7 +201,7 @@ static MTLocalNotification *_instance;
         
         [[UIApplication sharedApplication] scheduleLocalNotification:notif];
         [notif release];
-        NSLog(@"dictObject %@",notif.userInfo);
+        //NSLog(@"dictObject %@",notif.userInfo);
         [[UIApplication sharedApplication] cancelLocalNotification:notification];
     } else {
         NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
@@ -244,13 +244,13 @@ static MTLocalNotification *_instance;
             
             NSDictionary *dict    = localNotif.userInfo;
             NSArray *dayList      = (NSArray *) [dict objectForKey:@"day"];
-            NSLog(@"dayLIstCouhnt %@",dayList);
+            //NSLog(@"dayLIstCouhnt %@",dayList);
             
             for(NSString *strDay in dayList) {
                 
                 NSManagedObject *objectD = day;
                 NSString *strPKDay = [[[objectD objectID] URIRepresentation] absoluteString];
-                NSLog(@"%@ ==  %@", strDay, strPKDay);
+                //NSLog(@"%@ ==  %@", strDay, strPKDay);
                 if([strPKDay isEqualToString:strDay]) {
                     //[[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine withDay:date];
                     [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
@@ -319,7 +319,7 @@ static MTLocalNotification *_instance;
             }
         }
     }
-    NSLog(@"Exits %d",exist);
+    //NSLog(@"Exits %d",exist);
     return  exist;
 }
 

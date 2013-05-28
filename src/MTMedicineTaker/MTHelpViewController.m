@@ -31,11 +31,10 @@
         UIImage *cancelImageActive = [UIImage imageNamed:@"Ok-helpbox-s.png"];
         
         UIButton *buttonCancel = [UIButton buttonWithType:UIButtonTypeCustom];
-        buttonCancel.frame = CGRectMake(0, 0, 0, 0);
+        buttonCancel.frame = CGRectMake(0.0f, 0.0f, 61.0f, 33.5f);
         [buttonCancel setImage:cancelImageInactive forState:UIControlStateNormal];
         [buttonCancel setImage:cancelImageActive forState:UIControlStateHighlighted];
         [buttonCancel addTarget:self action:@selector(onButtonCancelClicked) forControlEvents:UIControlEventTouchUpInside];
-        [buttonCancel setHidden:YES];
         
         UIBarButtonItem *barButtonCancel = [[[UIBarButtonItem alloc] initWithCustomView:buttonCancel]autorelease];
     

@@ -16,7 +16,7 @@
 #import "MTLocalNotification.h"
 #import "PCImageDirectorySaver.h"
 
-@interface MTMedicineInfoViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,MTTextFieldCellDelegate>
+@interface MTMedicineInfoViewController () <UIActionSheetDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,MTTextFieldCellDelegate>
 {
     UIImagePickerController *imagePicker;
     int selectedIndex;
@@ -31,6 +31,9 @@
 @property(nonatomic, retain) NSMutableArray *previousTimeList;
 @property(nonatomic, retain) NSMutableArray *previousDayList;
 @property(nonatomic, retain) NSString *proviousMedicineName;
+@property(nonatomic, retain) NSString *unit;
+@property(nonatomic, retain) NSString *quantity;
+@property(nonatomic, retain) NSString *meal;
 
 - (IBAction)addMedicineImage:(id)sender;
 - (UIPickerView *)pickerViewInit;
@@ -54,6 +57,10 @@ static MTMedicineInfoViewController *_instance;
         _previousTimeList = [[NSMutableArray alloc] init];
         _previousDayList = [[NSMutableArray alloc] init];
 
+        self.quantity = @"";
+        self.unit = @"";
+        self.meal = @"";
+        
         self.quantityList = [[[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil] autorelease];
         self.mealList = [[[NSArray alloc] initWithObjects:@"Before Meal",@"After Meal",@"None", nil] autorelease];
         
@@ -102,6 +109,10 @@ static MTMedicineInfoViewController *_instance;
     [_medicine release];
     [_previousDayList release];
     [_previousTimeList release];
+    [_meal release];
+    [_unit release];
+    [_quantity release];
+    
     [super dealloc];
 }
 
@@ -127,7 +138,7 @@ static MTMedicineInfoViewController *_instance;
 
 - (UITableViewCell *)cellWithTableView: (UITableView *)tableView andIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Medicine %@ %@",_medicine,self.medicine);
+    //NSLog(@"Medicine %@ %@",_medicine,self.medicine);
     NSString *CellIdentifier = @"MTMedicineInfoCell";
     
     MTMedicineInfoCell *tbCell = (MTMedicineInfoCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -351,7 +362,7 @@ static MTMedicineInfoViewController *_instance;
     imagePicker.delegate = self;
     
     if(buttonIndex == 0) {
-        NSLog(@"Take Photo");
+        //NSLog(@"Take Photo");
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera ;
             [self presentModalViewController:imagePicker animated:YES];
@@ -361,7 +372,7 @@ static MTMedicineInfoViewController *_instance;
             NSLog(@"Error to take photo");
         }
     } else if(buttonIndex == 1) {
-        NSLog(@"Choose Photo");
+        //NSLog(@"Choose Photo");
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
             imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             [self presentModalViewController:imagePicker animated:YES];
@@ -378,7 +389,9 @@ static MTMedicineInfoViewController *_instance;
 {
     if([textFieldId integerValue] == 0) {
         self.medicine.unit = textField.text;
+        self.unit = textField.text;
     } else if ([textFieldId integerValue] == 1) {
+        self.quantity = textField.text;
         self.medicine.quantity = [NSNumber numberWithInt: [textField.text integerValue]];
     }
 }
@@ -397,12 +410,13 @@ static MTMedicineInfoViewController *_instance;
         Date *dateHandler = nil;
         Date *prevDateStr = nil;
         for(Date *prevDate in self.previousDayList) {
-            NSLog(@"day %@",prevDate);
+           // NSLog(@"day %@",prevDate);
 //NSLog(@"day2 %@",prevDate.date);
             
             prevDateStr = prevDate;//<- on  tuesday :)
             if([date isEqual:prevDate]) {
                 dateHandler = date;
+                //break;
             }
         }
         if(!dateHandler) {
@@ -410,16 +424,17 @@ static MTMedicineInfoViewController *_instance;
             for(UILocalNotification *localNotif in notificationListWithMedicine) {
                 NSDictionary *dict    = localNotif.userInfo;
                 NSArray *dayList      = (NSArray *) [dict objectForKey:@"day"];
-                NSLog(@"dayLIstCouhnt %@",dayList);
+                //NSLog(@"dayLIstCouhnt %@",dayList);
                 
                 for(NSString *strDay in dayList) {
                     
                     NSManagedObject *objectD = prevDateStr;
                     NSString *strPKDay = [[[objectD objectID] URIRepresentation] absoluteString];
-                    NSLog(@"%@ ==  %@", strDay, strPKDay);
+                    //NSLog(@"%@ ==  %@", strDay, strPKDay);
                     if([strPKDay isEqualToString:strDay]) {
                         [self.previousDayList removeObject:prevDateStr];
                         [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine withDay:prevDateStr];
+                        //break;
                     }
                 }
             }
@@ -427,21 +442,22 @@ static MTMedicineInfoViewController *_instance;
     }
     
     for(Date *prevDate in self.previousDayList) {
-        NSLog(@"day %@",prevDate);
+       // NSLog(@"day %@",prevDate);
 
         for(UILocalNotification *localNotif in notificationListWithMedicine) {
             NSDictionary *dict    = localNotif.userInfo;
             NSArray *dayList      = (NSArray *) [dict objectForKey:@"day"];
-            NSLog(@"dayLIstCouhnt %@",dayList);
+            //NSLog(@"dayLIstCouhnt %@",dayList);
             
             for(NSString *strDay in dayList) {
                 
                 NSManagedObject *objectD = prevDate;
                 NSString *strPKDay = [[[objectD objectID] URIRepresentation] absoluteString];
-                NSLog(@"%@ ==  %@", strDay, strPKDay);
+                //NSLog(@"%@ ==  %@", strDay, strPKDay);
                 if([strPKDay isEqualToString:strDay]) {
                    
                     [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine withDay:prevDate];
+                   // break;
                 }
             }
         }
@@ -528,7 +544,7 @@ static MTMedicineInfoViewController *_instance;
                     NSDate *d1 = [NSDate date];
                     NSDateComponents *components = [calendar components:(NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:d1];
                     [components setDay:[d.date integerValue]];
-                    NSLog(@"%d and %d",compsThisMonth.day,components.day);
+                   // NSLog(@"%d and %d",compsThisMonth.day,components.day);
                     if(compsThisMonth.day > components.day) {
                         [components setMonth:compsThisMonth.month + 1];
                         dateComponents = components;
@@ -585,8 +601,8 @@ static MTMedicineInfoViewController *_instance;
             [dateFormat setDateFormat:@"MMM:dd:yyyy hh:mm aa EEEE"];
             
             NSString *strTime = [dateFormat stringFromDate:finalDate];
-            NSLog(@"Final Date %@",strTime );
-            NSLog(@"day %@",d.date );
+            //NSLog(@"Final Date %@",strTime );
+            //NSLog(@"day %@",d.date );
             [[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andDayValue:d andMedicine:_medicine];
             //[[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andDayValue: (NSString *)day andMedicine:_medicine];
         }
@@ -618,63 +634,66 @@ static MTMedicineInfoViewController *_instance;
 
 - (void) onButtonDoneClicked
 {
-    if(![self.medicineName.text isEqual:@""]) {
+    if(![self.medicineName.text isEqual:@""] && ![self.quantity isEqualToString:@""] && ![self.meal isEqualToString:@""] && ![self.unit isEqualToString:@""]) {
+        [_spinner startAnimating];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Save Changes?"
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:nil];
+        alert.tag = 1;
+        [alert buttonTitleAtIndex:[alert addButtonWithTitle:@"Ok"]];
+        [alert buttonTitleAtIndex:[alert addButtonWithTitle:@"Cancel"]];
+        [alert show];
+        [alert release];
         
-        // if(![self.medicineName.text isEqualToString:self.proviousMedicineName]) {
-        
-        NSString *imagePath = [NSString stringWithFormat:@"Medicine_%@%@",_medicineName.text,_medicine.medicineTaker.name];
-        
-        self.medicine.medicineName      = _medicineName.text;
-        self.medicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] saveImageInDocumentFileWithImage:self.medicineImage.imageView.image andAppendingImageName:imagePath];
-        self.medicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
-        self.medicine.status            = self.medicine.meal;
-        
-        [[ManageObjectModel objectManager] saveContext];
-        
-        NSManagedObject *object = [Medicine medicineWithImagePath:self.medicine.medicineImagePath];
-        int primaryKey = [[[[[[object objectID] URIRepresentation] absoluteString] lastPathComponent] substringFromIndex:1] intValue];
-        NSString *strPK = [[NSNumber numberWithInt:primaryKey] stringValue];
-        
-        NSLog(@"PK %@",strPK);
-        Medicine *updateMedicine = (Medicine *) object;
-        updateMedicine.medicineName      = _medicineName.text;
-        updateMedicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] replaceFile:imagePath withImage:self.medicineImage.imageView.image withNewFile:strPK];
-        updateMedicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
-        updateMedicine.status            = self.medicine.meal;
-        
-        [[ManageObjectModel objectManager] saveContext];
-        
-        if(self.switcher.on) {
-            [self setFireDate];
-        } else {
-            [[MTLocalNotification sharedInstance] deleteNotificationWithMedicine:self.medicine fromNotification:nil];
-        }
-        
-        
-        
-        [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
-        /*NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
-         NSLog(@"%d", notificationList.count);*/
-        
-        //} else {
-        
-        /* UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Medicine already exist!!"
-         delegate:nil
-         cancelButtonTitle:@"Ok"
-         otherButtonTitles:nil];
-         [alert show];
-         [alert release];*/
-        
-        //}
     } else {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error:" message:@"Please fill out Medicine name!"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error:" message:@"Please fill up all fields!"
                                                        delegate:nil
                                               cancelButtonTitle:@"Ok"
                                               otherButtonTitles:nil];
+
         [alert show];
         [alert release];
     }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1) {
+        [self save];
+    }
+}
+
+- (void) save
+{
+    NSString *imagePath = [NSString stringWithFormat:@"Medicine_%@%@",_medicineName.text,_medicine.medicineTaker.name];
+    self.medicine.medicineName      = _medicineName.text;
+    self.medicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] saveImageInDocumentFileWithImage:self.medicineImage.imageView.image andAppendingImageName:imagePath];
+    self.medicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
+    self.medicine.status            = self.medicine.meal;
+    
+    [[ManageObjectModel objectManager] saveContext];
+    
+    NSManagedObject *object = [Medicine medicineWithImagePath:self.medicine.medicineImagePath];
+    int primaryKey = [[[[[[object objectID] URIRepresentation] absoluteString] lastPathComponent] substringFromIndex:1] intValue];
+    NSString *strPK = [[NSNumber numberWithInt:primaryKey] stringValue];
+    
+    Medicine *updateMedicine = (Medicine *) object;
+    updateMedicine.medicineName      = _medicineName.text;
+    updateMedicine.medicineImagePath = [[PCImageDirectorySaver directorySaver] replaceFile:imagePath withImage:self.medicineImage.imageView.image withNewFile:strPK];
+    updateMedicine.willRemind        = [NSNumber numberWithBool:self.switcher.on];
+    updateMedicine.status            = self.medicine.meal;
+    
+    [[ManageObjectModel objectManager] saveContext];
+    
+    if(self.switcher.on) {
+        [self setFireDate];
+    } else {
+        [[MTLocalNotification sharedInstance] deleteNotificationWithMedicine:self.medicine fromNotification:nil];
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
 }
 
 - (void)showPickerActionSheet:(NSString *)title
@@ -710,7 +729,7 @@ static MTMedicineInfoViewController *_instance;
 
 - (void)okTapped:(NSObject *)sender
 {
-    NSLog(@"%d",[_pickerView selectedRowInComponent:0] );
+   // NSLog(@"%d",[_pickerView selectedRowInComponent:0] );
     
     if( selectedIndex == 0) {
         _medicine.quantity = [NSNumber numberWithInt:[[_pickerList objectAtIndex:[_pickerView selectedRowInComponent:0]] integerValue]];
@@ -720,6 +739,7 @@ static MTMedicineInfoViewController *_instance;
     }
     else {
         _medicine.meal = [_pickerList objectAtIndex:[_pickerView selectedRowInComponent:0]];
+        self.meal = [_pickerList objectAtIndex:[_pickerView selectedRowInComponent:0]];
         MTMedicineInfoCell *cell = (MTMedicineInfoCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selectedIndex inSection:0]];
         cell.cellValue.text = self.medicine.meal;
         [cell layoutSubviews];
@@ -728,7 +748,7 @@ static MTMedicineInfoViewController *_instance;
     self.actionSheet = nil;
     self.pickerView = nil;
 }
-    
+
 - (UIPickerView *)pickerViewInit
 {
     UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0f, 30.0f, 0.0f, 0.0f)];
@@ -788,6 +808,16 @@ static MTMedicineInfoViewController *_instance;
     } else {
          self.switcher.on = NO;
     }
+    
+    if(_medicine) {
+        if(_medicine.quantity)
+            self.quantity = [_medicine.quantity stringValue];
+        if(_medicine.unit)
+            self.unit = _medicine.unit;
+        if (_medicine.meal)
+            self.meal = _medicine.meal;
+    }
+
     self.originalImage = self.medicineImage.imageView.image;
     
     NSArray *arrTimeList = [NSArray arrayWithArray:[_medicine.times allObjects]];

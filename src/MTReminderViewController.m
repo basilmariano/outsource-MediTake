@@ -541,7 +541,7 @@
             NSString *currentStatus = (NSString *)[stringFields objectAtIndex:0];
             if([currentStatus isEqualToString:@"Taken"] || [currentStatus isEqualToString:@"Skip"]) {
                 NSString *lastDateStatusUpdated = (NSString *)[stringFields objectAtIndex:2];
-                NSLog(@"%@ == %@",strfireDate,lastDateStatusUpdated);
+               // NSLog(@"%@ == %@",strfireDate,lastDateStatusUpdated);
                 if(![lastDateStatusUpdated isEqualToString:strfireDate]) {//<-change the time status
 
                     time.status = medicine.status;
