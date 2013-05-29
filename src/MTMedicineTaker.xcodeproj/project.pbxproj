@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F23FFAA1755AB9200571655 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3F23FFA71755AB9200571655 /* SVProgressHUD.bundle */; };
+		3F23FFAB1755AB9200571655 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3F23FFA71755AB9200571655 /* SVProgressHUD.bundle */; };
+		3F23FFAC1755AB9200571655 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F23FFA91755AB9200571655 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F23FFAD1755AB9200571655 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F23FFA91755AB9200571655 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		3F6F75B317544D8F0085A7B5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC202C79174E507300C91C7C /* AVFoundation.framework */; };
+		3FC5E4AB1754E1F800EA8B16 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC5E4AA1754E1F800EA8B16 /* QuartzCore.framework */; };
+		3FC5E4AC1754E20B00EA8B16 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC5E4AA1754E1F800EA8B16 /* QuartzCore.framework */; };
 		633CC432173CA8F800FCBD67 /* MTHelpViewController-h568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633CC42E173CA8F800FCBD67 /* MTHelpViewController-h568.xib */; };
 		633CC433173CA8F800FCBD67 /* MTHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633CC430173CA8F800FCBD67 /* MTHelpViewController.m */; };
 		633CC434173CA8F800FCBD67 /* MTHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633CC431173CA8F800FCBD67 /* MTHelpViewController.xib */; };
@@ -264,6 +270,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F23FFA71755AB9200571655 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		3F23FFA81755AB9200571655 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		3F23FFA91755AB9200571655 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		3FC5E4AA1754E1F800EA8B16 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		633CC42E173CA8F800FCBD67 /* MTHelpViewController-h568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MTHelpViewController-h568.xib"; sourceTree = "<group>"; };
 		633CC42F173CA8F800FCBD67 /* MTHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTHelpViewController.h; sourceTree = "<group>"; };
 		633CC430173CA8F800FCBD67 /* MTHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTHelpViewController.m; sourceTree = "<group>"; };
@@ -446,6 +456,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC5E4AB1754E1F800EA8B16 /* QuartzCore.framework in Frameworks */,
 				AC202C7A174E507300C91C7C /* AVFoundation.framework in Frameworks */,
 				ACEF7D2917377DE20035773D /* StoreKit.framework in Frameworks */,
 				ACBD65BE170BC483007EABE6 /* CoreGraphics.framework in Frameworks */,
@@ -465,6 +476,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC5E4AC1754E20B00EA8B16 /* QuartzCore.framework in Frameworks */,
 				ACEF7D4F1737948D0035773D /* StoreKit.framework in Frameworks */,
 				ACEF7D501737948D0035773D /* CoreGraphics.framework in Frameworks */,
 				ACEF7D511737948D0035773D /* SystemConfiguration.framework in Frameworks */,
@@ -483,6 +495,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F23FFA61755AB9200571655 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				3F23FFA71755AB9200571655 /* SVProgressHUD.bundle */,
+				3F23FFA81755AB9200571655 /* SVProgressHUD.h */,
+				3F23FFA91755AB9200571655 /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
+			path = ../libs/SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		633CC42A173CA74700FCBD67 /* HelpView */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,6 +703,8 @@
 		ACBD65AD170BC483007EABE6 = {
 			isa = PBXGroup;
 			children = (
+				3F23FFA61755AB9200571655 /* SVProgressHUD */,
+				3FC5E4AA1754E1F800EA8B16 /* QuartzCore.framework */,
 				63F607BC173E98DE00DAFF50 /* Icon-free.png */,
 				63F607BA173E98D500DAFF50 /* Icon-free@2x.png */,
 				ACEF7D1317375C950035773D /* GADAdMobExtras.h */,
@@ -1081,6 +1106,7 @@
 				633CC44E173CB74300FCBD67 /* Help_buttnBlue-s.png in Resources */,
 				AC202C77174E486700C91C7C /* NotifSound.wav in Resources */,
 				63A26AB8175451C200B5D09D /* Helpbox.png in Resources */,
+				3F23FFAA1755AB9200571655 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1169,6 +1195,7 @@
 				63F607BD173E98DE00DAFF50 /* Icon-free.png in Resources */,
 				AC202C78174E486700C91C7C /* NotifSound.wav in Resources */,
 				63A26AB9175451C200B5D09D /* Helpbox.png in Resources */,
+				3F23FFAB1755AB9200571655 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1214,6 +1241,7 @@
 				ACCA8B6717320A5600E315B3 /* MTWebViewController.m in Sources */,
 				ACBE579217336D93005920B0 /* UIImage+UIImage_fixOrientation.m in Sources */,
 				633CC433173CA8F800FCBD67 /* MTHelpViewController.m in Sources */,
+				3F23FFAC1755AB9200571655 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1256,6 +1284,7 @@
 				ACEF7D4C1737948D0035773D /* MTWebViewController.m in Sources */,
 				ACEF7D4D1737948D0035773D /* UIImage+UIImage_fixOrientation.m in Sources */,
 				63F607B9173E97C800DAFF50 /* MTHelpViewController.m in Sources */,
+				3F23FFAD1755AB9200571655 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

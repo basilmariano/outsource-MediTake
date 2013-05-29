@@ -19,8 +19,8 @@
 @property (nonatomic, assign) IBOutlet UILabel *medicineQuantity;
 @property (nonatomic, assign) IBOutlet UILabel *medicineUnit;
 @property (nonatomic, assign) IBOutlet UILabel *scheduleDate;
-//@property (nonatomic, assign) IBOutlet PCAsyncImageView *medicineImage;
-//@property (nonatomic, assign) IBOutlet PCAsyncImageView *TakerImage;
+@property (nonatomic, assign) IBOutlet PCAsyncImageView *medicineImage;
+@property (nonatomic, assign) IBOutlet PCAsyncImageView *TakerImage;
 @property (nonatomic, assign) IBOutlet UIImageView *alarmImage;
 @property (nonatomic, assign) IBOutlet UIImageView *medicineImageView;
 @property (nonatomic, assign) IBOutlet UIImageView *profileImageView;

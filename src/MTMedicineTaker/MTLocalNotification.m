@@ -225,41 +225,19 @@ static MTLocalNotification *_instance;
     NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
     for(UILocalNotification *localNotif in notificationList) {
         //check if in localNotif
-        NSArray *notificationList = [UIApplication sharedApplication].scheduledLocalNotifications;
-        for(UILocalNotification *localNotif in notificationList) {
-           /* NSDictionary *dict    = localNotif.userInfo;
-            NSArray *dayList      = (NSArray *) [dict objectForKey:@"day"];
+        NSDictionary *dict    = localNotif.userInfo;
+        NSArray *dayList      = (NSArray *) [dict objectForKey:@"day"];
             
+        for(NSString *strDay in dayList) {
             NSManagedObject *objectD = day;
             NSString *strPKDay = [[[objectD objectID] URIRepresentation] absoluteString];
-            
-            for(NSString *specificDay in dayList) {
-                
-                if([specificDay isEqualToString:strPKDay]) {
-                    
-                    [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
-
-                }
-            }*/
-            
-            NSDictionary *dict    = localNotif.userInfo;
-            NSArray *dayList      = (NSArray *) [dict objectForKey:@"day"];
-            //NSLog(@"dayLIstCouhnt %@",dayList);
-            
-            for(NSString *strDay in dayList) {
-                
-                NSManagedObject *objectD = day;
-                NSString *strPKDay = [[[objectD objectID] URIRepresentation] absoluteString];
-                //NSLog(@"%@ ==  %@", strDay, strPKDay);
-                if([strPKDay isEqualToString:strDay]) {
-                    //[[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine withDay:date];
-                    [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
-                }
+            //NSLog(@"%@ ==  %@", strDay, strPKDay);
+            if([strPKDay isEqualToString:strDay]) {
+                [self deleteNotificationWithMedicine:medicine fromNotification:localNotif];//<-do recursion
+                break;
             }
         }
-
     }
-
 }
 
 - (void)cancelNotificationWithMedicine: (Medicine *)medicine andFireDate:(NSDate *)fireTime

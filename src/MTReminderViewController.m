@@ -17,12 +17,14 @@
 #import "MTWebViewController.h"
 #import "GADBannerView.h"
 #import "MTHelpViewController.h"
+#import "PCAsyncImageView.h"
 
 @interface MTReminderViewController () <UIActionSheetDelegate>
 {
     int selectedIndexPathRow;
     GADBannerView *_gadBannerView;
 }
+
 @property (nonatomic, retain) NSMutableArray *reminderList;
 
 @end
@@ -96,12 +98,10 @@
     tbCell.medicineName.text        = med.medicineName;
     tbCell.medicineQuantity.text    = [med.quantity stringValue];
     tbCell.medicineUnit.text        = med.unit;
-    tbCell.medicineImageView.image  = [[PCImageDirectorySaver directorySaver]imageFilePath:med.medicineImagePath];//profile.image;
-    tbCell.profileImageView.image   = [[PCImageDirectorySaver directorySaver]imageFilePath:med.medicineTaker.profileImagePath];
-    //[tbCell.medicineImage loadImageFromURL:[NSURL URLWithString:med.medicineImagePath]];
-    //[tbCell.TakerImage loadImageFromURL:[NSURL URLWithString:med.medicineTaker.profileImagePath]];
-    //tbCell.alarmImage.image = [UIImage imageNamed:alarmImage];
-    //tbCell.takenTime.text = takenTime;
+    //tbCell.medicineImageView.image  = [[PCImageDirectorySaver directorySaver]imageFilePath:med.medicineImagePath];//profile.image;
+    //tbCell.profileImageView.image   = [[PCImageDirectorySaver directorySaver]imageFilePath:med.medicineTaker.profileImagePath];
+    [tbCell.medicineImage loadImageFromURL:[NSURL URLWithString:med.medicineImagePath ]];
+    [tbCell.TakerImage loadImageFromURL:[NSURL URLWithString:med.medicineTaker.profileImagePath]];
     
     NSString *status = nil;
     NSArray *arrTime = [NSArray arrayWithArray:[med.times allObjects]];
@@ -119,7 +119,7 @@
         
         if([strFireTime isEqualToString:strTime]) {
             status = time.status;
-            NSLog(@"%@",status);
+            break;
         }
     }
     
@@ -425,13 +425,12 @@
      
 #endif
     
-    [self retrieveNotificationList];
 }
 
 - (void) retrieveNotificationList
 {
     NSArray *notifLIst = [UIApplication sharedApplication].scheduledLocalNotifications;
-    NSLog(@"notif count %d",notifLIst.count);
+    //NSLog(@"notif count %d",notifLIst.count);
     if(self.reminderList.count) {
         [self.reminderList removeAllObjects];
     }
@@ -439,9 +438,8 @@
         [_tableView reloadData];
         return;
     }
-    
+
     for(UILocalNotification *notif in notifLIst) {
-        
         NSArray *medList = [Medicine medicineList];
         NSString *PKHolder = nil;
         for(Medicine *meds in medList) {
@@ -452,10 +450,11 @@
                 NSString *strPK = [[[object objectID] URIRepresentation] absoluteString];
                 if([strPK isEqualToString:pk]) {
                     PKHolder = strPK;
+                    break;
                 }
             }
         }
-        
+
         if(!PKHolder) {
             [[UIApplication sharedApplication] cancelLocalNotification:notif];
         } else {
@@ -482,7 +481,7 @@
             }
         }
     }
-    
+
     [self syncReminders];
 }
 
@@ -506,7 +505,7 @@
         NSManagedObject *managedObject=[[[ManageObjectModel objectManager] managedObjectContext] objectWithID: [[[ManageObjectModel objectManager] persistentStoreCoordinator] managedObjectIDForURIRepresentation:[NSURL URLWithString:pk]]];
         
         Medicine *medicine = (Medicine *) managedObject;
-        NSLog(@"Med status %@", medicine.status);
+        //NSLog(@"Med status %@", medicine.status);
         NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:
                                medicine,@"Medicine",
                                notif,@"notification",
@@ -526,6 +525,7 @@
             
             if([remMedicineTakerName isEqualToString:newMedicineTakerName] && [remMed.medicineName isEqualToString:medicine.medicineName] && [remDate isEqualToDate:newRemDate]) {
                 newMedicine = remMed;
+                break;
             }
         }
        
@@ -543,7 +543,6 @@
                 NSString *lastDateStatusUpdated = (NSString *)[stringFields objectAtIndex:2];
                // NSLog(@"%@ == %@",strfireDate,lastDateStatusUpdated);
                 if(![lastDateStatusUpdated isEqualToString:strfireDate]) {//<-change the time status
-
                     time.status = medicine.status;
                     break;
                 }
@@ -585,8 +584,6 @@
 
 - (void) onButtonHelpClicked
 {
-    NSLog(@"Help Clicked");
-    
     NSString *nibName = [[XCDeviceManager manager] xibNameForDevice:@"MTHelpViewController"];
     
     MTHelpViewController *profileController = [[[MTHelpViewController alloc] initWithNibName:nibName bundle:nil] autorelease];

@@ -15,6 +15,7 @@
 #import "Date.h"
 #import "MTLocalNotification.h"
 #import "PCImageDirectorySaver.h"
+#import "SVProgressHUD.h"
 
 @interface MTMedicineInfoViewController () <UIActionSheetDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,MTTextFieldCellDelegate>
 {
@@ -404,6 +405,7 @@ static MTMedicineInfoViewController *_instance;
 
 - (void) removeNotificationWithDeletedDays
 {
+    NSLog(@"1 %@", [NSDate date]);
     NSMutableArray *notificationListWithMedicine = [[MTLocalNotification sharedInstance] medicineNotificationList:self.medicine];
     NSArray *dayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
     for(Date *date in dayList) {
@@ -440,7 +442,7 @@ static MTMedicineInfoViewController *_instance;
             }
         }
     }
-    
+    NSLog(@"2 %@", [NSDate date]);
     for(Date *prevDate in self.previousDayList) {
        // NSLog(@"day %@",prevDate);
 
@@ -457,11 +459,12 @@ static MTMedicineInfoViewController *_instance;
                 if([strPKDay isEqualToString:strDay]) {
                    
                     [[MTLocalNotification sharedInstance] cancelNotificationWithMedicine:self.medicine withDay:prevDate];
-                   // break;
+                    break;
                 }
             }
         }
     }
+    NSLog(@"3 %@", [NSDate date]);
 }
 
 - (void)setFireDate
@@ -635,16 +638,8 @@ static MTMedicineInfoViewController *_instance;
 - (void) onButtonDoneClicked
 {
     if(![self.medicineName.text isEqual:@""] && ![self.quantity isEqualToString:@""] && ![self.meal isEqualToString:@""] && ![self.unit isEqualToString:@""]) {
-        [_spinner startAnimating];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information:" message:@"Save Changes?"
-                                                       delegate:self
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:nil];
-        alert.tag = 1;
-        [alert buttonTitleAtIndex:[alert addButtonWithTitle:@"Ok"]];
-        [alert buttonTitleAtIndex:[alert addButtonWithTitle:@"Cancel"]];
-        [alert show];
-        [alert release];
+        [SVProgressHUD showWithStatus:@"Please wait.."];
+        [self performSelector:@selector(save) withObject:nil afterDelay:0.1];
         
     } else {
         
@@ -693,7 +688,12 @@ static MTMedicineInfoViewController *_instance;
         [[MTLocalNotification sharedInstance] deleteNotificationWithMedicine:self.medicine fromNotification:nil];
     }
     
+    [self dismissSuccess];
     [self.navigationController popViewControllerAnimated:YES];//<-return to predecessor controller
+}
+
+- (void)dismissSuccess {
+	[SVProgressHUD showSuccessWithStatus:@"Medicine Saved!"];
 }
 
 - (void)showPickerActionSheet:(NSString *)title
