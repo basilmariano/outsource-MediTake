@@ -34,7 +34,7 @@
     [navigationbar sendSubviewToBack:self.navigationTitle];
     [navigationbar sendSubviewToBack:_backgroundImageVIew];
         
-        _backgroundImageVIew.frame = CGRectMake(0.0f, 0.0f, 320.0f, 45.0f);
+    _backgroundImageVIew.frame = CGRectMake(0.0f, 0.0f, 320.0f, 45.0f);
         
     return  navigationbar;
 }

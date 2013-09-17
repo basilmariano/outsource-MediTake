@@ -32,6 +32,10 @@
     
     MTReminderViewController *reminder =[[[MTReminderViewController alloc] initWithNibName:@"MTReminderViewController" bundle:nil]autorelease];
     
+    MTTableViewController *profiles = [[[MTTableViewController alloc] initWithTableViewName:@"Profile" andEntityName:@"Profile" andSectionNumber:1] autorelease];
+    
+    MTReminderViewController *reminders =[[[MTReminderViewController alloc] initWithNibName:@"MTReminderViewController" bundle:nil]autorelease];
+    
     UIImage *buttonRemindersNormal = [UIImage imageNamed:@"Reminder-s.png"];
     UIImage *buttonReminderPressed = [UIImage imageNamed:@"Reminder-ss.png"];
     UIImage *buttonProfileNormal = [UIImage imageNamed:@"Profile-s.png"];
@@ -39,22 +43,31 @@
     UIImage *splashImage = nil;
     
     UIButton *btnReminders = [UIButton buttonWithType:UIButtonTypeCustom];
-   
     [btnReminders setImage:buttonRemindersNormal forState:UIControlStateNormal];
     [btnReminders setImage:buttonReminderPressed forState:UIControlStateSelected];
     
+    UIButton *btnRemindersz = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnRemindersz setImage:buttonRemindersNormal forState:UIControlStateNormal];
+    [btnRemindersz setImage:buttonReminderPressed forState:UIControlStateSelected];
+    UIButton *btnProfilez = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnProfilez setImage:buttonProfileNormal forState:UIControlStateNormal];
+    [btnProfilez setImage:buttonProfilePressed forState:UIControlStateSelected];
+    
     UIButton *btnProfile = [UIButton buttonWithType:UIButtonTypeCustom];
-   
     [btnProfile setImage:buttonProfileNormal forState:UIControlStateNormal];
     [btnProfile setImage:buttonProfilePressed forState:UIControlStateSelected];
     
     if([[XCDeviceManager manager] deviceType] == iPhone4_Device ) { //IPHONE4
-        btnReminders.frame = CGRectMake(0, 431, 160, 49);
-        btnProfile.frame = CGRectMake(160, 431, 160, 49);
+        btnRemindersz.frame = CGRectMake(0, 0, 160, 49);
+        btnProfilez.frame = CGRectMake(160, 0, 160, 49);
+        btnProfile.frame = CGRectMake(320, 0, 160, 49);
+        btnReminders.frame = CGRectMake(480, 0, 160, 49);
         splashImage = [UIImage imageNamed:@"Default.png"];
     } else if([[XCDeviceManager manager] deviceType] == iPhone5_Device) {//IPHONE5
         btnReminders.frame = CGRectMake(0, 518, 160, 49);
         btnProfile.frame = CGRectMake(160, 518, 160, 49);
+        btnProfile.frame = CGRectMake(320, 518, 160, 49);
+        btnProfile.frame = CGRectMake(480, 518, 160, 49);
         splashImage = [UIImage imageNamed:@"Default-568h.png"];
     }
     
@@ -65,9 +78,15 @@
     MTNavigationViewController *profileNavigation = [[[MTNavigationViewController alloc] initWithRootViewController:profile] autorelease];
     profileNavigation.tabBarItem = [MTTabBarItem itemButton:btnProfile];
     
-    MTTabBarController *tabBarController = [[[MTTabBarController alloc] initWithBackgroundImage:nil] autorelease];
+    MTNavigationViewController *reminderNavigations = [[[MTNavigationViewController alloc] initWithRootViewController:reminders] autorelease];
+    reminderNavigations.tabBarItem = [MTTabBarItem itemButton:btnRemindersz];
+    
+    MTNavigationViewController *profileNavigations = [[[MTNavigationViewController alloc] initWithRootViewController:profiles] autorelease];
+    profileNavigations.tabBarItem = [MTTabBarItem itemButton:btnProfilez];
+    
+    MTTabBarController *tabBarController = [[[MTTabBarController alloc] initWithScrollViewTabImage:nil withScrollViewContentSize:CGSizeMake(160.0f + 160.0f + 160.0f + 160.0f, 49.0f) andScrollViewPositionY:431.0f andScrollViewHeight:49.0f] autorelease];
     tabBarController.delegate = self;
-    tabBarController.viewControllers = [NSArray arrayWithObjects:reminderNavigation, profileNavigation, nil];
+    tabBarController.viewControllers = [NSArray arrayWithObjects:reminderNavigation, profileNavigation, reminderNavigations, profileNavigations, nil];
     tabBarController.selectedIndex = 0;
    
     UIImageView *splashImageView = [[[UIImageView alloc] initWithImage:splashImage] autorelease];

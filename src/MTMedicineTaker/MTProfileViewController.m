@@ -100,18 +100,18 @@
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera ;
             [self presentModalViewController:imagePicker animated:YES];
         }
-        else
-        {
+        else {
             NSLog(@"Error to take photo");
         }
-    }else if(buttonIndex == 1) {
+    } else if(buttonIndex == 1) {
         NSLog(@"Choose Photo");
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
             imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             [self presentModalViewController:imagePicker animated:YES];
-        }
-        else
-        {
+        } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            [self presentModalViewController:imagePicker animated:YES];
+        } else {
             NSLog(@"Error to choose photo");
         }
     }
@@ -132,24 +132,17 @@
     
     UIImage* originalImage = nil;
     originalImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    if(originalImage==nil)
-    {
+    
+    if(originalImage==nil) {
         originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
-    if(originalImage==nil)
-    {
+    if(originalImage==nil){
         originalImage = [info objectForKey:UIImagePickerControllerCropRect];
     }
     
-    UIImage *fixedOrientationImage = originalImage;
-    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        fixedOrientationImage = [originalImage fixOrientation];
-    }
-    
+    UIImage *fixedOrientationImage = [originalImage fixOrientation];
     UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:fixedOrientationImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
-    //At this point you have the selected image in originalImage
     [self.profileImage setImage:finalImage forState:UIControlStateNormal];
-    
 }
 
 - (void)viewDidLoad

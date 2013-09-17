@@ -314,13 +314,8 @@ static MTMedicineInfoViewController *_instance;
         originalImage = [info objectForKey:UIImagePickerControllerCropRect];
     }
     
-    UIImage *fixedOrientationImage = originalImage;
-    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        fixedOrientationImage = [originalImage fixOrientation];
-    }
-    
+    UIImage *fixedOrientationImage = [originalImage fixOrientation];
     UIImage *finalImage = [[PCImageDirectorySaver directorySaver] scaleImage:fixedOrientationImage withScaleToSize:CGSizeMake(100.0f,100.0f)];
-    //At this point you have the selected image in originalImage
     [self.medicineImage setImage:finalImage forState:UIControlStateNormal];
 }
 
@@ -602,12 +597,8 @@ static MTMedicineInfoViewController *_instance;
             
             NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
             [dateFormat setDateFormat:@"MMM:dd:yyyy hh:mm aa EEEE"];
-            
-            NSString *strTime = [dateFormat stringFromDate:finalDate];
-            //NSLog(@"Final Date %@",strTime );
-            //NSLog(@"day %@",d.date );
             [[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andDayValue:d andMedicine:_medicine];
-            //[[MTLocalNotification sharedInstance] scheduleNotificationWithFireDate:itemDate frequencyType:type andDayValue: (NSString *)day andMedicine:_medicine];
+
         }
         }
     }
@@ -718,10 +709,8 @@ static MTMedicineInfoViewController *_instance;
     UIButton *okButton = [UIButton buttonWithType:UIButtonTypeCustom];
     okButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
     [okButton setTitle:@"OK" forState:UIControlStateNormal];
-    //[okButton setBackgroundImage:[UIImage imageNamed:@"ButtonBg.png"] forState:UIControlStateNormal];
     okButton.frame = CGRectMake(21.0f, 250.0f, 278.0f, 45.0f);
     [okButton addTarget:self action:@selector(okTapped:) forControlEvents:UIControlEventTouchUpInside];
-    //[actionSheet addSubview:self.pickerView];
     [actionSheet addSubview:okButton];
     
     [actionSheet release];
@@ -729,8 +718,6 @@ static MTMedicineInfoViewController *_instance;
 
 - (void)okTapped:(NSObject *)sender
 {
-   // NSLog(@"%d",[_pickerView selectedRowInComponent:0] );
-    
     if( selectedIndex == 0) {
         _medicine.quantity = [NSNumber numberWithInt:[[_pickerList objectAtIndex:[_pickerView selectedRowInComponent:0]] integerValue]];
         MTMedicineInfoCell *cell = (MTMedicineInfoCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selectedIndex inSection:0]];
@@ -777,11 +764,6 @@ static MTMedicineInfoViewController *_instance;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-   // self.previousTimeList = [NSArray arrayWithArray:[_medicine.times allObjects]];
-   // self.previousDayList = [NSArray arrayWithArray:[_medicine.days allObjects]];
-    if(![self.medicineName.text isEqual:@""])
-        
-
     [_tableView reloadData];
 }
 -(NSMutableArray *)medicineTimeList

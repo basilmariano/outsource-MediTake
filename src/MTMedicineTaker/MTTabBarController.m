@@ -13,7 +13,8 @@
 
 @interface MTTabBarController ()
 
-@property(nonatomic,retain) UINavigationItem *navItem;
+@property (nonatomic, retain) UINavigationItem *navItem;
+@property (nonatomic, retain) UIScrollView *scrollView;
 
 @end
 
@@ -28,13 +29,7 @@
     return (self);
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
--(id)initWithBackgroundImage: (UIImage *)backgroundImage
+- (id)initWithBackgroundImage: (UIImage *)backgroundImage
 {
     self = [super init];
     
@@ -44,6 +39,36 @@
     }
     
     return (self);
+}
+
+- (id)initWithScrollViewTabImage: (UIImage *) backgroundImage withScrollViewContentSize: (CGSize)scrollContentSize
+          andScrollViewPositionY: (float) scrollPositionY
+andScrollViewHeight: (float) scrollViewHeight
+{
+    self = [super init];
+    
+    if(self)
+    {
+        self.scrollView = [[[UIScrollView alloc] init] autorelease];
+        [_scrollView setBackgroundColor:[UIColor clearColor]];
+        [_scrollView setFrame:CGRectMake(0.0f, scrollPositionY, self.view.frame.size.width, scrollViewHeight)];
+        [_scrollView setContentSize:scrollContentSize];
+        [_scrollView setShowsHorizontalScrollIndicator:YES];
+        [_scrollView setPagingEnabled:YES];
+        
+        [self.view addSubview:self.scrollView];
+        self.background.image = backgroundImage;
+    }
+    
+    return (self);
+}
+
+- (void)viewDidLoad
+{
+    [_navItem release];
+    [_scrollView release];
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
 }
 
 - (UINavigationItem *)navigationItem {
@@ -73,7 +98,12 @@
         NSAssert([item isKindOfClass:[MTTabBarItem class]], @"must use MTTabBarItem for tabBarItem");
         MTTabBarItem *tabBarItem = (MTTabBarItem *) item;
         [tabBarItem.tabItemButton addTarget:self action:@selector(tabButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:tabBarItem.tabItemButton];
+        
+        if (self.scrollView) {
+            [self.scrollView addSubview:tabBarItem.tabItemButton];
+        } else {
+            [self.view addSubview:tabBarItem.tabItemButton];
+        }
         
     }
 }

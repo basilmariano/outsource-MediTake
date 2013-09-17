@@ -14,4 +14,8 @@
 @property (nonatomic, assign) UINavigationController *navController;
 
 -(id)initWithBackgroundImage: (UIImage *)backgroundImage;
+- (id)initWithScrollViewTabImage: (UIImage *) backgroundImage
+       withScrollViewContentSize: (CGSize)scrollContentSize
+          andScrollViewPositionY: (float) scrollPositionY
+             andScrollViewHeight: (float) scrollViewHeight;
 @end

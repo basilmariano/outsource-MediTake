@@ -1361,6 +1361,7 @@
 		ACBD65DA170BC483007EABE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Johnson Wong (ZZXSKHWRXH)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
 				INFOPLIST_FILE = "MTMedicineTaker/MTMedicineTaker-Info.plist";
@@ -1372,6 +1373,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MedsTime;
+				PROVISIONING_PROFILE = "7BD858E2-1065-4443-9B2F-2F9139CDA79E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1379,6 +1381,7 @@
 		ACBD65DB170BC483007EABE6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Johnson Wong (ZZXSKHWRXH)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
 				INFOPLIST_FILE = "MTMedicineTaker/MTMedicineTaker-Info.plist";
@@ -1390,6 +1393,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MedsTime;
+				PROVISIONING_PROFILE = "7BD858E2-1065-4443-9B2F-2F9139CDA79E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1397,8 +1401,8 @@
 		ACEF7D9E1737948D0035773D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: hansel Koh (8M76ZDK36F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: hansel Koh (8M76ZDK36F)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tonya Wong (8YM59VZ82Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tonya Wong (8YM59VZ82Y)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
 				INFOPLIST_FILE = "MTMedicineTakerFree-Info.plist";
@@ -1411,8 +1415,8 @@
 				OTHER_CFLAGS = "-DFREE";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MedsTimefree;
-				PROVISIONING_PROFILE = "02F35071-19EE-424F-B5EF-FF73F7AE5AD9";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "02F35071-19EE-424F-B5EF-FF73F7AE5AD9";
+				PROVISIONING_PROFILE = "5A57C4D6-FA48-4AB3-ADAF-266ACE5F2D36";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5A57C4D6-FA48-4AB3-ADAF-266ACE5F2D36";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1420,7 +1424,8 @@
 		ACEF7DA01737948D0035773D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: hansel Koh (8M76ZDK36F)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tonya Wong (8YM59VZ82Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tonya Wong (8YM59VZ82Y)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTMedicineTaker/MTMedicineTaker-Prefix.pch";
 				INFOPLIST_FILE = "MTMedicineTakerFree-Info.plist";
@@ -1436,7 +1441,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MedsTimefree;
-				PROVISIONING_PROFILE = "02F35071-19EE-424F-B5EF-FF73F7AE5AD9";
+				PROVISIONING_PROFILE = "5A57C4D6-FA48-4AB3-ADAF-266ACE5F2D36";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5A57C4D6-FA48-4AB3-ADAF-266ACE5F2D36";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -27,8 +27,8 @@
         // Custom initialization
         self.title = @"Help";
         
-        UIImage *cancelImageInactive = [UIImage imageNamed:@"Ok-helpbox-ss.png"];
-        UIImage *cancelImageActive = [UIImage imageNamed:@"Ok-helpbox-s.png"];
+        UIImage *cancelImageInactive = [UIImage imageNamed:@"Ok-helpbox-s.png"];
+        UIImage *cancelImageActive = [UIImage imageNamed:@"Ok-helpbox-ss.png"];
         
         UIButton *buttonCancel = [UIButton buttonWithType:UIButtonTypeCustom];
         buttonCancel.frame = CGRectMake(0.0f, 0.0f, 61.0f, 33.5f);

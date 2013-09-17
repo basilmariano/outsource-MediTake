@@ -45,8 +45,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{5, 20}, {310, 500}}</string>
 								<reference key="NSSuperview" ref="852973313"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -86,7 +84,6 @@
 						</array>
 						<string key="NSFrameSize">{320, 475}</string>
 						<reference key="NSSuperview" ref="80051161"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="713948907"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -104,7 +101,6 @@
 				</array>
 				<string key="NSFrame">{{0, 44}, {320, 475}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="852973313"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">

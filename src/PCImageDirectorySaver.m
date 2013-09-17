@@ -48,15 +48,17 @@ static PCImageDirectorySaver *_instance;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
     NSString *filePath = [documentsPath stringByAppendingPathComponent:imageName]; //Add the file name
+    
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSFileManager *fileMgr = [NSFileManager defaultManager];
         
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
         NSError *error = nil;
         if ([fileMgr removeItemAtPath:filePath error:&error] != YES)
             NSLog(@"Unable to delete file: %@", [error localizedDescription]);
         
         filePath = [documentsPath stringByAppendingPathComponent:imageName]; //Add the file name
     }
+    
     [pngData writeToFile:filePath atomically:YES]; //Write the file
     return filePath;
 }
@@ -72,7 +74,7 @@ static PCImageDirectorySaver *_instance;
 {
     UIImage *cropedImage = [self cropImageWithImage:image];
     NSLog(@"CropedImage %f %f",cropedImage.size.width, cropedImage.size.height);
-    // Scalling selected image to targeted size
+ 
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 0, colorSpace, kCGImageAlphaPremultipliedLast);
     CGContextClearRect(context, CGRectMake(0, 0, size.width, size.height));
@@ -81,11 +83,11 @@ static PCImageDirectorySaver *_instance;
         CGContextRotateCTM(context, -M_PI_2);
         CGContextTranslateCTM(context, -size.height, 0.0f);
         CGContextDrawImage(context, CGRectMake(0, 0, size.height, size.width), cropedImage.CGImage);
-    }
-    else
+    } else {
         CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), cropedImage.CGImage);
+    }
     
-    CGImageRef scaledImage=CGBitmapContextCreateImage(context);
+    CGImageRef scaledImage = CGBitmapContextCreateImage(context);
     
     CGColorSpaceRelease(colorSpace);
     CGContextRelease(context);
